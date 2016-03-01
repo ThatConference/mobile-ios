@@ -8,20 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		312A94161C814B6B00AE938B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A94151C814B6B00AE938B /* AppDelegate.swift */; };
-		312A94181C814B6B00AE938B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A94171C814B6B00AE938B /* ViewController.swift */; };
 		312A941B1C814B6B00AE938B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 312A94191C814B6B00AE938B /* Main.storyboard */; };
 		312A941D1C814B6B00AE938B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 312A941C1C814B6B00AE938B /* Assets.xcassets */; };
 		312A94201C814B6B00AE938B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */; };
+		312A94281C85383200AE938B /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A94271C85383200AE938B /* AuthorizationViewController.swift */; };
+		312A942A1C85390B00AE938B /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A94291C85390B00AE938B /* ScheduleViewController.swift */; };
+		312A942C1C85396E00AE938B /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A942B1C85396E00AE938B /* FavoritesViewController.swift */; };
+		312A942E1C85399900AE938B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A942D1C85399900AE938B /* MapViewController.swift */; };
+		312A94301C8539B600AE938B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A942F1C8539B600AE938B /* SettingsViewController.swift */; };
+		312A94321C85422100AE938B /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 312A94311C85422100AE938B /* Media.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		312A94121C814B6B00AE938B /* camper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = camper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		312A94151C814B6B00AE938B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		312A94171C814B6B00AE938B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		312A941A1C814B6B00AE938B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		312A941C1C814B6B00AE938B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		312A941F1C814B6B00AE938B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		312A94211C814B6B00AE938B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		312A94271C85383200AE938B /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
+		312A94291C85390B00AE938B /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
+		312A942B1C85396E00AE938B /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		312A942D1C85399900AE938B /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		312A942F1C8539B600AE938B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		312A94311C85422100AE938B /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,11 +65,16 @@
 			isa = PBXGroup;
 			children = (
 				312A94151C814B6B00AE938B /* AppDelegate.swift */,
-				312A94171C814B6B00AE938B /* ViewController.swift */,
 				312A94191C814B6B00AE938B /* Main.storyboard */,
 				312A941C1C814B6B00AE938B /* Assets.xcassets */,
 				312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */,
 				312A94211C814B6B00AE938B /* Info.plist */,
+				312A94271C85383200AE938B /* AuthorizationViewController.swift */,
+				312A94291C85390B00AE938B /* ScheduleViewController.swift */,
+				312A942B1C85396E00AE938B /* FavoritesViewController.swift */,
+				312A942D1C85399900AE938B /* MapViewController.swift */,
+				312A942F1C8539B600AE938B /* SettingsViewController.swift */,
+				312A94311C85422100AE938B /* Media.xcassets */,
 			);
 			path = camper;
 			sourceTree = "<group>";
@@ -124,6 +139,7 @@
 			files = (
 				312A94201C814B6B00AE938B /* LaunchScreen.storyboard in Resources */,
 				312A941D1C814B6B00AE938B /* Assets.xcassets in Resources */,
+				312A94321C85422100AE938B /* Media.xcassets in Resources */,
 				312A941B1C814B6B00AE938B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,8 +151,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				312A94181C814B6B00AE938B /* ViewController.swift in Sources */,
+				312A942A1C85390B00AE938B /* ScheduleViewController.swift in Sources */,
+				312A94281C85383200AE938B /* AuthorizationViewController.swift in Sources */,
+				312A942C1C85396E00AE938B /* FavoritesViewController.swift in Sources */,
+				312A942E1C85399900AE938B /* MapViewController.swift in Sources */,
 				312A94161C814B6B00AE938B /* AppDelegate.swift in Sources */,
+				312A94301C8539B600AE938B /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
