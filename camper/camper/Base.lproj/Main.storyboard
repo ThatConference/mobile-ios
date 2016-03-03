@@ -162,7 +162,7 @@
         <scene sceneID="jR4-X0-4xr">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xIv-N6-21P" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="schedule" id="csf-AT-1cn"/>
+                    <tabBarItem key="tabBarItem" title="schedule" image="schedule" id="csf-AT-1cn"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="w8W-5G-FWi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -185,7 +185,7 @@
         <scene sceneID="ddt-yl-Hce">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fzf-xS-aRF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="favorites" id="7jr-2b-EKb"/>
+                    <tabBarItem key="tabBarItem" title="favorites" image="favorites" id="7jr-2b-EKb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5pe-wP-17x">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -208,7 +208,7 @@
         <scene sceneID="ETu-ah-YDa">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vEe-7N-kFP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="map" id="WfG-mE-SrW"/>
+                    <tabBarItem key="tabBarItem" title="map" image="map" id="WfG-mE-SrW"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ewL-0w-y6c">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -231,7 +231,7 @@
         <scene sceneID="PVa-IR-Rh3">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="De9-Eq-Hlq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="settings" id="C1F-4s-DNA"/>
+                    <tabBarItem key="tabBarItem" title="settings" image="settings" id="C1F-4s-DNA"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5v7-nX-eyh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -251,4 +251,10 @@
             <point key="canvasLocation" x="1751" y="1413"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="favorites" width="120" height="115"/>
+        <image name="map" width="162" height="141"/>
+        <image name="schedule" width="24" height="25"/>
+        <image name="settings" width="112" height="118"/>
+    </resources>
 </document>

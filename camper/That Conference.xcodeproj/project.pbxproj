@@ -16,7 +16,6 @@
 		312A942C1C85396E00AE938B /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A942B1C85396E00AE938B /* FavoritesViewController.swift */; };
 		312A942E1C85399900AE938B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A942D1C85399900AE938B /* MapViewController.swift */; };
 		312A94301C8539B600AE938B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A942F1C8539B600AE938B /* SettingsViewController.swift */; };
-		312A94321C85422100AE938B /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 312A94311C85422100AE938B /* Media.xcassets */; };
 		312A94341C85EE5E00AE938B /* SessionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A94331C85EE5D00AE938B /* SessionDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +31,6 @@
 		312A942B1C85396E00AE938B /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		312A942D1C85399900AE938B /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		312A942F1C8539B600AE938B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		312A94311C85422100AE938B /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		312A94331C85EE5D00AE938B /* SessionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,7 +74,6 @@
 				312A942B1C85396E00AE938B /* FavoritesViewController.swift */,
 				312A942D1C85399900AE938B /* MapViewController.swift */,
 				312A942F1C8539B600AE938B /* SettingsViewController.swift */,
-				312A94311C85422100AE938B /* Media.xcassets */,
 				312A94331C85EE5D00AE938B /* SessionDetailViewController.swift */,
 			);
 			path = camper;
@@ -143,7 +140,6 @@
 			files = (
 				312A94201C814B6B00AE938B /* LaunchScreen.storyboard in Resources */,
 				312A941D1C814B6B00AE938B /* Assets.xcassets in Resources */,
-				312A94321C85422100AE938B /* Media.xcassets in Resources */,
 				312A941B1C814B6B00AE938B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
