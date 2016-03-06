@@ -17,6 +17,50 @@
 		312A942E1C85399900AE938B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A942D1C85399900AE938B /* MapViewController.swift */; };
 		312A94301C8539B600AE938B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A942F1C8539B600AE938B /* SettingsViewController.swift */; };
 		312A94341C85EE5E00AE938B /* SessionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A94331C85EE5D00AE938B /* SessionDetailViewController.swift */; };
+		312A943A1C88DEC900AE938B /* Chunk.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94381C88DEC900AE938B /* Chunk.ttf */; };
+		312A943B1C88DEC900AE938B /* Knockout-HTF31-JuniorMiddlewt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94391C88DEC900AE938B /* Knockout-HTF31-JuniorMiddlewt.otf */; };
+		312A94621C89325D00AE938B /* NeutraCond-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A943C1C89325D00AE938B /* NeutraCond-Bold.otf */; };
+		312A94631C89325D00AE938B /* NeutraCond-BoldAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A943D1C89325D00AE938B /* NeutraCond-BoldAlt.otf */; };
+		312A94641C89325D00AE938B /* NeutraCond-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A943E1C89325D00AE938B /* NeutraCond-Light.otf */; };
+		312A94651C89325D00AE938B /* NeutraCond-LightAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A943F1C89325D00AE938B /* NeutraCond-LightAlt.otf */; };
+		312A94661C89325D00AE938B /* NeutraCond-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94401C89325D00AE938B /* NeutraCond-Medium.otf */; };
+		312A94671C89325D00AE938B /* NeutraCond-MediumAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94411C89325D00AE938B /* NeutraCond-MediumAlt.otf */; };
+		312A94681C89325D00AE938B /* NeutraCond-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94421C89325D00AE938B /* NeutraCond-Thin.otf */; };
+		312A94691C89325D00AE938B /* NeutraCond-ThinAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94431C89325D00AE938B /* NeutraCond-ThinAlt.otf */; };
+		312A946A1C89325D00AE938B /* NeutraCond-Titling.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94441C89325D00AE938B /* NeutraCond-Titling.otf */; };
+		312A946B1C89325D00AE938B /* NeutraDisplay-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94451C89325D00AE938B /* NeutraDisplay-Bold.otf */; };
+		312A946C1C89325D00AE938B /* NeutraDisplay-BoldAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94461C89325D00AE938B /* NeutraDisplay-BoldAlt.otf */; };
+		312A946D1C89325D00AE938B /* NeutraDisplay-Draft.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94471C89325D00AE938B /* NeutraDisplay-Draft.otf */; };
+		312A946E1C89325D00AE938B /* NeutraDisplay-DraftAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94481C89325D00AE938B /* NeutraDisplay-DraftAlt.otf */; };
+		312A946F1C89325D00AE938B /* NeutraDisplay-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94491C89325D00AE938B /* NeutraDisplay-Light.otf */; };
+		312A94701C89325D00AE938B /* NeutraDisplay-LightAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A944A1C89325D00AE938B /* NeutraDisplay-LightAlt.otf */; };
+		312A94711C89325D00AE938B /* NeutraDisplay-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A944B1C89325D00AE938B /* NeutraDisplay-Medium.otf */; };
+		312A94721C89325D00AE938B /* NeutraDisplay-MediumAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A944C1C89325D00AE938B /* NeutraDisplay-MediumAlt.otf */; };
+		312A94731C89325D00AE938B /* NeutraDisplay-Num.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A944D1C89325D00AE938B /* NeutraDisplay-Num.otf */; };
+		312A94741C89325D00AE938B /* NeutraDisplay-NumAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A944E1C89325D00AE938B /* NeutraDisplay-NumAlt.otf */; };
+		312A94751C89325D00AE938B /* NeutraDisplay-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A944F1C89325D00AE938B /* NeutraDisplay-Thin.otf */; };
+		312A94761C89325D00AE938B /* NeutraDisplay-ThinAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94501C89325D00AE938B /* NeutraDisplay-ThinAlt.otf */; };
+		312A94771C89325D00AE938B /* NeutraDisplay-Titling.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94511C89325D00AE938B /* NeutraDisplay-Titling.otf */; };
+		312A94781C89325D00AE938B /* NeutraText-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94521C89325D00AE938B /* NeutraText-Bold.otf */; };
+		312A94791C89325D00AE938B /* NeutraText-BoldAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94531C89325D00AE938B /* NeutraText-BoldAlt.otf */; };
+		312A947A1C89325D00AE938B /* NeutraText-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94541C89325D00AE938B /* NeutraText-BoldItalic.otf */; };
+		312A947B1C89325D00AE938B /* NeutraText-BoldItalicAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94551C89325D00AE938B /* NeutraText-BoldItalicAlt.otf */; };
+		312A947C1C89325D00AE938B /* NeutraText-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94561C89325D00AE938B /* NeutraText-Book.otf */; };
+		312A947D1C89325D00AE938B /* NeutraText-BookAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94571C89325D00AE938B /* NeutraText-BookAlt.otf */; };
+		312A947E1C89325D00AE938B /* NeutraText-BookItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94581C89325D00AE938B /* NeutraText-BookItalic.otf */; };
+		312A947F1C89325D00AE938B /* NeutraText-BookItalicAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94591C89325D00AE938B /* NeutraText-BookItalicAlt.otf */; };
+		312A94801C89325D00AE938B /* NeutraText-Demi.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A945A1C89325D00AE938B /* NeutraText-Demi.otf */; };
+		312A94811C89325D00AE938B /* NeutraText-DemiAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A945B1C89325D00AE938B /* NeutraText-DemiAlt.otf */; };
+		312A94821C89325D00AE938B /* NeutraText-DemiItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A945C1C89325D00AE938B /* NeutraText-DemiItalic.otf */; };
+		312A94831C89325D00AE938B /* NeutraText-DemiItalicAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A945D1C89325D00AE938B /* NeutraText-DemiItalicAlt.otf */; };
+		312A94841C89325D00AE938B /* NeutraText-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A945E1C89325D00AE938B /* NeutraText-Light.otf */; };
+		312A94851C89325D00AE938B /* NeutraText-LightAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A945F1C89325D00AE938B /* NeutraText-LightAlt.otf */; };
+		312A94861C89325D00AE938B /* NeutraText-LightIA.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94601C89325D00AE938B /* NeutraText-LightIA.otf */; };
+		312A94871C89325D00AE938B /* NeutraText-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94611C89325D00AE938B /* NeutraText-LightItalic.otf */; };
+		31CFCD7C1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */; };
+		31CFCD811C8A741B00DB2AB2 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFCD801C8A741B00DB2AB2 /* Session.swift */; };
+		31CFCD841C8B70ED00DB2AB2 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */; };
+		31CFCD861C8B73DD00DB2AB2 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFCD851C8B73DD00DB2AB2 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +76,50 @@
 		312A942D1C85399900AE938B /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		312A942F1C8539B600AE938B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		312A94331C85EE5D00AE938B /* SessionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDetailViewController.swift; sourceTree = "<group>"; };
+		312A94381C88DEC900AE938B /* Chunk.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chunk.ttf; sourceTree = "<group>"; };
+		312A94391C88DEC900AE938B /* Knockout-HTF31-JuniorMiddlewt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Knockout-HTF31-JuniorMiddlewt.otf"; sourceTree = "<group>"; };
+		312A943C1C89325D00AE938B /* NeutraCond-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraCond-Bold.otf"; sourceTree = "<group>"; };
+		312A943D1C89325D00AE938B /* NeutraCond-BoldAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraCond-BoldAlt.otf"; sourceTree = "<group>"; };
+		312A943E1C89325D00AE938B /* NeutraCond-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraCond-Light.otf"; sourceTree = "<group>"; };
+		312A943F1C89325D00AE938B /* NeutraCond-LightAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraCond-LightAlt.otf"; sourceTree = "<group>"; };
+		312A94401C89325D00AE938B /* NeutraCond-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraCond-Medium.otf"; sourceTree = "<group>"; };
+		312A94411C89325D00AE938B /* NeutraCond-MediumAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraCond-MediumAlt.otf"; sourceTree = "<group>"; };
+		312A94421C89325D00AE938B /* NeutraCond-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraCond-Thin.otf"; sourceTree = "<group>"; };
+		312A94431C89325D00AE938B /* NeutraCond-ThinAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraCond-ThinAlt.otf"; sourceTree = "<group>"; };
+		312A94441C89325D00AE938B /* NeutraCond-Titling.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraCond-Titling.otf"; sourceTree = "<group>"; };
+		312A94451C89325D00AE938B /* NeutraDisplay-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraDisplay-Bold.otf"; sourceTree = "<group>"; };
+		312A94461C89325D00AE938B /* NeutraDisplay-BoldAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraDisplay-BoldAlt.otf"; sourceTree = "<group>"; };
+		312A94471C89325D00AE938B /* NeutraDisplay-Draft.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraDisplay-Draft.otf"; sourceTree = "<group>"; };
+		312A94481C89325D00AE938B /* NeutraDisplay-DraftAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraDisplay-DraftAlt.otf"; sourceTree = "<group>"; };
+		312A94491C89325D00AE938B /* NeutraDisplay-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraDisplay-Light.otf"; sourceTree = "<group>"; };
+		312A944A1C89325D00AE938B /* NeutraDisplay-LightAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraDisplay-LightAlt.otf"; sourceTree = "<group>"; };
+		312A944B1C89325D00AE938B /* NeutraDisplay-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraDisplay-Medium.otf"; sourceTree = "<group>"; };
+		312A944C1C89325D00AE938B /* NeutraDisplay-MediumAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraDisplay-MediumAlt.otf"; sourceTree = "<group>"; };
+		312A944D1C89325D00AE938B /* NeutraDisplay-Num.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraDisplay-Num.otf"; sourceTree = "<group>"; };
+		312A944E1C89325D00AE938B /* NeutraDisplay-NumAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraDisplay-NumAlt.otf"; sourceTree = "<group>"; };
+		312A944F1C89325D00AE938B /* NeutraDisplay-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraDisplay-Thin.otf"; sourceTree = "<group>"; };
+		312A94501C89325D00AE938B /* NeutraDisplay-ThinAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraDisplay-ThinAlt.otf"; sourceTree = "<group>"; };
+		312A94511C89325D00AE938B /* NeutraDisplay-Titling.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraDisplay-Titling.otf"; sourceTree = "<group>"; };
+		312A94521C89325D00AE938B /* NeutraText-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-Bold.otf"; sourceTree = "<group>"; };
+		312A94531C89325D00AE938B /* NeutraText-BoldAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-BoldAlt.otf"; sourceTree = "<group>"; };
+		312A94541C89325D00AE938B /* NeutraText-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-BoldItalic.otf"; sourceTree = "<group>"; };
+		312A94551C89325D00AE938B /* NeutraText-BoldItalicAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-BoldItalicAlt.otf"; sourceTree = "<group>"; };
+		312A94561C89325D00AE938B /* NeutraText-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-Book.otf"; sourceTree = "<group>"; };
+		312A94571C89325D00AE938B /* NeutraText-BookAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-BookAlt.otf"; sourceTree = "<group>"; };
+		312A94581C89325D00AE938B /* NeutraText-BookItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-BookItalic.otf"; sourceTree = "<group>"; };
+		312A94591C89325D00AE938B /* NeutraText-BookItalicAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-BookItalicAlt.otf"; sourceTree = "<group>"; };
+		312A945A1C89325D00AE938B /* NeutraText-Demi.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-Demi.otf"; sourceTree = "<group>"; };
+		312A945B1C89325D00AE938B /* NeutraText-DemiAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-DemiAlt.otf"; sourceTree = "<group>"; };
+		312A945C1C89325D00AE938B /* NeutraText-DemiItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-DemiItalic.otf"; sourceTree = "<group>"; };
+		312A945D1C89325D00AE938B /* NeutraText-DemiItalicAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-DemiItalicAlt.otf"; sourceTree = "<group>"; };
+		312A945E1C89325D00AE938B /* NeutraText-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-Light.otf"; sourceTree = "<group>"; };
+		312A945F1C89325D00AE938B /* NeutraText-LightAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-LightAlt.otf"; sourceTree = "<group>"; };
+		312A94601C89325D00AE938B /* NeutraText-LightIA.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-LightIA.otf"; sourceTree = "<group>"; };
+		312A94611C89325D00AE938B /* NeutraText-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-LightItalic.otf"; sourceTree = "<group>"; };
+		31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThatConferenceAPI.swift; sourceTree = "<group>"; };
+		31CFCD801C8A741B00DB2AB2 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
+		31CFCD851C8B73DD00DB2AB2 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +152,9 @@
 		312A94141C814B6B00AE938B /* camper */ = {
 			isa = PBXGroup;
 			children = (
+				31CFCD821C8B6E1400DB2AB2 /* datasource */,
+				31CFCD7F1C8A73D700DB2AB2 /* models */,
+				312A94351C88DE1A00AE938B /* resources */,
 				312A94151C814B6B00AE938B /* AppDelegate.swift */,
 				312A94191C814B6B00AE938B /* Main.storyboard */,
 				312A941C1C814B6B00AE938B /* Assets.xcassets */,
@@ -77,6 +168,71 @@
 				312A94331C85EE5D00AE938B /* SessionDetailViewController.swift */,
 			);
 			path = camper;
+			sourceTree = "<group>";
+		};
+		312A94351C88DE1A00AE938B /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				312A943C1C89325D00AE938B /* NeutraCond-Bold.otf */,
+				312A943D1C89325D00AE938B /* NeutraCond-BoldAlt.otf */,
+				312A943E1C89325D00AE938B /* NeutraCond-Light.otf */,
+				312A943F1C89325D00AE938B /* NeutraCond-LightAlt.otf */,
+				312A94401C89325D00AE938B /* NeutraCond-Medium.otf */,
+				312A94411C89325D00AE938B /* NeutraCond-MediumAlt.otf */,
+				312A94421C89325D00AE938B /* NeutraCond-Thin.otf */,
+				312A94431C89325D00AE938B /* NeutraCond-ThinAlt.otf */,
+				312A94441C89325D00AE938B /* NeutraCond-Titling.otf */,
+				312A94451C89325D00AE938B /* NeutraDisplay-Bold.otf */,
+				312A94461C89325D00AE938B /* NeutraDisplay-BoldAlt.otf */,
+				312A94471C89325D00AE938B /* NeutraDisplay-Draft.otf */,
+				312A94481C89325D00AE938B /* NeutraDisplay-DraftAlt.otf */,
+				312A94491C89325D00AE938B /* NeutraDisplay-Light.otf */,
+				312A944A1C89325D00AE938B /* NeutraDisplay-LightAlt.otf */,
+				312A944B1C89325D00AE938B /* NeutraDisplay-Medium.otf */,
+				312A944C1C89325D00AE938B /* NeutraDisplay-MediumAlt.otf */,
+				312A944D1C89325D00AE938B /* NeutraDisplay-Num.otf */,
+				312A944E1C89325D00AE938B /* NeutraDisplay-NumAlt.otf */,
+				312A944F1C89325D00AE938B /* NeutraDisplay-Thin.otf */,
+				312A94501C89325D00AE938B /* NeutraDisplay-ThinAlt.otf */,
+				312A94511C89325D00AE938B /* NeutraDisplay-Titling.otf */,
+				312A94521C89325D00AE938B /* NeutraText-Bold.otf */,
+				312A94531C89325D00AE938B /* NeutraText-BoldAlt.otf */,
+				312A94541C89325D00AE938B /* NeutraText-BoldItalic.otf */,
+				312A94551C89325D00AE938B /* NeutraText-BoldItalicAlt.otf */,
+				312A94561C89325D00AE938B /* NeutraText-Book.otf */,
+				312A94571C89325D00AE938B /* NeutraText-BookAlt.otf */,
+				312A94581C89325D00AE938B /* NeutraText-BookItalic.otf */,
+				312A94591C89325D00AE938B /* NeutraText-BookItalicAlt.otf */,
+				312A945A1C89325D00AE938B /* NeutraText-Demi.otf */,
+				312A945B1C89325D00AE938B /* NeutraText-DemiAlt.otf */,
+				312A945C1C89325D00AE938B /* NeutraText-DemiItalic.otf */,
+				312A945D1C89325D00AE938B /* NeutraText-DemiItalicAlt.otf */,
+				312A945E1C89325D00AE938B /* NeutraText-Light.otf */,
+				312A945F1C89325D00AE938B /* NeutraText-LightAlt.otf */,
+				312A94601C89325D00AE938B /* NeutraText-LightIA.otf */,
+				312A94611C89325D00AE938B /* NeutraText-LightItalic.otf */,
+				312A94381C88DEC900AE938B /* Chunk.ttf */,
+				312A94391C88DEC900AE938B /* Knockout-HTF31-JuniorMiddlewt.otf */,
+			);
+			name = resources;
+			sourceTree = "<group>";
+		};
+		31CFCD7F1C8A73D700DB2AB2 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				31CFCD801C8A741B00DB2AB2 /* Session.swift */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		31CFCD821C8B6E1400DB2AB2 /* datasource */ = {
+			isa = PBXGroup;
+			children = (
+				31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */,
+				31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */,
+				31CFCD851C8B73DD00DB2AB2 /* CoreDataStack.swift */,
+			);
+			name = datasource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +294,49 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				312A947E1C89325D00AE938B /* NeutraText-BookItalic.otf in Resources */,
+				312A94851C89325D00AE938B /* NeutraText-LightAlt.otf in Resources */,
+				312A94631C89325D00AE938B /* NeutraCond-BoldAlt.otf in Resources */,
 				312A94201C814B6B00AE938B /* LaunchScreen.storyboard in Resources */,
+				312A943B1C88DEC900AE938B /* Knockout-HTF31-JuniorMiddlewt.otf in Resources */,
+				312A94641C89325D00AE938B /* NeutraCond-Light.otf in Resources */,
+				312A94701C89325D00AE938B /* NeutraDisplay-LightAlt.otf in Resources */,
+				312A94801C89325D00AE938B /* NeutraText-Demi.otf in Resources */,
+				312A946C1C89325D00AE938B /* NeutraDisplay-BoldAlt.otf in Resources */,
+				312A946B1C89325D00AE938B /* NeutraDisplay-Bold.otf in Resources */,
+				312A94791C89325D00AE938B /* NeutraText-BoldAlt.otf in Resources */,
+				312A94711C89325D00AE938B /* NeutraDisplay-Medium.otf in Resources */,
+				312A94721C89325D00AE938B /* NeutraDisplay-MediumAlt.otf in Resources */,
+				312A94841C89325D00AE938B /* NeutraText-Light.otf in Resources */,
+				312A94671C89325D00AE938B /* NeutraCond-MediumAlt.otf in Resources */,
+				312A94731C89325D00AE938B /* NeutraDisplay-Num.otf in Resources */,
+				312A94811C89325D00AE938B /* NeutraText-DemiAlt.otf in Resources */,
+				312A947B1C89325D00AE938B /* NeutraText-BoldItalicAlt.otf in Resources */,
+				312A94681C89325D00AE938B /* NeutraCond-Thin.otf in Resources */,
+				312A94781C89325D00AE938B /* NeutraText-Bold.otf in Resources */,
+				312A94861C89325D00AE938B /* NeutraText-LightIA.otf in Resources */,
+				312A947F1C89325D00AE938B /* NeutraText-BookItalicAlt.otf in Resources */,
+				312A946F1C89325D00AE938B /* NeutraDisplay-Light.otf in Resources */,
+				312A94821C89325D00AE938B /* NeutraText-DemiItalic.otf in Resources */,
+				312A946A1C89325D00AE938B /* NeutraCond-Titling.otf in Resources */,
+				312A946E1C89325D00AE938B /* NeutraDisplay-DraftAlt.otf in Resources */,
+				312A94831C89325D00AE938B /* NeutraText-DemiItalicAlt.otf in Resources */,
+				312A94871C89325D00AE938B /* NeutraText-LightItalic.otf in Resources */,
 				312A941D1C814B6B00AE938B /* Assets.xcassets in Resources */,
+				312A947A1C89325D00AE938B /* NeutraText-BoldItalic.otf in Resources */,
+				312A94761C89325D00AE938B /* NeutraDisplay-ThinAlt.otf in Resources */,
+				312A94691C89325D00AE938B /* NeutraCond-ThinAlt.otf in Resources */,
+				312A947C1C89325D00AE938B /* NeutraText-Book.otf in Resources */,
+				312A94661C89325D00AE938B /* NeutraCond-Medium.otf in Resources */,
+				312A94741C89325D00AE938B /* NeutraDisplay-NumAlt.otf in Resources */,
+				312A94621C89325D00AE938B /* NeutraCond-Bold.otf in Resources */,
+				312A943A1C88DEC900AE938B /* Chunk.ttf in Resources */,
+				312A947D1C89325D00AE938B /* NeutraText-BookAlt.otf in Resources */,
+				312A94651C89325D00AE938B /* NeutraCond-LightAlt.otf in Resources */,
+				312A94771C89325D00AE938B /* NeutraDisplay-Titling.otf in Resources */,
+				312A94751C89325D00AE938B /* NeutraDisplay-Thin.otf in Resources */,
 				312A941B1C814B6B00AE938B /* Main.storyboard in Resources */,
+				312A946D1C89325D00AE938B /* NeutraDisplay-Draft.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,8 +352,12 @@
 				312A94341C85EE5E00AE938B /* SessionDetailViewController.swift in Sources */,
 				312A942C1C85396E00AE938B /* FavoritesViewController.swift in Sources */,
 				312A942E1C85399900AE938B /* MapViewController.swift in Sources */,
+				31CFCD7C1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift in Sources */,
+				31CFCD861C8B73DD00DB2AB2 /* CoreDataStack.swift in Sources */,
+				31CFCD841C8B70ED00DB2AB2 /* SessionStore.swift in Sources */,
 				312A94161C814B6B00AE938B /* AppDelegate.swift in Sources */,
 				312A94301C8539B600AE938B /* SettingsViewController.swift in Sources */,
+				31CFCD811C8A741B00DB2AB2 /* Session.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +509,7 @@
 				312A94261C814B6B00AE938B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

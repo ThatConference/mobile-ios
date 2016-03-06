@@ -36,6 +36,12 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Chunk.ttf</string>
+		<string>Knockout-HTF31-JuniorMiddlewt.otf</string>
+		<string>NeutraText-Bold.otf</string>
+	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
