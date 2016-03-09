@@ -104,6 +104,18 @@ class ThatConferenceAPI {
         
         //let isUserFavoriteValue = json["IsUserFavorite"] as? NSNumber
         
+        let fetchRequest = NSFetchRequest(entityName: "Session")
+        let predicate = NSPredicate(format: "id == \(id)")
+        fetchRequest.predicate = predicate
+        
+        var fetchedSessions: [Session]!
+        context.performBlockAndWait() {
+            fetchedSessions = try! context.executeFetchRequest(fetchRequest) as! [Session]
+        }
+        if fetchedSessions.count > 0 {
+            return fetchedSessions.first
+        }
+        
         var session: Session!
         context.performBlockAndWait() {
             session = NSEntityDescription.insertNewObjectForEntityForName("Session", inManagedObjectContext: context) as! Session

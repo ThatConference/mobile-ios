@@ -8,35 +8,17 @@ class ScheduleViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        store.fetchAll() {
+        let sessionStore = SessionStore()
+        sessionStore.fetchAll() {
             (sessionResult) -> Void in
+            let sortBySessionDateTime = NSSortDescriptor(key: "scheduledDateTime", ascending: true)
+            let allSessions = try! self.store.fetchMainQueueSessions(predicate: nil, sortDescriptors: [sortBySessionDateTime])
+            
             NSOperationQueue.mainQueue().addOperationWithBlock() {
-                switch sessionResult {
-                case let .Success(sessions):
-                    print("Successfully found \(sessions.count) sessions.")
-                    self.sessionDataSource.sessions = sessions
-                case let .Failure(error):
-                    self.sessionDataSource.sessions.removeAll()
-                    print("Error fetching sessions: \(error)")
-                }
+                self.sessionDataSource.sessions = allSessions
+                print("Successfully loaded \(allSessions.count) sessions.")
                 //self.collectionView.reloadSections(NSIndexSet(index: 0))
             }
         }
     }
-    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
-//        let sessionStore = SessionStore()
-//        sessionStore.fetchAll() {
-//            (sessionResult) -> Void in
-//            let sortBySessionDateTime = NSSortDescriptor(key: "ScheduledDateTime", ascending: true)
-//            let allSessions = try! self.store.fetchMainQueueSessions(predicate: nil, sortDescriptors: [sortBySessionDateTime])
-//            
-//            NSOperationQueue.mainQueue().addOperationWithBlock() {
-//                self.sessionDataSource.sessions = allSessions
-//                //self.collectionView.reloadSections(NSIndexSet(index: 0))
-//            }
-//        }
-//    }
 }

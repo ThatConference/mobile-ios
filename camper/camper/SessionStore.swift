@@ -33,7 +33,8 @@ class SessionStore {
                 
                 let objectIds = sessions.map { $0.objectID }
                 let predicate = NSPredicate(format: "self IN %@", objectIds)
-                let sortBySessionDate = NSSortDescriptor(key: "ScheduledDateTime", ascending: true)
+                //let sortBySessionDate = NSSortDescriptor(key: "ScheduledDateTime", ascending: true)
+                let sortBySessionDate = NSSortDescriptor(key: "id", ascending: true)
                 
                 do {
                     try self.coreDataStack.saveChanges()
