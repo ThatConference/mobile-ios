@@ -7,22 +7,13 @@ class Session: NSManagedObject {
         
         id = 0
         title = ""
-        sessiondescription = ""
+        sessionDescription = ""
+        scheduledDateTime = NSDate()
+        scheduledRoom = ""
         primaryCategory = ""
-        level = 0
+        level = "0"
         accepted = false
         cancelled = false
-        isUserFavorite = false
+        //isUserFavorite = false
     }
-}
-
-extension Session {
-    @NSManaged var id: Int
-    @NSManaged var title: String?
-    @NSManaged var sessiondescription: String?
-    @NSManaged var primaryCategory: String?
-    @NSManaged var level: Int
-    @NSManaged var accepted: Bool
-    @NSManaged var cancelled: Bool
-    @NSManaged var isUserFavorite: Bool
 }
