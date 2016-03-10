@@ -12,12 +12,13 @@ class SessionDataSource: NSObject, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView,
         cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
             
-            let identifier = "UICollectionViewCell"
+            let identifier = "SessionCollectionViewCell"
             let cell =
             collectionView.dequeueReusableCellWithReuseIdentifier(identifier,
                 forIndexPath: indexPath) as! SessionCollectionViewCell
             
-            //let session = sessions[indexPath.row]
+            let session = sessions[indexPath.row]
+            cell.session = session
             
             return cell
     }

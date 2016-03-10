@@ -2,6 +2,8 @@ import UIKit
 
 class ScheduleViewController : UIViewController {
     
+    @IBOutlet var collectionView: UICollectionView!
+    
     var store: SessionStore!
     let sessionDataSource = SessionDataSource()
     
@@ -17,7 +19,7 @@ class ScheduleViewController : UIViewController {
             NSOperationQueue.mainQueue().addOperationWithBlock() {
                 self.sessionDataSource.sessions = allSessions
                 print("Successfully loaded \(allSessions.count) sessions.")
-                //self.collectionView.reloadSections(NSIndexSet(index: 0))
+                self.collectionView.reloadSections(NSIndexSet(index: 0))
             }
         }
     }

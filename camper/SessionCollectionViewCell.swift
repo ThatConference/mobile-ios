@@ -5,26 +5,21 @@ class SessionCollectionViewCell: UICollectionViewCell {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var spinner: UIActivityIndicatorView!
     
+    var session: Session!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        updateWithImage(nil)
+        updateWithSession()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        updateWithImage(nil)
+        updateWithSession()
     }
     
-    func updateWithImage(image: UIImage?) {
-        if let imageToDisplay = image {
-            spinner.stopAnimating()
-            imageView.image = imageToDisplay
-        }
-        else {
-            spinner.startAnimating()
-            imageView.image = nil
-        }
+    func updateWithSession() {
+        
     }
 }
