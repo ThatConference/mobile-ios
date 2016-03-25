@@ -22,5 +22,7 @@ class ScheduleViewController : UIViewController {
                 self.collectionView.reloadSections(NSIndexSet(index: 0))
             }
         }
+        
+        self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
     }
 }
