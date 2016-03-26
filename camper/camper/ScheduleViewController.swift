@@ -23,6 +23,8 @@ class ScheduleViewController : UIViewController {
             }
         }
         
+        
+        //TODO: If logged in, skip this
         self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
     }
 }
