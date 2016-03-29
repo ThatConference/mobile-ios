@@ -10,7 +10,7 @@ class ThatConferenceAPI {
     
     private static let dateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         return formatter
     }()
     
@@ -88,37 +88,42 @@ class ThatConferenceAPI {
             scheduledRoom = json["ScheduledRoom"] as? String,
             primaryCategory = json["PrimaryCategory"] as? String,
             level = json["Level"] as? String,
-            acceptedValue = json["Accepted"] as? NSNumber,
-            cancelledValue = json["Canceled"] as? NSNumber
+            accepted = (json["Accepted"] as? NSNumber)?.boolValue,
+            cancelled = (json["Canceled"] as? NSNumber)?.boolValue
             else {
                 return nil
         }
         
-        let accepted = ThatConferenceAPI.convertToBool(acceptedValue)
-        let cancelled = ThatConferenceAPI.convertToBool(cancelledValue)
+        //let accepted = ThatConferenceAPI.convertToBool(acceptedValue)
+        //let cancelled = ThatConferenceAPI.convertToBool(cancelledValue)
         
         var scheduledDateTime: NSDate?
         if dateString != nil {
-            scheduledDateTime = dateFormatter.dateFromString(dateString!)
+            scheduledDateTime = dateFormatter.dateFromString(dateString!)            
         }
         
         //let isUserFavoriteValue = json["IsUserFavorite"] as? NSNumber
         
-        let fetchRequest = NSFetchRequest(entityName: "Session")
-        let predicate = NSPredicate(format: "id == \(id)")
-        fetchRequest.predicate = predicate
+        /****************
+        **  Appears to be pulling from cache and ignoring fetch request **
+        ***************/
+//        let fetchRequest = NSFetchRequest(entityName: "Session")
+//        let predicate = NSPredicate(format: "id == \(id)")
+//        fetchRequest.predicate = predicate
+//        
+//        var fetchedSessions: [Session]!
+//        context.performBlockAndWait() {
+//            fetchedSessions = try! context.executeFetchRequest(fetchRequest) as! [Session]
+//        }
+//        if fetchedSessions.count > 0 {
+//            print("fetched session date time: \(fetchedSessions.first?.scheduledDateTime)")
+//            return fetchedSessions.first
+//        }
         
-        var fetchedSessions: [Session]!
-        context.performBlockAndWait() {
-            fetchedSessions = try! context.executeFetchRequest(fetchRequest) as! [Session]
-        }
-        if fetchedSessions.count > 0 {
-            return fetchedSessions.first
-        }
-        
-        var session: Session!
-        context.performBlockAndWait() {
-            session = NSEntityDescription.insertNewObjectForEntityForName("Session", inManagedObjectContext: context) as! Session
+        //is this ever hit?!?!
+        var session = Session()
+        //context.performBlockAndWait() {
+           // session = NSEntityDescription.insertNewObjectForEntityForName("Session", inManagedObjectContext: context) as! Session
             
             session.id = id
             session.title = title
@@ -130,7 +135,7 @@ class ThatConferenceAPI {
             session.accepted = accepted
             session.cancelled = cancelled
             //session.isUserFavorite = ThatConferenceAPI.convertToBool(isUserFavoriteValue)
-        }
+        //}
         
         return session
     }
