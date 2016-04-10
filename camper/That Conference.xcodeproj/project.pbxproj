@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		311E0E6B1CB74D76004FA850 /* ExternalLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */; };
 		3123AC251C8F905C0097BF33 /* ThatConference.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3123AC231C8F905C0097BF33 /* ThatConference.xcdatamodeld */; };
 		3123AC281C90959D0097BF33 /* Session+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3123AC261C90959D0097BF33 /* Session+CoreDataProperties.swift */; };
 		3123AC291C90959D0097BF33 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3123AC271C90959D0097BF33 /* Session.swift */; };
@@ -68,6 +69,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalLogin.swift; sourceTree = "<group>"; };
 		3123AC241C8F905C0097BF33 /* ThatConference.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ThatConference.xcdatamodel; sourceTree = "<group>"; };
 		3123AC261C90959D0097BF33 /* Session+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3123AC271C90959D0097BF33 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 			children = (
 				3123AC261C90959D0097BF33 /* Session+CoreDataProperties.swift */,
 				3123AC271C90959D0097BF33 /* Session.swift */,
+				311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				312A942E1C85399900AE938B /* MapViewController.swift in Sources */,
 				31CFCD7C1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift in Sources */,
 				3123AC291C90959D0097BF33 /* Session.swift in Sources */,
+				311E0E6B1CB74D76004FA850 /* ExternalLogin.swift in Sources */,
 				31CFCD861C8B73DD00DB2AB2 /* CoreDataStack.swift in Sources */,
 				31CFCD841C8B70ED00DB2AB2 /* SessionStore.swift in Sources */,
 				3123AC251C8F905C0097BF33 /* ThatConference.xcdatamodeld in Sources */,

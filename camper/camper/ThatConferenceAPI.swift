@@ -2,11 +2,12 @@ import Foundation
 import CoreData
 
 enum Method: String {
-    case SessionsGetAll = "Session/GetAllAcceptedSessions"
+    case SessionsGetAll = "/api3/Session/GetAllAcceptedSessions"
+    case ExternalLogins = "/api3/Account/ExternalLogins?returnUrl=%2F&generateState=true"
 }
 
 class ThatConferenceAPI {
-    private static let baseURLString = "https://www.thatconference.com/api3/"
+    private static let baseURLString = "https://www.thatconference.com"
     
     private static let dateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
@@ -32,6 +33,10 @@ class ThatConferenceAPI {
     
     static func sessionsGetAllURL() -> NSURL {
         return thatConferenceURL(.SessionsGetAll, parameters: ["year": GetCurrentYear()])
+    }
+    
+    static func externalLogins() -> NSURL {
+        return thatConferenceURL(.ExternalLogins, parameters: nil)
     }
     
     static func convertToBool(value: NSNumber?) -> Bool {

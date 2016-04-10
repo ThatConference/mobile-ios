@@ -6,6 +6,8 @@ class AuthorizationViewController : UIViewController {
     @IBOutlet var usernameError: UILabel!
     @IBOutlet var passwordError: UILabel!
     
+    ///api3/Account/ExternalLogins?returnUrl=%2F&generateState=true
+    
     @IBAction func loginPressed(sender: AnyObject) {
         //TODO: Authorize using username/password
         usernameError.text = "No checked. Oh no!"
