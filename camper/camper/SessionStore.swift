@@ -23,29 +23,29 @@ class SessionStore {
         let task = session.dataTaskWithRequest(request) {
             (data, response, error) -> Void in
             
-            var result = self.processSessionsRequest(data: data, error: error)
+            let result = self.processSessionsRequest(data: data, error: error)
             
-            if case let .Success(sessions) = result {
-                let mainQueueContext = self.coreDataStack.mainQueueContext
-                mainQueueContext.performBlockAndWait() {
-                    try! mainQueueContext.obtainPermanentIDsForObjects(sessions)
-                }
-                
-                let objectIds = sessions.map { $0.objectID }
-                let predicate = NSPredicate(format: "self IN %@", objectIds)
-                //let sortBySessionDate = NSSortDescriptor(key: "ScheduledDateTime", ascending: true)
-                let sortBySessionDate = NSSortDescriptor(key: "id", ascending: true)
-                
-                do {
-                    try self.coreDataStack.saveChanges()
-                    
-                    let mainQueueSessions = try self.fetchMainQueueSessions(predicate: predicate, sortDescriptors: [sortBySessionDate])
-                    result = .Success(mainQueueSessions)
-                }
-                catch let error {
-                    result = .Failure(error)
-                }
-            }
+            // temporarily disable caching
+//            if case let .Success(sessions) = result {                
+//                let mainQueueContext = self.coreDataStack.mainQueueContext
+//                mainQueueContext.performBlockAndWait() {
+//                    try! mainQueueContext.obtainPermanentIDsForObjects(sessions)
+//                }
+//                
+//                let objectIds = sessions.map { $0.objectID }
+//                let predicate = NSPredicate(format: "self IN %@", objectIds)
+//                let sortBySessionDate = NSSortDescriptor(key: "scheduledDateTime", ascending: true)                
+//                
+//                do {
+//                    try self.coreDataStack.saveChanges()
+//                    
+//                    let mainQueueSessions = try self.fetchMainQueueSessions(predicate: predicate, sortDescriptors: [sortBySessionDate])
+//                    result = .Success(mainQueueSessions)
+//                }
+//                catch let error {
+//                    result = .Failure(error)
+//                }
+//            }
             
             completion(result)
         }
@@ -85,4 +85,68 @@ class SessionStore {
         
         return ThatConferenceAPI.sessionsFromJSONData(jsonData, inContext: self.coreDataStack.privateQueueContext)
     }
+   
+    func getDailySchedules(sessions: [Session]) -> Dictionary<String, DailySchedule> {
+        var schedule = Dictionary<String, DailySchedule>()
+        var cancelled: Int = 0
+        
+        for session in sessions {
+            if session.cancelled {
+                cancelled += 1
+                continue
+            }
+            
+            var dateString = String()
+            var time = String()
+            if let date = session.scheduledDateTime {
+                dateString = getDate(date)
+                time = getTime(date)
+            }
+
+            //create a new reference for this dailySchedule in our temp lookup
+            if schedule[dateString] == nil {
+                let dailySchedule = DailySchedule()
+                if let date = session.scheduledDateTime {
+                    dailySchedule.date = date
+                }
+                
+                schedule[dateString] = dailySchedule                
+            }
+            
+            if let currentDay = schedule[dateString] {
+                var found: Bool = false
+                for timeSlot in currentDay.timeSlots {
+                    if timeSlot.time == time {
+                        timeSlot.sessions.append(session)
+                        found = true
+                        break
+                    }
+                }
+                
+                if !found {
+                    let timeSlot = TimeSlot()
+                    timeSlot.time = time
+                    timeSlot.sessions = [session]
+                    currentDay.timeSlots.append(timeSlot)
+                }
+            }
+        }
+        
+        return schedule
+    }
+    
+    private func getDate(dateTime: NSDate?) -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM-dd-YYYY"
+        
+        return dateFormatter.stringFromDate(dateTime!)
+    }
+    
+    private func getTime(dateTime: NSDate?) -> String {
+        let timeFormatter = NSDateFormatter()
+        timeFormatter.dateFormat = "HH:mm"
+        
+        return timeFormatter.stringFromDate(dateTime!)
+    }
+
 }

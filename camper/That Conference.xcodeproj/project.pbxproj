@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		311E0E6B1CB74D76004FA850 /* ExternalLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */; };
 		3123AC251C8F905C0097BF33 /* ThatConference.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3123AC231C8F905C0097BF33 /* ThatConference.xcdatamodeld */; };
-		3123AC281C90959D0097BF33 /* Session+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3123AC261C90959D0097BF33 /* Session+CoreDataProperties.swift */; };
 		3123AC291C90959D0097BF33 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3123AC271C90959D0097BF33 /* Session.swift */; };
 		3123AC2B1C90A0070097BF33 /* SessionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3123AC2A1C90A0070097BF33 /* SessionDataSource.swift */; };
 		3123AC2D1C90A0750097BF33 /* SessionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3123AC2C1C90A0750097BF33 /* SessionCollectionViewCell.swift */; };
@@ -66,12 +65,16 @@
 		31CFCD7C1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */; };
 		31CFCD841C8B70ED00DB2AB2 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */; };
 		31CFCD861C8B73DD00DB2AB2 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFCD851C8B73DD00DB2AB2 /* CoreDataStack.swift */; };
+		5113D3851CAA20CB00D6B974 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */; };
+		5113D3881CAC521C00D6B974 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5113D3871CAC521C00D6B974 /* CircleView.swift */; };
+		5113D38A1CAF58A100D6B974 /* CircleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5113D3891CAF58A100D6B974 /* CircleLabel.swift */; };
+		512DA03B1CB7585D006CC1B3 /* DailySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DA03A1CB7585D006CC1B3 /* DailySchedule.swift */; };
+		512DA03D1CB758B9006CC1B3 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalLogin.swift; sourceTree = "<group>"; };
 		3123AC241C8F905C0097BF33 /* ThatConference.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ThatConference.xcdatamodel; sourceTree = "<group>"; };
-		3123AC261C90959D0097BF33 /* Session+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3123AC271C90959D0097BF33 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		3123AC2A1C90A0070097BF33 /* SessionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDataSource.swift; sourceTree = "<group>"; };
 		3123AC2C1C90A0750097BF33 /* SessionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionCollectionViewCell.swift; path = ../SessionCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -130,6 +133,11 @@
 		31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThatConferenceAPI.swift; sourceTree = "<group>"; };
 		31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
 		31CFCD851C8B73DD00DB2AB2 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
+		5113D3871CAC521C00D6B974 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		5113D3891CAF58A100D6B974 /* CircleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleLabel.swift; sourceTree = "<group>"; };
+		512DA03A1CB7585D006CC1B3 /* DailySchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailySchedule.swift; sourceTree = "<group>"; };
+		512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,21 +170,20 @@
 		312A94141C814B6B00AE938B /* camper */ = {
 			isa = PBXGroup;
 			children = (
-				31CFCD821C8B6E1400DB2AB2 /* datasource */,
-				31CFCD7F1C8A73D700DB2AB2 /* models */,
-				312A94351C88DE1A00AE938B /* resources */,
+				5113D3861CAC51AE00D6B974 /* custom views */,
 				312A94151C814B6B00AE938B /* AppDelegate.swift */,
-				312A94191C814B6B00AE938B /* Main.storyboard */,
 				312A941C1C814B6B00AE938B /* Assets.xcassets */,
-				312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */,
-				312A94211C814B6B00AE938B /* Info.plist */,
 				312A94271C85383200AE938B /* AuthorizationViewController.swift */,
-				312A94291C85390B00AE938B /* ScheduleViewController.swift */,
 				312A942B1C85396E00AE938B /* FavoritesViewController.swift */,
+				312A94211C814B6B00AE938B /* Info.plist */,
+				312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */,
+				312A94191C814B6B00AE938B /* Main.storyboard */,
 				312A942D1C85399900AE938B /* MapViewController.swift */,
-				312A942F1C8539B600AE938B /* SettingsViewController.swift */,
-				312A94331C85EE5D00AE938B /* SessionDetailViewController.swift */,
+				5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */,
+				312A94291C85390B00AE938B /* ScheduleViewController.swift */,
 				3123AC2C1C90A0750097BF33 /* SessionCollectionViewCell.swift */,
+				312A94331C85EE5D00AE938B /* SessionDetailViewController.swift */,
+				312A942F1C8539B600AE938B /* SettingsViewController.swift */,
 			);
 			path = camper;
 			sourceTree = "<group>";
@@ -231,9 +238,10 @@
 		31CFCD7F1C8A73D700DB2AB2 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				3123AC261C90959D0097BF33 /* Session+CoreDataProperties.swift */,
 				3123AC271C90959D0097BF33 /* Session.swift */,
 				311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */,
+				512DA03A1CB7585D006CC1B3 /* DailySchedule.swift */,
+				512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -241,6 +249,7 @@
 		31CFCD821C8B6E1400DB2AB2 /* datasource */ = {
 			isa = PBXGroup;
 			children = (
+				31CFCD7F1C8A73D700DB2AB2 /* models */,
 				31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */,
 				31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */,
 				31CFCD851C8B73DD00DB2AB2 /* CoreDataStack.swift */,
@@ -248,6 +257,17 @@
 				3123AC2A1C90A0070097BF33 /* SessionDataSource.swift */,
 			);
 			name = datasource;
+			sourceTree = "<group>";
+		};
+		5113D3861CAC51AE00D6B974 /* custom views */ = {
+			isa = PBXGroup;
+			children = (
+				5113D3871CAC521C00D6B974 /* CircleView.swift */,
+				5113D3891CAF58A100D6B974 /* CircleLabel.swift */,
+				31CFCD821C8B6E1400DB2AB2 /* datasource */,
+				312A94351C88DE1A00AE938B /* resources */,
+			);
+			name = "custom views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,11 +383,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3123AC2D1C90A0750097BF33 /* SessionCollectionViewCell.swift in Sources */,
-				3123AC281C90959D0097BF33 /* Session+CoreDataProperties.swift in Sources */,
+				512DA03D1CB758B9006CC1B3 /* TimeSlot.swift in Sources */,
+				512DA03B1CB7585D006CC1B3 /* DailySchedule.swift in Sources */,
 				312A942A1C85390B00AE938B /* ScheduleViewController.swift in Sources */,
 				312A94281C85383200AE938B /* AuthorizationViewController.swift in Sources */,
 				3123AC2B1C90A0070097BF33 /* SessionDataSource.swift in Sources */,
 				312A94341C85EE5E00AE938B /* SessionDetailViewController.swift in Sources */,
+				5113D3881CAC521C00D6B974 /* CircleView.swift in Sources */,
+				5113D3851CAA20CB00D6B974 /* ScheduleTableViewCell.swift in Sources */,
 				312A942C1C85396E00AE938B /* FavoritesViewController.swift in Sources */,
 				312A942E1C85399900AE938B /* MapViewController.swift in Sources */,
 				31CFCD7C1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift in Sources */,
@@ -377,6 +400,7 @@
 				31CFCD841C8B70ED00DB2AB2 /* SessionStore.swift in Sources */,
 				3123AC251C8F905C0097BF33 /* ThatConference.xcdatamodeld in Sources */,
 				312A94161C814B6B00AE938B /* AppDelegate.swift in Sources */,
+				5113D38A1CAF58A100D6B974 /* CircleLabel.swift in Sources */,
 				312A94301C8539B600AE938B /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
