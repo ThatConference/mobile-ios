@@ -56,5 +56,8 @@ class AuthorizationViewController : UIViewController {
     
     func loginOAuth(vendor: String) {
         print("Logging in with:" + vendor)
+        
+        //let externalLogins = ThatConferenceAPI.externalLoginsFromJSONData(<#T##data: NSData##NSData#>, inContext: <#T##NSManagedObjectContext#>)
+        
     }
 }

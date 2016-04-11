@@ -1,26 +1,13 @@
 import UIKit
 import CoreData
 
-enum SessionsResult {
-    case Success([Session])
-    case Failure(ErrorType)
-}
-
-enum APIError: ErrorType {
-    case InvalidJSONData
-}
-
 class SessionStore {
     let coreDataStack = CoreDataStack(modelName: "ThatConference")
-    let session: NSURLSession = {
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        return NSURLSession(configuration: config)
-    }()
     
     func fetchAll(completion completion: (SessionsResult) -> Void) {
         let url = ThatConferenceAPI.sessionsGetAllURL()
         let request = NSURLRequest(URL: url)
-        let task = session.dataTaskWithRequest(request) {
+        let task = ThatConferenceAPI.nsurlSession.dataTaskWithRequest(request) {
             (data, response, error) -> Void in
             
             let result = self.processSessionsRequest(data: data, error: error)

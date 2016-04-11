@@ -6,7 +6,26 @@ enum Method: String {
     case ExternalLogins = "/api3/Account/ExternalLogins?returnUrl=%2F&generateState=true"
 }
 
+enum SessionsResult {
+    case Success([Session])
+    case Failure(ErrorType)
+}
+
+enum ExternalLoginResult {
+    case Success([ExternalLogin])
+    case Failure(ErrorType)
+}
+
+enum APIError: ErrorType {
+    case InvalidJSONData
+}
+
 class ThatConferenceAPI {
+    static let nsurlSession: NSURLSession = {
+        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+        return NSURLSession(configuration: config)
+    }()
+    
     private static let baseURLString = "https://www.thatconference.com"
     
     private static let dateFormatter: NSDateFormatter = {
@@ -29,6 +48,10 @@ class ThatConferenceAPI {
         
         components.queryItems = queryItems
         return components.URL!
+    }
+    
+    static func authorizationExternalLogins() -> NSURL {
+        return thatConferenceURL(.ExternalLogins, parameters: nil)
     }
     
     static func sessionsGetAllURL() -> NSURL {
@@ -126,7 +149,7 @@ class ThatConferenceAPI {
 //        }
         
         //is this ever hit?!?!
-        var session = Session()
+        let session = Session()
         //context.performBlockAndWait() {
            // session = NSEntityDescription.insertNewObjectForEntityForName("Session", inManagedObjectContext: context) as! Session
             
@@ -143,5 +166,50 @@ class ThatConferenceAPI {
         //}
         
         return session
+    }
+    
+    class func externalLoginsFromJSONData(data: NSData, inContext context: NSManagedObjectContext) -> ExternalLoginResult {
+        do {
+            let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
+            
+            guard let logins = jsonObject as? [[String:AnyObject]]
+                else {
+                    return .Failure(APIError.InvalidJSONData)
+            }
+            
+            var returnLogins = [ExternalLogin]()
+            
+            for loginJSON in logins {
+                if let login = externalLoginFromJSONData(loginJSON, inContext: context) {
+                    returnLogins.append(login)
+                }
+            }
+            
+            if returnLogins.count == 0 && logins.count > 0 {
+                return .Failure(APIError.InvalidJSONData)
+            }
+            
+            return .Success(returnLogins)
+        }
+        catch let error {
+            return .Failure(error)
+        }
+    }
+    
+    private class func externalLoginFromJSONData(json: [String: AnyObject], inContext context: NSManagedObjectContext) -> ExternalLogin? {
+        guard let
+            name = json["Name"] as? String,
+            state = json["State"] as? String,
+            url = json["Url"] as? String
+        else {
+            return nil
+        }
+        
+        let login = ExternalLogin()
+        login.name = name
+        login.state = state
+        login.url = url
+        
+        return login
     }
 }
