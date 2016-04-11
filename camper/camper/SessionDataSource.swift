@@ -11,7 +11,21 @@ class SessionDataSource: NSObject, UITableViewDataSource {
             let session  = timeSlots.sessions[indexPath.row]
             cell.sessionTitle.text = session.title
             cell.sessionTitle.sizeToFit()
-            //cell.speakerLabel.text = self.sessionDataSource.sessions[indexPath.row].
+            
+            //set up speaker text
+            var speakerString: String = ""
+            var firstSpeaker: Bool = true
+            for speaker in session.speakers {
+                if !firstSpeaker {
+                    speakerString.appendContentsOf(", ")
+                } else {
+                    firstSpeaker = false
+                }
+
+                speakerString.appendContentsOf("\(speaker.firstName) \(speaker.lastName)")                
+            }
+            
+            cell.speakerLabel.text = speakerString
             cell.roomLabel.text = session.scheduledRoom
         }
                 

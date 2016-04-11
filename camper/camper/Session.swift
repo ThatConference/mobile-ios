@@ -11,4 +11,5 @@ class Session: NSObject {
     var scheduledRoom: String?
     var primaryCategory: String?
     var level: String?
+    var speakers: [Speaker] = []
 }
