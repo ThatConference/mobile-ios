@@ -14,8 +14,7 @@ class SessionDataSource: NSObject, UITableViewDataSource {
             //cell.speakerLabel.text = self.sessionDataSource.sessions[indexPath.row].
             cell.roomLabel.text = session.scheduledRoom
         }
-        
-        
+                
         return cell
     }
     
@@ -29,7 +28,7 @@ class SessionDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return dailySchedule.timeSlots[section].time
+        return SessionStore.getFormattedTime(dailySchedule.timeSlots[section].time)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

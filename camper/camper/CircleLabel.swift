@@ -2,6 +2,7 @@ import UIKit
 
 class CircleLabel: UIView {
     var label: UILabel!
+    var timeSlot: NSDate!
     
     private var showCircle: Bool = false
     private var circleLayer: CAShapeLayer!
