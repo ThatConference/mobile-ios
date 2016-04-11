@@ -283,23 +283,20 @@
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="room" translatesAutoresizingMaskIntoConstraints="NO" id="v1D-UJ-9X5">
-                                                    <rect key="frame" x="76" y="102" width="30" height="20"/>
+                                                    <rect key="frame" x="76" y="105" width="30" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="LZL-fn-dZi"/>
                                                         <constraint firstAttribute="width" constant="30" id="lrZ-cf-ooF"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name Last Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIi-rS-hC7">
-                                                    <rect key="frame" x="109" y="78" width="253" height="17"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="253" id="xEm-5J-CZ1"/>
-                                                    </constraints>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name Last Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIi-rS-hC7">
+                                                    <rect key="frame" x="109" y="78" width="441" height="17"/>
                                                     <fontDescription key="fontDescription" name="NeutrafaceText-BookAlt" family="Neutraface Text" pointSize="17"/>
                                                     <color key="textColor" red="0.43529411764705883" green="0.4392156862745098" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOe-jO-Eo3">
-                                                    <rect key="frame" x="109" y="102" width="253" height="20"/>
+                                                    <rect key="frame" x="109" y="105" width="441" height="20"/>
                                                     <fontDescription key="fontDescription" name="NeutrafaceText-BookAlt" family="Neutraface Text" pointSize="17"/>
                                                     <color key="textColor" red="0.43529411759999997" green="0.43921568630000002" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -321,8 +318,8 @@
                                             <constraints>
                                                 <constraint firstItem="DMP-70-Xzg" firstAttribute="centerX" secondItem="So8-xx-q03" secondAttribute="centerX" id="43l-NF-6vS"/>
                                                 <constraint firstItem="ZCd-NM-RmI" firstAttribute="centerY" secondItem="So8-xx-q03" secondAttribute="centerY" id="50a-gX-OAx"/>
-                                                <constraint firstItem="v1D-UJ-9X5" firstAttribute="top" secondItem="yMW-cN-zKi" secondAttribute="bottom" constant="5" id="6Fy-W7-nL8"/>
                                                 <constraint firstItem="AIi-rS-hC7" firstAttribute="leading" secondItem="yMW-cN-zKi" secondAttribute="trailing" constant="8" symbolic="YES" id="7br-I8-Gep"/>
+                                                <constraint firstAttribute="trailing" secondItem="AIi-rS-hC7" secondAttribute="trailing" constant="10" id="EQx-Vi-2pZ"/>
                                                 <constraint firstItem="So8-xx-q03" firstAttribute="leading" secondItem="Dqm-OI-W0y" secondAttribute="leadingMargin" id="Eid-jF-Ka9"/>
                                                 <constraint firstItem="v1D-UJ-9X5" firstAttribute="centerX" secondItem="yMW-cN-zKi" secondAttribute="centerX" id="PlC-oa-GYV"/>
                                                 <constraint firstItem="yMW-cN-zKi" firstAttribute="top" secondItem="DMP-70-Xzg" secondAttribute="top" id="Sev-cs-6yl"/>
@@ -330,6 +327,7 @@
                                                 <constraint firstItem="ZCd-NM-RmI" firstAttribute="leading" secondItem="v1D-UJ-9X5" secondAttribute="leading" id="amA-BN-GOh"/>
                                                 <constraint firstItem="ZCd-NM-RmI" firstAttribute="leading" secondItem="So8-xx-q03" secondAttribute="trailing" constant="18" id="bvT-EC-lcg"/>
                                                 <constraint firstItem="v1D-UJ-9X5" firstAttribute="centerY" secondItem="fOe-jO-Eo3" secondAttribute="centerY" id="e1b-jG-RDy"/>
+                                                <constraint firstItem="fOe-jO-Eo3" firstAttribute="top" secondItem="AIi-rS-hC7" secondAttribute="bottom" constant="10" id="ely-yM-XdY"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="DMP-70-Xzg" secondAttribute="bottom" constant="10" id="fRa-ZD-qeY"/>
                                                 <constraint firstItem="v1D-UJ-9X5" firstAttribute="top" secondItem="fOe-jO-Eo3" secondAttribute="top" id="fZw-Av-InG"/>
                                                 <constraint firstItem="AIi-rS-hC7" firstAttribute="centerY" secondItem="yMW-cN-zKi" secondAttribute="centerY" id="fzE-K9-V8x"/>
@@ -337,6 +335,7 @@
                                                 <constraint firstItem="fOe-jO-Eo3" firstAttribute="leading" secondItem="v1D-UJ-9X5" secondAttribute="trailing" constant="3" id="hk1-uz-jf2"/>
                                                 <constraint firstItem="AIi-rS-hC7" firstAttribute="leading" secondItem="fOe-jO-Eo3" secondAttribute="leading" id="kU7-9c-Bx6"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="ZCd-NM-RmI" secondAttribute="trailing" constant="10" id="m7B-Fo-gVr"/>
+                                                <constraint firstItem="v1D-UJ-9X5" firstAttribute="centerY" secondItem="fOe-jO-Eo3" secondAttribute="centerY" id="xBF-Bt-fYj"/>
                                                 <constraint firstItem="ZCd-NM-RmI" firstAttribute="top" secondItem="Dqm-OI-W0y" secondAttribute="topMargin" priority="250" constant="28" id="xaI-S3-RG0"/>
                                             </constraints>
                                         </tableViewCellContentView>

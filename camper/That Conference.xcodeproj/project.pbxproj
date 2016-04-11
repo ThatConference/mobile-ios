@@ -69,6 +69,7 @@
 		5113D38A1CAF58A100D6B974 /* CircleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5113D3891CAF58A100D6B974 /* CircleLabel.swift */; };
 		512DA03B1CB7585D006CC1B3 /* DailySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DA03A1CB7585D006CC1B3 /* DailySchedule.swift */; };
 		512DA03D1CB758B9006CC1B3 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */; };
+		512DA03F1CBBE03C006CC1B3 /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DA03E1CBBE03C006CC1B3 /* Speaker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -136,6 +137,7 @@
 		5113D3891CAF58A100D6B974 /* CircleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleLabel.swift; sourceTree = "<group>"; };
 		512DA03A1CB7585D006CC1B3 /* DailySchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailySchedule.swift; sourceTree = "<group>"; };
 		512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
+		512DA03E1CBBE03C006CC1B3 /* Speaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +244,7 @@
 				311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */,
 				512DA03A1CB7585D006CC1B3 /* DailySchedule.swift */,
 				512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */,
+				512DA03E1CBBE03C006CC1B3 /* Speaker.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				3123AC2B1C90A0070097BF33 /* SessionDataSource.swift in Sources */,
 				312A94341C85EE5E00AE938B /* SessionDetailViewController.swift in Sources */,
 				5113D3881CAC521C00D6B974 /* CircleView.swift in Sources */,
+				512DA03F1CBBE03C006CC1B3 /* Speaker.swift in Sources */,
 				5113D3851CAA20CB00D6B974 /* ScheduleTableViewCell.swift in Sources */,
 				312A942C1C85396E00AE938B /* FavoritesViewController.swift in Sources */,
 				312A942E1C85399900AE938B /* MapViewController.swift in Sources */,

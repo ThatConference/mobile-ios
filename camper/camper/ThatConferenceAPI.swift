@@ -122,48 +122,54 @@ class ThatConferenceAPI {
                 return nil
         }
         
-        //let accepted = ThatConferenceAPI.convertToBool(acceptedValue)
-        //let cancelled = ThatConferenceAPI.convertToBool(cancelledValue)
-        
         var scheduledDateTime: NSDate?
         if dateString != nil {
             scheduledDateTime = dateFormatter.dateFromString(dateString!)            
         }
+
         
-        //let isUserFavoriteValue = json["IsUserFavorite"] as? NSNumber
-        
-        /****************
-        **  Appears to be pulling from cache and ignoring fetch request **
-        ***************/
-//        let fetchRequest = NSFetchRequest(entityName: "Session")
-//        let predicate = NSPredicate(format: "id == \(id)")
-//        fetchRequest.predicate = predicate
-//        
-//        var fetchedSessions: [Session]!
-//        context.performBlockAndWait() {
-//            fetchedSessions = try! context.executeFetchRequest(fetchRequest) as! [Session]
-//        }
-//        if fetchedSessions.count > 0 {
-//            print("fetched session date time: \(fetchedSessions.first?.scheduledDateTime)")
-//            return fetchedSessions.first
-//        }
-        
-        //is this ever hit?!?!
         let session = Session()
-        //context.performBlockAndWait() {
-           // session = NSEntityDescription.insertNewObjectForEntityForName("Session", inManagedObjectContext: context) as! Session
-            
-            session.id = id
-            session.title = title
-            session.sessionDescription = sessionDescription
-            session.scheduledDateTime = scheduledDateTime
-            session.scheduledRoom = scheduledRoom
-            session.primaryCategory = primaryCategory
-            session.level = level
-            session.accepted = accepted
-            session.cancelled = cancelled
-            //session.isUserFavorite = ThatConferenceAPI.convertToBool(isUserFavoriteValue)
-        //}
+        session.id = id
+        session.title = title
+        session.sessionDescription = sessionDescription
+        session.scheduledDateTime = scheduledDateTime
+        session.scheduledRoom = scheduledRoom
+        session.primaryCategory = primaryCategory
+        session.level = level
+        session.accepted = accepted
+        session.cancelled = cancelled
+        
+        if let speakers = json["Speakers"] as? [[String: AnyObject]] {
+            for jsonSpeaker in speakers {
+                let speaker = Speaker()
+                speaker.firstName = jsonSpeaker["FirstName"] as? String
+                speaker.lastName = jsonSpeaker["LastName"] as? String
+                
+                if let headshotString = jsonSpeaker["HeadShot"] as? String {
+                    speaker.headShotURL = NSURL(string: headshotString)
+                }
+                
+                speaker.biography = jsonSpeaker["Biography"] as? String
+                
+                if let websiteString = jsonSpeaker["WebSite"] as? String {
+                    speaker.website = NSURL(string: websiteString)
+                }
+                
+                speaker.company = jsonSpeaker["Company"] as? String
+                speaker.title = jsonSpeaker["Title"] as? String
+                speaker.twitter = jsonSpeaker["Twitter"] as? String
+                speaker.facebook = jsonSpeaker["Facebook"] as? String
+                speaker.googlePlus = jsonSpeaker["GooglePlus"] as? String
+                speaker.linkedIn = jsonSpeaker["LinkedIn"] as? String
+                speaker.gitHub = jsonSpeaker["GitHub"] as? String
+                
+                if let lastUpdatedString = jsonSpeaker["LastUpdated"] as? String {
+                    speaker.lastUpdated = dateFormatter.dateFromString(lastUpdatedString)
+                }
+                
+                session.speakers.append(speaker)
+            }
+        }
         
         return session
     }

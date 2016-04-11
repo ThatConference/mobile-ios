@@ -84,10 +84,10 @@ class SessionStore {
             }
             
             var dateString = String()
-            var time = String()
+            //var time = String()
             if let date = session.scheduledDateTime {
                 dateString = getDate(date)
-                time = getTime(date)
+                //time = getTime(date)
             }
 
             //create a new reference for this dailySchedule in our temp lookup
@@ -103,7 +103,7 @@ class SessionStore {
             if let currentDay = schedule[dateString] {
                 var found: Bool = false
                 for timeSlot in currentDay.timeSlots {
-                    if timeSlot.time == time {
+                    if timeSlot.time == session.scheduledDateTime {
                         timeSlot.sessions.append(session)
                         found = true
                         break
@@ -112,7 +112,7 @@ class SessionStore {
                 
                 if !found {
                     let timeSlot = TimeSlot()
-                    timeSlot.time = time
+                    timeSlot.time = session.scheduledDateTime
                     timeSlot.sessions = [session]
                     currentDay.timeSlots.append(timeSlot)
                 }
@@ -129,9 +129,9 @@ class SessionStore {
         return dateFormatter.stringFromDate(dateTime!)
     }
     
-    private func getTime(dateTime: NSDate?) -> String {
+    class func getFormattedTime(dateTime: NSDate?) -> String {
         let timeFormatter = NSDateFormatter()
-        timeFormatter.dateFormat = "HH:mm"
+        timeFormatter.dateFormat = "h:mm a"
         
         return timeFormatter.stringFromDate(dateTime!)
     }
