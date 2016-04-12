@@ -1,6 +1,6 @@
 import UIKit
 
-class SessionDataSource: NSObject, UITableViewDataSource {
+class ScheduleDataSource: NSObject, UITableViewDataSource {
     var dailySchedule: DailySchedule!
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

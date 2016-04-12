@@ -5,25 +5,30 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timeTableView: UIStackView!
     @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var nextDayButton: UIButton!
+    @IBOutlet var previousDayButton: UIButton!
     
     var store: SessionStore!
-    private let sessionDataSource = SessionDataSource()
+    var currentDay: String!
+    var previousDay: String!
+    var nextDay: String!
+    
+    private let scheduleDataSource = ScheduleDataSource()
     private var currentlySelectedTimeLabel: CircleLabel!
+    private var dailySchedules: Dictionary<String, DailySchedule>!
    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.timeTableView.backgroundColor = UIColor.clearColor()
-        
         let sessionStore = SessionStore()
         sessionStore.fetchAll() {
             (sessionResult) -> Void in
-            let allSessions: [Session]
-            var dailySchedules: Dictionary<String,DailySchedule>!
+            //var dailySchedules: Dictionary<String,DailySchedule>!
             switch sessionResult {
             case .Success(let sessions):
-                allSessions = sessions
-                dailySchedules = sessionStore.getDailySchedules(allSessions)
+                self.dailySchedules = sessionStore.getDailySchedules(sessions)
+                if self.currentDay == nil {
+                    self.setCurrentDay(self.dailySchedules)
+                }
             case .Failure(let error):
                 // REENABLE CACHING 
                 //let sortBySessionDateTime = NSSortDescriptor(key: "scheduledDateTime", ascending: true)
@@ -31,24 +36,25 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
                 print("Error: \(error)")
             }
             
-            NSOperationQueue.mainQueue().addOperationWithBlock() {                
-                if let schedule = dailySchedules["08-10-2015"] {
-                    self.sessionDataSource.dailySchedule = schedule
+            NSOperationQueue.mainQueue().addOperationWithBlock() {
+                if let day = self.currentDay {
+                    if let schedule = self.dailySchedules[day] {
+                        self.scheduleDataSource.dailySchedule = schedule
+                        self.setButtonValues(self.dailySchedules)
+                    }
+                    self.loadTimeTable()
+                    self.tableView.delegate = self
+                    self.tableView.dataSource = self.scheduleDataSource
+                    self.tableView.reloadData()
+                    
+                    self.setDateLabel(self.scheduleDataSource.dailySchedule.date!)
+                    
+                    //TODO: put this check back in before we go live - just commenting out for testing
+                    //let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.sessionDataSource.dailySchedule.date, toUnitGranularity: .Day)
+                    //if order == NSComparisonResult.OrderedSame {
+                        self.jumpToTimeOfDay()
+                    //}
                 }
-                self.loadTimeTable()
-                self.tableView.delegate = self
-                self.tableView.dataSource = self.sessionDataSource
-                self.tableView.reloadData()
-                
-                let dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "EEEE MMM dd"
-                self.dateLabel.text = dateFormatter.stringFromDate(self.sessionDataSource.dailySchedule.date!)
-                
-                //TODO: put this check back in before we go live - just commenting out for testing
-                //let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.sessionDataSource.dailySchedule.date, toUnitGranularity: .Day)
-                //if order == NSComparisonResult.OrderedSame {
-                    self.jumpToTimeOfDay()
-                //}
             }
         }
         
@@ -56,13 +62,135 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         if (!Authentication.isLoggedIn()) {
             self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
         }
+
+        // set up controls
+        let rightArrow = UIImage(named: "subheader-arrow-right")
+        self.nextDayButton.imageEdgeInsets = UIEdgeInsetsMake(0, self.nextDayButton.frame.size.width - (rightArrow!.size.width), 0, 0)
+        self.nextDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, -(rightArrow!.size.width + 5), 0, (rightArrow!.size.width + 5))
+        self.nextDayButton.addTarget(self, action: #selector(self.moveToNextDay), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        self.previousDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5)
+        self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), forControlEvents: .TouchUpInside)
+    }
+    
+    @objc private func moveToNextDay() {
+        self.moveToDay(self.nextDay)
+    }
+    
+    @objc private func moveToPrevious() {
+        self.moveToDay(self.previousDay)
+    }
+    
+    private func moveToDay(day: String!) {
+        self.scheduleDataSource.dailySchedule = self.dailySchedules[day];
+        UIView.transitionWithView(self.tableView, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() -> Void in
+                self.tableView.reloadData()
+            self.tableView.scrollToRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
+            }, completion: nil)
+        UIView.transitionWithView(self.timeTableView, duration: 0.5, options: .TransitionCrossDissolve, animations: {() -> Void in
+                self.loadTimeTable()
+            }, completion: nil)
+        UIView.transitionWithView(self.dateLabel, duration: 0.5, options: .TransitionCrossDissolve, animations: {() -> Void in
+                self.setDateLabel(self.scheduleDataSource.dailySchedule.date!)
+                self.setPageState(day)
+            }, completion: nil)
+        
+        let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.scheduleDataSource.dailySchedule.date, toUnitGranularity: .Day)
+        if order == NSComparisonResult.OrderedSame {
+            self.jumpToTimeOfDay()
+        }
+
+    }
+    
+    // MARK: Page State
+    
+    private func setCurrentDay(schedules: Dictionary<String, DailySchedule>) {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "mm-dd-yyyy"
+        let today = formatter.stringFromDate(NSDate())
+        
+        // set the date to today, unless we're outside the conference
+        if schedules.indexForKey(today) != nil {
+            //self.currentDay = today
+            self.setPageState(today)
+        }
+        else {
+            self.setPageState(nil)
+        }
+    }
+    
+    private func setPageState(currentDay: String!) {
+        let sortedDates = Array(self.dailySchedules.keys).sort()
+        if currentDay == nil || sortedDates[0] == currentDay {
+            self.currentDay = sortedDates[0]
+            self.nextDay = sortedDates[1]
+        }
+        else {
+            let indexes = sortedDates.count - 1
+            var index = 0
+            repeat {
+                self.previousDay = sortedDates[index]
+                if index + 1 <= indexes {
+                    self.currentDay = sortedDates[index + 1]
+                }
+                if index + 2 <= indexes {
+                    self.nextDay = sortedDates[index + 2]
+                }
+                else {
+                    self.nextDay = nil
+                }
+                
+                index += 1
+            } while sortedDates[index] != currentDay
+        }
+        
+        setButtonValues(self.dailySchedules)
+    }
+    
+    private func setDateLabel(date: NSDate) {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "EEEE MMM dd"
+        self.dateLabel.text = dateFormatter.stringFromDate(date)
+    }
+    
+    private func setButtonValues(schedules: Dictionary<String, DailySchedule>) {
+        let buttonLabelFormatter = NSDateFormatter()
+        buttonLabelFormatter.dateFormat = "MMM dd"
+        
+        let getDateFormatter = NSDateFormatter()
+        getDateFormatter.dateFormat = "MM-dd-yyyy"
+        
+        if let previous = self.previousDay {
+            self.previousDayButton.hidden = false
+            let date = getDateFormatter.dateFromString(previous)
+            self.previousDayButton.setTitle(buttonLabelFormatter.stringFromDate(date!), forState: .Normal)
+        }
+        else {
+            self.previousDayButton.hidden = true
+        }
+        
+        if let next = self.nextDay {
+            self.nextDayButton.hidden = false
+            let date = getDateFormatter.dateFromString(next)
+            self.nextDayButton.setTitle(buttonLabelFormatter.stringFromDate(date!), forState: .Normal)
+        }
+        else {
+            self.nextDayButton.hidden = true
+        }
     }
    
-    func loadTimeTable() {
+    // MARK: Time Table Methods
+    
+    private func loadTimeTable() {
+        for subview in self.timeTableView.arrangedSubviews {
+            self.timeTableView.removeArrangedSubview(subview)
+            subview.removeFromSuperview()
+        }
+        
         self.timeTableView.addArrangedSubview(createTimeLabel("AM"));
         
         var hours: [Int] = []
-        for timeSlot in self.sessionDataSource.dailySchedule.timeSlots {
+        for timeSlot in self.scheduleDataSource.dailySchedule.timeSlots {
             var alreadyAdded: Bool = false
             var hour = NSCalendar.currentCalendar().component(.Hour, fromDate: timeSlot.time)
             
@@ -127,8 +255,8 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
     }
     
     private func determineClosestTimeslotSection(hourSelected: NSDate) -> Int {
-        for index in 0...sessionDataSource.dailySchedule.timeSlots.count - 1 {
-            let timeSlot = sessionDataSource.dailySchedule.timeSlots[index]
+        for index in 0...scheduleDataSource.dailySchedule.timeSlots.count - 1 {
+            let timeSlot = scheduleDataSource.dailySchedule.timeSlots[index]
             if timeSlot.time == hourSelected {
                 return index
             }
@@ -175,13 +303,14 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         let indexPath = NSIndexPath(forRow: 0, inSection: section)
         self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
     }
+
     
     //set the proper selected Time
     func scrollViewDidScroll(scrollView: UIScrollView) {
 
     }
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) { 
+        //TODO: go to proper time
     }
 }
