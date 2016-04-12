@@ -23,8 +23,6 @@ class AuthorizationViewController : UIViewController {
         githubButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
     }
     
-    ///api3/Account/ExternalLogins?returnUrl=%2F&generateState=true
-    
     @IBAction func loginPressed(sender: AnyObject) {
         //TODO: Authorize using username/password
         usernameError.text = "Not checked. Oh no!"
@@ -57,7 +55,17 @@ class AuthorizationViewController : UIViewController {
     func loginOAuth(vendor: String) {
         print("Logging in with:" + vendor)
         
-        //let externalLogins = ThatConferenceAPI.externalLoginsFromJSONData(<#T##data: NSData##NSData#>, inContext: <#T##NSManagedObjectContext#>)
+        let authentication = Authentication()
+        authentication.fetchExternalLogins() {
+            (externalLoginResult) -> Void in
+            
+            switch externalLoginResult {
+            case .Success(let externalLogins):
+                print("External Logins Retrieved. \(externalLogins.count)")
+            case .Failure(let error):
+                print("Error: \(error)")
+            }
+        }
         
     }
 }

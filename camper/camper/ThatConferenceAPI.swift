@@ -3,7 +3,7 @@ import CoreData
 
 enum Method: String {
     case SessionsGetAll = "/api3/Session/GetAllAcceptedSessions"
-    case ExternalLogins = "/api3/Account/ExternalLogins?returnUrl=%2F&generateState=true"
+    case ExternalLogins = "/api3/Account/ExternalLogins"
 }
 
 enum SessionsResult {
@@ -58,8 +58,8 @@ class ThatConferenceAPI {
         return thatConferenceURL(.SessionsGetAll, parameters: ["year": GetCurrentYear()])
     }
     
-    static func externalLogins() -> NSURL {
-        return thatConferenceURL(.ExternalLogins, parameters: nil)
+    static func externalLoginsURL() -> NSURL {
+        return thatConferenceURL(.ExternalLogins, parameters: ["returnUrl":"/", "generateState": "true"])
     }
     
     static func convertToBool(value: NSNumber?) -> Bool {
@@ -174,7 +174,7 @@ class ThatConferenceAPI {
         return session
     }
     
-    class func externalLoginsFromJSONData(data: NSData, inContext context: NSManagedObjectContext) -> ExternalLoginResult {
+    class func externalLoginsFromJSONData(data: NSData) -> ExternalLoginResult {
         do {
             let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
             
@@ -186,7 +186,7 @@ class ThatConferenceAPI {
             var returnLogins = [ExternalLogin]()
             
             for loginJSON in logins {
-                if let login = externalLoginFromJSONData(loginJSON, inContext: context) {
+                if let login = externalLoginFromJSONData(loginJSON) {
                     returnLogins.append(login)
                 }
             }
@@ -202,7 +202,7 @@ class ThatConferenceAPI {
         }
     }
     
-    private class func externalLoginFromJSONData(json: [String: AnyObject], inContext context: NSManagedObjectContext) -> ExternalLogin? {
+    private class func externalLoginFromJSONData(json: [String: AnyObject]) -> ExternalLogin? {
         guard let
             name = json["Name"] as? String,
             state = json["State"] as? String,
