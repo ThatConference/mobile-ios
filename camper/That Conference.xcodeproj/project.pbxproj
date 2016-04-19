@@ -270,12 +270,12 @@
 		31CFCD821C8B6E1400DB2AB2 /* datasource */ = {
 			isa = PBXGroup;
 			children = (
-				31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */,
-				31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */,
-				31CFCD851C8B73DD00DB2AB2 /* CoreDataStack.swift */,
-				3123AC231C8F905C0097BF33 /* ThatConference.xcdatamodeld */,
-				3123AC2A1C90A0070097BF33 /* SessionDataSource.swift */,
 				318F268B1CBC65F30065A76F /* Authentication.swift */,
+				31CFCD851C8B73DD00DB2AB2 /* CoreDataStack.swift */,
+				3123AC2A1C90A0070097BF33 /* SessionDataSource.swift */,
+				31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */,
+				31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */,
+				3123AC231C8F905C0097BF33 /* ThatConference.xcdatamodeld */,
 			);
 			name = datasource;
 			sourceTree = "<group>";

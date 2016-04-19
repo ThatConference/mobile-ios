@@ -5,7 +5,8 @@ class SessionStore {
     
     func fetchAll(completion completion: (SessionsResult) -> Void) {
         let url = ThatConferenceAPI.sessionsGetAllURL()
-        let request = NSURLRequest(URL: url)
+        var request = NSMutableURLRequest(URL: url)
+        request = addAuthIfPossible(request)
         let task = ThatConferenceAPI.nsurlSession.dataTaskWithRequest(request) {
             (data, response, error) -> Void in
             
@@ -119,6 +120,14 @@ class SessionStore {
         }
         
         return schedule
+    }
+    
+    private func addAuthIfPossible(request: NSMutableURLRequest) -> NSMutableURLRequest {
+        if let authToken = Authentication.loadAuthToken() {
+            request.setValue(authToken.token, forHTTPHeaderField: "Authorization")
+        }
+        
+        return request
     }
     
     private func getDate(dateTime: NSDate?) -> String {
