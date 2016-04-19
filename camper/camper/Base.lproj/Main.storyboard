@@ -55,7 +55,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFu-a8-11I">
-                                <rect key="frame" x="20" y="162" width="76" height="20.5"/>
+                                <rect key="frame" x="20" y="162" width="76" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.69019607843137254" green="0.59999999999999998" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -70,13 +70,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O6p-Q4-XdR">
-                                <rect key="frame" x="20" y="260" width="74" height="21"/>
+                                <rect key="frame" x="20" y="260" width="74" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v77-wn-c0R">
-                                <rect key="frame" x="235" y="372" width="130" height="40"/>
+                                <rect key="frame" x="235" y="371" width="130" height="40"/>
                                 <color key="backgroundColor" red="0.25882352941176467" green="0.49019607843137253" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="v77-wn-c0R" secondAttribute="height" multiplier="163:50" id="hGh-7r-SyY"/>
@@ -90,13 +90,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or login through social" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYR-qa-I6K">
-                                <rect key="frame" x="223" y="493" width="154" height="19.5"/>
+                                <rect key="frame" x="223" y="492" width="154" height="20"/>
                                 <fontDescription key="fontDescription" name="Knockout-HTF31-JuniorMiddlewt" family="Knockout" pointSize="17"/>
                                 <color key="textColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yQC-F8-8fQ">
-                                <rect key="frame" x="20" y="281" width="560" height="62.5"/>
+                                <rect key="frame" x="20" y="280" width="560" height="62.5"/>
                                 <color key="backgroundColor" red="0.91372549020000005" green="0.90980392160000001" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="yQC-F8-8fQ" secondAttribute="height" multiplier="18:2" id="8Cb-Rm-kKZ"/>
@@ -105,7 +105,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="6c7-hQ-dYS">
-                                <rect key="frame" x="20" y="520" width="560" height="95"/>
+                                <rect key="frame" x="20" y="519" width="560" height="95"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya3-E5-Wn5" userLabel="facebookButton">
                                         <rect key="frame" x="0.0" y="0.0" width="112" height="95"/>
@@ -115,21 +115,21 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XhR-UP-01c" userLabel="twitterButton">
-                                        <rect key="frame" x="112" y="0.0" width="113" height="95"/>
+                                        <rect key="frame" x="112" y="0.0" width="112.5" height="95"/>
                                         <state key="normal" image="twitter"/>
                                         <connections>
                                             <action selector="twitterPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DgW-Bb-3D1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MrT-o3-ade" userLabel="googleButton">
-                                        <rect key="frame" x="225" y="0.0" width="112" height="95"/>
+                                        <rect key="frame" x="224" y="0.0" width="112" height="95"/>
                                         <state key="normal" image="google"/>
                                         <connections>
                                             <action selector="googlePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FIf-pC-iPL"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46K-rx-fyQ" userLabel="windowsButton">
-                                        <rect key="frame" x="337" y="0.0" width="113" height="95"/>
+                                        <rect key="frame" x="336" y="0.0" width="112.5" height="95"/>
                                         <state key="normal" image="windows"/>
                                         <connections>
                                             <action selector="microsoftPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5kg-ht-wod"/>
@@ -148,7 +148,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="04a-lG-MUy">
-                                <rect key="frame" x="214.5" y="420" width="171" height="38"/>
+                                <rect key="frame" x="214" y="419" width="171" height="38"/>
                                 <fontDescription key="fontDescription" name="Knockout-HTF31-JuniorMiddlewt" family="Knockout" pointSize="23"/>
                                 <state key="normal" title="Continue as Guest">
                                     <color key="titleColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -158,17 +158,23 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ERROR MESSAGE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHd-ih-00b">
-                                <rect key="frame" x="450.5" y="253.5" width="129.5" height="19.5"/>
+                                <rect key="frame" x="450" y="252" width="130" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ERROR MESSAGE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YEV-du-9nY">
-                                <rect key="frame" x="450.5" y="154.5" width="129.5" height="19.5"/>
+                                <rect key="frame" x="450" y="154" width="130" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FzJ-lZ-Dpd">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <connections>
+                                    <segue destination="aMo-Py-5db" kind="embed" identifier="showWebView" id="Kqj-EE-up7"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -178,10 +184,12 @@
                             <constraint firstItem="YYR-qa-I6K" firstAttribute="bottom" secondItem="6c7-hQ-dYS" secondAttribute="bottom" id="4Bg-KN-o7E"/>
                             <constraint firstItem="pHd-ih-00b" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="5Ij-4u-hZo"/>
                             <constraint firstItem="HFu-a8-11I" firstAttribute="top" secondItem="OXK-I6-ie2" secondAttribute="bottom" constant="34" id="6tX-V4-1eU"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="FzJ-lZ-Dpd" secondAttribute="bottom" id="Ayw-5d-z5G"/>
                             <constraint firstItem="YYR-qa-I6K" firstAttribute="top" secondItem="04a-lG-MUy" secondAttribute="bottom" constant="35" id="B91-g0-Yyo"/>
                             <constraint firstItem="1Ft-oB-4DV" firstAttribute="top" secondItem="HFu-a8-11I" secondAttribute="bottom" id="Dui-LV-CR2"/>
                             <constraint firstItem="04a-lG-MUy" firstAttribute="top" secondItem="v77-wn-c0R" secondAttribute="bottom" constant="8" id="HBI-XD-Rmn"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="YYR-qa-I6K" secondAttribute="bottom" constant="125" id="I6t-KE-MhE"/>
+                            <constraint firstItem="FzJ-lZ-Dpd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Jgh-SO-RZU"/>
                             <constraint firstItem="v77-wn-c0R" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Kkh-fn-4m9"/>
                             <constraint firstItem="04a-lG-MUy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="N5I-LC-NrC"/>
                             <constraint firstItem="yQC-F8-8fQ" firstAttribute="top" secondItem="pHd-ih-00b" secondAttribute="bottom" constant="8" id="N8u-w2-WeW"/>
@@ -200,6 +208,8 @@
                             <constraint firstItem="gxI-Ss-7ka" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="td6-ze-Dyk"/>
                             <constraint firstItem="gxI-Ss-7ka" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="u1J-d2-oIs"/>
                             <constraint firstItem="HFu-a8-11I" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ug3-jP-9Fm"/>
+                            <constraint firstAttribute="trailing" secondItem="FzJ-lZ-Dpd" secondAttribute="trailing" id="v7g-e7-zIr"/>
+                            <constraint firstItem="FzJ-lZ-Dpd" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="vVi-BQ-kwM"/>
                             <constraint firstItem="yQC-F8-8fQ" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="wad-es-7gA"/>
                             <constraint firstItem="1Ft-oB-4DV" firstAttribute="top" secondItem="YEV-du-9nY" secondAttribute="bottom" constant="8" id="wpK-Kg-Qzq"/>
                         </constraints>
@@ -221,11 +231,12 @@
                         <outlet property="twitterButton" destination="XhR-UP-01c" id="iPb-eR-eqU"/>
                         <outlet property="username" destination="1Ft-oB-4DV" id="r3l-no-4TW"/>
                         <outlet property="usernameError" destination="YEV-du-9nY" id="m9R-dX-8T2"/>
+                        <outlet property="webContainer" destination="FzJ-lZ-Dpd" id="9J8-Ma-moq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="877" y="-293"/>
+            <point key="canvasLocation" x="877" y="-1269"/>
         </scene>
         <!--Schedule-->
         <scene sceneID="6ue-Pz-rNK">
@@ -485,7 +496,7 @@
                         <segue destination="fzf-xS-aRF" kind="relationship" relationship="viewControllers" id="ILW-I1-4zA"/>
                         <segue destination="vEe-7N-kFP" kind="relationship" relationship="viewControllers" id="qfr-u7-7kK"/>
                         <segue destination="De9-Eq-Hlq" kind="relationship" relationship="viewControllers" id="BWG-Sp-ljN"/>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="show_login" id="4qj-hr-kMl"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="show_login" id="qm9-0u-GLe"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1iV-d9-QeP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -588,6 +599,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AE7-Wq-ZfU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1751" y="1413"/>
+        </scene>
+        <!--Authorization Web View Controller-->
+        <scene sceneID="U22-uk-zgU">
+            <objects>
+                <viewController restorationIdentifier="AuthWebView" storyboardIdentifier="AuthWebView" id="aMo-Py-5db" customClass="AuthorizationWebViewController" customModule="That_Conference" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w1t-Y3-U4l">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ha5-1g-yiD">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Cancel" id="yE8-EP-AVb">
+                                        <connections>
+                                            <action selector="cancelWasPressed:" destination="aMo-Py-5db" id="o5T-8j-PC8"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NBR-Ul-QQ1">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="aMo-Py-5db" id="DgJ-fE-sfD"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ha5-1g-yiD" firstAttribute="leading" secondItem="w1t-Y3-U4l" secondAttribute="leading" id="03O-dY-CXq"/>
+                            <constraint firstAttribute="trailing" secondItem="NBR-Ul-QQ1" secondAttribute="trailing" id="83L-2k-8cz"/>
+                            <constraint firstItem="ha5-1g-yiD" firstAttribute="top" secondItem="w1t-Y3-U4l" secondAttribute="top" constant="20" id="AEt-FB-m1S"/>
+                            <constraint firstItem="NBR-Ul-QQ1" firstAttribute="leading" secondItem="w1t-Y3-U4l" secondAttribute="leading" id="MQf-GE-QZ9"/>
+                            <constraint firstAttribute="bottom" secondItem="NBR-Ul-QQ1" secondAttribute="bottom" id="T1k-PF-w0V"/>
+                            <constraint firstItem="NBR-Ul-QQ1" firstAttribute="top" secondItem="ha5-1g-yiD" secondAttribute="bottom" id="cte-dZ-YBY"/>
+                            <constraint firstAttribute="trailing" secondItem="ha5-1g-yiD" secondAttribute="trailing" id="eV9-NQ-G1k"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="NBR-Ul-QQ1" id="avQ-me-afy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SeR-uv-rWE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1751" y="-1269"/>
         </scene>
     </scenes>
     <resources>

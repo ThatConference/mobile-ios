@@ -3,7 +3,7 @@ import CoreData
 
 enum Method: String {
     case SessionsGetAll = "/api3/Session/GetAllAcceptedSessions"
-    case ExternalLogins = "/api3/Account/ExternalLogins"
+    case ExternalLogins = "/api3/Account/ExternalLogins?returnUrl=%2F&generateState=true"
 }
 
 enum SessionsResult {
@@ -26,7 +26,7 @@ class ThatConferenceAPI {
         return NSURLSession(configuration: config)
     }()
     
-    static let baseURLString = "https://www.thatconference.com"
+    private static let baseURLString = "https://www.thatconference.com"
     
     private static let dateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
@@ -58,8 +58,8 @@ class ThatConferenceAPI {
         return thatConferenceURL(.SessionsGetAll, parameters: ["year": GetCurrentYear()])
     }
     
-    static func externalLoginsURL() -> NSURL {
-        return thatConferenceURL(.ExternalLogins, parameters: ["returnUrl":"/", "generateState": "true"])
+    static func externalLogins() -> NSURL {
+        return thatConferenceURL(.ExternalLogins, parameters: nil)
     }
     
     static func convertToBool(value: NSNumber?) -> Bool {
@@ -139,6 +139,40 @@ class ThatConferenceAPI {
         session.accepted = accepted
         session.cancelled = cancelled
         
+<<<<<<< HEAD
+        /****************
+        **  Appears to be pulling from cache and ignoring fetch request **
+        ***************/
+//        let fetchRequest = NSFetchRequest(entityName: "Session")
+//        let predicate = NSPredicate(format: "id == \(id)")
+//        fetchRequest.predicate = predicate
+//        
+//        var fetchedSessions: [Session]!
+//        context.performBlockAndWait() {
+//            fetchedSessions = try! context.executeFetchRequest(fetchRequest) as! [Session]
+//        }
+//        if fetchedSessions.count > 0 {
+//            print("fetched session date time: \(fetchedSessions.first?.scheduledDateTime)")
+//            return fetchedSessions.first
+//        }
+        
+        //is this ever hit?!?!
+        let session = Session()
+        //context.performBlockAndWait() {
+           // session = NSEntityDescription.insertNewObjectForEntityForName("Session", inManagedObjectContext: context) as! Session
+            
+            session.id = id
+            session.title = title
+            session.sessionDescription = sessionDescription
+            session.scheduledDateTime = scheduledDateTime
+            session.scheduledRoom = scheduledRoom
+            session.primaryCategory = primaryCategory
+            session.level = level
+            session.accepted = accepted
+            session.cancelled = cancelled
+            //session.isUserFavorite = ThatConferenceAPI.convertToBool(isUserFavoriteValue)
+        //}
+=======
         if let speakers = json["Speakers"] as? [[String: AnyObject]] {
             for jsonSpeaker in speakers {
                 let speaker = Speaker()
@@ -170,11 +204,12 @@ class ThatConferenceAPI {
                 session.speakers.append(speaker)
             }
         }
+>>>>>>> 0b4ce6b8cc807bfc048f0d1607d232a7d27ffab3
         
         return session
     }
     
-    class func externalLoginsFromJSONData(data: NSData) -> ExternalLoginResult {
+    class func externalLoginsFromJSONData(data: NSData, inContext context: NSManagedObjectContext) -> ExternalLoginResult {
         do {
             let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
             
@@ -186,7 +221,7 @@ class ThatConferenceAPI {
             var returnLogins = [ExternalLogin]()
             
             for loginJSON in logins {
-                if let login = externalLoginFromJSONData(loginJSON) {
+                if let login = externalLoginFromJSONData(loginJSON, inContext: context) {
                     returnLogins.append(login)
                 }
             }
@@ -202,7 +237,7 @@ class ThatConferenceAPI {
         }
     }
     
-    private class func externalLoginFromJSONData(json: [String: AnyObject]) -> ExternalLogin? {
+    private class func externalLoginFromJSONData(json: [String: AnyObject], inContext context: NSManagedObjectContext) -> ExternalLogin? {
         guard let
             name = json["Name"] as? String,
             state = json["State"] as? String,

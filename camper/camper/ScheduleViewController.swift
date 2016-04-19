@@ -52,8 +52,20 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
             }
         }
         
-        //TODO: If logged in, skip this
-        self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
+        //Check if logged in already and not expired
+        var loggedIn = false
+        
+        if let authToken = Authentication.loadAuthToken() {
+            if authToken.expiration.isGreaterThanDate(NSDate()) {
+                loggedIn = true
+            } else {
+                Authentication.removeAuthToken()
+            }
+        }
+        
+        if (!loggedIn) {
+            self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
+        }
     }
    
     func loadTimeTable() {
@@ -81,7 +93,6 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
                 self.timeTableView.addArrangedSubview(label)
                 hours.append(hour)
             }
-            
         }
         
         self.timeTableView.addArrangedSubview(createTimeLabel("PM"));

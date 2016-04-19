@@ -1,6 +1,7 @@
 import UIKit
 
-class AuthorizationViewController : UIViewController {
+class AuthorizationViewController : UIViewController, ContainerDelegateProtocol {
+    @IBOutlet var webContainer: UIView!
     @IBOutlet var username: UITextField!
     @IBOutlet var password: UITextField!
     @IBOutlet var usernameError: UILabel!
@@ -10,6 +11,8 @@ class AuthorizationViewController : UIViewController {
     @IBOutlet var googleButton: UIButton!
     @IBOutlet var microsoftButton: UIButton!
     @IBOutlet var githubButton: UIButton!
+    
+    private var embeddedViewController: AuthorizationWebViewController!
     
     override func viewDidLoad() {
         usernameError.text = ""
@@ -21,6 +24,15 @@ class AuthorizationViewController : UIViewController {
         googleButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         microsoftButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         githubButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        //check here for the right segue by name
+        if let vc = segue.destinationViewController as? AuthorizationWebViewController
+            where segue.identifier == "showWebView" {
+            (segue.destinationViewController as! AuthorizationWebViewController).delegate = self;
+            self.embeddedViewController = vc
+        }
     }
     
     @IBAction func loginPressed(sender: AnyObject) {
@@ -52,8 +64,16 @@ class AuthorizationViewController : UIViewController {
         loginOAuth("GitHub")
     }
     
-    func loginOAuth(vendor: String) {
-        print("Logging in with:" + vendor)
+    func Close() {
+        webContainer.hidden = true;
+    }
+    
+    func SignedIn() {
+        self.dismissViewControllerAnimated(false, completion: nil)
+    }
+    
+    func loginOAuth(provider: String) {
+        print("Logging in with:" + provider)
         
         let authentication = Authentication()
         authentication.fetchExternalLogins() {
@@ -62,6 +82,19 @@ class AuthorizationViewController : UIViewController {
             switch externalLoginResult {
             case .Success(let externalLogins):
                 print("External Logins Retrieved. \(externalLogins.count)")
+                var url: NSURL!
+                for externalLogin in externalLogins {
+                    if (externalLogin.name == provider) {
+                        url = NSURL(string: ThatConferenceAPI.baseURLString + externalLogin.url!)
+                        
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.webContainer.hidden = false
+                            self.embeddedViewController!.openOAuthDestination(url, provider: provider)
+                        }
+                        
+                        break
+                    }
+                }
             case .Failure(let error):
                 print("Error: \(error)")
             }

@@ -65,15 +65,20 @@
 		31CFCD7C1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */; };
 		31CFCD841C8B70ED00DB2AB2 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */; };
 		31CFCD861C8B73DD00DB2AB2 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFCD851C8B73DD00DB2AB2 /* CoreDataStack.swift */; };
+		31D0D9411CC08282007C5999 /* AuthorizationWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D0D9401CC08282007C5999 /* AuthorizationWebViewController.swift */; };
+		31D0D9451CC48DEE007C5999 /* AuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D0D9441CC48DEE007C5999 /* AuthToken.swift */; };
+		31D0D9481CC5DB6A007C5999 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D0D9471CC5DB6A007C5999 /* NSDate.swift */; };
 		5113D3851CAA20CB00D6B974 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */; };
 		5113D3881CAC521C00D6B974 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5113D3871CAC521C00D6B974 /* CircleView.swift */; };
 		5113D38A1CAF58A100D6B974 /* CircleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5113D3891CAF58A100D6B974 /* CircleLabel.swift */; };
 		512DA03B1CB7585D006CC1B3 /* DailySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DA03A1CB7585D006CC1B3 /* DailySchedule.swift */; };
 		512DA03D1CB758B9006CC1B3 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */; };
 		512DA03F1CBBE03C006CC1B3 /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DA03E1CBBE03C006CC1B3 /* Speaker.swift */; };
+		793E308F6CBA37E7993A7AAB /* Pods_That_Conference.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4D3D3C6A3950C88F7A8ED7 /* Pods_That_Conference.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16A6CCF3DACA1350BA4E2BF3 /* Pods-That Conference.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-That Conference.debug.xcconfig"; path = "Pods/Target Support Files/Pods-That Conference/Pods-That Conference.debug.xcconfig"; sourceTree = "<group>"; };
 		311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalLogin.swift; sourceTree = "<group>"; };
 		3123AC241C8F905C0097BF33 /* ThatConference.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ThatConference.xcdatamodel; sourceTree = "<group>"; };
 		3123AC271C90959D0097BF33 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -134,12 +139,17 @@
 		31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThatConferenceAPI.swift; sourceTree = "<group>"; };
 		31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
 		31CFCD851C8B73DD00DB2AB2 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		31D0D9401CC08282007C5999 /* AuthorizationWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationWebViewController.swift; sourceTree = "<group>"; };
+		31D0D9441CC48DEE007C5999 /* AuthToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthToken.swift; sourceTree = "<group>"; };
+		31D0D9471CC5DB6A007C5999 /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
+		4BAAD464880882563610413E /* Pods-That Conference.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-That Conference.release.xcconfig"; path = "Pods/Target Support Files/Pods-That Conference/Pods-That Conference.release.xcconfig"; sourceTree = "<group>"; };
 		5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		5113D3871CAC521C00D6B974 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		5113D3891CAF58A100D6B974 /* CircleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleLabel.swift; sourceTree = "<group>"; };
 		512DA03A1CB7585D006CC1B3 /* DailySchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailySchedule.swift; sourceTree = "<group>"; };
 		512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
 		512DA03E1CBBE03C006CC1B3 /* Speaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
+		8D4D3D3C6A3950C88F7A8ED7 /* Pods_That_Conference.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_That_Conference.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				793E308F6CBA37E7993A7AAB /* Pods_That_Conference.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +169,8 @@
 			children = (
 				312A94141C814B6B00AE938B /* camper */,
 				312A94131C814B6B00AE938B /* Products */,
+				7DABC2093D49E46466AB5DEC /* Pods */,
+				94598CB30C79D35EB87D4F9A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -172,6 +185,7 @@
 		312A94141C814B6B00AE938B /* camper */ = {
 			isa = PBXGroup;
 			children = (
+				31D0D9461CC5DB4D007C5999 /* extensions */,
 				5113D3861CAC51AE00D6B974 /* custom views */,
 				31CFCD821C8B6E1400DB2AB2 /* datasource */,
 				31CFCD7F1C8A73D700DB2AB2 /* models */,
@@ -179,6 +193,7 @@
 				312A94151C814B6B00AE938B /* AppDelegate.swift */,
 				312A941C1C814B6B00AE938B /* Assets.xcassets */,
 				312A94271C85383200AE938B /* AuthorizationViewController.swift */,
+				31D0D9401CC08282007C5999 /* AuthorizationWebViewController.swift */,
 				312A942B1C85396E00AE938B /* FavoritesViewController.swift */,
 				312A94211C814B6B00AE938B /* Info.plist */,
 				312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */,
@@ -242,11 +257,12 @@
 		31CFCD7F1C8A73D700DB2AB2 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				3123AC271C90959D0097BF33 /* Session.swift */,
-				311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */,
+				31D0D9441CC48DEE007C5999 /* AuthToken.swift */,
 				512DA03A1CB7585D006CC1B3 /* DailySchedule.swift */,
-				512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */,
+				311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */,
+				3123AC271C90959D0097BF33 /* Session.swift */,
 				512DA03E1CBBE03C006CC1B3 /* Speaker.swift */,
+				512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -264,6 +280,14 @@
 			name = datasource;
 			sourceTree = "<group>";
 		};
+		31D0D9461CC5DB4D007C5999 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				31D0D9471CC5DB6A007C5999 /* NSDate.swift */,
+			);
+			name = extensions;
+			sourceTree = "<group>";
+		};
 		5113D3861CAC51AE00D6B974 /* custom views */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +297,23 @@
 			name = "custom views";
 			sourceTree = "<group>";
 		};
+		7DABC2093D49E46466AB5DEC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				16A6CCF3DACA1350BA4E2BF3 /* Pods-That Conference.debug.xcconfig */,
+				4BAAD464880882563610413E /* Pods-That Conference.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		94598CB30C79D35EB87D4F9A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8D4D3D3C6A3950C88F7A8ED7 /* Pods_That_Conference.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -280,9 +321,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 312A94241C814B6B00AE938B /* Build configuration list for PBXNativeTarget "That Conference" */;
 			buildPhases = (
+				E37FF060168EB2A6628C92B5 /* Check Pods Manifest.lock */,
 				312A940E1C814B6B00AE938B /* Sources */,
 				312A940F1C814B6B00AE938B /* Frameworks */,
 				312A94101C814B6B00AE938B /* Resources */,
+				4048D040420E5C1885EB1858 /* Embed Pods Frameworks */,
+				9FA1F718F4E075891D2A9973 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -380,6 +424,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4048D040420E5C1885EB1858 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-That Conference/Pods-That Conference-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9FA1F718F4E075891D2A9973 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-That Conference/Pods-That Conference-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E37FF060168EB2A6628C92B5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		312A940E1C814B6B00AE938B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -390,6 +482,7 @@
 				312A942A1C85390B00AE938B /* ScheduleViewController.swift in Sources */,
 				312A94281C85383200AE938B /* AuthorizationViewController.swift in Sources */,
 				3123AC2B1C90A0070097BF33 /* SessionDataSource.swift in Sources */,
+				31D0D9451CC48DEE007C5999 /* AuthToken.swift in Sources */,
 				312A94341C85EE5E00AE938B /* SessionDetailViewController.swift in Sources */,
 				5113D3881CAC521C00D6B974 /* CircleView.swift in Sources */,
 				512DA03F1CBBE03C006CC1B3 /* Speaker.swift in Sources */,
@@ -398,6 +491,7 @@
 				312A942E1C85399900AE938B /* MapViewController.swift in Sources */,
 				31CFCD7C1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift in Sources */,
 				3123AC291C90959D0097BF33 /* Session.swift in Sources */,
+				31D0D9411CC08282007C5999 /* AuthorizationWebViewController.swift in Sources */,
 				311E0E6B1CB74D76004FA850 /* ExternalLogin.swift in Sources */,
 				318F268C1CBC65F30065A76F /* Authentication.swift in Sources */,
 				31CFCD861C8B73DD00DB2AB2 /* CoreDataStack.swift in Sources */,
@@ -405,6 +499,7 @@
 				3123AC251C8F905C0097BF33 /* ThatConference.xcdatamodeld in Sources */,
 				312A94161C814B6B00AE938B /* AppDelegate.swift in Sources */,
 				5113D38A1CAF58A100D6B974 /* CircleLabel.swift in Sources */,
+				31D0D9481CC5DB6A007C5999 /* NSDate.swift in Sources */,
 				312A94301C8539B600AE938B /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -516,6 +611,7 @@
 		};
 		312A94251C814B6B00AE938B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 16A6CCF3DACA1350BA4E2BF3 /* Pods-That Conference.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -528,6 +624,7 @@
 		};
 		312A94261C814B6B00AE938B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4BAAD464880882563610413E /* Pods-That Conference.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Locksmith
 
 class Authentication {
     func fetchExternalLogins(completion completion: (ExternalLoginResult) -> Void) {
@@ -28,5 +29,35 @@ class Authentication {
         }
         
         return ThatConferenceAPI.externalLoginsFromJSONData(jsonData)
+    }
+    
+    static let AuthTokenLocation = "TCAuthToken"
+    static let key_Token = "token"
+    static let key_Expiration = "expires"
+    
+    static func saveAuthToken(authToken: AuthToken) {
+        do {
+            try Locksmith.updateData([key_Token: authToken.token, key_Expiration: authToken.expiration], forUserAccount: AuthTokenLocation)
+        } catch {
+            print ("Could not save auth token")
+        }
+    }
+    
+    static func loadAuthToken() -> AuthToken? {
+        if let dictionary = Locksmith.loadDataForUserAccount(AuthTokenLocation) as Dictionary<String, AnyObject>! {
+            let authToken = AuthToken()
+            authToken.token = dictionary[key_Token] as! String
+            authToken.expiration = dictionary[key_Expiration] as! NSDate
+            return authToken
+        }
+        return nil
+    }
+    
+    static func removeAuthToken() {
+        do {
+            try Locksmith.deleteDataForUserAccount(AuthTokenLocation)
+        } catch {
+            print ("Count not remove auth token")
+        }
     }
 }
