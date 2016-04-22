@@ -36,9 +36,12 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol 
     }
     
     @IBAction func loginPressed(sender: AnyObject) {
-        //TODO: Authorize using username/password
-        usernameError.text = "Not checked. Oh no!"
-        passwordError.text = "That is a good password"
+        //TODO: Check inputs
+//        usernameError.text = "Not checked. Oh no!"
+//        passwordError.text = "That is a good password"
+        
+        let authentication = Authentication()
+        authentication.performLocalLogin(username.text!, password: password.text!)
     }
     @IBAction func continueAsGuest(sender: AnyObject) {
         self.dismissViewControllerAnimated(false, completion: nil)
@@ -69,6 +72,14 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol 
     }
     
     func SignedIn() {
+        let alert = UIAlertController(title: "Success", message: "Sign in was successful", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { action in
+            self.DismissView()
+        }))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    private func DismissView() {
         self.dismissViewControllerAnimated(false, completion: nil)
     }
     

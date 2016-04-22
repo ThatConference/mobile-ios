@@ -10,6 +10,12 @@ import Foundation
 import Locksmith
 
 class Authentication {
+    func performLocalLogin(username: String, password: String) {
+        ThatConferenceAPI.localLogin(username, password: password)
+        
+        //TODO: Parse Result and save AuthToken
+    }
+    
     func fetchExternalLogins(completion completion: (ExternalLoginResult) -> Void) {
         let url = ThatConferenceAPI.externalLoginsURL()
         let request = NSURLRequest(URL: url)
@@ -57,7 +63,21 @@ class Authentication {
         do {
             try Locksmith.deleteDataForUserAccount(AuthTokenLocation)
         } catch {
-            print ("Count not remove auth token")
+            print ("Could not remove auth token")
         }
+    }
+    
+    static func isLoggedIn() -> Bool {
+        var loggedIn = false
+        
+        if let authToken = Authentication.loadAuthToken() {
+            if authToken.expiration.isGreaterThanDate(NSDate()) {
+                loggedIn = true
+            } else {
+                Authentication.removeAuthToken()
+            }
+        }
+        
+        return loggedIn
     }
 }

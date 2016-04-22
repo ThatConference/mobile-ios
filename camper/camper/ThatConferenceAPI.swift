@@ -4,6 +4,7 @@ import CoreData
 enum Method: String {
     case SessionsGetAll = "/api3/Session/GetAllAcceptedSessions"
     case ExternalLogins = "/api3/Account/ExternalLogins"
+    case Token = "/Token"
 }
 
 enum SessionsResult {
@@ -54,12 +55,12 @@ class ThatConferenceAPI {
         return thatConferenceURL(.ExternalLogins, parameters: nil)
     }
     
-    static func sessionsGetAllURL() -> NSURL {
-        return thatConferenceURL(.SessionsGetAll, parameters: ["year": GetCurrentYear()])
-    }
-    
     static func externalLoginsURL() -> NSURL {
         return thatConferenceURL(.ExternalLogins, parameters: ["returnUrl":"/", "generateState": "true"])
+    }
+    
+    static func sessionsGetAllURL() -> NSURL {
+        return thatConferenceURL(.SessionsGetAll, parameters: ["year": GetCurrentYear()])
     }
     
     static func convertToBool(value: NSNumber?) -> Bool {
@@ -77,6 +78,39 @@ class ThatConferenceAPI {
 //        
 //        return String(components.year)
         return "2015"
+    }
+    
+    
+    static func localLogin(username: String, password: String) {
+        let headers = [
+            "accept": "application/json",
+            "content-type": "application/x-www-form-urlencoded"
+        ]
+        
+        let postData = NSMutableData(data: "grant_type=password".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&username=\(username)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&password=\(password)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: baseURLString + Method.Token.rawValue)!,
+                                          cachePolicy: .UseProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
+        request.HTTPMethod = "POST"
+        request.allHTTPHeaderFields = headers
+        request.HTTPBody = postData
+        
+        print("REQUEST:\(request)")
+        
+        let session = NSURLSession.sharedSession()
+        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error)
+            } else {
+                let httpResponse = response as? NSHTTPURLResponse
+                print(httpResponse)
+            }
+        })
+        
+        dataTask.resume()
     }
     
     class func sessionsFromJSONData(data: NSData, inContext context: NSManagedObjectContext) -> SessionsResult {

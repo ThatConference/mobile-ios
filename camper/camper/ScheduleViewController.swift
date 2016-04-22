@@ -52,18 +52,8 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
             }
         }
         
-        //Check if logged in already and not expired
-        var loggedIn = false
-        
-        if let authToken = Authentication.loadAuthToken() {
-            if authToken.expiration.isGreaterThanDate(NSDate()) {
-                loggedIn = true
-            } else {
-                Authentication.removeAuthToken()
-            }
-        }
-        
-        if (!loggedIn) {
+        //Show login screen if not logged in
+        if (!Authentication.isLoggedIn()) {
             self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
         }
     }
