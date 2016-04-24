@@ -10,10 +10,10 @@ import Foundation
 import Locksmith
 
 class Authentication {
-    func performLocalLogin(username: String, password: String) {
-        ThatConferenceAPI.localLogin(username, password: password)
-        
-        //TODO: Parse Result and save AuthToken
+    func performLocalLogin(username: String, password: String, completionDelegate: RequestCompleteProtocol) {
+        let tcAPI = ThatConferenceAPI()
+        tcAPI.requestCompleteProtocol = completionDelegate
+        tcAPI.localLogin(username, password: password)
     }
     
     func fetchExternalLogins(completion completion: (ExternalLoginResult) -> Void) {

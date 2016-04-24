@@ -115,21 +115,21 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XhR-UP-01c" userLabel="twitterButton">
-                                        <rect key="frame" x="112" y="0.0" width="113" height="95"/>
+                                        <rect key="frame" x="112" y="0.0" width="112.5" height="95"/>
                                         <state key="normal" image="twitter"/>
                                         <connections>
                                             <action selector="twitterPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DgW-Bb-3D1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MrT-o3-ade" userLabel="googleButton">
-                                        <rect key="frame" x="225" y="0.0" width="112" height="95"/>
+                                        <rect key="frame" x="224.5" y="0.0" width="112" height="95"/>
                                         <state key="normal" image="google"/>
                                         <connections>
                                             <action selector="googlePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FIf-pC-iPL"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46K-rx-fyQ" userLabel="windowsButton">
-                                        <rect key="frame" x="337" y="0.0" width="113" height="95"/>
+                                        <rect key="frame" x="336.5" y="0.0" width="112.5" height="95"/>
                                         <state key="normal" image="windows"/>
                                         <connections>
                                             <action selector="microsoftPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5kg-ht-wod"/>
@@ -169,6 +169,12 @@
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ERROR MESSAGE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nud-iz-d3E">
+                                <rect key="frame" x="235" y="135" width="130" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FzJ-lZ-Dpd">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
@@ -179,6 +185,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1Ft-oB-4DV" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="0ga-Sb-G4b"/>
+                            <constraint firstItem="nud-iz-d3E" firstAttribute="top" secondItem="OXK-I6-ie2" secondAttribute="bottom" constant="7" id="2Y4-ui-0Pt"/>
                             <constraint firstItem="yQC-F8-8fQ" firstAttribute="top" secondItem="O6p-Q4-XdR" secondAttribute="bottom" id="3DY-c1-Ze8"/>
                             <constraint firstItem="O6p-Q4-XdR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="3qT-nd-5Jb"/>
                             <constraint firstItem="YYR-qa-I6K" firstAttribute="bottom" secondItem="6c7-hQ-dYS" secondAttribute="bottom" id="4Bg-KN-o7E"/>
@@ -193,6 +200,7 @@
                             <constraint firstItem="v77-wn-c0R" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Kkh-fn-4m9"/>
                             <constraint firstItem="04a-lG-MUy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="N5I-LC-NrC"/>
                             <constraint firstItem="yQC-F8-8fQ" firstAttribute="top" secondItem="pHd-ih-00b" secondAttribute="bottom" constant="8" id="N8u-w2-WeW"/>
+                            <constraint firstItem="nud-iz-d3E" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NZC-h4-7GE"/>
                             <constraint firstItem="OXK-I6-ie2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WjJ-Mg-z8w"/>
                             <constraint firstItem="OXK-I6-ie2" firstAttribute="top" secondItem="gxI-Ss-7ka" secondAttribute="bottom" constant="18" id="XYB-3u-FIW"/>
                             <constraint firstItem="O6p-Q4-XdR" firstAttribute="top" secondItem="1Ft-oB-4DV" secondAttribute="bottom" constant="16" id="YSq-ie-AgL"/>
@@ -223,6 +231,7 @@
                     </view>
                     <connections>
                         <outlet property="facebookButton" destination="Ya3-E5-Wn5" id="8Og-sL-D7C"/>
+                        <outlet property="generalError" destination="nud-iz-d3E" id="kGb-6n-1uo"/>
                         <outlet property="githubButton" destination="R2p-3l-9Al" id="qr5-R7-dou"/>
                         <outlet property="googleButton" destination="MrT-o3-ade" id="3eM-IG-wZ4"/>
                         <outlet property="microsoftButton" destination="46K-rx-fyQ" id="KFD-96-JBi"/>

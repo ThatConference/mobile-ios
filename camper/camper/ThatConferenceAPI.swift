@@ -21,7 +21,13 @@ enum APIError: ErrorType {
     case InvalidJSONData
 }
 
+protocol RequestCompleteProtocol {
+    func DataReceived(data : NSData?, response : NSURLResponse?, error : NSError?)
+}
+
 class ThatConferenceAPI {
+    var requestCompleteProtocol: RequestCompleteProtocol?
+    
     static let nsurlSession: NSURLSession = {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         return NSURLSession(configuration: config)
@@ -47,7 +53,10 @@ class ThatConferenceAPI {
             }
         }
         
-        components.queryItems = queryItems
+        if (queryItems.count > 0) {
+            components.queryItems = queryItems
+        }
+        
         return components.URL!
     }
     
@@ -81,7 +90,7 @@ class ThatConferenceAPI {
     }
     
     
-    static func localLogin(username: String, password: String) {
+    func localLogin(username: String, password: String) {
         let headers = [
             "accept": "application/json",
             "content-type": "application/x-www-form-urlencoded"
@@ -91,23 +100,16 @@ class ThatConferenceAPI {
         postData.appendData("&username=\(username)".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&password=\(password)".dataUsingEncoding(NSUTF8StringEncoding)!)
         
-        let request = NSMutableURLRequest(URL: NSURL(string: baseURLString + Method.Token.rawValue)!,
+        let request = NSMutableURLRequest(URL: NSURL(string: ThatConferenceAPI.baseURLString + Method.Token.rawValue)!,
                                           cachePolicy: .UseProtocolCachePolicy,
                                           timeoutInterval: 10.0)
         request.HTTPMethod = "POST"
         request.allHTTPHeaderFields = headers
         request.HTTPBody = postData
         
-        print("REQUEST:\(request)")
-        
         let session = NSURLSession.sharedSession()
-        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error)
-            } else {
-                let httpResponse = response as? NSHTTPURLResponse
-                print(httpResponse)
-            }
+        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+            self.requestCompleteProtocol?.DataReceived(data, response: response, error: error)
         })
         
         dataTask.resume()
@@ -161,7 +163,6 @@ class ThatConferenceAPI {
             scheduledDateTime = dateFormatter.dateFromString(dateString!)            
         }
 
-        
         let session = Session()
         session.id = id
         session.title = title

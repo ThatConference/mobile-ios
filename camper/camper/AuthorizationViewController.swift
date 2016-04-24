@@ -1,11 +1,12 @@
 import UIKit
 
-class AuthorizationViewController : UIViewController, ContainerDelegateProtocol {
+class AuthorizationViewController : UIViewController, ContainerDelegateProtocol, RequestCompleteProtocol {
     @IBOutlet var webContainer: UIView!
     @IBOutlet var username: UITextField!
     @IBOutlet var password: UITextField!
     @IBOutlet var usernameError: UILabel!
     @IBOutlet var passwordError: UILabel!
+    @IBOutlet var generalError: UILabel!
     @IBOutlet var facebookButton: UIButton!
     @IBOutlet var twitterButton: UIButton!
     @IBOutlet var googleButton: UIButton!
@@ -15,8 +16,15 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol 
     private var embeddedViewController: AuthorizationWebViewController!
     
     override func viewDidLoad() {
-        usernameError.text = ""
-        passwordError.text = ""
+        clearErrors()
+        
+        let usernameSpacerView = UIView(frame:CGRect(x:0, y:0, width:10, height:10))
+        username.leftViewMode = UITextFieldViewMode.Always
+        username.leftView = usernameSpacerView
+        
+        let passwordSpacerView = UIView(frame:CGRect(x:0, y:0, width:10, height:10))
+        password.leftViewMode = UITextFieldViewMode.Always
+        password.leftView = passwordSpacerView
         
         //Force ContentMode for Buttons - Does not work from XIB
         facebookButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
@@ -35,13 +43,17 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol 
         }
     }
     
+    func clearErrors() {
+        usernameError.text = ""
+        passwordError.text = ""
+        generalError.text = ""
+    }
+    
     @IBAction func loginPressed(sender: AnyObject) {
-        //TODO: Check inputs
-//        usernameError.text = "Not checked. Oh no!"
-//        passwordError.text = "That is a good password"
+        clearErrors()
         
         let authentication = Authentication()
-        authentication.performLocalLogin(username.text!, password: password.text!)
+        authentication.performLocalLogin(username.text!, password: password.text!, completionDelegate: self)
     }
     @IBAction func continueAsGuest(sender: AnyObject) {
         self.dismissViewControllerAnimated(false, completion: nil)
@@ -110,6 +122,67 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol 
                 print("Error: \(error)")
             }
         }
+    }
+    
+    func DataReceived(data : NSData?, response : NSURLResponse?, error : NSError?) {
+        guard let httpResponse = response as? NSHTTPURLResponse else {
+            print("Error: could not read response")
+            loginError("Server Error. No Response.")
+            return
+        }
         
+        if (httpResponse.statusCode == 400) {
+            print("Wrong Credentials")
+            loginError("Invalid Username / Password")
+            return
+        }
+        
+        guard let responseData = data else {
+            print("Error: did not receive data")
+            loginError("Server Error. No Response.")
+            return
+        }
+        
+        guard error == nil else {
+            print("error calling GET on /posts/1")
+            print(error)
+            loginError("Server Error. Bad Response.")
+            return
+        }
+        
+        let post: NSDictionary
+        do {
+            post = try NSJSONSerialization.JSONObjectWithData(responseData,
+                                                              options: []) as! NSDictionary
+        } catch  {
+            print("error trying to convert data to JSON")
+            loginError("Server Error. Bad Response.")
+            return
+        }
+        
+        guard let
+            accessToken = post["access_token"] as? String,
+            expiresIn = post["expires_in"] as? Double
+            else {
+                print("Could not parse data to internal login")
+                loginError("Server Error. Bad Response.")
+                return
+        }
+        
+        let token = AuthToken()
+        token.token = accessToken
+        token.expiration = NSDate().dateByAddingTimeInterval(Double(expiresIn))
+        Authentication.saveAuthToken(token)
+        
+        print("Sign in was successful")
+        dispatch_async(dispatch_get_main_queue()) {
+            self.SignedIn()
+        }
+    }
+    
+    func loginError(errorMessage: String) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.generalError.text = errorMessage
+        }
     }
 }
