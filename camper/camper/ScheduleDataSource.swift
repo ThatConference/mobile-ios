@@ -9,6 +9,7 @@ class ScheduleDataSource: NSObject, UITableViewDataSource {
         if let schedule = dailySchedule {
             let timeSlots = schedule.timeSlots[indexPath.section]
             let session  = timeSlots.sessions[indexPath.row]
+            cell.session = session
             cell.sessionTitle.text = session.title
             cell.sessionTitle.sizeToFit()
             
@@ -48,5 +49,4 @@ class ScheduleDataSource: NSObject, UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return dailySchedule.timeSlots.count
     }
-    
 }

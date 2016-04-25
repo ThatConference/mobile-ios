@@ -7,6 +7,8 @@ class ScheduleTableViewCell: UITableViewCell {
     @IBOutlet var roomLabel: UILabel!
     @IBOutlet var circleView: CircleView!
     
+    var session: Session!
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }

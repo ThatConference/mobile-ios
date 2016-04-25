@@ -119,21 +119,21 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XhR-UP-01c" userLabel="twitterButton">
-                                        <rect key="frame" x="112" y="0.0" width="112.5" height="95"/>
+                                        <rect key="frame" x="112" y="0.0" width="113" height="95"/>
                                         <state key="normal" image="twitter"/>
                                         <connections>
                                             <action selector="twitterPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DgW-Bb-3D1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MrT-o3-ade" userLabel="googleButton">
-                                        <rect key="frame" x="224.5" y="0.0" width="112" height="95"/>
+                                        <rect key="frame" x="225" y="0.0" width="112" height="95"/>
                                         <state key="normal" image="google"/>
                                         <connections>
                                             <action selector="googlePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FIf-pC-iPL"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46K-rx-fyQ" userLabel="windowsButton">
-                                        <rect key="frame" x="336.5" y="0.0" width="112.5" height="95"/>
+                                        <rect key="frame" x="337" y="0.0" width="113" height="95"/>
                                         <state key="normal" image="windows"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2p-3l-9Al">
@@ -450,7 +450,7 @@
         <!--SESSION DETAIL-->
         <scene sceneID="nuu-zw-6uS">
             <objects>
-                <viewController title="SESSION DETAIL" id="Xxt-e1-kaa" customClass="SessionDetailViewController" customModule="That_Conference" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SessionDetailViewController" title="SESSION DETAIL" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xxt-e1-kaa" customClass="SessionDetailViewController" customModule="That_Conference" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NE7-1n-mcK"/>
                         <viewControllerLayoutGuide type="bottom" id="RLC-QG-jcM"/>

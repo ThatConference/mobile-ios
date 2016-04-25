@@ -50,10 +50,10 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
                     self.setDateLabel(self.scheduleDataSource.dailySchedule.date!)
                     
                     //TODO: put this check back in before we go live - just commenting out for testing
-                    //let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.sessionDataSource.dailySchedule.date, toUnitGranularity: .Day)
-                    //if order == NSComparisonResult.OrderedSame {
+                    let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.scheduleDataSource.dailySchedule.date, toUnitGranularity: .Day)
+                    if order == NSComparisonResult.OrderedSame {
                         self.jumpToTimeOfDay()
-                    //}
+                    }
                 }
             }
         }
@@ -312,5 +312,15 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) { 
         //TODO: go to proper time
+    }
+    
+    // MARK: UITableViewDelegate
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ScheduleTableViewCell
+        let session =  cell.session
+        let sessionDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("SessionDetailViewController") as! SessionDetailViewController
+        sessionDetailVC.session = session
+        self.navigationController!.pushViewController(sessionDetailVC, animated: true)
     }
 }
