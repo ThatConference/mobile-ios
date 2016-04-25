@@ -16,20 +16,28 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
     private let scheduleDataSource = ScheduleDataSource()
     private var currentlySelectedTimeLabel: CircleLabel!
     private var dailySchedules: Dictionary<String, DailySchedule>!
+    private var activityIndicator: UIActivityIndicatorView!
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 80, 80))
+        self.activityIndicator.activityIndicatorViewStyle = .Gray
+        self.activityIndicator.center =  self.view.center
+        self.activityIndicator.backgroundColor = UIColor.whiteColor()
+        self.activityIndicator.hidesWhenStopped = true
+        self.view.addSubview(self.activityIndicator)
+        
         let sessionStore = SessionStore()
+        self.dateLabel.text = "Loading"
+        self.activityIndicator.startAnimating()
         sessionStore.fetchAll() {
             (sessionResult) -> Void in
             //var dailySchedules: Dictionary<String,DailySchedule>!
             switch sessionResult {
             case .Success(let sessions):
                 self.dailySchedules = sessionStore.getDailySchedules(sessions)
-                if self.currentDay == nil {
-                    self.setCurrentDay(self.dailySchedules)
-                }
             case .Failure(let error):
+                //TODO: notify pulling from cache - accuracy may be off
                 // REENABLE CACHING 
                 //let sortBySessionDateTime = NSSortDescriptor(key: "scheduledDateTime", ascending: true)
                 //allSessions = try! self.store.fetchMainQueueSessions(predicate: nil, sortDescriptors: [sortBySessionDateTime])
@@ -37,23 +45,24 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
             }
             
             NSOperationQueue.mainQueue().addOperationWithBlock() {
-                if let day = self.currentDay {
-                    if let schedule = self.dailySchedules[day] {
-                        self.scheduleDataSource.dailySchedule = schedule
-                        self.setButtonValues(self.dailySchedules)
-                    }
-                    self.loadTimeTable()
-                    self.tableView.delegate = self
-                    self.tableView.dataSource = self.scheduleDataSource
-                    self.tableView.reloadData()
-                    
-                    self.setDateLabel(self.scheduleDataSource.dailySchedule.date!)
-                    
-                    //TODO: put this check back in before we go live - just commenting out for testing
-                    let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.scheduleDataSource.dailySchedule.date, toUnitGranularity: .Day)
-                    if order == NSComparisonResult.OrderedSame {
-                        self.jumpToTimeOfDay()
-                    }
+                self.activityIndicator.stopAnimating()                
+                
+                self.setCurrentDay(self.dailySchedules)
+                
+                if let schedule = self.dailySchedules[self.currentDay] {
+                    self.scheduleDataSource.dailySchedule = schedule
+                }
+                
+                self.loadTimeTable()
+                self.tableView.delegate = self
+                self.tableView.dataSource = self.scheduleDataSource
+                self.tableView.reloadData()
+                
+                self.setDateLabel(self.scheduleDataSource.dailySchedule.date!)
+                
+                let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.scheduleDataSource.dailySchedule.date, toUnitGranularity: .Day)
+                if order == NSComparisonResult.OrderedSame {
+                    self.jumpToTimeOfDay()
                 }
             }
         }
@@ -111,7 +120,6 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         
         // set the date to today, unless we're outside the conference
         if schedules.indexForKey(today) != nil {
-            //self.currentDay = today
             self.setPageState(today)
         }
         else {
@@ -124,6 +132,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         if currentDay == nil || sortedDates[0] == currentDay {
             self.currentDay = sortedDates[0]
             self.nextDay = sortedDates[1]
+            self.previousDay = nil
         }
         else {
             let indexes = sortedDates.count - 1
