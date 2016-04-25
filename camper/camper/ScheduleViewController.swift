@@ -19,6 +19,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let sessionStore = SessionStore()
         sessionStore.fetchAll() {
             (sessionResult) -> Void in
