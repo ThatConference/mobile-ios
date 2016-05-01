@@ -50,7 +50,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
             }
             
             NSOperationQueue.mainQueue().addOperationWithBlock() {
-                self.activityIndicator.stopAnimating()                
+                self.activityIndicator.stopAnimating()
                 
                 self.setCurrentDay(self.dailySchedules)
                 

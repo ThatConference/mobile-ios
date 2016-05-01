@@ -352,7 +352,7 @@
                                                     <color key="textColor" red="0.43529411759999997" green="0.43921568630000002" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like" translatesAutoresizingMaskIntoConstraints="NO" id="DMP-70-Xzg">
+                                                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like" translatesAutoresizingMaskIntoConstraints="NO" id="DMP-70-Xzg">
                                                     <rect key="frame" x="13" y="76" width="40" height="55"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="50v-Qv-fOr"/>
@@ -390,6 +390,8 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="circleView" destination="So8-xx-q03" id="Dhg-wp-SVo"/>
+                                            <outlet property="circleViewHeightConstraint" destination="iCG-VY-YpU" id="iKK-Sh-fi6"/>
+                                            <outlet property="favoriteIcon" destination="DMP-70-Xzg" id="viD-QG-joh"/>
                                             <outlet property="roomLabel" destination="fOe-jO-Eo3" id="BWs-XL-jWs"/>
                                             <outlet property="sessionTitle" destination="ZCd-NM-RmI" id="NK0-9C-KB7"/>
                                             <outlet property="speakerLabel" destination="AIi-rS-hC7" id="Nca-6D-Pxn"/>

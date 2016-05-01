@@ -12,4 +12,5 @@ class Session: NSObject {
     var primaryCategory: String?
     var level: String?
     var speakers: [Speaker] = []
+    var isFamilyApproved: Bool = false
 }

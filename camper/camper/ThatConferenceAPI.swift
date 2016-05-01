@@ -5,6 +5,7 @@ enum Method: String {
     case SessionsGetAll = "/api3/Session/GetAllAcceptedSessions"
     case ExternalLogins = "/api3/Account/ExternalLogins"
     case Token = "/Token"
+    case Favorite = "/api3/Favorites/"
 }
 
 enum SessionsResult {
@@ -61,11 +62,11 @@ class ThatConferenceAPI {
         return components.URL!
     }
     
-    static func authorizationExternalLogins() -> NSURL {
+    class func authorizationExternalLogins() -> NSURL {
         return thatConferenceURL(.ExternalLogins, parameters: nil)
     }
     
-    static func externalLoginsURL() -> NSURL {
+    class func externalLoginsURL() -> NSURL {
         return thatConferenceURL(.ExternalLogins, parameters: ["returnUrl":"/", "generateState": "true"])
     }
     
@@ -83,21 +84,21 @@ class ThatConferenceAPI {
         return thatConferenceURL(.SessionsGetAll, parameters: ["year": GetCurrentYear()])
     }
     
-    static func convertToBool(value: NSNumber?) -> Bool {
+    class func convertToBool(value: NSNumber?) -> Bool {
         return value == 1
     }
     
-    static func convertToBool(value: String?) -> Bool {
+    class func convertToBool(value: String?) -> Bool {
         return value == "1"
     }
     
-    private static func GetCurrentYear() -> String {
+    private class func GetCurrentYear() -> String {
 //        let date = NSDate()
 //        let calendar = NSCalendar.currentCalendar()
 //        let components = calendar.components([.Day , .Month , .Year], fromDate: date)
 //        
 //        return String(components.year)
-        return "2015"
+        return "2016"
     }
     
     
@@ -164,7 +165,8 @@ class ThatConferenceAPI {
             primaryCategory = json["PrimaryCategory"] as? String,
             level = json["Level"] as? String,
             accepted = (json["Accepted"] as? NSNumber)?.boolValue,
-            cancelled = (json["Canceled"] as? NSNumber)?.boolValue
+            cancelled = (json["Canceled"] as? NSNumber)?.boolValue,
+            isFamilyApproved = (json["IsFamilyApproved"] as? NSNumber)?.boolValue
             else {
                 return nil
         }
@@ -184,6 +186,7 @@ class ThatConferenceAPI {
         session.level = level
         session.accepted = accepted
         session.cancelled = cancelled
+        session.isFamilyApproved = isFamilyApproved
         
         if let speakers = json["Speakers"] as? [[String: AnyObject]] {
             for jsonSpeaker in speakers {
@@ -263,5 +266,28 @@ class ThatConferenceAPI {
         login.url = url
         
         return login
+    }
+    
+    // MARK: Favorites
+    
+    func saveFavorite(sessionId: NSNumber?) {
+        // save the favorite
+        let url = ThatConferenceAPI.thatConferenceURL(.Favorite, parameters: nil).URLByAppendingPathComponent("Add").URLByAppendingPathComponent("\(sessionId!)")
+        let request = NSMutableURLRequest(URL: url,
+                                          cachePolicy: .UseProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
+        request.HTTPMethod = "GET"
+        let session = NSURLSession.sharedSession()
+        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+            self.requestCompleteProtocol?.DataReceived(data, response: response, error: error)
+        })
+        
+        dataTask.resume()
+        
+        // TODO: need to update our sessionStore data...
+    }
+    
+    func deleteFavorite(sessionId: String) {
+        
     }
 }

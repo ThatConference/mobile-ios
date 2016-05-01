@@ -12,6 +12,14 @@ class ScheduleDataSource: NSObject, UITableViewDataSource {
             cell.session = session
             cell.sessionTitle.text = session.title
             cell.sessionTitle.sizeToFit()
+        
+            if !session.isFamilyApproved {
+                cell.circleView.hidden = true
+                //cell.circleViewHeightConstraint.constant = 0
+            }
+            else {
+                cell.circleView.hidden = false
+            }
             
             //set up speaker text
             var speakerString: String = ""
