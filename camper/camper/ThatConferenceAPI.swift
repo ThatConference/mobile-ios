@@ -277,6 +277,11 @@ class ThatConferenceAPI {
                                           cachePolicy: .UseProtocolCachePolicy,
                                           timeoutInterval: 10.0)
         request.HTTPMethod = "GET"
+        if let token = Authentication.loadAuthToken() {
+                request.addValue("Bearer \(token.token!)", forHTTPHeaderField: "Authorization")
+        }
+        
+        print(request)
         let session = NSURLSession.sharedSession()
         let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
             self.requestCompleteProtocol?.DataReceived(data, response: response, error: error)
