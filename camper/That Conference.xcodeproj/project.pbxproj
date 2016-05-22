@@ -74,6 +74,8 @@
 		512DA03B1CB7585D006CC1B3 /* DailySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DA03A1CB7585D006CC1B3 /* DailySchedule.swift */; };
 		512DA03D1CB758B9006CC1B3 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */; };
 		512DA03F1CBBE03C006CC1B3 /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DA03E1CBBE03C006CC1B3 /* Speaker.swift */; };
+		51713A931CF150290081549B /* SessionDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51713A911CF150290081549B /* SessionDetails.storyboard */; };
+		51A4D1D01CF1532900F956BC /* favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51A4D1CF1CF1532900F956BC /* favorites.storyboard */; };
 		793E308F6CBA37E7993A7AAB /* Pods_That_Conference.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4D3D3C6A3950C88F7A8ED7 /* Pods_That_Conference.framework */; };
 /* End PBXBuildFile section */
 
@@ -149,6 +151,8 @@
 		512DA03A1CB7585D006CC1B3 /* DailySchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailySchedule.swift; sourceTree = "<group>"; };
 		512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
 		512DA03E1CBBE03C006CC1B3 /* Speaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
+		51713A921CF150290081549B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SessionDetails.storyboard; sourceTree = "<group>"; };
+		51A4D1CF1CF1532900F956BC /* favorites.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = favorites.storyboard; sourceTree = "<group>"; };
 		8D4D3D3C6A3950C88F7A8ED7 /* Pods_That_Conference.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_That_Conference.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -198,6 +202,8 @@
 				312A94211C814B6B00AE938B /* Info.plist */,
 				312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */,
 				312A94191C814B6B00AE938B /* Main.storyboard */,
+				51A4D1CF1CF1532900F956BC /* favorites.storyboard */,
+				51713A911CF150290081549B /* SessionDetails.storyboard */,
 				312A942D1C85399900AE938B /* MapViewController.swift */,
 				3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */,
 				5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */,
@@ -389,6 +395,7 @@
 				312A94791C89325D00AE938B /* NeutraText-BoldAlt.otf in Resources */,
 				312A94711C89325D00AE938B /* NeutraDisplay-Medium.otf in Resources */,
 				312A94721C89325D00AE938B /* NeutraDisplay-MediumAlt.otf in Resources */,
+				51A4D1D01CF1532900F956BC /* favorites.storyboard in Resources */,
 				312A94841C89325D00AE938B /* NeutraText-Light.otf in Resources */,
 				312A94671C89325D00AE938B /* NeutraCond-MediumAlt.otf in Resources */,
 				312A94731C89325D00AE938B /* NeutraDisplay-Num.otf in Resources */,
@@ -410,6 +417,7 @@
 				312A94691C89325D00AE938B /* NeutraCond-ThinAlt.otf in Resources */,
 				312A947C1C89325D00AE938B /* NeutraText-Book.otf in Resources */,
 				312A94661C89325D00AE938B /* NeutraCond-Medium.otf in Resources */,
+				51713A931CF150290081549B /* SessionDetails.storyboard in Resources */,
 				312A94741C89325D00AE938B /* NeutraDisplay-NumAlt.otf in Resources */,
 				312A94621C89325D00AE938B /* NeutraCond-Bold.otf in Resources */,
 				312A943A1C88DEC900AE938B /* Chunk.ttf in Resources */,
@@ -521,6 +529,14 @@
 				312A941F1C814B6B00AE938B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		51713A911CF150290081549B /* SessionDetails.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				51713A921CF150290081549B /* Base */,
+			);
+			name = SessionDetails.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
