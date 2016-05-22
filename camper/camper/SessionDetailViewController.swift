@@ -39,8 +39,17 @@ class SessionDetailViewController : UIViewController, UITableViewDataSource, UIT
         self.view.layoutIfNeeded()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    @IBAction func RoomButtonPressed(sender: AnyObject) {
+        performSegueWithIdentifier("OpenMap", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "OpenMap"
+        {
+            if let mapVC = segue.destinationViewController as? MapViewController {
+                mapVC.roomName = session.scheduledRoom
+            }
+        }
     }
     
     private func setDateLabel(date: NSDate) {

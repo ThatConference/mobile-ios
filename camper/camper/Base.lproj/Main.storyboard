@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="l5J-hF-BEd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="l5J-hF-BEd">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -431,7 +431,7 @@
         <!--FAVORITES MAP-->
         <scene sceneID="aTb-it-VBM">
             <objects>
-                <viewController id="DjL-3a-YMn" customClass="MapViewController" customModule="That_Conference" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DjL-3a-YMn" customClass="MapViewController" customModule="That_Conference" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bLC-hf-3GH"/>
                         <viewControllerLayoutGuide type="bottom" id="MFb-vA-GuF"/>
@@ -439,10 +439,48 @@
                     <view key="view" contentMode="scaleToFill" id="buE-nk-fec">
                         <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baseMap" translatesAutoresizingMaskIntoConstraints="NO" id="Vgl-zc-VGN">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEp-2f-73w" userLabel="CurrentRoom">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYf-TZ-7Fx">
+                                        <rect key="frame" x="99" y="109" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.25882352939999997" green="0.49019607840000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.039215686270000001" green="0.08235294118" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="SYf-TZ-7Fx" firstAttribute="centerY" secondItem="hEp-2f-73w" secondAttribute="centerY" id="20n-DE-csW"/>
+                                    <constraint firstAttribute="width" constant="240" id="Bq8-rS-5Wa"/>
+                                    <constraint firstAttribute="height" constant="240" id="Ifl-rf-Hxh"/>
+                                    <constraint firstItem="SYf-TZ-7Fx" firstAttribute="centerX" secondItem="hEp-2f-73w" secondAttribute="centerX" id="tgW-kV-CQJ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hEp-2f-73w" firstAttribute="leading" secondItem="buE-nk-fec" secondAttribute="leading" id="8ex-5n-kiz"/>
+                            <constraint firstItem="Vgl-zc-VGN" firstAttribute="leading" secondItem="buE-nk-fec" secondAttribute="leading" id="FmT-Is-hgK"/>
+                            <constraint firstAttribute="trailing" secondItem="Vgl-zc-VGN" secondAttribute="trailing" id="PxB-lE-Ca9"/>
+                            <constraint firstItem="Vgl-zc-VGN" firstAttribute="top" secondItem="bLC-hf-3GH" secondAttribute="bottom" id="Twc-hw-Kk8"/>
+                            <constraint firstItem="MFb-vA-GuF" firstAttribute="top" secondItem="Vgl-zc-VGN" secondAttribute="bottom" id="WAd-n0-c3a"/>
+                            <constraint firstItem="hEp-2f-73w" firstAttribute="top" secondItem="bLC-hf-3GH" secondAttribute="bottom" id="eVi-oh-dAl"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="FAVORITES MAP" id="vj9-Mn-uca"/>
                     <connections>
+                        <outlet property="currentRoomHeight" destination="Ifl-rf-Hxh" id="WR6-mw-6LH"/>
+                        <outlet property="currentRoomLabel" destination="SYf-TZ-7Fx" id="4GU-HJ-PaO"/>
+                        <outlet property="currentRoomView" destination="hEp-2f-73w" id="Doh-nc-XZ6"/>
+                        <outlet property="currentRoomWidth" destination="Bq8-rS-5Wa" id="czy-lG-BkI"/>
+                        <outlet property="currentRoomX" destination="tgW-kV-CQJ" id="eb1-gp-n6o"/>
+                        <outlet property="currentRoomY" destination="20n-DE-csW" id="av1-CT-hjk"/>
                         <segue destination="DWb-sB-Sus" kind="show" identifier="FavoritesSessionDetail" id="wAM-vD-FeN"/>
                     </connections>
                 </viewController>
@@ -742,10 +780,10 @@
             </objects>
             <point key="canvasLocation" x="3344" y="753"/>
         </scene>
-        <!--favorites-->
+        <!--Favorites-->
         <scene sceneID="8Js-FX-240">
             <objects>
-                <viewControllerPlaceholder storyboardName="favorites" id="Kii-iN-kE6" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Favorites" id="Kii-iN-kE6" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="eRT-YD-Ig3"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EF2-8d-PZh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -754,6 +792,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="baseMap" width="874" height="1284"/>
         <image name="facebook" width="96" height="95"/>
         <image name="favorites" width="38" height="37"/>
         <image name="github" width="95" height="95"/>
@@ -772,6 +811,6 @@
         <image name="windows" width="96" height="95"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xwR-kA-fa2"/>
+        <segue reference="wAM-vD-FeN"/>
     </inferredMetricsTieBreakers>
 </document>
