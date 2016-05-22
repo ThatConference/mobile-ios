@@ -20,6 +20,11 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        
         self.activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 80, 80))
         self.activityIndicator.activityIndicatorViewStyle = .Gray
         self.activityIndicator.center =  self.view.center

@@ -34,6 +34,7 @@ class ThatConferenceAPI {
     }()
     
     static let baseURLString = "https://www.thatconference.com"
+    static let baseResourceURLString = "https://thatconference.blob.core.windows.net"
     
     private static let dateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
@@ -66,6 +67,16 @@ class ThatConferenceAPI {
     
     static func externalLoginsURL() -> NSURL {
         return thatConferenceURL(.ExternalLogins, parameters: ["returnUrl":"/", "generateState": "true"])
+    }
+    
+    static func resourceURL(partialURL: String) -> NSURL {
+        let badPrefix = "cloud/"
+        let index1 = partialURL.startIndex.advancedBy(badPrefix.characters.count)
+        let substringURL = partialURL.substringFromIndex(index1)
+        
+        let fullURL = baseResourceURLString + substringURL;
+        let components = NSURLComponents(string: fullURL)!
+        return components.URL!
     }
     
     static func sessionsGetAllURL() -> NSURL {

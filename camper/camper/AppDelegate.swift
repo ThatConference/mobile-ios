@@ -12,19 +12,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let scheduleViewController = navController.topViewController as! ScheduleViewController
         scheduleViewController.store = SessionStore()
         
-//        let backImage = UIImage(named: "back");
-//        UIBarButtonItem.appearance().setBackButtonBackgroundImage(backImage, forState: .Normal, barMetrics: .Default);
-        
-        // FIND AVAILABLE FONTS
-//        for family: String in UIFont.familyNames()
-//        {
-//            print("\(family)")
-//            for names: String in UIFont.fontNamesForFamilyName(family)
-//            {
-//                print("== \(names)")
-//            }
-//        }
-        
         return true
     }
 }

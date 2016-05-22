@@ -42,6 +42,8 @@
 		<string>Knockout-HTF31-JuniorMiddlewt.otf</string>
 		<string>NeutraText-Bold.otf</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

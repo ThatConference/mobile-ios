@@ -62,6 +62,8 @@
 		312A94861C89325D00AE938B /* NeutraText-LightIA.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94601C89325D00AE938B /* NeutraText-LightIA.otf */; };
 		312A94871C89325D00AE938B /* NeutraText-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94611C89325D00AE938B /* NeutraText-LightItalic.otf */; };
 		318F268C1CBC65F30065A76F /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318F268B1CBC65F30065A76F /* Authentication.swift */; };
+		3199C7191CD1B968002F01CD /* SpeakerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */; };
+		3199C71C1CD6EFA5002F01CD /* PageDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */; };
 		31CFCD7C1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */; };
 		31CFCD841C8B70ED00DB2AB2 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */; };
 		31CFCD861C8B73DD00DB2AB2 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFCD851C8B73DD00DB2AB2 /* CoreDataStack.swift */; };
@@ -136,6 +138,8 @@
 		312A94601C89325D00AE938B /* NeutraText-LightIA.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-LightIA.otf"; sourceTree = "<group>"; };
 		312A94611C89325D00AE938B /* NeutraText-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-LightItalic.otf"; sourceTree = "<group>"; };
 		318F268B1CBC65F30065A76F /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerProfileViewController.swift; sourceTree = "<group>"; };
+		3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageDetailCell.swift; sourceTree = "<group>"; };
 		31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThatConferenceAPI.swift; sourceTree = "<group>"; };
 		31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
 		31CFCD851C8B73DD00DB2AB2 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -199,10 +203,12 @@
 				312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */,
 				312A94191C814B6B00AE938B /* Main.storyboard */,
 				312A942D1C85399900AE938B /* MapViewController.swift */,
+				3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */,
 				5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */,
 				312A94291C85390B00AE938B /* ScheduleViewController.swift */,
 				312A94331C85EE5D00AE938B /* SessionDetailViewController.swift */,
 				312A942F1C8539B600AE938B /* SettingsViewController.swift */,
+				3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */,
 			);
 			path = camper;
 			sourceTree = "<group>";
@@ -478,6 +484,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				512DA03D1CB758B9006CC1B3 /* TimeSlot.swift in Sources */,
+				3199C71C1CD6EFA5002F01CD /* PageDetailCell.swift in Sources */,
 				512DA03B1CB7585D006CC1B3 /* DailySchedule.swift in Sources */,
 				312A942A1C85390B00AE938B /* ScheduleViewController.swift in Sources */,
 				312A94281C85383200AE938B /* AuthorizationViewController.swift in Sources */,
@@ -488,6 +495,7 @@
 				512DA03F1CBBE03C006CC1B3 /* Speaker.swift in Sources */,
 				5113D3851CAA20CB00D6B974 /* ScheduleTableViewCell.swift in Sources */,
 				312A942C1C85396E00AE938B /* FavoritesViewController.swift in Sources */,
+				3199C7191CD1B968002F01CD /* SpeakerProfileViewController.swift in Sources */,
 				312A942E1C85399900AE938B /* MapViewController.swift in Sources */,
 				31CFCD7C1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift in Sources */,
 				3123AC291C90959D0097BF33 /* Session.swift in Sources */,
