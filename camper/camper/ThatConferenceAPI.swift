@@ -1,11 +1,11 @@
 import Foundation
-import CoreData
 
 enum Method: String {
     case SessionsGetAll = "/api3/Session/GetAllAcceptedSessions"
     case ExternalLogins = "/api3/Account/ExternalLogins"
     case Token = "/Token"
     case Favorite = "/api3/Favorites/"
+    case UserFavorites = "/api3/Session/GetFavoriteSessions"
 }
 
 enum SessionsResult {
@@ -93,11 +93,6 @@ class ThatConferenceAPI {
     }
     
     private class func GetCurrentYear() -> String {
-//        let date = NSDate()
-//        let calendar = NSCalendar.currentCalendar()
-//        let components = calendar.components([.Day , .Month , .Year], fromDate: date)
-//        
-//        return String(components.year)
         return "2016"
     }
     
@@ -127,7 +122,7 @@ class ThatConferenceAPI {
         dataTask.resume()
     }
     
-    class func sessionsFromJSONData(data: NSData, inContext context: NSManagedObjectContext) -> SessionsResult {
+    class func sessionsFromJSONData(data: NSData) -> SessionsResult {
         do {
             let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
             
@@ -139,7 +134,7 @@ class ThatConferenceAPI {
             var finalSessions = [Session]()
             
             for sessionJSON in sessions {
-                if let session = sessionFromJSONData(sessionJSON, inContext: context) {
+                if let session = sessionFromJSONData(sessionJSON) {
                     finalSessions.append(session)
                 }
             }
@@ -155,7 +150,7 @@ class ThatConferenceAPI {
         }
     }
     
-    private class func sessionFromJSONData(json: [String: AnyObject], inContext context: NSManagedObjectContext) -> Session? {
+    private class func sessionFromJSONData(json: [String: AnyObject]) -> Session? {
         guard let
             id = json["Id"] as? Int,
             title = json["Title"] as? String,
@@ -167,9 +162,15 @@ class ThatConferenceAPI {
             accepted = (json["Accepted"] as? NSNumber)?.boolValue,
             cancelled = (json["Canceled"] as? NSNumber)?.boolValue,
             isFamilyApproved = (json["IsFamilyApproved"] as? NSNumber)?.boolValue
-            else {
+        else {
                 return nil
         }
+        
+        var isUserFavorite: Bool = false
+        if let userFavorite = (json["IsUserFavorite"] as? NSNumber) {
+            isUserFavorite = userFavorite.boolValue
+        }
+       
         
         var scheduledDateTime: NSDate?
         if dateString != nil {
@@ -187,6 +188,7 @@ class ThatConferenceAPI {
         session.accepted = accepted
         session.cancelled = cancelled
         session.isFamilyApproved = isFamilyApproved
+        session.isUserFavorite = isUserFavorite
         
         if let speakers = json["Speakers"] as? [[String: AnyObject]] {
             for jsonSpeaker in speakers {
@@ -270,7 +272,7 @@ class ThatConferenceAPI {
     
     // MARK: Favorites
     
-    func saveFavorite(sessionId: NSNumber?) {
+    class func saveFavorite(sessionId: NSNumber?, completionHandler: (data: NSData?, response: NSURLResponse?, error: ErrorType?) -> Void) {
         // save the favorite
         let url = ThatConferenceAPI.thatConferenceURL(.Favorite, parameters: nil).URLByAppendingPathComponent("Add").URLByAppendingPathComponent("\(sessionId!)")
         let request = NSMutableURLRequest(URL: url,
@@ -281,10 +283,9 @@ class ThatConferenceAPI {
                 request.addValue("Bearer \(token.token!)", forHTTPHeaderField: "Authorization")
         }
         
-        print(request)
         let session = NSURLSession.sharedSession()
         let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
-            self.requestCompleteProtocol?.DataReceived(data, response: response, error: error)
+            completionHandler(data: data, response: response, error: error)
         })
         
         dataTask.resume()
@@ -292,7 +293,45 @@ class ThatConferenceAPI {
         // TODO: need to update our sessionStore data...
     }
     
-    func deleteFavorite(sessionId: String) {
+    class func deleteFavorite(sessionId: NSNumber?, completionHandler: (data: NSData?, response: NSURLResponse?, error: ErrorType?) -> Void) {
+        // remove the favorite
+        let url = ThatConferenceAPI.thatConferenceURL(.Favorite, parameters: nil).URLByAppendingPathComponent("Remove").URLByAppendingPathComponent("\(sessionId!)")
+        let request = NSMutableURLRequest(URL: url,
+                                          cachePolicy: .UseProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
+        request.HTTPMethod = "GET"
+        if let token = Authentication.loadAuthToken() {
+            request.addValue("Bearer \(token.token!)", forHTTPHeaderField: "Authorization")
+        }
         
+        let session = NSURLSession.sharedSession()
+        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+            completionHandler(data: data, response: response, error: error)
+        })
+
+        dataTask.resume()
+    }
+    
+    class func getFavoriteSessions(year: String, completionHandler:(SessionsResult) -> Void) {
+        let url = ThatConferenceAPI.thatConferenceURL(.UserFavorites, parameters: ["year": year])
+        let request = NSMutableURLRequest(URL: url,
+                                          cachePolicy: .UseProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
+        request.HTTPMethod = "GET"
+        if let token = Authentication.loadAuthToken() {
+            request.addValue("Bearer \(token.token!)", forHTTPHeaderField: "Authorization")
+        }
+        
+        let session = NSURLSession.sharedSession()
+        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+            if error != nil {
+                completionHandler(SessionsResult.Failure(error!))
+            }
+            
+            let sessions = sessionsFromJSONData(data!);
+            completionHandler(sessions)
+        })
+        
+        dataTask.resume()
     }
 }

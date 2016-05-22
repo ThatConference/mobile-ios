@@ -25,7 +25,7 @@ class ScheduleTableViewCell: UITableViewCell {
     }
     
     @objc private func favorited (sender:UITapGestureRecognizer) {
-        ThatConferenceAPI().saveFavorite(session.id)
+        //ThatConferenceAPI().saveFavorite(session.id)
     }
 }
 

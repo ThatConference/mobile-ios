@@ -35,40 +35,40 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         let sessionStore = SessionStore()
         self.dateLabel.text = "Loading"
         self.activityIndicator.startAnimating()
-        sessionStore.fetchAll() {
-            (sessionResult) -> Void in
-            //var dailySchedules: Dictionary<String,DailySchedule>!
-            switch sessionResult {
-            case .Success(let sessions):
-                self.dailySchedules = sessionStore.getDailySchedules(sessions)
-            case .Failure(let error):
-                //TODO: notify pulling from cache - accuracy may be off
-                // REENABLE CACHING 
-                //let sortBySessionDateTime = NSSortDescriptor(key: "scheduledDateTime", ascending: true)
-                //allSessions = try! self.store.fetchMainQueueSessions(predicate: nil, sortDescriptors: [sortBySessionDateTime])
-                print("Error: \(error)")
-            }
+
+         sessionStore.getDailySchedules() {
+            (results) -> Void in
             
-            NSOperationQueue.mainQueue().addOperationWithBlock() {
-                self.activityIndicator.stopAnimating()
+            switch results {
+            case .Success(let schedules):
+                self.dailySchedules = schedules
                 
-                self.setCurrentDay(self.dailySchedules)
-                
-                if let schedule = self.dailySchedules[self.currentDay] {
-                    self.scheduleDataSource.dailySchedule = schedule
+                NSOperationQueue.mainQueue().addOperationWithBlock() {
+                    self.activityIndicator.stopAnimating()
+                    
+                    self.setCurrentDay(self.dailySchedules)
+                    
+                    if let schedule = self.dailySchedules[self.currentDay] {
+                        self.scheduleDataSource.dailySchedule = schedule
+                    }
+                    
+                    self.loadTimeTable()
+                    self.tableView.delegate = self
+                    self.tableView.dataSource = self.scheduleDataSource
+                    self.tableView.reloadData()
+                    
+                    self.setDateLabel(self.scheduleDataSource.dailySchedule.date!)
+                    
+                    let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.scheduleDataSource.dailySchedule.date, toUnitGranularity: .Day)
+                    if order == NSComparisonResult.OrderedSame {
+                        self.jumpToTimeOfDay()
+                    }
                 }
-                
-                self.loadTimeTable()
-                self.tableView.delegate = self
-                self.tableView.dataSource = self.scheduleDataSource
-                self.tableView.reloadData()
-                
-                self.setDateLabel(self.scheduleDataSource.dailySchedule.date!)
-                
-                let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.scheduleDataSource.dailySchedule.date, toUnitGranularity: .Day)
-                if order == NSComparisonResult.OrderedSame {
-                    self.jumpToTimeOfDay()
-                }
+                break
+            case .Failure(let error):
+                UIAlertView(title: "Error", message: "An Error occurred", delegate: nil, cancelButtonTitle: "cancel")
+                //TODO: Display error
+                    break
             }
         }
         

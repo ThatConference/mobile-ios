@@ -15,10 +15,17 @@ class ScheduleDataSource: NSObject, UITableViewDataSource {
         
             if !session.isFamilyApproved {
                 cell.circleView.hidden = true
-                //cell.circleViewHeightConstraint.constant = 0
             }
             else {
                 cell.circleView.hidden = false
+            }
+            
+            if Authentication.isLoggedIn() {
+                cell.favoriteIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ScheduleDataSource.SessionFavorited(_:))))
+                setFavoriteIcon(cell)
+            }
+            else {
+                cell.favoriteIcon!.image = nil;
             }
             
             //set up speaker text
@@ -56,5 +63,49 @@ class ScheduleDataSource: NSObject, UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return dailySchedule.timeSlots.count
+    }
+    
+    func SessionFavorited(sender: UITapGestureRecognizer) {
+        if let cell = sender.view?.superview?.superview as? ScheduleTableViewCell {
+            let sessionStore = SessionStore()
+            if cell.session.isUserFavorite {
+                sessionStore.removeFavorite(cell.session, completion:{(sessionsResult) -> Void in
+                    switch sessionsResult {
+                    case .Success(let sessions):
+                        cell.session = sessions.first
+                        self.setFavoriteIcon(cell)
+                        break
+                    case .Failure(_):
+                        break
+                    }
+                })
+
+            }
+            else {
+                sessionStore.addFavorite(cell.session, completion:{(sessionsResult) -> Void in
+                    switch sessionsResult {
+                    case .Success(let sessions):
+                        cell.session = sessions.first
+                        self.setFavoriteIcon(cell)
+                        break
+                    case .Failure(_):
+                        break
+                    }
+                })
+
+            }
+            
+        }
+    }
+    
+    private func setFavoriteIcon(cell: ScheduleTableViewCell) {
+        dispatch_async(dispatch_get_main_queue(), {
+            if cell.session.isUserFavorite {
+                cell.favoriteIcon!.image = UIImage(named:"like-remove")
+            }
+            else {
+                cell.favoriteIcon!.image = UIImage(named:"like-1")
+            }
+        })        
     }
 }
