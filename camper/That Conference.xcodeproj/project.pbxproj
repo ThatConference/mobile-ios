@@ -77,6 +77,7 @@
 		512DA03F1CBBE03C006CC1B3 /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512DA03E1CBBE03C006CC1B3 /* Speaker.swift */; };
 		51713A931CF150290081549B /* SessionDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51713A911CF150290081549B /* SessionDetails.storyboard */; };
 		51A4D1D01CF1532900F956BC /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51A4D1CF1CF1532900F956BC /* Favorites.storyboard */; };
+		51A4D1D41CF290BB00F956BC /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */; };
 		793E308F6CBA37E7993A7AAB /* Pods_That_Conference.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4D3D3C6A3950C88F7A8ED7 /* Pods_That_Conference.framework */; };
 /* End PBXBuildFile section */
 
@@ -155,6 +156,7 @@
 		512DA03E1CBBE03C006CC1B3 /* Speaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
 		51713A921CF150290081549B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SessionDetails.storyboard; sourceTree = "<group>"; };
 		51A4D1CF1CF1532900F956BC /* Favorites.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Favorites.storyboard; sourceTree = "<group>"; };
+		51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		8D4D3D3C6A3950C88F7A8ED7 /* Pods_That_Conference.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_That_Conference.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -191,29 +193,30 @@
 		312A94141C814B6B00AE938B /* camper */ = {
 			isa = PBXGroup;
 			children = (
-				31D0D9461CC5DB4D007C5999 /* extensions */,
-				5113D3861CAC51AE00D6B974 /* custom views */,
-				31CFCD821C8B6E1400DB2AB2 /* datasource */,
-				31CFCD7F1C8A73D700DB2AB2 /* models */,
-				312A94351C88DE1A00AE938B /* resources */,
 				312A94151C814B6B00AE938B /* AppDelegate.swift */,
 				312A941C1C814B6B00AE938B /* Assets.xcassets */,
 				312A94271C85383200AE938B /* AuthorizationViewController.swift */,
 				31D0D9401CC08282007C5999 /* AuthorizationWebViewController.swift */,
+				5113D3861CAC51AE00D6B974 /* custom views */,
+				31CFCD821C8B6E1400DB2AB2 /* datasource */,
+				31D0D9461CC5DB4D007C5999 /* extensions */,
+				51A4D1CF1CF1532900F956BC /* Favorites.storyboard */,
 				312A942B1C85396E00AE938B /* FavoritesViewController.swift */,
 				312A94211C814B6B00AE938B /* Info.plist */,
 				312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */,
 				312A94191C814B6B00AE938B /* Main.storyboard */,
-				51A4D1CF1CF1532900F956BC /* Favorites.storyboard */,
-				51713A911CF150290081549B /* SessionDetails.storyboard */,
 				312A942D1C85399900AE938B /* MapViewController.swift */,
+				31CFCD7F1C8A73D700DB2AB2 /* models */,
 				3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */,
+				312A94351C88DE1A00AE938B /* resources */,
+				3123AC2A1C90A0070097BF33 /* ScheduleDataSource.swift */,
 				5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */,
 				312A94291C85390B00AE938B /* ScheduleViewController.swift */,
-				3123AC2A1C90A0070097BF33 /* ScheduleDataSource.swift */,
+				51713A911CF150290081549B /* SessionDetails.storyboard */,
 				312A94331C85EE5D00AE938B /* SessionDetailViewController.swift */,
 				312A942F1C8539B600AE938B /* SettingsViewController.swift */,
 				3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */,
+				51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */,
 			);
 			path = camper;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				3123AC2B1C90A0070097BF33 /* ScheduleDataSource.swift in Sources */,
 				312A94341C85EE5E00AE938B /* SessionDetailViewController.swift in Sources */,
 				5113D3881CAC521C00D6B974 /* CircleView.swift in Sources */,
+				51A4D1D41CF290BB00F956BC /* FavoritesTableViewCell.swift in Sources */,
 				512DA03F1CBBE03C006CC1B3 /* Speaker.swift in Sources */,
 				5113D3851CAA20CB00D6B974 /* ScheduleTableViewCell.swift in Sources */,
 				312A942C1C85396E00AE938B /* FavoritesViewController.swift in Sources */,
