@@ -9,6 +9,7 @@ class SessionDetailViewController : UIViewController, UITableViewDataSource, UIT
     @IBOutlet var detailTable: UITableView!
     @IBOutlet var detailTableHeight: NSLayoutConstraint!
     @IBOutlet var detailSectionHeight: NSLayoutConstraint!
+    @IBOutlet var favoriteButton: UIImageView!
     
     var session: Session!
     var newTableHeight = CGFloat(0)
@@ -37,6 +38,14 @@ class SessionDetailViewController : UIViewController, UITableViewDataSource, UIT
         detailTableHeight.constant = newTableHeight
         detailSectionHeight.constant = newTableHeight + 105
         self.view.layoutIfNeeded()
+        
+        if Authentication.isLoggedIn() {
+            favoriteButton.userInteractionEnabled = true
+            favoriteButton!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SessionDetailViewController.SessionFavorited(_:))))
+            setFavoriteIcon(animated: false)
+        } else {
+            self.favoriteButton!.image = nil
+        }
     }
     
     @IBAction func RoomButtonPressed(sender: AnyObject) {
@@ -90,5 +99,62 @@ class SessionDetailViewController : UIViewController, UITableViewDataSource, UIT
         let speakerDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("SpeakerProfileViewController") as! SpeakerProfileViewController
         speakerDetailVC.speaker = speaker
         self.navigationController!.pushViewController(speakerDetailVC, animated: true)
+    }
+    
+    // MARK: Favoriting
+    
+    func SessionFavorited(sender: UITapGestureRecognizer) {
+        let sessionStore = SessionStore()
+        if self.session.isUserFavorite {
+            sessionStore.removeFavorite(self.session, completion:{(sessionsResult) -> Void in
+                switch sessionsResult {
+                case .Success(let sessions):
+                    self.session = sessions.first
+                    self.setFavoriteIcon(animated: true)
+                    break
+                case .Failure(_):
+                    break
+                }
+            })
+            
+        }
+        else {
+            CATransaction.begin()
+            CATransaction.setAnimationDuration(1.5)
+            let transition = CATransition()
+            transition.type = kCATransitionFade
+            self.favoriteButton!.layer.addAnimation(transition, forKey: kCATransitionFade)
+            CATransaction.commit()
+            self.favoriteButton!.image = UIImage(named:"likeadded")
+            sessionStore.addFavorite(self.session, completion:{(sessionsResult) -> Void in
+                switch sessionsResult {
+                case .Success(let sessions):
+                    self.session = sessions.first
+                    self.setFavoriteIcon(animated: true)
+                    break
+                case .Failure(_):
+                    break
+                }
+            })
+        }
+    }
+    
+    private func setFavoriteIcon(animated animated: Bool) {
+        dispatch_async(dispatch_get_main_queue(), { 
+            if animated {
+                CATransaction.begin()
+                CATransaction.setAnimationDuration(1.5)
+                let transition = CATransition()
+                transition.type = kCATransitionFade
+                self.favoriteButton!.layer.addAnimation(transition, forKey: kCATransitionFade)
+                CATransaction.commit()
+            }
+            if self.session.isUserFavorite {
+                self.favoriteButton!.image = UIImage(named:"like-remove")
+            }
+            else {
+                self.favoriteButton!.image = UIImage(named:"like-1")
+            }
+        })
     }
 }

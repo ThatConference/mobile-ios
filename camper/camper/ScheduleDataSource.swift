@@ -22,7 +22,7 @@ class ScheduleDataSource: NSObject, UITableViewDataSource {
             
             if Authentication.isLoggedIn() {
                 cell.favoriteIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ScheduleDataSource.SessionFavorited(_:))))
-                setFavoriteIcon(cell)
+                setFavoriteIcon(cell, animated: false)
             }
             else {
                 cell.favoriteIcon!.image = nil;
@@ -73,7 +73,7 @@ class ScheduleDataSource: NSObject, UITableViewDataSource {
                     switch sessionsResult {
                     case .Success(let sessions):
                         cell.session = sessions.first
-                        self.setFavoriteIcon(cell)
+                        self.setFavoriteIcon(cell, animated: true)
                         break
                     case .Failure(_):
                         break
@@ -82,11 +82,18 @@ class ScheduleDataSource: NSObject, UITableViewDataSource {
 
             }
             else {
+                CATransaction.begin()
+                CATransaction.setAnimationDuration(1.5)
+                let transition = CATransition()
+                transition.type = kCATransitionFade
+                cell.favoriteIcon!.layer.addAnimation(transition, forKey: kCATransitionFade)
+                CATransaction.commit()
+                cell.favoriteIcon!.image = UIImage(named:"likeadded")
                 sessionStore.addFavorite(cell.session, completion:{(sessionsResult) -> Void in
                     switch sessionsResult {
                     case .Success(let sessions):
                         cell.session = sessions.first
-                        self.setFavoriteIcon(cell)
+                        self.setFavoriteIcon(cell, animated: true)
                         break
                     case .Failure(_):
                         break
@@ -98,13 +105,23 @@ class ScheduleDataSource: NSObject, UITableViewDataSource {
         }
     }
     
-    private func setFavoriteIcon(cell: ScheduleTableViewCell) {
+    private func setFavoriteIcon(cell: ScheduleTableViewCell, animated: Bool) {
         dispatch_async(dispatch_get_main_queue(), {
+            if animated {
+                CATransaction.begin()
+                CATransaction.setAnimationDuration(1.5)
+                let transition = CATransition()
+                transition.type = kCATransitionFade
+                cell.favoriteIcon!.layer.addAnimation(transition, forKey: kCATransitionFade)
+                CATransaction.commit()
+            }
             if cell.session.isUserFavorite {
                 cell.favoriteIcon!.image = UIImage(named:"like-remove")
             }
             else {
-                cell.favoriteIcon!.image = UIImage(named:"like-1")
+                    //cell.favoriteIcon!.image = UIImage(named:"likeadded")
+                
+                    cell.favoriteIcon!.image = UIImage(named:"like-1")
             }
         })        
     }

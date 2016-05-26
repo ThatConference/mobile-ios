@@ -1,6 +1,6 @@
     import UIKit
 
-class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UITableViewDelegate {
+class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UITableViewDelegate, UINavigationControllerDelegate {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timeTableView: UIStackView!
@@ -24,6 +24,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        self.navigationController?.delegate = self
         
         self.activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 80, 80))
         self.activityIndicator.activityIndicatorViewStyle = .Gray
@@ -336,5 +337,12 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         let sessionDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("SessionDetailViewController") as! SessionDetailViewController
         sessionDetailVC.session = session
         self.navigationController!.pushViewController(sessionDetailVC, animated: true)
+    }
+    
+    // MARK: UINavigationContollerDelegate
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        if viewController.isEqual(self) {
+            self.tableView.reloadData()
+        }
     }
 }
