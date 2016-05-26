@@ -65,7 +65,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
                     }
                 }
                 break
-            case .Failure(let error):
+            case .Failure(_):
                 UIAlertView(title: "Error", message: "An Error occurred", delegate: nil, cancelButtonTitle: "cancel")
                 //TODO: Display error
                     break
