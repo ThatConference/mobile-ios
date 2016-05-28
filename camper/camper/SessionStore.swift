@@ -151,7 +151,7 @@ class SessionStore {
     }
     
     private func fetchAll(completion completion: (SessionsResult) -> Void) {
-        let url = ThatConferenceAPI.sessionsGetAllURL()
+        let url = ThatConferenceAPI.sessionsGetAcceptedURL(nil)
         var request = NSMutableURLRequest(URL: url)
         request = addAuthIfPossible(request)
         let task = ThatConferenceAPI.nsurlSession.dataTaskWithRequest(request) {
