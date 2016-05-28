@@ -34,4 +34,19 @@ class FavoritesDataSource: NSObject, UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return dailySchedule.timeSlots.count
     }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            dailySchedule.timeSlots[indexPath.section].sessions.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
+            if (dailySchedule.timeSlots[indexPath.section].sessions.count == 0) {
+                dailySchedule.timeSlots.removeAtIndex(indexPath.section)
+                let indexSet = NSMutableIndexSet()
+                indexSet.addIndex(indexPath.section)
+                tableView.deleteSections(indexSet, withRowAnimation: UITableViewRowAnimation.Automatic)
+            }
+            //TODO: Persist this delete
+        }
+    }
 }
