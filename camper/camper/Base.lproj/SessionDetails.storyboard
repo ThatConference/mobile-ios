@@ -298,7 +298,7 @@
                                                     <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="766-JI-Fwz">
                                                         <rect key="frame" x="87" y="0.0" width="200" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WhN-iT-3NQ" userLabel="twitterButton">
+                                                            <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WhN-iT-3NQ" userLabel="twitterButton">
                                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="WhN-iT-3NQ" secondAttribute="height" multiplier="1:1" id="Nnr-cB-qKk"/>
@@ -308,7 +308,7 @@
                                                                     <action selector="twitterButton:" destination="30l-uW-VZ4" eventType="touchUpInside" id="5MX-0y-5KF"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Axf-MI-QES" userLabel="facebookButton">
+                                                            <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Axf-MI-QES" userLabel="facebookButton">
                                                                 <rect key="frame" x="40" y="0.0" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="Axf-MI-QES" secondAttribute="height" multiplier="1:1" id="7LZ-sN-350"/>
@@ -318,7 +318,7 @@
                                                                     <action selector="facebookButton:" destination="30l-uW-VZ4" eventType="touchUpInside" id="w0B-1y-33S"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="duw-fk-GD4" userLabel="googleButton">
+                                                            <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="duw-fk-GD4" userLabel="googleButton">
                                                                 <rect key="frame" x="80" y="0.0" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="duw-fk-GD4" secondAttribute="height" multiplier="1:1" id="cxe-9p-lDE"/>
@@ -328,7 +328,7 @@
                                                                     <action selector="googleButton:" destination="30l-uW-VZ4" eventType="touchUpInside" id="P55-EA-fma"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oGV-db-1s2" userLabel="linkedinButton">
+                                                            <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oGV-db-1s2" userLabel="linkedinButton">
                                                                 <rect key="frame" x="120" y="0.0" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="oGV-db-1s2" secondAttribute="height" multiplier="1:1" id="RZO-Qn-S5b"/>
@@ -338,7 +338,7 @@
                                                                     <action selector="linkedinButton:" destination="30l-uW-VZ4" eventType="touchUpInside" id="fqd-uN-cfr"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleAspectFit" restorationIdentifier="githubButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWH-nc-TXe" userLabel="githubButton">
+                                                            <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" restorationIdentifier="githubButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWH-nc-TXe" userLabel="githubButton">
                                                                 <rect key="frame" x="160" y="0.0" width="40" height="40"/>
                                                                 <accessibility key="accessibilityConfiguration" label="githubButton"/>
                                                                 <constraints>

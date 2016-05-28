@@ -92,7 +92,7 @@ class ThatConferenceAPI {
         return value == "1"
     }
     
-    private class func GetCurrentYear() -> String {
+    class func GetCurrentYear() -> String {
         return "2016"
     }
     
