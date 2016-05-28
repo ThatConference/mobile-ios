@@ -49,20 +49,22 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
                     
                     self.setCurrentDay(self.dailySchedules)
                     
-                    if let schedule = self.dailySchedules[self.currentDay] {
-                        self.scheduleDataSource.dailySchedule = schedule
-                    }
-                    
-                    self.loadTimeTable()
-                    self.tableView.delegate = self
-                    self.tableView.dataSource = self.scheduleDataSource
-                    self.tableView.reloadData()
-                    
-                    self.setDateLabel(self.scheduleDataSource.dailySchedule.date!)
-                    
-                    let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.scheduleDataSource.dailySchedule.date, toUnitGranularity: .Day)
-                    if order == NSComparisonResult.OrderedSame {
-                        self.jumpToTimeOfDay()
+                    if self.dailySchedules.count > 0 {
+                        if let schedule = self.dailySchedules[self.currentDay] {
+                            self.scheduleDataSource.dailySchedule = schedule
+                        }
+                        
+                        self.loadTimeTable()
+                        self.tableView.delegate = self
+                        self.tableView.dataSource = self.scheduleDataSource
+                        self.tableView.reloadData()
+                        
+                        self.setDateLabel(self.scheduleDataSource.dailySchedule.date!)
+                        
+                        let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.scheduleDataSource.dailySchedule.date, toUnitGranularity: .Day)
+                        if order == NSComparisonResult.OrderedSame {
+                            self.jumpToTimeOfDay()
+                        }
                     }
                 }
                 break
@@ -135,30 +137,31 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
     
     private func setPageState(currentDay: String!) {
         let sortedDates = Array(self.dailySchedules.keys).sort()
-        if currentDay == nil || sortedDates[0] == currentDay {
-            self.currentDay = sortedDates[0]
-            self.nextDay = sortedDates[1]
-            self.previousDay = nil
+        if sortedDates.count > 0 {
+            if currentDay == nil || sortedDates[0] == currentDay {
+                self.currentDay = sortedDates[0]
+                self.nextDay = sortedDates[1]
+                self.previousDay = nil
+            }
+            else {
+                let indexes = sortedDates.count - 1
+                var index = 0
+                repeat {
+                    self.previousDay = sortedDates[index]
+                    if index + 1 <= indexes {
+                        self.currentDay = sortedDates[index + 1]
+                    }
+                    if index + 2 <= indexes {
+                        self.nextDay = sortedDates[index + 2]
+                    }
+                    else {
+                        self.nextDay = nil
+                    }
+                    
+                    index += 1
+                } while sortedDates[index] != currentDay
+            }
         }
-        else {
-            let indexes = sortedDates.count - 1
-            var index = 0
-            repeat {
-                self.previousDay = sortedDates[index]
-                if index + 1 <= indexes {
-                    self.currentDay = sortedDates[index + 1]
-                }
-                if index + 2 <= indexes {
-                    self.nextDay = sortedDates[index + 2]
-                }
-                else {
-                    self.nextDay = nil
-                }
-                
-                index += 1
-            } while sortedDates[index] != currentDay
-        }
-        
         setButtonValues(self.dailySchedules)
     }
     

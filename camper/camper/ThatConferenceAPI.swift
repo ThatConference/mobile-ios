@@ -6,6 +6,7 @@ enum Method: String {
     case Token = "/Token"
     case Favorite = "/api3/Favorites/"
     case UserFavorites = "/api3/Session/GetFavoriteSessions"
+    case SessionGetAccepted = "/api3/Session/GetAcceptedSessions"
 }
 
 enum SessionsResult {
@@ -82,6 +83,15 @@ class ThatConferenceAPI {
     
     static func sessionsGetAllURL() -> NSURL {
         return thatConferenceURL(.SessionsGetAll, parameters: ["year": GetCurrentYear()])
+    }
+    
+    static func sessionsGetAcceptedURL(sinceDate: NSDate?) -> NSURL {
+        var params: Dictionary<String, String>? = Dictionary<String, String>()
+        if let date = sinceDate {
+            let dateString = dateFormatter.stringFromDate(date)
+            params = ["sinceUpdatedDate": dateString]
+        }
+        return thatConferenceURL(.SessionGetAccepted, parameters: params!)
     }
     
     class func convertToBool(value: NSNumber?) -> Bool {
