@@ -37,16 +37,27 @@ class FavoritesDataSource: NSObject, UITableViewDataSource {
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            dailySchedule.timeSlots[indexPath.section].sessions.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            let sessionStore = SessionStore()
             
-            if (dailySchedule.timeSlots[indexPath.section].sessions.count == 0) {
-                dailySchedule.timeSlots.removeAtIndex(indexPath.section)
-                let indexSet = NSMutableIndexSet()
-                indexSet.addIndex(indexPath.section)
-                tableView.deleteSections(indexSet, withRowAnimation: UITableViewRowAnimation.Automatic)
-            }
-            //TODO: Persist this delete
+            sessionStore.removeFavorite(dailySchedule.timeSlots[indexPath.section].sessions[indexPath.row], completion:{(sessionsResult) -> Void in
+                switch sessionsResult {
+                case .Success(_):
+                    dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                        self.dailySchedule.timeSlots[indexPath.section].sessions.removeAtIndex(indexPath.row)
+                        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                        
+                        if (self.dailySchedule.timeSlots[indexPath.section].sessions.count == 0) {
+                            self.dailySchedule.timeSlots.removeAtIndex(indexPath.section)
+                            let indexSet = NSMutableIndexSet()
+                            indexSet.addIndex(indexPath.section)
+                            tableView.deleteSections(indexSet, withRowAnimation: UITableViewRowAnimation.Automatic)
+                        }
+                    }
+                    break
+                case .Failure(_):
+                    break
+                }
+            })
         }
     }
 }

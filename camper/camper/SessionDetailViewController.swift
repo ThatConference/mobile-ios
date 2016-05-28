@@ -137,6 +137,9 @@ class SessionDetailViewController : UIViewController, UITableViewDataSource, UIT
                     self.setFavoriteIcon(animated: true)
                     break
                 case .Failure(_):
+                    let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
                     break
                 }
             })
