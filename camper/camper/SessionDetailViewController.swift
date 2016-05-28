@@ -27,7 +27,6 @@ class SessionDetailViewController : UIViewController, UITableViewDataSource, UIT
         
         labelTitle.text = session.title
         labelDescription.text = session.sessionDescription
-        labelDescription.scrollRangeToVisible(NSRange(location: 0, length: 0))
         roomName.text = session.scheduledRoom
         
         self.detailTable.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -46,6 +45,11 @@ class SessionDetailViewController : UIViewController, UITableViewDataSource, UIT
         } else {
             self.favoriteButton!.image = nil
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        labelDescription.setContentOffset(CGPointZero, animated: false)
     }
     
     @IBAction func RoomButtonPressed(sender: AnyObject) {

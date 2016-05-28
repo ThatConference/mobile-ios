@@ -97,10 +97,14 @@ class SpeakerProfileViewController : UIViewController {
         if let bioText = speaker.biography
         {
             biography.text = bioText
-            biography.scrollRangeToVisible(NSRange(location: 0, length: 0))
         }
         
         setSocialButtons()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        biography.setContentOffset(CGPointZero, animated: false)
     }
     
     private func setSocialButtons() {
