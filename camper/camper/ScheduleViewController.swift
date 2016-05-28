@@ -232,6 +232,14 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         }
         
         self.timeTableView.addArrangedSubview(createTimeLabel("PM"));
+        
+        //set initial time to circle
+        for circleView in self.timeTableView.subviews {
+            if circleView.isKindOfClass(CircleLabel) {
+                (circleView as! CircleLabel).toggleCircle()
+                break
+            }
+        }
     }
     
     private func createTimeLabel(value: String) -> UILabel {
@@ -266,7 +274,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
     
     func timeSelected(recognizer: UITapGestureRecognizer) {
         let view = recognizer.view  as! CircleLabel
-        currentlySelectedTimeLabel?.toggleCircle()
+        //currentlySelectedTimeLabel?.toggleCircle()
         currentlySelectedTimeLabel = view
         view.toggleCircle()
         self.scrollToSection(view.timeSlot)
@@ -315,21 +323,35 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
             
         }
     }
-    
+   
     private func scrollToSection(timeSlot: NSDate) {
         let section = determineClosestTimeslotSection(timeSlot)
         let indexPath = NSIndexPath(forRow: 0, inSection: section)
         self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
     }
-
     
     //set the proper selected Time
     func scrollViewDidScroll(scrollView: UIScrollView) {
-
-    }
-    
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) { 
-        //TODO: go to proper time
+        let tableView = scrollView as! UITableView
+        
+        if let visibleRows = tableView.indexPathsForVisibleRows {
+            let section = visibleRows[0].section; //top visible time
+            
+            let timeSlot = dailySchedules[self.currentDay]?.timeSlots[section];
+            
+            for timeView in self.timeTableView.subviews {
+                if timeView.isKindOfClass(CircleLabel) {
+                    let circleView = (timeView as! CircleLabel)
+                    if circleView.timeSlot.isEqualToDate(timeSlot!.time!) {
+                        if circleView.circleVisible() == false {
+                            circleView.toggleCircle()
+                        }
+                    } else if circleView.circleVisible() {
+                        circleView.toggleCircle()
+                    }
+                }
+            }
+        }
     }
     
     // MARK: UITableViewDelegate

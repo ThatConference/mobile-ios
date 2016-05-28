@@ -32,7 +32,10 @@ class CircleLabel: UIView {
             self.layer.insertSublayer(circleLayer, atIndex: 0)
         } else {
             self.layer.sublayers?.removeAtIndex((self.layer.sublayers?.indexOf(circleLayer))!)
-        }      
-        
+        }
+    }
+    
+    func circleVisible() -> Bool {
+        return showCircle
     }
 }

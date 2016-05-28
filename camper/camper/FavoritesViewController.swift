@@ -227,6 +227,14 @@ class FavoritesViewController : UIViewController, UIGestureRecognizerDelegate, U
         }
     
         self.timeTableView.addArrangedSubview(createTimeLabel("PM"));
+        
+        //set initial time to circle
+        for circleView in self.timeTableView.subviews {
+            if circleView.isKindOfClass(CircleLabel) {
+                (circleView as! CircleLabel).toggleCircle()
+                break
+            }
+        }
     }
     
     private func createTimeLabel(value: String) -> UILabel {
@@ -318,11 +326,26 @@ class FavoritesViewController : UIViewController, UIGestureRecognizerDelegate, U
     
     //set the proper selected Time
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        let tableView = scrollView as! UITableView
         
-    }
-    
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        //TODO: go to proper time
+        if let visibleRows = tableView.indexPathsForVisibleRows {
+            let section = visibleRows[0].section; //top visible time
+            
+            let timeSlot = dailySchedules[self.currentDay]?.timeSlots[section];
+            
+            for timeView in self.timeTableView.subviews {
+                if timeView.isKindOfClass(CircleLabel) {
+                    let circleView = (timeView as! CircleLabel)
+                    if circleView.timeSlot.isEqualToDate(timeSlot!.time!) {
+                        if circleView.circleVisible() == false {
+                            circleView.toggleCircle()
+                        }
+                    } else if circleView.circleVisible() {
+                        circleView.toggleCircle()
+                    }
+                }
+            }
+        }
     }
     
     // MARK: UITableViewDelegate
