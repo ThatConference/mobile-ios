@@ -88,6 +88,7 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { action in
             self.DismissView()
         }))
+        setDirtyData()
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
@@ -122,6 +123,12 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
                 print("Error: \(error)")
             }
         }
+    }
+    
+    func setDirtyData() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.dirtyDataSchedule = true;
+        appDelegate.dirtyDataFavorites = true;
     }
     
     func DataReceived(data : NSData?, response : NSURLResponse?, error : NSError?) {

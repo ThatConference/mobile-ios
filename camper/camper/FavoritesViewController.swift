@@ -33,43 +33,7 @@ class FavoritesViewController : UIViewController, UIGestureRecognizerDelegate, U
         self.activityIndicator.hidesWhenStopped = true
         self.view.addSubview(self.activityIndicator)
         
-        let sessionStore = SessionStore()
-        self.dateLabel.text = "Loading"
-        self.activityIndicator.startAnimating()
-        
-        sessionStore.getFavoriteSessions(completion: {(sessionResult) -> Void in
-            switch sessionResult {
-            case .Success(let sessions):
-                self.dailySchedules = sessions
-    
-                NSOperationQueue.mainQueue().addOperationWithBlock() {
-                    self.activityIndicator.stopAnimating()
-    
-                    self.setCurrentDay(self.dailySchedules)
-    
-                    if let schedule = self.dailySchedules[self.currentDay] {
-                        self.favoritesDataSource.dailySchedule = schedule
-                    }
-    
-                    self.loadTimeTable()
-                    self.tableView.delegate = self
-                    self.tableView.dataSource = self.favoritesDataSource
-                    self.tableView.reloadData()
-    
-                    self.setDateLabel(self.favoritesDataSource.dailySchedule.date!)
-    
-                    let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.favoritesDataSource.dailySchedule.date, toUnitGranularity: .Day)
-                    if order == NSComparisonResult.OrderedSame {
-                        self.jumpToTimeOfDay()
-                    }
-                }
-                break
-            case .Failure(_):
-                UIAlertView(title: "Error", message: "An Error occurred", delegate: nil, cancelButtonTitle: "cancel")
-                //TODO: Display error
-                break
-            }
-        })
+        loadData()
         
         //Show login screen if not logged in
         if (!Authentication.isLoggedIn()) {
@@ -84,6 +48,14 @@ class FavoritesViewController : UIViewController, UIGestureRecognizerDelegate, U
     
         self.previousDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5)
         self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), forControlEvents: .TouchUpInside)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if (getDirtyData()) {
+            loadData()
+        }
     }
     
     @objc private func moveToNextDay() {
@@ -115,6 +87,59 @@ class FavoritesViewController : UIViewController, UIGestureRecognizerDelegate, U
     
     }
     
+    // MARK: Page Data
+    private func loadData() {
+        let sessionStore = SessionStore()
+        self.dateLabel.text = "Loading"
+        self.activityIndicator.startAnimating()
+        
+        sessionStore.getFavoriteSessions(completion: {(sessionResult) -> Void in
+            switch sessionResult {
+            case .Success(let sessions):
+                self.dailySchedules = sessions
+                
+                NSOperationQueue.mainQueue().addOperationWithBlock() {
+                    self.activityIndicator.stopAnimating()
+                    
+                    self.setCurrentDay(self.dailySchedules)
+                    
+                    if (self.currentDay != nil) {
+                        if let schedule = self.dailySchedules[self.currentDay] {
+                            self.favoritesDataSource.dailySchedule = schedule
+                        }
+                        
+                        self.loadTimeTable()
+                        self.tableView.delegate = self
+                        self.tableView.dataSource = self.favoritesDataSource
+                        self.tableView.reloadData()
+                        
+                        self.setDateLabel(self.favoritesDataSource.dailySchedule.date!)
+                        
+                        let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.favoritesDataSource.dailySchedule.date, toUnitGranularity: .Day)
+                        if order == NSComparisonResult.OrderedSame {
+                            self.jumpToTimeOfDay()
+                        }
+                    }
+                }
+                break
+            case .Failure(_):
+                UIAlertView(title: "Error", message: "An Error occurred", delegate: nil, cancelButtonTitle: "cancel")
+                //TODO: Display error
+                break
+            }
+        })
+    }
+    
+    func setCleanData() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.dirtyDataFavorites = false;
+    }
+    
+    func getDirtyData() -> Bool {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        return appDelegate.dirtyDataFavorites;
+    }
+    
     // MARK: Page State
     
     private func setCurrentDay(schedules: Dictionary<String, DailySchedule>) {
@@ -131,12 +156,32 @@ class FavoritesViewController : UIViewController, UIGestureRecognizerDelegate, U
         }
     }
     
+    private func navigateToSchedule() {
+        let scheduleVC = self.storyboard?.instantiateViewControllerWithIdentifier("ScheduleViewController") as! ScheduleViewController
+        self.navigationController!.pushViewController(scheduleVC, animated: true)
+    }
+    
     private func setPageState(currentDay: String!) {
         let sortedDates = Array(self.dailySchedules.keys).sort()
+        
+        if sortedDates.count == 0 {
+            let alert = UIAlertController(title: "No Favorites", message: "No favorites found. Please select some favorites to view this page", preferredStyle: UIAlertControllerStyle.Alert)
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+                self.navigateToSchedule()
+            }
+            alert.addAction(OKAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        
         if currentDay == nil || sortedDates[0] == currentDay {
             self.currentDay = sortedDates[0]
-            self.nextDay = sortedDates[1]
+            self.nextDay = nil
             self.previousDay = nil
+            
+            if (sortedDates.count > 1) {
+                self.nextDay = sortedDates[1]
+            }
         }
         else {
             let indexes = sortedDates.count - 1

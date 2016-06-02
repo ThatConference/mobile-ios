@@ -35,6 +35,7 @@ class SettingsViewController : UITableViewController {
     @IBAction func loginPressed(sender: AnyObject) {
         if (Authentication.isLoggedIn()) {
             Authentication.removeAuthToken()
+            setDirtyData()
             let alert = UIAlertController(title: "Signed Out", message: "Sign out was successful. You can now sign in with a different account or continue as a guest.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
@@ -43,5 +44,11 @@ class SettingsViewController : UITableViewController {
         }
         
         setSignInButton()
+    }
+    
+    func setDirtyData() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.dirtyDataSchedule = true;
+        appDelegate.dirtyDataFavorites = true;
     }
 }

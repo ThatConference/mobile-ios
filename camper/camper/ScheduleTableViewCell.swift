@@ -3,11 +3,10 @@ import CoreGraphics
 
 class ScheduleTableViewCell: UITableViewCell {
     @IBOutlet var sessionTitle: UILabel!
+    @IBOutlet var categoryLabel: UILabel!
     @IBOutlet var speakerLabel: UILabel!
     @IBOutlet var roomLabel: UILabel!
-    @IBOutlet var circleView: CircleView!
     @IBOutlet var favoriteIcon: UIImageView!
-    @IBOutlet weak var circleViewHeightConstraint: NSLayoutConstraint!
     
     var session: Session!
 

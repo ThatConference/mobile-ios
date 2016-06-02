@@ -113,6 +113,7 @@ class SessionDetailViewController : UIViewController, UITableViewDataSource, UIT
             sessionStore.removeFavorite(self.session, completion:{(sessionsResult) -> Void in
                 switch sessionsResult {
                 case .Success(let sessions):
+                    self.setDirtyData()
                     self.session = sessions.first
                     self.setFavoriteIcon(animated: true)
                     break
@@ -133,6 +134,7 @@ class SessionDetailViewController : UIViewController, UITableViewDataSource, UIT
             sessionStore.addFavorite(self.session, completion:{(sessionsResult) -> Void in
                 switch sessionsResult {
                 case .Success(let sessions):
+                    self.setDirtyData()
                     self.session = sessions.first
                     self.setFavoriteIcon(animated: true)
                     break
@@ -144,6 +146,11 @@ class SessionDetailViewController : UIViewController, UITableViewDataSource, UIT
                 }
             })
         }
+    }
+    
+    func setDirtyData() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.dirtyDataFavorites = true;
     }
     
     private func setFavoriteIcon(animated animated: Bool) {

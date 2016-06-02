@@ -1,6 +1,6 @@
-    import UIKit
+import UIKit
 
-class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UITableViewDelegate, UINavigationControllerDelegate {
+class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timeTableView: UIStackView!
@@ -12,8 +12,8 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
     var currentDay: String!
     var previousDay: String!
     var nextDay: String!
+    var dailySchedule: DailySchedule!
     
-    private let scheduleDataSource = ScheduleDataSource()
     private var currentlySelectedTimeLabel: CircleLabel!
     private var dailySchedules: Dictionary<String, DailySchedule>!
     private var activityIndicator: UIActivityIndicatorView!
@@ -33,47 +33,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         self.activityIndicator.hidesWhenStopped = true
         self.view.addSubview(self.activityIndicator)
         
-        let sessionStore = SessionStore()
-        self.dateLabel.text = "Loading"
-        self.activityIndicator.startAnimating()
-
-         sessionStore.getDailySchedules() {
-            (results) -> Void in
-            
-            switch results {
-            case .Success(let schedules):
-                self.dailySchedules = schedules
-                
-                NSOperationQueue.mainQueue().addOperationWithBlock() {
-                    self.activityIndicator.stopAnimating()
-                    
-                    self.setCurrentDay(self.dailySchedules)
-                    
-                    if self.dailySchedules.count > 0 {
-                        if let schedule = self.dailySchedules[self.currentDay] {
-                            self.scheduleDataSource.dailySchedule = schedule
-                        }
-                        
-                        self.loadTimeTable()
-                        self.tableView.delegate = self
-                        self.tableView.dataSource = self.scheduleDataSource
-                        self.tableView.reloadData()
-                        
-                        self.setDateLabel(self.scheduleDataSource.dailySchedule.date!)
-                        
-                        let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.scheduleDataSource.dailySchedule.date, toUnitGranularity: .Day)
-                        if order == NSComparisonResult.OrderedSame {
-                            self.jumpToTimeOfDay()
-                        }
-                    }
-                }
-                break
-            case .Failure(_):
-                UIAlertView(title: "Error", message: "An Error occurred", delegate: nil, cancelButtonTitle: "cancel")
-                //TODO: Display error
-                    break
-            }
-        }
+        loadData()
         
         //Show login screen if not logged in
         if (!Authentication.isLoggedIn()) {
@@ -90,6 +50,14 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), forControlEvents: .TouchUpInside)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if (getDirtyData()) {
+            loadData()
+        }
+    }
+    
     @objc private func moveToNextDay() {
         self.moveToDay(self.nextDay)
     }
@@ -99,7 +67,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
     }
     
     private func moveToDay(day: String!) {
-        self.scheduleDataSource.dailySchedule = self.dailySchedules[day];
+        self.dailySchedule = self.dailySchedules[day];
         UIView.transitionWithView(self.tableView, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() -> Void in
                 self.tableView.reloadData()
             self.tableView.scrollToRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
@@ -108,15 +76,70 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
                 self.loadTimeTable()
             }, completion: nil)
         UIView.transitionWithView(self.dateLabel, duration: 0.5, options: .TransitionCrossDissolve, animations: {() -> Void in
-                self.setDateLabel(self.scheduleDataSource.dailySchedule.date!)
+                self.setDateLabel(self.dailySchedule.date!)
                 self.setPageState(day)
             }, completion: nil)
         
-        let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.scheduleDataSource.dailySchedule.date, toUnitGranularity: .Day)
+        let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.dailySchedule.date, toUnitGranularity: .Day)
         if order == NSComparisonResult.OrderedSame {
             self.jumpToTimeOfDay()
         }
-
+    }
+    
+    // MARK: Data
+    func loadData() {
+        let sessionStore = SessionStore()
+        self.dateLabel.text = "Loading"
+        self.activityIndicator.startAnimating()
+        
+        setCleanData()
+        sessionStore.getDailySchedules() {
+            (results) -> Void in
+            
+            switch results {
+            case .Success(let schedules):
+                self.dailySchedules = schedules
+                
+                NSOperationQueue.mainQueue().addOperationWithBlock() {
+                    self.activityIndicator.stopAnimating()
+                    
+                    self.setCurrentDay(self.dailySchedules)
+                    
+                    if self.dailySchedules.count > 0 {
+                        if let schedule = self.dailySchedules[self.currentDay] {
+                            self.dailySchedule = schedule
+                        }
+                        
+                        self.loadTimeTable()
+                        self.tableView.delegate = self
+                        self.tableView.dataSource = self
+                        self.tableView.reloadData()
+                        
+                        self.setDateLabel(self.dailySchedule.date!)
+                        
+                        let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.dailySchedule.date, toUnitGranularity: .Day)
+                        if order == NSComparisonResult.OrderedSame {
+                            self.jumpToTimeOfDay()
+                        }
+                    }
+                }
+                break
+            case .Failure(_):
+                UIAlertView(title: "Error", message: "An Error occurred", delegate: nil, cancelButtonTitle: "cancel")
+                //TODO: Display error
+                break
+            }
+        }
+    }
+    
+    func setCleanData() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.dirtyDataSchedule = false;
+    }
+    
+    func getDirtyData() -> Bool {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        return appDelegate.dirtyDataSchedule;
     }
     
     // MARK: Page State
@@ -208,7 +231,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         self.timeTableView.addArrangedSubview(createTimeLabel("AM"));
         
         var hours: [Int] = []
-        for timeSlot in self.scheduleDataSource.dailySchedule.timeSlots {
+        for timeSlot in self.dailySchedule.timeSlots {
             var alreadyAdded: Bool = false
             var hour = NSCalendar.currentCalendar().component(.Hour, fromDate: timeSlot.time)
             
@@ -274,15 +297,14 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
     
     func timeSelected(recognizer: UITapGestureRecognizer) {
         let view = recognizer.view  as! CircleLabel
-        //currentlySelectedTimeLabel?.toggleCircle()
         currentlySelectedTimeLabel = view
         view.toggleCircle()
         self.scrollToSection(view.timeSlot)
     }
     
     private func determineClosestTimeslotSection(hourSelected: NSDate) -> Int {
-        for index in 0...scheduleDataSource.dailySchedule.timeSlots.count - 1 {
-            let timeSlot = scheduleDataSource.dailySchedule.timeSlots[index]
+        for index in 0...dailySchedule.timeSlots.count - 1 {
+            let timeSlot = dailySchedule.timeSlots[index]
             if timeSlot.time == hourSelected {
                 return index
             }
@@ -369,5 +391,131 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         if viewController.isEqual(self) {
             self.tableView.reloadData()
         }
+    }
+    
+    // MARK: Data Source
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("ScheduleTableViewCell") as! ScheduleTableViewCell
+        
+        if let schedule = dailySchedule {
+            let timeSlots = schedule.timeSlots[indexPath.section]
+            let session  = timeSlots.sessions[indexPath.row]
+            cell.session = session
+            cell.sessionTitle.text = session.title
+            cell.sessionTitle.sizeToFit()
+            cell.categoryLabel.text = session.primaryCategory
+            
+            cell.favoriteIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.SessionFavorited(_:))))
+            setFavoriteIcon(cell, animated: false)
+            
+            //set up speaker text
+            var speakerString: String = ""
+            var firstSpeaker: Bool = true
+            for speaker in session.speakers {
+                if !firstSpeaker {
+                    speakerString.appendContentsOf(", ")
+                } else {
+                    firstSpeaker = false
+                }
+                
+                speakerString.appendContentsOf("\(speaker.firstName) \(speaker.lastName)")
+            }
+            
+            cell.speakerLabel.text = speakerString
+            cell.roomLabel.text = session.scheduledRoom
+        }
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if dailySchedule.timeSlots[section].sessions.count > 0 {
+            return dailySchedule.timeSlots[section].sessions.count
+        }
+        else {
+            return 0
+        }
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return SessionStore.getFormattedTime(dailySchedule.timeSlots[section].time)
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return dailySchedule.timeSlots.count
+    }
+    
+    func SessionFavorited(sender: UITapGestureRecognizer) {
+        if Authentication.isLoggedIn() {
+            if let cell = sender.view?.superview?.superview as? ScheduleTableViewCell {
+                let sessionStore = SessionStore()
+                if cell.session.isUserFavorite {
+                    sessionStore.removeFavorite(cell.session, completion:{(sessionsResult) -> Void in
+                        switch sessionsResult {
+                        case .Success(let sessions):
+                            self.setDirtyData()
+                            cell.session = sessions.first
+                            self.setFavoriteIcon(cell, animated: true)
+                            break
+                        case .Failure(_):
+                            break
+                        }
+                    })
+                    
+                }
+                else {
+                    CATransaction.begin()
+                    CATransaction.setAnimationDuration(1.5)
+                    let transition = CATransition()
+                    transition.type = kCATransitionFade
+                    cell.favoriteIcon!.layer.addAnimation(transition, forKey: kCATransitionFade)
+                    CATransaction.commit()
+                    cell.favoriteIcon!.image = UIImage(named:"likeadded")
+                    sessionStore.addFavorite(cell.session, completion:{(sessionsResult) -> Void in
+                        switch sessionsResult {
+                        case .Success(let sessions):
+                            self.setDirtyData()
+                            cell.session = sessions.first
+                            self.setFavoriteIcon(cell, animated: true)
+                            break
+                        case .Failure(_):
+                            break
+                        }
+                    })
+                }
+            }
+        }
+        else
+        {
+            self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
+        }
+    }
+    
+    func setDirtyData() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.dirtyDataFavorites = true;
+    }
+    
+    private func setFavoriteIcon(cell: ScheduleTableViewCell, animated: Bool) {
+        dispatch_async(dispatch_get_main_queue(), {
+            if animated {
+                CATransaction.begin()
+                CATransaction.setAnimationDuration(1.5)
+                let transition = CATransition()
+                transition.type = kCATransitionFade
+                cell.favoriteIcon!.layer.addAnimation(transition, forKey: kCATransitionFade)
+                CATransaction.commit()
+            }
+            if cell.session.isUserFavorite {
+                cell.favoriteIcon!.image = UIImage(named:"like-remove")
+            }
+            else {
+                //cell.favoriteIcon!.image = UIImage(named:"likeadded")
+                
+                cell.favoriteIcon!.image = UIImage(named:"like-1")
+            }
+        })
     }
 }
