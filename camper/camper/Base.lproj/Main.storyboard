@@ -779,7 +779,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="baseMap" width="640" height="907"/>
+        <image name="baseMap" width="634" height="898"/>
         <image name="facebook" width="96" height="95"/>
         <image name="favorites" width="38" height="37"/>
         <image name="github" width="95" height="95"/>
