@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "tc-map-Mangrove.png",
+      "filename" : "tc-map-mangrove.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "tc-map-Mangrove@2x.png",
+      "filename" : "tc-map-mangrove@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "tc-map-Mangrove@3x.png",
+      "filename" : "tc-map-mangrove@3x.png",
       "scale" : "3x"
     }
   ],
