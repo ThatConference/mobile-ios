@@ -96,6 +96,7 @@ class FavoritesViewController : UIViewController, UIGestureRecognizerDelegate, U
         sessionStore.getFavoriteSessions(completion: {(sessionResult) -> Void in
             switch sessionResult {
             case .Success(let sessions):
+                self.setData(false)
                 self.dailySchedules = sessions
                 PersistenceManager.saveDailySchedule(self.dailySchedules, path: Path.Favorites)
                 self.displayData()
@@ -104,6 +105,7 @@ class FavoritesViewController : UIViewController, UIGestureRecognizerDelegate, U
                 if let values = PersistenceManager.loadDailySchedule(Path.Favorites) {
                     self.dailySchedules = values
                     self.displayData()
+                    self.setData(true)
                 } else {
                     let alert = UIAlertController(title: "Error", message: "Could not retrieve favorites data. Please try again later.", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
@@ -141,9 +143,9 @@ class FavoritesViewController : UIViewController, UIGestureRecognizerDelegate, U
         }
     }
     
-    func setCleanData() {
+    func setData(isDirty: Bool) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.dirtyDataFavorites = false;
+        appDelegate.dirtyDataFavorites = isDirty;
     }
     
     func getDirtyData() -> Bool {

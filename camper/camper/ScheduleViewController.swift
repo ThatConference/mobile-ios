@@ -92,18 +92,19 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         self.dateLabel.text = "Loading"
         self.activityIndicator.startAnimating()
         
-        setCleanData()
         sessionStore.getDailySchedules() {
             (results) -> Void in
             
             switch results {
             case .Success(let schedules):
+                self.setData(false)
                 self.dailySchedules = schedules
                 PersistenceManager.saveDailySchedule(self.dailySchedules, path: Path.Schedule)
                 self.displayData()
                 break
             case .Failure(_):
                 if let values = PersistenceManager.loadDailySchedule(Path.Schedule) {
+                    self.setData(true)
                     self.dailySchedules = values
                     self.displayData()
                 } else {
@@ -143,9 +144,9 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         }
     }
     
-    func setCleanData() {
+    func setData(isDirty: Bool) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.dirtyDataSchedule = false;
+        appDelegate.dirtyDataSchedule = isDirty;
     }
     
     func getDirtyData() -> Bool {
