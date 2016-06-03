@@ -31,14 +31,8 @@ class FavoritesViewController : UIViewController, UIGestureRecognizerDelegate, U
         self.activityIndicator.center =  self.view.center
         self.activityIndicator.backgroundColor = UIColor.whiteColor()
         self.activityIndicator.hidesWhenStopped = true
-        self.view.addSubview(self.activityIndicator)
         
-        loadData()
-        
-        //Show login screen if not logged in
-        if (!Authentication.isLoggedIn()) {
-            self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
-        }
+        checkUserStatus()
     
         // set up controls
         let rightArrow = UIImage(named: "subheader-arrow-right")
@@ -88,6 +82,18 @@ class FavoritesViewController : UIViewController, UIGestureRecognizerDelegate, U
     }
     
     // MARK: Page Data
+    private func checkUserStatus()
+    {
+        //Show login screen if not logged in
+        if (!Authentication.isLoggedIn()) {
+            setData(true)
+            self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
+        } else {
+            self.view.addSubview(self.activityIndicator)
+            loadData()
+        }
+    }
+    
     private func loadData() {
         let sessionStore = SessionStore()
         self.dateLabel.text = "Loading"
@@ -107,7 +113,7 @@ class FavoritesViewController : UIViewController, UIGestureRecognizerDelegate, U
                     self.displayData()
                     self.setData(true)
                 } else {
-                    let alert = UIAlertController(title: "Error", message: "Could not retrieve favorites data. Please try again later.", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "Error", message: "Could not retrieve favorites data. Please make sure you are logged in and have a connection.", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
                     return
