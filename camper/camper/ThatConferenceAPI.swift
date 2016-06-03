@@ -336,10 +336,10 @@ class ThatConferenceAPI {
         let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
             if error != nil {
                 completionHandler(SessionsResult.Failure(error!))
+            } else {
+                let sessions = sessionsFromJSONData(data!);
+                completionHandler(sessions)
             }
-            
-            let sessions = sessionsFromJSONData(data!);
-            completionHandler(sessions)
         })
         
         dataTask.resume()

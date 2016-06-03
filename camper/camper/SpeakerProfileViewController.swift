@@ -77,14 +77,15 @@ class SpeakerProfileViewController : UIViewController {
         {
             let url = ThatConferenceAPI.resourceURL(headshot.absoluteString)
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                let data = NSData(contentsOfURL: url) //make sure your image in this url does exist, otherwise unwrap in a if let check
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.profileImage.image = UIImage(data: data!)
-                });
+                if let data = NSData(contentsOfURL: url) {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.profileImage.image = UIImage(data: data)
+                    });
+                }
             }
         }
-    
-        speakerName.text = "\(speaker.firstName) \(speaker.lastName)"
+
+        speakerName.text = "\(speaker.firstName!) \(speaker.lastName!)"
         jobTitle.text = speaker.title
         company.text = speaker.company
         

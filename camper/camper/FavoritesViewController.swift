@@ -97,37 +97,48 @@ class FavoritesViewController : UIViewController, UIGestureRecognizerDelegate, U
             switch sessionResult {
             case .Success(let sessions):
                 self.dailySchedules = sessions
-                
-                NSOperationQueue.mainQueue().addOperationWithBlock() {
-                    self.activityIndicator.stopAnimating()
-                    
-                    self.setCurrentDay(self.dailySchedules)
-                    
-                    if (self.currentDay != nil) {
-                        if let schedule = self.dailySchedules[self.currentDay] {
-                            self.favoritesDataSource.dailySchedule = schedule
-                        }
-                        
-                        self.loadTimeTable()
-                        self.tableView.delegate = self
-                        self.tableView.dataSource = self.favoritesDataSource
-                        self.tableView.reloadData()
-                        
-                        self.setDateLabel(self.favoritesDataSource.dailySchedule.date!)
-                        
-                        let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.favoritesDataSource.dailySchedule.date, toUnitGranularity: .Day)
-                        if order == NSComparisonResult.OrderedSame {
-                            self.jumpToTimeOfDay()
-                        }
-                    }
-                }
+                PersistenceManager.saveDailySchedule(self.dailySchedules, path: Path.Favorites)
+                self.displayData()
                 break
             case .Failure(_):
-                UIAlertView(title: "Error", message: "An Error occurred", delegate: nil, cancelButtonTitle: "cancel")
-                //TODO: Display error
+                if let values = PersistenceManager.loadDailySchedule(Path.Favorites) {
+                    self.dailySchedules = values
+                    self.displayData()
+                } else {
+                    let alert = UIAlertController(title: "Error", message: "Could not retrieve favorites data. Please try again later.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    return
+                }
                 break
             }
         })
+    }
+    
+    func displayData() {
+        NSOperationQueue.mainQueue().addOperationWithBlock() {
+            self.activityIndicator.stopAnimating()
+            
+            self.setCurrentDay(self.dailySchedules)
+            
+            if (self.currentDay != nil) {
+                if let schedule = self.dailySchedules[self.currentDay] {
+                    self.favoritesDataSource.dailySchedule = schedule
+                }
+                
+                self.loadTimeTable()
+                self.tableView.delegate = self
+                self.tableView.dataSource = self.favoritesDataSource
+                self.tableView.reloadData()
+                
+                self.setDateLabel(self.favoritesDataSource.dailySchedule.date!)
+                
+                let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.favoritesDataSource.dailySchedule.date, toUnitGranularity: .Day)
+                if order == NSComparisonResult.OrderedSame {
+                    self.jumpToTimeOfDay()
+                }
+            }
+        }
     }
     
     func setCleanData() {

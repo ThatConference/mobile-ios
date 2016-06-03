@@ -99,35 +99,46 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
             switch results {
             case .Success(let schedules):
                 self.dailySchedules = schedules
-                
-                NSOperationQueue.mainQueue().addOperationWithBlock() {
-                    self.activityIndicator.stopAnimating()
-                    
-                    self.setCurrentDay(self.dailySchedules)
-                    
-                    if self.dailySchedules.count > 0 {
-                        if let schedule = self.dailySchedules[self.currentDay] {
-                            self.dailySchedule = schedule
-                        }
-                        
-                        self.loadTimeTable()
-                        self.tableView.delegate = self
-                        self.tableView.dataSource = self
-                        self.tableView.reloadData()
-                        
-                        self.setDateLabel(self.dailySchedule.date!)
-                        
-                        let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.dailySchedule.date, toUnitGranularity: .Day)
-                        if order == NSComparisonResult.OrderedSame {
-                            self.jumpToTimeOfDay()
-                        }
-                    }
-                }
+                PersistenceManager.saveDailySchedule(self.dailySchedules, path: Path.Schedule)
+                self.displayData()
                 break
             case .Failure(_):
-                UIAlertView(title: "Error", message: "An Error occurred", delegate: nil, cancelButtonTitle: "cancel")
-                //TODO: Display error
+                if let values = PersistenceManager.loadDailySchedule(Path.Schedule) {
+                    self.dailySchedules = values
+                    self.displayData()
+                } else {
+                    let alert = UIAlertController(title: "Error", message: "Could not retrieve schedule data. Please try again later.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    return
+                }
                 break
+            }
+        }
+    }
+    
+    func displayData() {
+        NSOperationQueue.mainQueue().addOperationWithBlock() {
+            self.activityIndicator.stopAnimating()
+            
+            self.setCurrentDay(self.dailySchedules)
+            
+            if self.dailySchedules.count > 0 {
+                if let schedule = self.dailySchedules[self.currentDay] {
+                    self.dailySchedule = schedule
+                }
+                
+                self.loadTimeTable()
+                self.tableView.delegate = self
+                self.tableView.dataSource = self
+                self.tableView.reloadData()
+                
+                self.setDateLabel(self.dailySchedule.date!)
+                
+                let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.dailySchedule.date, toUnitGranularity: .Day)
+                if order == NSComparisonResult.OrderedSame {
+                    self.jumpToTimeOfDay()
+                }
             }
         }
     }
@@ -420,7 +431,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
                     firstSpeaker = false
                 }
                 
-                speakerString.appendContentsOf("\(speaker.firstName) \(speaker.lastName)")
+                speakerString.appendContentsOf("\(speaker.firstName!) \(speaker.lastName!)")
             }
             
             cell.speakerLabel.text = speakerString
@@ -512,8 +523,6 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
                 cell.favoriteIcon!.image = UIImage(named:"like-remove")
             }
             else {
-                //cell.favoriteIcon!.image = UIImage(named:"likeadded")
-                
                 cell.favoriteIcon!.image = UIImage(named:"like-1")
             }
         })

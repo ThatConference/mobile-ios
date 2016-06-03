@@ -89,7 +89,7 @@ class SessionDetailViewController : UIViewController, UITableViewDataSource, UIT
         let speaker = session.speakers[row]
         
         cell.speaker = speaker
-        cell.descriptionLabel.text = "\(speaker.firstName) \(speaker.lastName)"
+        cell.descriptionLabel.text = "\(speaker.firstName!) \(speaker.lastName!)"
         
         return cell
     }
