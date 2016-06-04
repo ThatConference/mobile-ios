@@ -60,6 +60,8 @@
 		312A94851C89325D00AE938B /* NeutraText-LightAlt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A945F1C89325D00AE938B /* NeutraText-LightAlt.otf */; };
 		312A94861C89325D00AE938B /* NeutraText-LightIA.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94601C89325D00AE938B /* NeutraText-LightIA.otf */; };
 		312A94871C89325D00AE938B /* NeutraText-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94611C89325D00AE938B /* NeutraText-LightItalic.otf */; };
+		31373CA21D027B2300430EC0 /* PostCards.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31373CA01D027B2300430EC0 /* PostCards.storyboard */; };
+		31373CA41D027CCD00430EC0 /* PostCardCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31373CA31D027CCD00430EC0 /* PostCardCollectionViewController.swift */; };
 		316269AE1D0117020089D777 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316269AD1D0117020089D777 /* PersistenceManager.swift */; };
 		318F268C1CBC65F30065A76F /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318F268B1CBC65F30065A76F /* Authentication.swift */; };
 		3199C7191CD1B968002F01CD /* SpeakerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */; };
@@ -138,6 +140,8 @@
 		312A945F1C89325D00AE938B /* NeutraText-LightAlt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-LightAlt.otf"; sourceTree = "<group>"; };
 		312A94601C89325D00AE938B /* NeutraText-LightIA.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-LightIA.otf"; sourceTree = "<group>"; };
 		312A94611C89325D00AE938B /* NeutraText-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-LightItalic.otf"; sourceTree = "<group>"; };
+		31373CA11D027B2300430EC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PostCards.storyboard; sourceTree = "<group>"; };
+		31373CA31D027CCD00430EC0 /* PostCardCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCardCollectionViewController.swift; sourceTree = "<group>"; };
 		316269AD1D0117020089D777 /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		318F268B1CBC65F30065A76F /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerProfileViewController.swift; sourceTree = "<group>"; };
@@ -193,30 +197,28 @@
 		312A94141C814B6B00AE938B /* camper */ = {
 			isa = PBXGroup;
 			children = (
+				312A94211C814B6B00AE938B /* Info.plist */,
 				312A94151C814B6B00AE938B /* AppDelegate.swift */,
-				312A941C1C814B6B00AE938B /* Assets.xcassets */,
 				312A94271C85383200AE938B /* AuthorizationViewController.swift */,
 				31D0D9401CC08282007C5999 /* AuthorizationWebViewController.swift */,
-				5113D3861CAC51AE00D6B974 /* custom views */,
-				31CFCD821C8B6E1400DB2AB2 /* datasource */,
-				31D0D9461CC5DB4D007C5999 /* extensions */,
-				51A4D1CF1CF1532900F956BC /* Favorites.storyboard */,
 				310179BA1CF6A44E00D480AE /* FavoritesDataSource.swift */,
 				51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */,
 				312A942B1C85396E00AE938B /* FavoritesViewController.swift */,
-				312A94211C814B6B00AE938B /* Info.plist */,
-				312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */,
-				312A94191C814B6B00AE938B /* Main.storyboard */,
 				312A942D1C85399900AE938B /* MapViewController.swift */,
-				31CFCD7F1C8A73D700DB2AB2 /* models */,
 				3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */,
-				312A94351C88DE1A00AE938B /* resources */,
+				31373CA31D027CCD00430EC0 /* PostCardCollectionViewController.swift */,
 				5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */,
 				312A94291C85390B00AE938B /* ScheduleViewController.swift */,
-				51713A911CF150290081549B /* SessionDetails.storyboard */,
 				312A94331C85EE5D00AE938B /* SessionDetailViewController.swift */,
 				312A942F1C8539B600AE938B /* SettingsViewController.swift */,
 				3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */,
+				312A941C1C814B6B00AE938B /* Assets.xcassets */,
+				5113D3861CAC51AE00D6B974 /* custom views */,
+				31CFCD821C8B6E1400DB2AB2 /* datasource */,
+				31D0D9461CC5DB4D007C5999 /* extensions */,
+				31CFCD7F1C8A73D700DB2AB2 /* models */,
+				312A94351C88DE1A00AE938B /* resources */,
+				31373C9D1D02735B00430EC0 /* storyboards */,
 			);
 			path = camper;
 			sourceTree = "<group>";
@@ -266,6 +268,18 @@
 				312A94391C88DEC900AE938B /* Knockout-HTF31-JuniorMiddlewt.otf */,
 			);
 			name = resources;
+			sourceTree = "<group>";
+		};
+		31373C9D1D02735B00430EC0 /* storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				51A4D1CF1CF1532900F956BC /* Favorites.storyboard */,
+				312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */,
+				312A94191C814B6B00AE938B /* Main.storyboard */,
+				51713A911CF150290081549B /* SessionDetails.storyboard */,
+				31373CA01D027B2300430EC0 /* PostCards.storyboard */,
+			);
+			name = storyboards;
 			sourceTree = "<group>";
 		};
 		31CFCD7F1C8A73D700DB2AB2 /* models */ = {
@@ -396,6 +410,7 @@
 				312A94641C89325D00AE938B /* NeutraCond-Light.otf in Resources */,
 				312A94701C89325D00AE938B /* NeutraDisplay-LightAlt.otf in Resources */,
 				312A94801C89325D00AE938B /* NeutraText-Demi.otf in Resources */,
+				31373CA21D027B2300430EC0 /* PostCards.storyboard in Resources */,
 				312A946C1C89325D00AE938B /* NeutraDisplay-BoldAlt.otf in Resources */,
 				312A946B1C89325D00AE938B /* NeutraDisplay-Bold.otf in Resources */,
 				312A94791C89325D00AE938B /* NeutraText-BoldAlt.otf in Resources */,
@@ -497,6 +512,7 @@
 				312A942A1C85390B00AE938B /* ScheduleViewController.swift in Sources */,
 				312A94281C85383200AE938B /* AuthorizationViewController.swift in Sources */,
 				31D0D9451CC48DEE007C5999 /* AuthToken.swift in Sources */,
+				31373CA41D027CCD00430EC0 /* PostCardCollectionViewController.swift in Sources */,
 				312A94341C85EE5E00AE938B /* SessionDetailViewController.swift in Sources */,
 				5113D3881CAC521C00D6B974 /* CircleView.swift in Sources */,
 				51A4D1D41CF290BB00F956BC /* FavoritesTableViewCell.swift in Sources */,
@@ -537,6 +553,14 @@
 				312A941F1C814B6B00AE938B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		31373CA01D027B2300430EC0 /* PostCards.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				31373CA11D027B2300430EC0 /* Base */,
+			);
+			name = PostCards.storyboard;
 			sourceTree = "<group>";
 		};
 		51713A911CF150290081549B /* SessionDetails.storyboard */ = {

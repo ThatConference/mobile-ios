@@ -48,6 +48,13 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         
         self.previousDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5)
         self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), forControlEvents: .TouchUpInside)
+        
+        // camera button
+        let cameraBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        cameraBtn.setImage(UIImage(named: "camera"), forState: UIControlState.Normal)
+        cameraBtn.addTarget(self, action: #selector(self.moveToCamera), forControlEvents:  UIControlEvents.TouchUpInside)
+        let item = UIBarButtonItem(customView: cameraBtn)
+        self.navigationItem.rightBarButtonItem = item
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -56,6 +63,15 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         if (getDirtyData()) {
             loadData()
         }
+    }
+    
+    @objc private func moveToCamera() {
+        self.moveToPostCard()
+    }
+    
+    private func moveToPostCard() {
+        let postCardVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostCardCollectionViewController") as! PostCardCollectionViewController
+        self.navigationController!.pushViewController(postCardVC, animated: true)
     }
     
     @objc private func moveToNextDay() {
@@ -467,7 +483,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
                     sessionStore.removeFavorite(cell.session, completion:{(sessionsResult) -> Void in
                         switch sessionsResult {
                         case .Success(let sessions):
-                            self.setDirtyData()
+                            self.setData(true)
                             cell.session = sessions.first
                             self.setFavoriteIcon(cell, animated: true)
                             break
@@ -488,7 +504,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
                     sessionStore.addFavorite(cell.session, completion:{(sessionsResult) -> Void in
                         switch sessionsResult {
                         case .Success(let sessions):
-                            self.setDirtyData()
+                            self.setData(true)
                             cell.session = sessions.first
                             self.setFavoriteIcon(cell, animated: true)
                             break
@@ -503,11 +519,6 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         {
             self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
         }
-    }
-    
-    func setDirtyData() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.dirtyDataFavorites = true;
     }
     
     private func setFavoriteIcon(cell: ScheduleTableViewCell, animated: Bool) {
