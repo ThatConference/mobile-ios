@@ -14,6 +14,7 @@ class Session: NSObject {
     var speakers: [Speaker] = []
     var isFamilyApproved: Bool = false
     var isUserFavorite: Bool = false
+    var updated: Bool = false
     
     override init() {}
     
@@ -30,6 +31,7 @@ class Session: NSObject {
         aCoder.encodeObject(self.speakers, forKey: "speakers")
         aCoder.encodeObject(self.isFamilyApproved, forKey: "isFamilyApproved")
         aCoder.encodeObject(self.isUserFavorite, forKey: "isUserFavorite")
+        aCoder.encodeObject(self.updated, forKey: "updated")
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -45,6 +47,7 @@ class Session: NSObject {
         let speakers = aDecoder.decodeObjectForKey("speakers") as! [Speaker]
         let isFamilyApproved = aDecoder.decodeObjectForKey("isFamilyApproved") as! Bool
         let isUserFavorite = aDecoder.decodeObjectForKey("isUserFavorite") as! Bool
+        let updated = aDecoder.decodeObjectForKey("updated") as! Bool
         self.init(cancelled: cancelled,
                   accepted: accepted,
                   id: id,
@@ -56,7 +59,8 @@ class Session: NSObject {
                   level: level,
                   speakers: speakers,
                   isFamilyApproved: isFamilyApproved,
-                  isUserFavorite: isUserFavorite)
+                  isUserFavorite: isUserFavorite,
+                  updated: updated)
     }
     
     required init(cancelled: Bool,
@@ -70,7 +74,8 @@ class Session: NSObject {
                   level: String?,
                   speakers: [Speaker],
                   isFamilyApproved: Bool,
-                  isUserFavorite: Bool) {
+                  isUserFavorite: Bool,
+                  updated: Bool) {
         self.cancelled = cancelled
         self.accepted = accepted
         self.id = id
@@ -83,5 +88,6 @@ class Session: NSObject {
         self.speakers = speakers
         self.isFamilyApproved = isFamilyApproved
         self.isUserFavorite = isUserFavorite
+        self.updated = updated
     }
 }

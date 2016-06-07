@@ -2,6 +2,7 @@ import UIKit
 import CoreGraphics
 
 class ScheduleTableViewCell: UITableViewCell {
+    @IBOutlet var updateFlag: UIImageView!
     @IBOutlet var sessionTitle: UILabel!
     @IBOutlet var categoryLabel: UILabel!
     @IBOutlet var speakerLabel: UILabel!

@@ -7,6 +7,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var nextDayButton: UIButton!
     @IBOutlet var previousDayButton: UIButton!
+    @IBOutlet var updatedFlag: UIImageView!
     
     var store: SessionStore!
     var currentDay: String!
@@ -246,6 +247,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         for timeSlot in self.dailySchedule.timeSlots {
             var alreadyAdded: Bool = false
             var hour = NSCalendar.currentCalendar().component(.Hour, fromDate: timeSlot.time)
+            let minutes = NSCalendar.currentCalendar().component(.Minute, fromDate: timeSlot.time)
             
             for trackedHours in hours {
                 if trackedHours == hour {
@@ -259,7 +261,13 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
                     hour = hour - 12
                 }
                 
-                let label = createClickableTimeLabel("\(hour)")
+                var padding = ""
+                if (minutes == 0) {
+                    padding = "0"
+                }
+                
+                let timeLabel = "\(hour):\(minutes)\(padding)"
+                let label = createClickableTimeLabel(timeLabel)
                 label.timeSlot = timeSlot.time
                 self.timeTableView.addArrangedSubview(label)
                 hours.append(hour)
@@ -288,13 +296,13 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
     }
     
     private func createCircleTimeLabel(value: String) -> CircleLabel {
-        let view = CircleLabel(frame: CGRect(x: 0, y: 0, width: 20.0, height: 20.0))
+        let view = CircleLabel(frame: CGRect(x: 0, y: 0, width: 35.0, height: 35.0))
         view.userInteractionEnabled = true
         view.label.text = "\(value)"
         view.label.font = UIFont(name: "Neutraface Text", size: 14.0)
         view.sizeToFit()
-        view.heightAnchor.constraintEqualToConstant(20).active = true
-        view.widthAnchor.constraintEqualToConstant(20).active = true
+        view.heightAnchor.constraintEqualToConstant(35).active = true
+        view.widthAnchor.constraintEqualToConstant(35).active = true
         return view
     }
     
@@ -437,6 +445,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
             
             cell.speakerLabel.text = speakerString
             cell.roomLabel.text = session.scheduledRoom
+            cell.updateFlag.hidden = !session.updated
         }
         
         return cell

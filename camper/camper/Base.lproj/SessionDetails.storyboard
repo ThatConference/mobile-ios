@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -457,11 +456,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon-facebook" width="512" height="512"/>
-        <image name="icon-github" width="512" height="512"/>
-        <image name="icon-google" width="512" height="512"/>
-        <image name="icon-linkedin" width="512" height="512"/>
-        <image name="icon-twitter" width="512" height="512"/>
+        <image name="icon-facebook" width="40" height="40"/>
+        <image name="icon-github" width="40" height="40"/>
+        <image name="icon-google" width="40" height="40"/>
+        <image name="icon-linkedin" width="40" height="40"/>
+        <image name="icon-twitter" width="40" height="40"/>
         <image name="like-1" width="128" height="128"/>
         <image name="profilePicHolder" width="120" height="140"/>
         <image name="room" width="119" height="103"/>
