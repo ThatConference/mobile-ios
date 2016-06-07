@@ -16,6 +16,7 @@
         <mutableArray key="NeutraText-Bold.otf">
             <string>NeutrafaceText-Bold</string>
             <string>NeutrafaceText-Bold</string>
+            <string>NeutrafaceText-Bold</string>
         </mutableArray>
         <mutableArray key="NeutraText-BookAlt.otf">
             <string>NeutrafaceText-BookAlt</string>
@@ -329,6 +330,13 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flag" translatesAutoresizingMaskIntoConstraints="NO" id="Sp4-eq-PAs">
+                                                    <rect key="frame" x="8" y="53" width="40" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Sp4-eq-PAs" secondAttribute="height" multiplier="4:5" id="DVp-n2-Isd"/>
+                                                        <constraint firstAttribute="width" constant="40" id="ufz-ng-eQg"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker" translatesAutoresizingMaskIntoConstraints="NO" id="yMW-cN-zKi">
                                                     <rect key="frame" x="56" y="56" width="40" height="20"/>
                                                     <constraints>
@@ -375,16 +383,26 @@
                                                     <color key="textColor" red="0.43529411759999997" green="0.43921568630000002" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flag" translatesAutoresizingMaskIntoConstraints="NO" id="Sp4-eq-PAs">
-                                                    <rect key="frame" x="8" y="53" width="40" height="50"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kia-zx-uXw">
+                                                    <rect key="frame" x="8" y="0.5" width="537" height="149.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CANCELLED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hI-YA-wKn">
+                                                            <rect key="frame" x="188" y="61" width="161.5" height="28"/>
+                                                            <fontDescription key="fontDescription" name="NeutrafaceText-Bold" family="Neutraface Text" pointSize="28"/>
+                                                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="Sp4-eq-PAs" secondAttribute="height" multiplier="4:5" id="DVp-n2-Isd"/>
-                                                        <constraint firstAttribute="width" constant="40" id="ufz-ng-eQg"/>
+                                                        <constraint firstItem="9hI-YA-wKn" firstAttribute="centerY" secondItem="Kia-zx-uXw" secondAttribute="centerY" id="NnR-NJ-Iov"/>
+                                                        <constraint firstItem="9hI-YA-wKn" firstAttribute="centerX" secondItem="Kia-zx-uXw" secondAttribute="centerX" id="hL2-mW-mwS"/>
                                                     </constraints>
-                                                </imageView>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="DMP-70-Xzg" firstAttribute="centerY" secondItem="Dqm-OI-W0y" secondAttribute="centerY" id="2f9-vv-jtN"/>
+                                                <constraint firstAttribute="trailing" secondItem="Kia-zx-uXw" secondAttribute="trailing" id="3Ts-QQ-wEl"/>
                                                 <constraint firstItem="fOe-jO-Eo3" firstAttribute="leading" secondItem="v1D-UJ-9X5" secondAttribute="trailing" constant="8" id="3XK-pc-k7H"/>
                                                 <constraint firstItem="RRG-Dj-eMx" firstAttribute="leading" secondItem="DMP-70-Xzg" secondAttribute="trailing" constant="8" id="Bio-WD-xVB"/>
                                                 <constraint firstItem="Sp4-eq-PAs" firstAttribute="top" secondItem="DMP-70-Xzg" secondAttribute="bottom" id="Jpd-tg-lNP"/>
@@ -392,6 +410,7 @@
                                                 <constraint firstItem="ZCd-NM-RmI" firstAttribute="top" secondItem="Dqm-OI-W0y" secondAttribute="topMargin" id="Ph8-we-tu3"/>
                                                 <constraint firstItem="AIi-rS-hC7" firstAttribute="centerY" secondItem="yMW-cN-zKi" secondAttribute="centerY" id="PwB-N8-1kP"/>
                                                 <constraint firstItem="AIi-rS-hC7" firstAttribute="leading" secondItem="yMW-cN-zKi" secondAttribute="trailing" constant="8" id="QQR-5V-Ekj"/>
+                                                <constraint firstItem="Kia-zx-uXw" firstAttribute="top" secondItem="Dqm-OI-W0y" secondAttribute="top" id="Qtg-7U-QPM"/>
                                                 <constraint firstItem="yMW-cN-zKi" firstAttribute="leading" secondItem="DMP-70-Xzg" secondAttribute="trailing" constant="8" id="Rjg-Uc-s6R"/>
                                                 <constraint firstItem="fOe-jO-Eo3" firstAttribute="centerY" secondItem="v1D-UJ-9X5" secondAttribute="centerY" id="SzI-lP-T8b"/>
                                                 <constraint firstItem="ZCd-NM-RmI" firstAttribute="leading" secondItem="DMP-70-Xzg" secondAttribute="trailing" constant="8" id="aJX-13-Vb1"/>
@@ -400,21 +419,26 @@
                                                 <constraint firstItem="fOe-jO-Eo3" firstAttribute="leading" secondItem="v1D-UJ-9X5" secondAttribute="trailing" constant="8" id="gz3-f1-omm"/>
                                                 <constraint firstItem="AIi-rS-hC7" firstAttribute="trailing" secondItem="Dqm-OI-W0y" secondAttribute="trailingMargin" id="kuC-my-pok"/>
                                                 <constraint firstItem="Sp4-eq-PAs" firstAttribute="leading" secondItem="Dqm-OI-W0y" secondAttribute="leadingMargin" id="mcR-nK-kSj"/>
+                                                <constraint firstItem="Kia-zx-uXw" firstAttribute="leading" secondItem="v1D-UJ-9X5" secondAttribute="trailing" id="nEf-3b-epV"/>
+                                                <constraint firstItem="Kia-zx-uXw" firstAttribute="leading" secondItem="Dqm-OI-W0y" secondAttribute="leadingMargin" id="nHj-UH-1hV"/>
                                                 <constraint firstItem="DMP-70-Xzg" firstAttribute="top" secondItem="Dqm-OI-W0y" secondAttribute="topMargin" id="oKO-lJ-ay6"/>
                                                 <constraint firstItem="AIi-rS-hC7" firstAttribute="leading" secondItem="yMW-cN-zKi" secondAttribute="trailing" constant="8" id="pss-1z-bbb"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="ZCd-NM-RmI" secondAttribute="trailing" id="tJU-AT-Eny"/>
                                                 <constraint firstItem="RRG-Dj-eMx" firstAttribute="top" secondItem="ZCd-NM-RmI" secondAttribute="bottom" constant="8" id="uoj-pC-HZw"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="fOe-jO-Eo3" secondAttribute="trailing" id="xdX-mW-Q0F"/>
+                                                <constraint firstAttribute="bottom" secondItem="Kia-zx-uXw" secondAttribute="bottom" id="xy9-Oc-ynC"/>
                                                 <constraint firstItem="v1D-UJ-9X5" firstAttribute="leading" secondItem="DMP-70-Xzg" secondAttribute="trailing" constant="8" id="ylw-E7-W0g"/>
                                                 <constraint firstItem="v1D-UJ-9X5" firstAttribute="top" secondItem="yMW-cN-zKi" secondAttribute="bottom" constant="8" id="ytK-1b-een"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="nEf-3b-epV"/>
                                                     <exclude reference="2f9-vv-jtN"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="cancelledCover" destination="Kia-zx-uXw" id="cLN-AD-bpl"/>
                                             <outlet property="categoryLabel" destination="RRG-Dj-eMx" id="vVk-D7-LO4"/>
                                             <outlet property="favoriteIcon" destination="DMP-70-Xzg" id="viD-QG-joh"/>
                                             <outlet property="roomLabel" destination="fOe-jO-Eo3" id="BWs-XL-jWs"/>

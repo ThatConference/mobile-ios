@@ -446,6 +446,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
             cell.speakerLabel.text = speakerString
             cell.roomLabel.text = session.scheduledRoom
             cell.updateFlag.hidden = !session.updated
+            cell.cancelledCover.hidden = !session.cancelled
         }
         
         return cell

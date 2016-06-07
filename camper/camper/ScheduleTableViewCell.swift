@@ -8,6 +8,7 @@ class ScheduleTableViewCell: UITableViewCell {
     @IBOutlet var speakerLabel: UILabel!
     @IBOutlet var roomLabel: UILabel!
     @IBOutlet var favoriteIcon: UIImageView!
+    @IBOutlet var cancelledCover: UIView!
     
     var session: Session!
 
