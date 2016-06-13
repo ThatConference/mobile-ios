@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qdJ-ki-6Nd">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -9,8 +8,10 @@
         <mutableArray key="NeutraText-Bold.otf">
             <string>NeutrafaceText-Bold</string>
             <string>NeutrafaceText-Bold</string>
+            <string>NeutrafaceText-Bold</string>
         </mutableArray>
         <mutableArray key="NeutraText-Book.otf">
+            <string>NeutrafaceText-Book</string>
             <string>NeutrafaceText-Book</string>
         </mutableArray>
         <mutableArray key="NeutraText-BookAlt.otf">
@@ -87,44 +88,79 @@
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="54.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8a-Pm-h3k">
-                                                    <rect key="frame" x="16" y="8" width="528" height="17"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gxn-zz-Wdb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="560" height="54.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8a-Pm-h3k">
+                                                            <rect key="frame" x="16" y="8" width="528" height="17"/>
+                                                            <fontDescription key="fontDescription" name="NeutrafaceText-Book" family="Neutraface Text" pointSize="17"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9LM-4g-M5G">
+                                                            <rect key="frame" x="16" y="33" width="528" height="15"/>
+                                                            <fontDescription key="fontDescription" name="NeutrafaceText-BookAlt" family="Neutraface Text" pointSize="15"/>
+                                                            <color key="textColor" red="0.63137254899999995" green="0.52549019610000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="17" id="ND6-tM-1hq"/>
+                                                        <constraint firstItem="o8a-Pm-h3k" firstAttribute="top" secondItem="Gxn-zz-Wdb" secondAttribute="topMargin" id="AQG-oC-Mnw"/>
+                                                        <constraint firstItem="9LM-4g-M5G" firstAttribute="top" secondItem="o8a-Pm-h3k" secondAttribute="bottom" constant="8" id="GvJ-g9-gZv"/>
+                                                        <constraint firstAttribute="trailing" secondItem="9LM-4g-M5G" secondAttribute="trailing" constant="16" id="HH4-Gd-JQ5"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="o8a-Pm-h3k" secondAttribute="trailing" constant="8" id="liF-lE-CvA"/>
+                                                        <constraint firstItem="9LM-4g-M5G" firstAttribute="leading" secondItem="Gxn-zz-Wdb" secondAttribute="leading" constant="16" id="nXZ-Ff-v9o"/>
+                                                        <constraint firstItem="o8a-Pm-h3k" firstAttribute="leading" secondItem="Gxn-zz-Wdb" secondAttribute="leadingMargin" constant="8" id="v6I-W4-SeU"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="NeutrafaceText-Book" family="Neutraface Text" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAa-oc-ZHr">
+                                                    <rect key="frame" x="0.0" y="0.0" width="560" height="54.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxA-cR-Rdl">
+                                                            <rect key="frame" x="16" y="8" width="528" height="17"/>
+                                                            <fontDescription key="fontDescription" name="NeutrafaceText-Book" family="Neutraface Text" pointSize="17"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CANCELLED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlJ-yp-NMx">
+                                                            <rect key="frame" x="8" y="33" width="544" height="20"/>
+                                                            <fontDescription key="fontDescription" name="NeutrafaceText-Bold" family="Neutraface Text" pointSize="20"/>
+                                                            <color key="textColor" red="0.66666666669999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="xlJ-yp-NMx" firstAttribute="top" secondItem="SAa-oc-ZHr" secondAttribute="topMargin" constant="22" id="Adh-Ie-EYP"/>
+                                                        <constraint firstItem="xlJ-yp-NMx" firstAttribute="leading" secondItem="SAa-oc-ZHr" secondAttribute="leadingMargin" id="IOa-hT-S7L"/>
+                                                        <constraint firstItem="sxA-cR-Rdl" firstAttribute="leading" secondItem="SAa-oc-ZHr" secondAttribute="leadingMargin" constant="8" id="PlB-2W-Exh"/>
+                                                        <constraint firstItem="sxA-cR-Rdl" firstAttribute="top" secondItem="SAa-oc-ZHr" secondAttribute="topMargin" id="WCX-wF-hTb"/>
+                                                        <constraint firstItem="xlJ-yp-NMx" firstAttribute="top" secondItem="sxA-cR-Rdl" secondAttribute="bottom" constant="8" id="g9O-XT-zwK"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="sxA-cR-Rdl" secondAttribute="trailing" constant="8" id="l0r-BT-MFH"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="xlJ-yp-NMx" secondAttribute="trailing" id="wmV-r3-ZvG"/>
+                                                    </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="ND6-tM-1hq"/>
+                                                            <exclude reference="Adh-Ie-EYP"/>
                                                         </mask>
                                                     </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9LM-4g-M5G">
-                                                    <rect key="frame" x="16" y="28" width="528" height="10.5"/>
-                                                    <fontDescription key="fontDescription" name="NeutrafaceText-BookAlt" family="Neutraface Text" pointSize="15"/>
-                                                    <color key="textColor" red="0.63137254899999995" green="0.52549019610000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="9LM-4g-M5G" secondAttribute="trailing" constant="8" id="G6e-j1-kpe"/>
-                                                <constraint firstItem="o8a-Pm-h3k" firstAttribute="top" secondItem="2Ci-Ah-LSH" secondAttribute="topMargin" id="I5d-SH-icd"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="9LM-4g-M5G" secondAttribute="bottom" constant="8" id="LHG-Mq-R3t"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="o8a-Pm-h3k" secondAttribute="trailing" constant="8" id="RFH-P4-zwi"/>
-                                                <constraint firstItem="9LM-4g-M5G" firstAttribute="top" secondItem="o8a-Pm-h3k" secondAttribute="bottom" constant="3" id="S85-rQ-E7P"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="o8a-Pm-h3k" secondAttribute="bottom" id="Yns-cI-uPY"/>
-                                                <constraint firstItem="9LM-4g-M5G" firstAttribute="leading" secondItem="2Ci-Ah-LSH" secondAttribute="leadingMargin" constant="8" id="ld3-f4-Yaj"/>
-                                                <constraint firstItem="o8a-Pm-h3k" firstAttribute="leading" secondItem="2Ci-Ah-LSH" secondAttribute="leadingMargin" constant="8" id="tal-wf-PFo"/>
+                                                <constraint firstAttribute="bottom" secondItem="Gxn-zz-Wdb" secondAttribute="bottom" id="4Cu-kD-pmB"/>
+                                                <constraint firstAttribute="trailing" secondItem="Gxn-zz-Wdb" secondAttribute="trailing" id="BUd-lM-VOh"/>
+                                                <constraint firstItem="Gxn-zz-Wdb" firstAttribute="top" secondItem="2Ci-Ah-LSH" secondAttribute="top" id="EDG-Ic-LO4"/>
+                                                <constraint firstAttribute="trailing" secondItem="SAa-oc-ZHr" secondAttribute="trailing" id="FgY-8v-1bn"/>
+                                                <constraint firstItem="SAa-oc-ZHr" firstAttribute="leading" secondItem="2Ci-Ah-LSH" secondAttribute="leading" id="ICL-gk-CvB"/>
+                                                <constraint firstAttribute="bottom" secondItem="SAa-oc-ZHr" secondAttribute="bottom" id="ZRP-Rr-7vu"/>
+                                                <constraint firstItem="SAa-oc-ZHr" firstAttribute="top" secondItem="2Ci-Ah-LSH" secondAttribute="top" id="eNG-Wy-JkW"/>
+                                                <constraint firstItem="Gxn-zz-Wdb" firstAttribute="leading" secondItem="2Ci-Ah-LSH" secondAttribute="leading" id="yep-j6-3ah"/>
                                             </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="Yns-cI-uPY"/>
-                                                </mask>
-                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="cancelledOverlay" destination="SAa-oc-ZHr" id="Sxy-U4-BR6"/>
+                                            <outlet property="cancelledTitle" destination="sxA-cR-Rdl" id="Lrc-zf-5h5"/>
                                             <outlet property="category" destination="9LM-4g-M5G" id="c0v-rA-s8f"/>
                                             <outlet property="sessionTitle" destination="o8a-Pm-h3k" id="jen-dY-SsG"/>
                                         </connections>
@@ -136,16 +172,15 @@
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="I06-ru-CL8" firstAttribute="top" secondItem="ARc-56-ZyB" secondAttribute="bottom" id="2rG-88-U96"/>
-                            <constraint firstItem="Rih-ot-k34" firstAttribute="leading" secondItem="UnJ-OO-tTv" secondAttribute="trailing" id="3f1-gX-Xnd"/>
-                            <constraint firstItem="Y0I-5n-FDw" firstAttribute="top" secondItem="UnJ-OO-tTv" secondAttribute="bottom" id="PaP-FA-bya"/>
-                            <constraint firstItem="UnJ-OO-tTv" firstAttribute="top" secondItem="I06-ru-CL8" secondAttribute="bottom" id="RaL-W6-exc"/>
+                            <constraint firstItem="Y0I-5n-FDw" firstAttribute="top" secondItem="UnJ-OO-tTv" secondAttribute="bottom" id="Ipr-Nn-XLT"/>
+                            <constraint firstItem="UnJ-OO-tTv" firstAttribute="top" secondItem="I06-ru-CL8" secondAttribute="bottom" id="XF5-df-BcE"/>
                             <constraint firstAttribute="trailing" secondItem="I06-ru-CL8" secondAttribute="trailing" id="Ydp-0f-omy"/>
-                            <constraint firstItem="UnJ-OO-tTv" firstAttribute="leading" secondItem="5g9-GX-BLV" secondAttribute="leading" id="eF2-L1-9AA"/>
-                            <constraint firstItem="Rih-ot-k34" firstAttribute="leading" secondItem="UnJ-OO-tTv" secondAttribute="trailing" id="eVI-Y0-bzY"/>
                             <constraint firstAttribute="trailing" secondItem="Rih-ot-k34" secondAttribute="trailing" id="kD3-sC-2T8"/>
+                            <constraint firstItem="UnJ-OO-tTv" firstAttribute="leading" secondItem="5g9-GX-BLV" secondAttribute="leadingMargin" constant="-20" id="ox8-39-LhJ"/>
                             <constraint firstItem="I06-ru-CL8" firstAttribute="leading" secondItem="5g9-GX-BLV" secondAttribute="leading" id="oxh-tD-MIp"/>
                             <constraint firstItem="Y0I-5n-FDw" firstAttribute="top" secondItem="Rih-ot-k34" secondAttribute="bottom" constant="5" id="xdB-vg-5Qt"/>
                             <constraint firstItem="Rih-ot-k34" firstAttribute="top" secondItem="I06-ru-CL8" secondAttribute="bottom" constant="5" id="xmz-Of-Z2H"/>
+                            <constraint firstItem="Rih-ot-k34" firstAttribute="leading" secondItem="UnJ-OO-tTv" secondAttribute="trailing" id="y4O-KZ-Usu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Rih-ot-k34" secondAttribute="trailing" constant="-20" id="zWp-yG-Ec7"/>
                         </constraints>
                     </view>

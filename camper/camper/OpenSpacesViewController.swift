@@ -1,33 +1,26 @@
 import UIKit
 
-class FavoritesViewController : TimeSlotRootViewController {
+class OpenSpacesViewController : TimeSlotRootViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timeTableView: UIStackView!
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var nextDayButton: UIButton!
     @IBOutlet var previousDayButton: UIButton!
+    @IBOutlet var updatedFlag: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        checkUserStatus()
-    
+        loadData()
+        
         // set up controls
         let rightArrow = UIImage(named: "subheader-arrow-right")
         self.nextDayButton.imageEdgeInsets = UIEdgeInsetsMake(0, self.nextDayButton.frame.size.width - (rightArrow!.size.width), 0, 0)
         self.nextDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, -(rightArrow!.size.width + 5), 0, (rightArrow!.size.width + 5))
         self.nextDayButton.addTarget(self, action: #selector(self.moveToNextDay), forControlEvents: UIControlEvents.TouchUpInside)
-    
+        
         self.previousDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5)
         self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), forControlEvents: .TouchUpInside)
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if (getDirtyData()) {
-            loadData()
-        }
     }
     
     @objc private func moveToNextDay() {
@@ -51,65 +44,47 @@ class FavoritesViewController : TimeSlotRootViewController {
             self.setDateLabel(self.dailySchedule.date!)
             self.setPageState(day)
             }, completion: nil)
-    
+        
         let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.dailySchedule.date, toUnitGranularity: .Day)
         if order == NSComparisonResult.OrderedSame {
             self.jumpToTimeOfDay()
         }
     }
     
-    // MARK: Page Data
-    private func checkUserStatus()
-    {
-        //Show login screen if not logged in
-        if (!Authentication.isLoggedIn()) {
-            setData(true)
-            self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
-        } else {
-            self.view.addSubview(self.activityIndicator)
-            loadData()
-        }
-    }
-    
+    // MARK: Data
     override func loadData() {
         let sessionStore = SessionStore()
         self.dateLabel.text = "Loading"
         self.activityIndicator.startAnimating()
         
-        sessionStore.getFavoriteSessions(completion: {(sessionResult) -> Void in
-            switch sessionResult {
-            case .Success(let sessions):
+        sessionStore.getDailySchedules(false) {
+            (results) -> Void in
+            
+            switch results {
+            case .Success(let schedules):
                 self.setData(false)
-                self.dailySchedules = sessions
-                PersistenceManager.saveDailySchedule(self.dailySchedules, path: Path.Favorites)
-                self.displayData()
-                break
-            case .Failure(_):
-                self.setData(true)
-                let values = PersistenceManager.loadDailySchedule(Path.Favorites)
-                if values != nil && Authentication.isLoggedIn() {
-                    self.dailySchedules = values!
+                self.dailySchedules = schedules
+                
+                if self.dailySchedules.count > 0 {
                     self.displayData()
                 } else {
-                    let alert = UIAlertController(title: "Error", message: "Could not retrieve favorites data. Please make sure you are logged in and have a connection.", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction) in
-                        if (self.dailySchedules != nil) {
-                            self.dailySchedules.removeAll()
-                        }
-                        
-                        self.tableView.delegate = self
-                        self.tableView.dataSource = self
-                        self.tableView.reloadData()
-                        self.activityIndicator.stopAnimating()
-                        
-                        let scheduleVC = self.storyboard?.instantiateViewControllerWithIdentifier("ScheduleViewController") as! ScheduleViewController
-                        self.navigationController!.pushViewController(scheduleVC, animated: true)
-                    }))
+                    self.activityIndicator.stopAnimating()
+                }
+                break
+            case .Failure(_):
+                if let values = PersistenceManager.loadDailySchedule(Path.OpenSpaces) {
+                    self.setData(true)
+                    self.dailySchedules = values
+                    self.displayData()
+                } else {
+                    let alert = UIAlertController(title: "Error", message: "Could not retrieve schedule data. Please try again later.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
+                    return
                 }
                 break
             }
-        })
+        }
     }
     
     func displayData() {
@@ -118,7 +93,7 @@ class FavoritesViewController : TimeSlotRootViewController {
             
             self.setCurrentDay(self.dailySchedules)
             
-            if (self.currentDay != nil) {
+            if self.dailySchedules.count > 0 {
                 if let schedule = self.dailySchedules[self.currentDay] {
                     self.dailySchedule = schedule
                 }
@@ -140,12 +115,12 @@ class FavoritesViewController : TimeSlotRootViewController {
     
     func setData(isDirty: Bool) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.dirtyDataFavorites = isDirty;
+        appDelegate.dirtyDataSchedule = isDirty;
     }
     
     override func getDirtyData() -> Bool {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        return appDelegate.dirtyDataFavorites;
+        return appDelegate.dirtyDataSchedule;
     }
     
     // MARK: Page State
@@ -154,7 +129,7 @@ class FavoritesViewController : TimeSlotRootViewController {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "mm-dd-yyyy"
         let today = formatter.stringFromDate(NSDate())
-    
+        
         // set the date to today, unless we're outside the conference
         if schedules.indexForKey(today) != nil {
             self.setPageState(today)
@@ -164,52 +139,36 @@ class FavoritesViewController : TimeSlotRootViewController {
         }
     }
     
-    private func navigateToSchedule() {
-        let scheduleVC = self.storyboard?.instantiateViewControllerWithIdentifier("ScheduleViewController") as! ScheduleViewController
-        self.navigationController!.pushViewController(scheduleVC, animated: true)
-    }
-    
     private func setPageState(currentDay: String!) {
         let sortedDates = Array(self.dailySchedules.keys).sort()
-        
-        if sortedDates.count == 0 {
-            let alert = UIAlertController(title: "No Favorites", message: "No favorites found. Please select some favorites to view this page", preferredStyle: UIAlertControllerStyle.Alert)
-            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
-                self.navigateToSchedule()
+        if sortedDates.count > 0 {
+            if currentDay == nil || sortedDates[0] == currentDay {
+                self.currentDay = sortedDates[0]
+                self.nextDay = nil
+                if sortedDates.count > 1 {
+                    self.nextDay = sortedDates[1]
+                }
+                self.previousDay = nil
             }
-            alert.addAction(OKAction)
-            self.presentViewController(alert, animated: true, completion: nil)
-            return
-        }
-        
-        if currentDay == nil || sortedDates[0] == currentDay {
-            self.currentDay = sortedDates[0]
-            self.nextDay = nil
-            self.previousDay = nil
-            
-            if (sortedDates.count > 1) {
-                self.nextDay = sortedDates[1]
+            else {
+                let indexes = sortedDates.count - 1
+                var index = 0
+                repeat {
+                    self.previousDay = sortedDates[index]
+                    if index + 1 <= indexes {
+                        self.currentDay = sortedDates[index + 1]
+                    }
+                    if index + 2 <= indexes {
+                        self.nextDay = sortedDates[index + 2]
+                    }
+                    else {
+                        self.nextDay = nil
+                    }
+                    
+                    index += 1
+                } while sortedDates[index] != currentDay
             }
         }
-        else {
-            let indexes = sortedDates.count - 1
-            var index = 0
-            repeat {
-                self.previousDay = sortedDates[index]
-                if index + 1 <= indexes {
-                    self.currentDay = sortedDates[index + 1]
-                }
-                if index + 2 <= indexes {
-                    self.nextDay = sortedDates[index + 2]
-                }
-                else {
-                    self.nextDay = nil
-                }
-    
-                index += 1
-            } while sortedDates[index] != currentDay
-        }
-    
         setButtonValues(self.dailySchedules)
     }
     
@@ -222,10 +181,10 @@ class FavoritesViewController : TimeSlotRootViewController {
     private func setButtonValues(schedules: Dictionary<String, DailySchedule>) {
         let buttonLabelFormatter = NSDateFormatter()
         buttonLabelFormatter.dateFormat = "MMM dd"
-    
+        
         let getDateFormatter = NSDateFormatter()
         getDateFormatter.dateFormat = "MM-dd-yyyy"
-    
+        
         if let previous = self.previousDay {
             self.previousDayButton.hidden = false
             let date = getDateFormatter.dateFromString(previous)
@@ -234,7 +193,7 @@ class FavoritesViewController : TimeSlotRootViewController {
         else {
             self.previousDayButton.hidden = true
         }
-    
+        
         if let next = self.nextDay {
             self.nextDayButton.hidden = false
             let date = getDateFormatter.dateFromString(next)
@@ -299,7 +258,6 @@ class FavoritesViewController : TimeSlotRootViewController {
     
     func timeSelected(recognizer: UITapGestureRecognizer) {
         let view = recognizer.view  as! CircleLabel
-        currentlySelectedTimeLabel?.toggleCircle()
         currentlySelectedTimeLabel = view
         view.toggleCircle()
         self.scrollToSection(view.timeSlot)
@@ -307,7 +265,7 @@ class FavoritesViewController : TimeSlotRootViewController {
     
     private func jumpToTimeOfDay() {
         let nowHour = NSCalendar.currentCalendar().component(.Hour, fromDate: NSDate())
-    
+        
         var locationSet: Bool = false
         var lastTimeVew: CircleLabel?
         for timeView in self.timeTableView.subviews {
@@ -323,18 +281,19 @@ class FavoritesViewController : TimeSlotRootViewController {
                 }
             }
         }
-    
+        
         if !locationSet {
             // didn't find a next/current time - go to the end
             if let view = lastTimeVew {
                 self.scrollToSection(view.timeSlot)
-    
+                
                 if let currentSelected = self.currentlySelectedTimeLabel {
                     currentSelected.toggleCircle()
                 }
                 self.currentlySelectedTimeLabel = view
                 self.currentlySelectedTimeLabel.toggleCircle()
             }
+            
         }
     }
     
@@ -368,52 +327,100 @@ class FavoritesViewController : TimeSlotRootViewController {
         }
     }
     
-    // MARK: UITableViewDelegate
-    func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
-        return "Remove"
+    // MARK: UINavigationContollerDelegate
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        if viewController.isEqual(self) {
+            self.tableView.reloadData()
+        }
     }
     
-    // MARK: DataSource
+    override func setDirtyData() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.dirtyDataFavorites = true;
+    }
+    
+    // MARK: Data Source
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("FavoritesTableViewCell") as! FavoritesTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ScheduleTableViewCell") as! ScheduleTableViewCell
         
         if let schedule = dailySchedule {
             let timeSlots = schedule.timeSlots[indexPath.section]
             let session  = timeSlots.sessions[indexPath.row]
             cell.session = session
             cell.sessionTitle.text = session.title
+            cell.sessionTitleCancelled.text = session.title
             cell.sessionTitle.sizeToFit()
-            cell.cancelledTitle.text = session.title
-            cell.cancelledOverlay.hidden = !session.cancelled
-            cell.category.text = "\(session.primaryCategory!)  |  Room: \(session.scheduledRoom!)"
+            cell.categoryLabel.text = session.primaryCategory
+            
+            cell.favoriteIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.SessionFavorited(_:))))
+            setFavoriteIcon(cell, animated: false)
+            
+            //set up speaker text
+            var speakerString: String = ""
+            var firstSpeaker: Bool = true
+            for speaker in session.speakers {
+                if !firstSpeaker {
+                    speakerString.appendContentsOf(", ")
+                } else {
+                    firstSpeaker = false
+                }
+                
+                speakerString.appendContentsOf("\(speaker.firstName!) \(speaker.lastName!)")
+            }
+            
+            cell.speakerLabel.text = speakerString
+            cell.roomLabel.text = session.scheduledRoom
+            cell.updateFlag.hidden = !session.updated
+            cell.cancelledCover.hidden = !session.cancelled
         }
         
         return cell
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            let sessionStore = SessionStore()
-            
-            sessionStore.removeFavorite(dailySchedule.timeSlots[indexPath.section].sessions[indexPath.row], completion:{(sessionsResult) -> Void in
-                switch sessionsResult {
-                case .Success(_):
-                    dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-                        self.dailySchedule.timeSlots[indexPath.section].sessions.removeAtIndex(indexPath.row)
-                        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                        
-                        if (self.dailySchedule.timeSlots[indexPath.section].sessions.count == 0) {
-                            self.dailySchedule.timeSlots.removeAtIndex(indexPath.section)
-                            let indexSet = NSMutableIndexSet()
-                            indexSet.addIndex(indexPath.section)
-                            tableView.deleteSections(indexSet, withRowAnimation: UITableViewRowAnimation.Automatic)
+    func SessionFavorited(sender: UITapGestureRecognizer) {
+        if Authentication.isLoggedIn() {
+            if let cell = sender.view?.superview?.superview as? ScheduleTableViewCell {
+                let sessionStore = SessionStore()
+                if cell.session.isUserFavorite {
+                    sessionStore.removeFavorite(cell.session, completion:{(sessionsResult) -> Void in
+                        switch sessionsResult {
+                        case .Success(let sessions):
+                            self.setDirtyData()
+                            cell.session = sessions.first
+                            self.setFavoriteIcon(cell, animated: true)
+                            break
+                        case .Failure(_):
+                            break
                         }
-                    }
-                    break
-                case .Failure(_):
-                    break
+                    })
+                    
                 }
-            })
+                else {
+                    CATransaction.begin()
+                    CATransaction.setAnimationDuration(1.5)
+                    let transition = CATransition()
+                    transition.type = kCATransitionFade
+                    cell.favoriteIcon!.layer.addAnimation(transition, forKey: kCATransitionFade)
+                    CATransaction.commit()
+                    cell.favoriteIcon!.image = UIImage(named:"likeadded")
+                    sessionStore.addFavorite(cell.session, completion:{(sessionsResult) -> Void in
+                        switch sessionsResult {
+                        case .Success(let sessions):
+                            self.setDirtyData()
+                            cell.session = sessions.first
+                            self.setFavoriteIcon(cell, animated: true)
+                            break
+                        case .Failure(_):
+                            break
+                        }
+                    })
+                }
+            }
+        }
+        else
+        {
+            self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
         }
     }
 }
+

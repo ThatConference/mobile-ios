@@ -1,46 +1,18 @@
 import UIKit
 
-class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate {
-    
+class ScheduleViewController : TimeSlotRootViewController {    
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timeTableView: UIStackView!
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var nextDayButton: UIButton!
     @IBOutlet var previousDayButton: UIButton!
     @IBOutlet var updatedFlag: UIImageView!
-    
-    var store: SessionStore!
-    var currentDay: String!
-    var previousDay: String!
-    var nextDay: String!
-    var dailySchedule: DailySchedule!
-    
-    private var currentlySelectedTimeLabel: CircleLabel!
-    private var dailySchedules: Dictionary<String, DailySchedule>!
-    private var activityIndicator: UIActivityIndicatorView!
    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
-        self.navigationController?.delegate = self
-        
-        self.activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 80, 80))
-        self.activityIndicator.activityIndicatorViewStyle = .Gray
-        self.activityIndicator.center =  self.view.center
-        self.activityIndicator.backgroundColor = UIColor.whiteColor()
-        self.activityIndicator.hidesWhenStopped = true
-        self.view.addSubview(self.activityIndicator)
-        
         loadData()
         
-        //Show login screen if not logged in
-        if (!Authentication.isLoggedIn()) {
-            self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
-        }
-
         // set up controls
         let rightArrow = UIImage(named: "subheader-arrow-right")
         self.nextDayButton.imageEdgeInsets = UIEdgeInsetsMake(0, self.nextDayButton.frame.size.width - (rightArrow!.size.width), 0, 0)
@@ -49,14 +21,6 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         
         self.previousDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5)
         self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), forControlEvents: .TouchUpInside)
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if (getDirtyData()) {
-            loadData()
-        }
     }
     
     @objc private func moveToNextDay() {
@@ -88,19 +52,18 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
     }
     
     // MARK: Data
-    func loadData() {
+    override func loadData() {
         let sessionStore = SessionStore()
         self.dateLabel.text = "Loading"
         self.activityIndicator.startAnimating()
         
-        sessionStore.getDailySchedules() {
+        sessionStore.getDailySchedules(true) {
             (results) -> Void in
             
             switch results {
             case .Success(let schedules):
                 self.setData(false)
                 self.dailySchedules = schedules
-                PersistenceManager.saveDailySchedule(self.dailySchedules, path: Path.Schedule)
                 self.displayData()
                 break
             case .Failure(_):
@@ -150,7 +113,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         appDelegate.dirtyDataSchedule = isDirty;
     }
     
-    func getDirtyData() -> Bool {
+    override func getDirtyData() -> Bool {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         return appDelegate.dirtyDataSchedule;
     }
@@ -285,51 +248,11 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         }
     }
     
-    private func createTimeLabel(value: String) -> UILabel {
-        let label = UILabel()
-        label.userInteractionEnabled = true
-        label.backgroundColor = UIColor.clearColor()
-        label.text = "\(value)"
-        label.font = UIFont(name: "Neutraface Text", size: 14.0)
-        
-        return label
-    }
-    
-    private func createCircleTimeLabel(value: String) -> CircleLabel {
-        let view = CircleLabel(frame: CGRect(x: 0, y: 0, width: 35.0, height: 35.0))
-        view.userInteractionEnabled = true
-        view.label.text = "\(value)"
-        view.label.font = UIFont(name: "Neutraface Text", size: 14.0)
-        view.sizeToFit()
-        view.heightAnchor.constraintEqualToConstant(35).active = true
-        view.widthAnchor.constraintEqualToConstant(35).active = true
-        return view
-    }
-    
-    private func createClickableTimeLabel(value: String) -> CircleLabel {
-        let view = createCircleTimeLabel(value)
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(ScheduleViewController.timeSelected(_:)))
-        recognizer.delegate = self
-        view.addGestureRecognizer(recognizer)
-        
-        return view
-    }
-    
     func timeSelected(recognizer: UITapGestureRecognizer) {
         let view = recognizer.view  as! CircleLabel
         currentlySelectedTimeLabel = view
         view.toggleCircle()
         self.scrollToSection(view.timeSlot)
-    }
-    
-    private func determineClosestTimeslotSection(hourSelected: NSDate) -> Int {
-        for index in 0...dailySchedule.timeSlots.count - 1 {
-            let timeSlot = dailySchedule.timeSlots[index]
-            if timeSlot.time == hourSelected {
-                return index
-            }
-        }
-        return 0
     }
     
     private func jumpToTimeOfDay() {
@@ -396,16 +319,6 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         }
     }
     
-    // MARK: UITableViewDelegate
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ScheduleTableViewCell
-        let session =  cell.session
-        let sessionDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("SessionDetailViewController") as! SessionDetailViewController
-        sessionDetailVC.session = session
-        self.navigationController!.pushViewController(sessionDetailVC, animated: true)
-    }
-    
     // MARK: UINavigationContollerDelegate
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         if viewController.isEqual(self) {
@@ -413,10 +326,13 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         }
     }
     
+    override func setDirtyData() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.dirtyDataFavorites = true;
+    }
+    
     // MARK: Data Source
-    
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ScheduleTableViewCell") as! ScheduleTableViewCell
         
         if let schedule = dailySchedule {
@@ -424,6 +340,7 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
             let session  = timeSlots.sessions[indexPath.row]
             cell.session = session
             cell.sessionTitle.text = session.title
+            cell.sessionTitleCancelled.text = session.title
             cell.sessionTitle.sizeToFit()
             cell.categoryLabel.text = session.primaryCategory
             
@@ -450,23 +367,6 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         }
         
         return cell
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if dailySchedule.timeSlots[section].sessions.count > 0 {
-            return dailySchedule.timeSlots[section].sessions.count
-        }
-        else {
-            return 0
-        }
-    }
-    
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return SessionStore.getFormattedTime(dailySchedule.timeSlots[section].time)
-    }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return dailySchedule.timeSlots.count
     }
     
     func SessionFavorited(sender: UITapGestureRecognizer) {
@@ -513,29 +413,5 @@ class ScheduleViewController : UIViewController, UIGestureRecognizerDelegate, UI
         {
             self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
         }
-    }
-    
-    func setDirtyData() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.dirtyDataFavorites = true;
-    }
-    
-    private func setFavoriteIcon(cell: ScheduleTableViewCell, animated: Bool) {
-        dispatch_async(dispatch_get_main_queue(), {
-            if animated {
-                CATransaction.begin()
-                CATransaction.setAnimationDuration(1.5)
-                let transition = CATransition()
-                transition.type = kCATransitionFade
-                cell.favoriteIcon!.layer.addAnimation(transition, forKey: kCATransitionFade)
-                CATransaction.commit()
-            }
-            if cell.session.isUserFavorite {
-                cell.favoriteIcon!.image = UIImage(named:"like-remove")
-            }
-            else {
-                cell.favoriteIcon!.image = UIImage(named:"like-1")
-            }
-        })
     }
 }

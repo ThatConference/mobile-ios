@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		310179BB1CF6A44E00D480AE /* FavoritesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310179BA1CF6A44E00D480AE /* FavoritesDataSource.swift */; };
 		311E0E6B1CB74D76004FA850 /* ExternalLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */; };
 		3123AC291C90959D0097BF33 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3123AC271C90959D0097BF33 /* Session.swift */; };
 		312A94161C814B6B00AE938B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A94151C814B6B00AE938B /* AppDelegate.swift */; };
@@ -66,6 +65,9 @@
 		3199C71C1CD6EFA5002F01CD /* PageDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */; };
 		31CFCD7C1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */; };
 		31CFCD841C8B70ED00DB2AB2 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */; };
+		31CFD1331D09050C00F1AE23 /* TimeSlotRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFD1321D09050C00F1AE23 /* TimeSlotRootViewController.swift */; };
+		31CFD1351D0E3AAB00F1AE23 /* TimeSlotRootTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFD1341D0E3AAB00F1AE23 /* TimeSlotRootTableViewCell.swift */; };
+		31CFD1371D0E416E00F1AE23 /* OpenSpacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFD1361D0E416E00F1AE23 /* OpenSpacesViewController.swift */; };
 		31D0D9411CC08282007C5999 /* AuthorizationWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D0D9401CC08282007C5999 /* AuthorizationWebViewController.swift */; };
 		31D0D9451CC48DEE007C5999 /* AuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D0D9441CC48DEE007C5999 /* AuthToken.swift */; };
 		31D0D9481CC5DB6A007C5999 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D0D9471CC5DB6A007C5999 /* NSDate.swift */; };
@@ -83,7 +85,6 @@
 
 /* Begin PBXFileReference section */
 		16A6CCF3DACA1350BA4E2BF3 /* Pods-That Conference.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-That Conference.debug.xcconfig"; path = "Pods/Target Support Files/Pods-That Conference/Pods-That Conference.debug.xcconfig"; sourceTree = "<group>"; };
-		310179BA1CF6A44E00D480AE /* FavoritesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesDataSource.swift; sourceTree = "<group>"; };
 		311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalLogin.swift; sourceTree = "<group>"; };
 		3123AC271C90959D0097BF33 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		312A94121C814B6B00AE938B /* That Conference.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "That Conference.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +145,9 @@
 		3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageDetailCell.swift; sourceTree = "<group>"; };
 		31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThatConferenceAPI.swift; sourceTree = "<group>"; };
 		31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
+		31CFD1321D09050C00F1AE23 /* TimeSlotRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlotRootViewController.swift; sourceTree = "<group>"; };
+		31CFD1341D0E3AAB00F1AE23 /* TimeSlotRootTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlotRootTableViewCell.swift; sourceTree = "<group>"; };
+		31CFD1361D0E416E00F1AE23 /* OpenSpacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSpacesViewController.swift; sourceTree = "<group>"; };
 		31D0D9401CC08282007C5999 /* AuthorizationWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationWebViewController.swift; sourceTree = "<group>"; };
 		31D0D9441CC48DEE007C5999 /* AuthToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthToken.swift; sourceTree = "<group>"; };
 		31D0D9471CC5DB6A007C5999 /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
@@ -193,30 +197,32 @@
 		312A94141C814B6B00AE938B /* camper */ = {
 			isa = PBXGroup;
 			children = (
+				312A94211C814B6B00AE938B /* Info.plist */,
+				51A4D1CF1CF1532900F956BC /* Favorites.storyboard */,
 				312A94151C814B6B00AE938B /* AppDelegate.swift */,
-				312A941C1C814B6B00AE938B /* Assets.xcassets */,
 				312A94271C85383200AE938B /* AuthorizationViewController.swift */,
 				31D0D9401CC08282007C5999 /* AuthorizationWebViewController.swift */,
-				5113D3861CAC51AE00D6B974 /* custom views */,
-				31CFCD821C8B6E1400DB2AB2 /* datasource */,
-				31D0D9461CC5DB4D007C5999 /* extensions */,
-				51A4D1CF1CF1532900F956BC /* Favorites.storyboard */,
-				310179BA1CF6A44E00D480AE /* FavoritesDataSource.swift */,
 				51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */,
 				312A942B1C85396E00AE938B /* FavoritesViewController.swift */,
-				312A94211C814B6B00AE938B /* Info.plist */,
-				312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */,
-				312A94191C814B6B00AE938B /* Main.storyboard */,
 				312A942D1C85399900AE938B /* MapViewController.swift */,
-				31CFCD7F1C8A73D700DB2AB2 /* models */,
+				31CFD1361D0E416E00F1AE23 /* OpenSpacesViewController.swift */,
 				3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */,
-				312A94351C88DE1A00AE938B /* resources */,
 				5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */,
 				312A94291C85390B00AE938B /* ScheduleViewController.swift */,
-				51713A911CF150290081549B /* SessionDetails.storyboard */,
 				312A94331C85EE5D00AE938B /* SessionDetailViewController.swift */,
 				312A942F1C8539B600AE938B /* SettingsViewController.swift */,
 				3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */,
+				31CFD1341D0E3AAB00F1AE23 /* TimeSlotRootTableViewCell.swift */,
+				31CFD1321D09050C00F1AE23 /* TimeSlotRootViewController.swift */,
+				312A941C1C814B6B00AE938B /* Assets.xcassets */,
+				5113D3861CAC51AE00D6B974 /* custom views */,
+				31CFCD821C8B6E1400DB2AB2 /* datasource */,
+				31D0D9461CC5DB4D007C5999 /* extensions */,
+				312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */,
+				312A94191C814B6B00AE938B /* Main.storyboard */,
+				31CFCD7F1C8A73D700DB2AB2 /* models */,
+				312A94351C88DE1A00AE938B /* resources */,
+				51713A911CF150290081549B /* SessionDetails.storyboard */,
 			);
 			path = camper;
 			sourceTree = "<group>";
@@ -499,15 +505,16 @@
 				31D0D9451CC48DEE007C5999 /* AuthToken.swift in Sources */,
 				312A94341C85EE5E00AE938B /* SessionDetailViewController.swift in Sources */,
 				5113D3881CAC521C00D6B974 /* CircleView.swift in Sources */,
+				31CFD1331D09050C00F1AE23 /* TimeSlotRootViewController.swift in Sources */,
 				51A4D1D41CF290BB00F956BC /* FavoritesTableViewCell.swift in Sources */,
 				512DA03F1CBBE03C006CC1B3 /* Speaker.swift in Sources */,
 				5113D3851CAA20CB00D6B974 /* ScheduleTableViewCell.swift in Sources */,
 				312A942C1C85396E00AE938B /* FavoritesViewController.swift in Sources */,
-				310179BB1CF6A44E00D480AE /* FavoritesDataSource.swift in Sources */,
 				3199C7191CD1B968002F01CD /* SpeakerProfileViewController.swift in Sources */,
 				316269AE1D0117020089D777 /* PersistenceManager.swift in Sources */,
 				312A942E1C85399900AE938B /* MapViewController.swift in Sources */,
 				31CFCD7C1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift in Sources */,
+				31CFD1371D0E416E00F1AE23 /* OpenSpacesViewController.swift in Sources */,
 				3123AC291C90959D0097BF33 /* Session.swift in Sources */,
 				31D0D9411CC08282007C5999 /* AuthorizationWebViewController.swift in Sources */,
 				311E0E6B1CB74D76004FA850 /* ExternalLogin.swift in Sources */,
@@ -516,6 +523,7 @@
 				312A94161C814B6B00AE938B /* AppDelegate.swift in Sources */,
 				5113D38A1CAF58A100D6B974 /* CircleLabel.swift in Sources */,
 				31D0D9481CC5DB6A007C5999 /* NSDate.swift in Sources */,
+				31CFD1351D0E3AAB00F1AE23 /* TimeSlotRootTableViewCell.swift in Sources */,
 				312A94301C8539B600AE938B /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
