@@ -291,14 +291,14 @@
                                                     <action selector="websiteButton:" destination="30l-uW-VZ4" eventType="touchUpInside" id="ziP-QH-W0p"/>
                                                 </connections>
                                             </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JNk-k9-zut">
+                                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="JNk-k9-zut">
                                                 <rect key="frame" x="177" y="110" width="373" height="40"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="766-JI-Fwz">
-                                                        <rect key="frame" x="87" y="0.0" width="200" height="40"/>
+                                                        <rect key="frame" x="87" y="0.0" width="372" height="75"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WhN-iT-3NQ" userLabel="twitterButton">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="WhN-iT-3NQ" secondAttribute="height" multiplier="1:1" id="Nnr-cB-qKk"/>
                                                                 </constraints>
@@ -308,7 +308,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Axf-MI-QES" userLabel="facebookButton">
-                                                                <rect key="frame" x="40" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="75" y="0.0" width="75" height="75"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="Axf-MI-QES" secondAttribute="height" multiplier="1:1" id="7LZ-sN-350"/>
                                                                 </constraints>
@@ -318,7 +318,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="duw-fk-GD4" userLabel="googleButton">
-                                                                <rect key="frame" x="80" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="149" y="0.0" width="74" height="75"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="duw-fk-GD4" secondAttribute="height" multiplier="1:1" id="cxe-9p-lDE"/>
                                                                 </constraints>
@@ -328,7 +328,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oGV-db-1s2" userLabel="linkedinButton">
-                                                                <rect key="frame" x="120" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="223" y="0.0" width="75" height="75"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="oGV-db-1s2" secondAttribute="height" multiplier="1:1" id="RZO-Qn-S5b"/>
                                                                 </constraints>
@@ -338,7 +338,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleAspectFit" restorationIdentifier="githubButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWH-nc-TXe" userLabel="githubButton">
-                                                                <rect key="frame" x="160" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="298" y="0.0" width="75" height="75"/>
                                                                 <accessibility key="accessibilityConfiguration" label="githubButton"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="RWH-nc-TXe" secondAttribute="height" multiplier="1:1" id="4A5-9Y-tch"/>
@@ -350,8 +350,16 @@
                                                             </button>
                                                         </subviews>
                                                         <constraints>
+                                                            <constraint firstAttribute="width" secondItem="766-JI-Fwz" secondAttribute="height" multiplier="5:1" id="8dU-XY-RDN"/>
                                                             <constraint firstAttribute="height" constant="40" id="hWp-KM-EO0"/>
+                                                            <constraint firstAttribute="height" constant="40" id="lfk-mt-OwA"/>
                                                         </constraints>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="8dU-XY-RDN"/>
+                                                                <exclude reference="hWp-KM-EO0"/>
+                                                            </mask>
+                                                        </variation>
                                                     </stackView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -362,6 +370,12 @@
                                                     <constraint firstItem="766-JI-Fwz" firstAttribute="leading" secondItem="JNk-k9-zut" secondAttribute="leading" priority="750" id="tga-Nr-ASb"/>
                                                     <constraint firstItem="766-JI-Fwz" firstAttribute="top" secondItem="JNk-k9-zut" secondAttribute="top" id="vjs-p5-opU"/>
                                                 </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="hBo-od-D20"/>
+                                                        <exclude reference="haV-Hz-d91"/>
+                                                    </mask>
+                                                </variation>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -378,7 +392,7 @@
                                             <constraint firstItem="fbu-jp-NGh" firstAttribute="leading" secondItem="NPg-Qh-0oH" secondAttribute="trailing" constant="8" id="aAN-ER-1b4"/>
                                             <constraint firstItem="GVQ-a0-js6" firstAttribute="leading" secondItem="NPg-Qh-0oH" secondAttribute="trailing" constant="8" id="cnH-Td-scD"/>
                                             <constraint firstAttribute="trailing" secondItem="fbu-jp-NGh" secondAttribute="trailing" constant="8" id="h5x-2D-tVX"/>
-                                            <constraint firstItem="JNk-k9-zut" firstAttribute="leading" secondItem="NPg-Qh-0oH" secondAttribute="trailing" constant="50" id="mlm-cz-GVo"/>
+                                            <constraint firstItem="JNk-k9-zut" firstAttribute="leading" secondItem="NPg-Qh-0oH" secondAttribute="trailing" constant="8" id="mlm-cz-GVo"/>
                                             <constraint firstItem="7h2-z4-hS6" firstAttribute="leading" secondItem="NPg-Qh-0oH" secondAttribute="trailing" constant="8" id="pWL-Nw-1Oa"/>
                                             <constraint firstItem="Gep-GS-n1C" firstAttribute="top" secondItem="Ww0-CW-Qoo" secondAttribute="top" constant="8" id="r8V-8o-tIE"/>
                                             <constraint firstItem="GVQ-a0-js6" firstAttribute="top" secondItem="7h2-z4-hS6" secondAttribute="bottom" constant="1" id="tpJ-lR-cPb"/>
@@ -387,6 +401,11 @@
                                             <constraint firstAttribute="height" constant="158" id="wEq-7Q-dTB"/>
                                             <constraint firstAttribute="trailing" secondItem="7h2-z4-hS6" secondAttribute="trailing" constant="8" id="yMW-9T-yXO"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="G3e-CJ-8VO"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E0j-B4-69m">
                                         <rect key="frame" x="0.0" y="158" width="600" height="329"/>
