@@ -68,7 +68,14 @@ class OpenSpacesViewController : TimeSlotRootViewController {
                 if self.dailySchedules.count > 0 {
                     self.displayData()
                 } else {
-                    self.activityIndicator.stopAnimating()
+                    self.setData(true)
+                    NSOperationQueue.mainQueue().addOperationWithBlock() {
+                        self.dateLabel.text = ""
+                        self.activityIndicator.stopAnimating()
+                        let alert = UIAlertController(title: "Error", message: "No Open Spaces found. Please try again later", preferredStyle: UIAlertControllerStyle.Alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    }
                 }
                 break
             case .Failure(_):

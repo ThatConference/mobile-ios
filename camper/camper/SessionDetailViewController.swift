@@ -38,13 +38,9 @@ class SessionDetailViewController : UIViewController, UITableViewDataSource, UIT
         detailSectionHeight.constant = newTableHeight + 105
         self.view.layoutIfNeeded()
         
-        if Authentication.isLoggedIn() {
-            favoriteButton.userInteractionEnabled = true
-            favoriteButton!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SessionDetailViewController.SessionFavorited(_:))))
-            setFavoriteIcon(animated: false)
-        } else {
-            self.favoriteButton!.image = nil
-        }
+        favoriteButton.userInteractionEnabled = true
+        favoriteButton!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SessionDetailViewController.SessionFavorited(_:))))
+        setFavoriteIcon(animated: false)
     }
     
     override func viewDidLayoutSubviews() {
@@ -108,43 +104,49 @@ class SessionDetailViewController : UIViewController, UITableViewDataSource, UIT
     // MARK: Favoriting
     
     func SessionFavorited(sender: UITapGestureRecognizer) {
-        let sessionStore = SessionStore()
-        if self.session.isUserFavorite {
-            sessionStore.removeFavorite(self.session, completion:{(sessionsResult) -> Void in
-                switch sessionsResult {
-                case .Success(let sessions):
-                    self.setDirtyData()
-                    self.session = sessions.first
-                    self.setFavoriteIcon(animated: true)
-                    break
-                case .Failure(_):
-                    break
-                }
-            })
-            
+        if Authentication.isLoggedIn() {
+            let sessionStore = SessionStore()
+            if self.session.isUserFavorite {
+                sessionStore.removeFavorite(self.session, completion:{(sessionsResult) -> Void in
+                    switch sessionsResult {
+                    case .Success(let sessions):
+                        self.setDirtyData()
+                        self.session = sessions.first
+                        self.setFavoriteIcon(animated: true)
+                        break
+                    case .Failure(_):
+                        break
+                    }
+                })
+                
+            }
+            else {
+                CATransaction.begin()
+                CATransaction.setAnimationDuration(1.5)
+                let transition = CATransition()
+                transition.type = kCATransitionFade
+                self.favoriteButton!.layer.addAnimation(transition, forKey: kCATransitionFade)
+                CATransaction.commit()
+                self.favoriteButton!.image = UIImage(named:"likeadded")
+                sessionStore.addFavorite(self.session, completion:{(sessionsResult) -> Void in
+                    switch sessionsResult {
+                    case .Success(let sessions):
+                        self.setDirtyData()
+                        self.session = sessions.first
+                        self.setFavoriteIcon(animated: true)
+                        break
+                    case .Failure(_):
+                        let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time", preferredStyle: UIAlertControllerStyle.Alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                        self.presentViewController(alert, animated: true, completion: nil)
+                        break
+                    }
+                })
+            }
         }
-        else {
-            CATransaction.begin()
-            CATransaction.setAnimationDuration(1.5)
-            let transition = CATransition()
-            transition.type = kCATransitionFade
-            self.favoriteButton!.layer.addAnimation(transition, forKey: kCATransitionFade)
-            CATransaction.commit()
-            self.favoriteButton!.image = UIImage(named:"likeadded")
-            sessionStore.addFavorite(self.session, completion:{(sessionsResult) -> Void in
-                switch sessionsResult {
-                case .Success(let sessions):
-                    self.setDirtyData()
-                    self.session = sessions.first
-                    self.setFavoriteIcon(animated: true)
-                    break
-                case .Failure(_):
-                    let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
-                    break
-                }
-            })
+        else
+        {
+            self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
         }
     }
     

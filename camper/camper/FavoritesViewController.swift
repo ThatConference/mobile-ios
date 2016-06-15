@@ -179,6 +179,7 @@ class FavoritesViewController : TimeSlotRootViewController {
             }
             alert.addAction(OKAction)
             self.presentViewController(alert, animated: true, completion: nil)
+            self.dateLabel.text = ""
             return
         }
         
