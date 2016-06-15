@@ -367,7 +367,7 @@
 				TargetAttributes = {
 					312A94111C814B6B00AE938B = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = ECEKCQEXEK;
+						DevelopmentTeam = 2VX3GW8TL8;
 					};
 				};
 			};
@@ -650,7 +650,7 @@
 				INFOPLIST_FILE = camper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thatconference.camper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatconference.mobile.ios;
 				PRODUCT_NAME = "That Conference";
 			};
 			name = Debug;
@@ -664,7 +664,7 @@
 				INFOPLIST_FILE = camper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thatconference.camper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatconference.mobile.ios;
 				PRODUCT_NAME = "That Conference";
 			};
 			name = Release;
