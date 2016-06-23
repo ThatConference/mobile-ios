@@ -1,10 +1,13 @@
 PODS:
+  - ImageScrollView (1.1)
   - Locksmith (2.0.8)
 
 DEPENDENCIES:
+  - ImageScrollView
   - Locksmith (= 2.0.8)
 
 SPEC CHECKSUMS:
+  ImageScrollView: 2c9adef18c5b6bd9a499c9babaf4cd7b6df703eb
   Locksmith: a8ed41ac4c06506ea8cb199d8ec8a8d3d108eb2a
 
 COCOAPODS: 0.39.0

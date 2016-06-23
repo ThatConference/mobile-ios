@@ -1,8 +1,8 @@
 import UIKit
 
-class FavoritesTableViewCell: UITableViewCell {
+class FavoritesTableViewCell: TimeSlotRootTableViewCell {
     @IBOutlet var sessionTitle: UILabel!
     @IBOutlet var category: UILabel!
-    
-    var session: Session!
+    @IBOutlet var cancelledOverlay: UIView!
+    @IBOutlet var cancelledTitle: UILabel!
 }

@@ -6,5 +6,6 @@ use_frameworks!
 target 'That Conference' do
 
 pod 'Locksmith', '2.0.8'
+pod 'ImageScrollView'
 
 end

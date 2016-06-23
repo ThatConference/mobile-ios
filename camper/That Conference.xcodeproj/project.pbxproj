@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		310179BB1CF6A44E00D480AE /* FavoritesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310179BA1CF6A44E00D480AE /* FavoritesDataSource.swift */; };
 		311E0E6B1CB74D76004FA850 /* ExternalLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */; };
 		3123AC291C90959D0097BF33 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3123AC271C90959D0097BF33 /* Session.swift */; };
 		312A94161C814B6B00AE938B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A94151C814B6B00AE938B /* AppDelegate.swift */; };
@@ -61,16 +60,24 @@
 		312A94861C89325D00AE938B /* NeutraText-LightIA.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94601C89325D00AE938B /* NeutraText-LightIA.otf */; };
 		312A94871C89325D00AE938B /* NeutraText-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94611C89325D00AE938B /* NeutraText-LightItalic.otf */; };
 		31373CA21D027B2300430EC0 /* PostCards.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31373CA01D027B2300430EC0 /* PostCards.storyboard */; };
-		31373CA41D027CCD00430EC0 /* PostCardCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31373CA31D027CCD00430EC0 /* PostCardCollectionViewController.swift */; };
+		31373CA41D027CCD00430EC0 /* PostCardChooseFrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31373CA31D027CCD00430EC0 /* PostCardChooseFrameViewController.swift */; };
+		313B19021D160B8C00E72562 /* PostCardFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313B19011D160B8C00E72562 /* PostCardFrame.swift */; };
 		316269AE1D0117020089D777 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316269AD1D0117020089D777 /* PersistenceManager.swift */; };
+		317154201D1B9784004078E2 /* PostCardSaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3171541F1D1B9784004078E2 /* PostCardSaveViewController.swift */; };
+		317154221D1C340E004078E2 /* PassThroughImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317154211D1C340E004078E2 /* PassThroughImageView.swift */; };
 		318F268C1CBC65F30065A76F /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318F268B1CBC65F30065A76F /* Authentication.swift */; };
 		3199C7191CD1B968002F01CD /* SpeakerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */; };
 		3199C71C1CD6EFA5002F01CD /* PageDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */; };
 		31CFCD7C1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */; };
 		31CFCD841C8B70ED00DB2AB2 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */; };
+		31CFD1331D09050C00F1AE23 /* TimeSlotRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFD1321D09050C00F1AE23 /* TimeSlotRootViewController.swift */; };
+		31CFD1351D0E3AAB00F1AE23 /* TimeSlotRootTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFD1341D0E3AAB00F1AE23 /* TimeSlotRootTableViewCell.swift */; };
+		31CFD1371D0E416E00F1AE23 /* OpenSpacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CFD1361D0E416E00F1AE23 /* OpenSpacesViewController.swift */; };
 		31D0D9411CC08282007C5999 /* AuthorizationWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D0D9401CC08282007C5999 /* AuthorizationWebViewController.swift */; };
 		31D0D9451CC48DEE007C5999 /* AuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D0D9441CC48DEE007C5999 /* AuthToken.swift */; };
 		31D0D9481CC5DB6A007C5999 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D0D9471CC5DB6A007C5999 /* NSDate.swift */; };
+		31D877F81D1864C10045E8DA /* FrameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D877F71D1864C10045E8DA /* FrameCell.swift */; };
+		31D877FA1D19CBD30045E8DA /* PostCardChoosePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D877F91D19CBD30045E8DA /* PostCardChoosePhotoViewController.swift */; };
 		5113D3851CAA20CB00D6B974 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */; };
 		5113D3881CAC521C00D6B974 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5113D3871CAC521C00D6B974 /* CircleView.swift */; };
 		5113D38A1CAF58A100D6B974 /* CircleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5113D3891CAF58A100D6B974 /* CircleLabel.swift */; };
@@ -85,7 +92,6 @@
 
 /* Begin PBXFileReference section */
 		16A6CCF3DACA1350BA4E2BF3 /* Pods-That Conference.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-That Conference.debug.xcconfig"; path = "Pods/Target Support Files/Pods-That Conference/Pods-That Conference.debug.xcconfig"; sourceTree = "<group>"; };
-		310179BA1CF6A44E00D480AE /* FavoritesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesDataSource.swift; sourceTree = "<group>"; };
 		311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalLogin.swift; sourceTree = "<group>"; };
 		3123AC271C90959D0097BF33 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		312A94121C814B6B00AE938B /* That Conference.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "That Conference.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,16 +147,24 @@
 		312A94601C89325D00AE938B /* NeutraText-LightIA.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-LightIA.otf"; sourceTree = "<group>"; };
 		312A94611C89325D00AE938B /* NeutraText-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-LightItalic.otf"; sourceTree = "<group>"; };
 		31373CA11D027B2300430EC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PostCards.storyboard; sourceTree = "<group>"; };
-		31373CA31D027CCD00430EC0 /* PostCardCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCardCollectionViewController.swift; sourceTree = "<group>"; };
+		31373CA31D027CCD00430EC0 /* PostCardChooseFrameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCardChooseFrameViewController.swift; sourceTree = "<group>"; };
+		313B19011D160B8C00E72562 /* PostCardFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCardFrame.swift; sourceTree = "<group>"; };
 		316269AD1D0117020089D777 /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		3171541F1D1B9784004078E2 /* PostCardSaveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCardSaveViewController.swift; sourceTree = "<group>"; };
+		317154211D1C340E004078E2 /* PassThroughImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassThroughImageView.swift; sourceTree = "<group>"; };
 		318F268B1CBC65F30065A76F /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerProfileViewController.swift; sourceTree = "<group>"; };
 		3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageDetailCell.swift; sourceTree = "<group>"; };
 		31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThatConferenceAPI.swift; sourceTree = "<group>"; };
 		31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
+		31CFD1321D09050C00F1AE23 /* TimeSlotRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlotRootViewController.swift; sourceTree = "<group>"; };
+		31CFD1341D0E3AAB00F1AE23 /* TimeSlotRootTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlotRootTableViewCell.swift; sourceTree = "<group>"; };
+		31CFD1361D0E416E00F1AE23 /* OpenSpacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSpacesViewController.swift; sourceTree = "<group>"; };
 		31D0D9401CC08282007C5999 /* AuthorizationWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationWebViewController.swift; sourceTree = "<group>"; };
 		31D0D9441CC48DEE007C5999 /* AuthToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthToken.swift; sourceTree = "<group>"; };
 		31D0D9471CC5DB6A007C5999 /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
+		31D877F71D1864C10045E8DA /* FrameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameCell.swift; sourceTree = "<group>"; };
+		31D877F91D19CBD30045E8DA /* PostCardChoosePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCardChoosePhotoViewController.swift; sourceTree = "<group>"; };
 		4BAAD464880882563610413E /* Pods-That Conference.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-That Conference.release.xcconfig"; path = "Pods/Target Support Files/Pods-That Conference/Pods-That Conference.release.xcconfig"; sourceTree = "<group>"; };
 		5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		5113D3871CAC521C00D6B974 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
@@ -201,17 +215,23 @@
 				312A94151C814B6B00AE938B /* AppDelegate.swift */,
 				312A94271C85383200AE938B /* AuthorizationViewController.swift */,
 				31D0D9401CC08282007C5999 /* AuthorizationWebViewController.swift */,
-				310179BA1CF6A44E00D480AE /* FavoritesDataSource.swift */,
 				51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */,
 				312A942B1C85396E00AE938B /* FavoritesViewController.swift */,
+				31D877F71D1864C10045E8DA /* FrameCell.swift */,
 				312A942D1C85399900AE938B /* MapViewController.swift */,
+				31CFD1361D0E416E00F1AE23 /* OpenSpacesViewController.swift */,
 				3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */,
-				31373CA31D027CCD00430EC0 /* PostCardCollectionViewController.swift */,
+				317154211D1C340E004078E2 /* PassThroughImageView.swift */,
+				31373CA31D027CCD00430EC0 /* PostCardChooseFrameViewController.swift */,
+				31D877F91D19CBD30045E8DA /* PostCardChoosePhotoViewController.swift */,
+				3171541F1D1B9784004078E2 /* PostCardSaveViewController.swift */,
 				5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */,
 				312A94291C85390B00AE938B /* ScheduleViewController.swift */,
 				312A94331C85EE5D00AE938B /* SessionDetailViewController.swift */,
 				312A942F1C8539B600AE938B /* SettingsViewController.swift */,
 				3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */,
+				31CFD1341D0E3AAB00F1AE23 /* TimeSlotRootTableViewCell.swift */,
+				31CFD1321D09050C00F1AE23 /* TimeSlotRootViewController.swift */,
 				312A941C1C814B6B00AE938B /* Assets.xcassets */,
 				5113D3861CAC51AE00D6B974 /* custom views */,
 				31CFCD821C8B6E1400DB2AB2 /* datasource */,
@@ -276,8 +296,8 @@
 				51A4D1CF1CF1532900F956BC /* Favorites.storyboard */,
 				312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */,
 				312A94191C814B6B00AE938B /* Main.storyboard */,
-				51713A911CF150290081549B /* SessionDetails.storyboard */,
 				31373CA01D027B2300430EC0 /* PostCards.storyboard */,
+				51713A911CF150290081549B /* SessionDetails.storyboard */,
 			);
 			name = storyboards;
 			sourceTree = "<group>";
@@ -291,6 +311,7 @@
 				3123AC271C90959D0097BF33 /* Session.swift */,
 				512DA03E1CBBE03C006CC1B3 /* Speaker.swift */,
 				512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */,
+				313B19011D160B8C00E72562 /* PostCardFrame.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -375,7 +396,7 @@
 				TargetAttributes = {
 					312A94111C814B6B00AE938B = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = ECEKCQEXEK;
+						DevelopmentTeam = 2VX3GW8TL8;
 					};
 				};
 			};
@@ -512,26 +533,33 @@
 				312A942A1C85390B00AE938B /* ScheduleViewController.swift in Sources */,
 				312A94281C85383200AE938B /* AuthorizationViewController.swift in Sources */,
 				31D0D9451CC48DEE007C5999 /* AuthToken.swift in Sources */,
-				31373CA41D027CCD00430EC0 /* PostCardCollectionViewController.swift in Sources */,
+				31373CA41D027CCD00430EC0 /* PostCardChooseFrameViewController.swift in Sources */,
 				312A94341C85EE5E00AE938B /* SessionDetailViewController.swift in Sources */,
+				317154201D1B9784004078E2 /* PostCardSaveViewController.swift in Sources */,
 				5113D3881CAC521C00D6B974 /* CircleView.swift in Sources */,
+				31CFD1331D09050C00F1AE23 /* TimeSlotRootViewController.swift in Sources */,
 				51A4D1D41CF290BB00F956BC /* FavoritesTableViewCell.swift in Sources */,
+				313B19021D160B8C00E72562 /* PostCardFrame.swift in Sources */,
+				31D877FA1D19CBD30045E8DA /* PostCardChoosePhotoViewController.swift in Sources */,
 				512DA03F1CBBE03C006CC1B3 /* Speaker.swift in Sources */,
 				5113D3851CAA20CB00D6B974 /* ScheduleTableViewCell.swift in Sources */,
 				312A942C1C85396E00AE938B /* FavoritesViewController.swift in Sources */,
-				310179BB1CF6A44E00D480AE /* FavoritesDataSource.swift in Sources */,
 				3199C7191CD1B968002F01CD /* SpeakerProfileViewController.swift in Sources */,
 				316269AE1D0117020089D777 /* PersistenceManager.swift in Sources */,
 				312A942E1C85399900AE938B /* MapViewController.swift in Sources */,
 				31CFCD7C1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift in Sources */,
+				31CFD1371D0E416E00F1AE23 /* OpenSpacesViewController.swift in Sources */,
 				3123AC291C90959D0097BF33 /* Session.swift in Sources */,
 				31D0D9411CC08282007C5999 /* AuthorizationWebViewController.swift in Sources */,
 				311E0E6B1CB74D76004FA850 /* ExternalLogin.swift in Sources */,
+				317154221D1C340E004078E2 /* PassThroughImageView.swift in Sources */,
 				318F268C1CBC65F30065A76F /* Authentication.swift in Sources */,
 				31CFCD841C8B70ED00DB2AB2 /* SessionStore.swift in Sources */,
+				31D877F81D1864C10045E8DA /* FrameCell.swift in Sources */,
 				312A94161C814B6B00AE938B /* AppDelegate.swift in Sources */,
 				5113D38A1CAF58A100D6B974 /* CircleLabel.swift in Sources */,
 				31D0D9481CC5DB6A007C5999 /* NSDate.swift in Sources */,
+				31CFD1351D0E3AAB00F1AE23 /* TimeSlotRootTableViewCell.swift in Sources */,
 				312A94301C8539B600AE938B /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -666,7 +694,7 @@
 				INFOPLIST_FILE = camper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thatconference.camper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatconference.mobile.ios;
 				PRODUCT_NAME = "That Conference";
 			};
 			name = Debug;
@@ -680,7 +708,7 @@
 				INFOPLIST_FILE = camper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thatconference.camper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thatconference.mobile.ios;
 				PRODUCT_NAME = "That Conference";
 			};
 			name = Release;

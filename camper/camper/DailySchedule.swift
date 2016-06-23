@@ -15,6 +15,12 @@ class DailySchedule: NSObject, NSCoding {
         aCoder.encodeObject(self.timeSaved, forKey: "timeSaved")
     }
     
+    func cleanData() {
+        date = NSDate()
+        timeSlots.removeAll()
+        timeSaved = nil
+    }
+    
     required convenience init?(coder aDecoder: NSCoder) {
         let date = aDecoder.decodeObjectForKey("date") as! NSDate
         let timeSlots = aDecoder.decodeObjectForKey("timeSlots") as! [TimeSlot!]

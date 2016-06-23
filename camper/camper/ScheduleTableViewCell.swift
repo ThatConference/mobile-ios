@@ -1,14 +1,15 @@
 import UIKit
 import CoreGraphics
 
-class ScheduleTableViewCell: UITableViewCell {
+class ScheduleTableViewCell: TimeSlotRootTableViewCell {
+    @IBOutlet var updateFlag: UIImageView!
     @IBOutlet var sessionTitle: UILabel!
     @IBOutlet var categoryLabel: UILabel!
     @IBOutlet var speakerLabel: UILabel!
     @IBOutlet var roomLabel: UILabel!
     @IBOutlet var favoriteIcon: UIImageView!
-    
-    var session: Session!
+    @IBOutlet var cancelledCover: UIView!
+    @IBOutlet var sessionTitleCancelled: UILabel!
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

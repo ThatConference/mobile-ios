@@ -36,6 +36,7 @@ class SettingsViewController : UITableViewController {
         if (Authentication.isLoggedIn()) {
             Authentication.removeAuthToken()
             setDirtyData()
+            PersistenceManager.deleteDailySchedule(Path.Favorites)
             let alert = UIAlertController(title: "Signed Out", message: "Sign out was successful. You can now sign in with a different account or continue as a guest.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
@@ -44,6 +45,21 @@ class SettingsViewController : UITableViewController {
         }
         
         setSignInButton()
+    }
+    
+    @IBAction func developedPressed(sender: AnyObject) {
+        let url = "http://milkcan.io"
+        UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+    }
+    
+    @IBAction func inWisconsinPressed(sender: AnyObject) {
+        let url = "http://inwisconsin.com/"
+        UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+    }
+    
+    @IBAction func thatConferencePressed(sender: AnyObject) {
+        let url = "http://thatconference.com"
+        UIApplication.sharedApplication().openURL(NSURL(string: url)!)
     }
     
     func setDirtyData() {

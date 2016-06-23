@@ -11,8 +11,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let rootViewController = window!.rootViewController as! UITabBarController
         let navController = rootViewController.childViewControllers.first as! UINavigationController
-        let scheduleViewController = navController.topViewController as! ScheduleViewController
-        scheduleViewController.store = SessionStore()
+        let favoritesViewController = navController.topViewController as! FavoritesViewController
+        favoritesViewController.store = SessionStore()
         
         return true
     }

@@ -6,16 +6,16 @@ class SessionStore {
         case Failure(ErrorType)
     }
     
-    func getDailySchedules(completion completion: (SessionDataRetrieval) -> Void) {
+    func getDailySchedules(returnSchedule: Bool, completion: (SessionDataRetrieval) -> Void) {
         var sessions = [Session]()
-        //TODO: check local storage, get updates since last.
-        //TOOD: if no local store, get all and update store
+        
         self.fetchAll() {
             (sessionResult) -> Void in
             switch sessionResult {
             case .Success(let returnedSessions):
                 sessions = returnedSessions
                 var schedule = Dictionary<String, DailySchedule>()
+                var openspaces = Dictionary<String, DailySchedule>()
                 var cancelled: Int = 0
                 
                 for session in sessions {
@@ -25,42 +25,78 @@ class SessionStore {
                     }
                     
                     var dateString = String()
-                    //var time = String()
                     if let date = session.scheduledDateTime {
                         dateString = self.getDate(date)
-                        //time = getTime(date)
                     }
 
-                    //create a new reference for this dailySchedule in our temp lookup
-                    if schedule[dateString] == nil {
-                        let dailySchedule = DailySchedule()
-                        if let date = session.scheduledDateTime {
-                            dailySchedule.date = date
+                    if session.primaryCategory != "Open Spaces" {
+                        //Add Item to Schedule
+                        if schedule[dateString] == nil {
+                            let dailySchedule = DailySchedule()
+                            if let date = session.scheduledDateTime {
+                                dailySchedule.date = date
+                            }
+                            
+                            schedule[dateString] = dailySchedule
                         }
                         
-                        schedule[dateString] = dailySchedule                
-                    }
-                    
-                    if let currentDay = schedule[dateString] {
-                        var found: Bool = false
-                        for timeSlot in currentDay.timeSlots {
-                            if timeSlot.time == session.scheduledDateTime {
-                                timeSlot.sessions.append(session)
-                                found = true
-                                break
+                        if let currentDay = schedule[dateString] {
+                            var found: Bool = false
+                            for timeSlot in currentDay.timeSlots {
+                                if timeSlot.time == session.scheduledDateTime {
+                                    timeSlot.sessions.append(session)
+                                    found = true
+                                    break
+                                }
+                            }
+                            
+                            if !found {
+                                let timeSlot = TimeSlot()
+                                timeSlot.time = session.scheduledDateTime
+                                timeSlot.sessions = [session]
+                                currentDay.timeSlots.append(timeSlot)
                             }
                         }
                         
-                        if !found {
-                            let timeSlot = TimeSlot()
-                            timeSlot.time = session.scheduledDateTime
-                            timeSlot.sessions = [session]
-                            currentDay.timeSlots.append(timeSlot)
+                    } else {
+                        //Add Item to Open Spaces
+                        if openspaces[dateString] == nil {
+                            let dailySchedule = DailySchedule()
+                            if let date = session.scheduledDateTime {
+                                dailySchedule.date = date
+                            }
+                            
+                            openspaces[dateString] = dailySchedule
+                        }
+                        
+                        if let currentDay = openspaces[dateString] {
+                            var found: Bool = false
+                            for timeSlot in currentDay.timeSlots {
+                                if timeSlot.time == session.scheduledDateTime {
+                                    timeSlot.sessions.append(session)
+                                    found = true
+                                    break
+                                }
+                            }
+                            
+                            if !found {
+                                let timeSlot = TimeSlot()
+                                timeSlot.time = session.scheduledDateTime
+                                timeSlot.sessions = [session]
+                                currentDay.timeSlots.append(timeSlot)
+                            }
                         }
                     }
                 }
                 
-                return completion(.Success(schedule))                
+                PersistenceManager.saveDailySchedule(schedule, path: Path.Schedule)
+                PersistenceManager.saveDailySchedule(openspaces, path: Path.OpenSpaces)
+            
+                if (returnSchedule) {
+                    return completion(.Success(schedule))
+                } else {
+                    return completion(.Success(openspaces))
+                }
             case .Failure(let error):
                 return completion(.Failure(error))
             }
@@ -108,10 +144,8 @@ class SessionStore {
                     }
                     
                     var dateString = String()
-                    //var time = String()
                     if let date = session.scheduledDateTime {
                         dateString = self.getDate(date)
-                        //time = getTime(date)
                     }
                     
                     //create a new reference for this dailySchedule in our temp lookup
