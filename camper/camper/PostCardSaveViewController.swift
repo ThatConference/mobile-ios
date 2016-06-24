@@ -1,4 +1,5 @@
 import ImageScrollView
+import Photos
 import UIKit
 
 class PostCardSaveViewController : UIViewController {
@@ -8,6 +9,10 @@ class PostCardSaveViewController : UIViewController {
     
     var pictureImageFile: UIImage?
     var frameImageFile: UIImage?
+    var photoAlbum: PHAssetCollection!
+    var assetCollectionPlaceholder: PHObjectPlaceholder!
+    
+    let ALBUM_NAME: String = "That Conference"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,27 +46,11 @@ class PostCardSaveViewController : UIViewController {
         let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext();
         
-        //Save Image
-        let imageData = UIImagePNGRepresentation(image)
-        let compressedPNGImage = UIImage(data: imageData!)
-        UIImageWriteToSavedPhotosAlbum(compressedPNGImage!, self, #selector(PostCardSaveViewController.image(_:didFinishSavingWithError:contextInfo:)), nil)
-        
+        //Save
         frameImage.layer.borderColor = UIColor.redColor().CGColor
+        setAlbum()
+        saveImage(image)
     }
-    
-    func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
-        if error == nil {
-            let ac = UIAlertController(title: "Created", message: "Your new That Postcard has been created.", preferredStyle: .Alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(ac, animated: true, completion: nil)
-        } else {
-            let ac = UIAlertController(title: "Save error", message: error?.localizedDescription, preferredStyle: .Alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(ac, animated: true, completion: nil)
-        }
-    }
-    
-    //self.tabBarController?.selectedIndex = tabBarController!.selectedIndex
     
     func getActualImageSize(image: UIImage, ImageView: UIImageView) -> CGSize {
         let tempWidth = image.size.width / ImageView.frame.size.width
@@ -95,5 +84,64 @@ class PostCardSaveViewController : UIViewController {
         UIGraphicsEndImageContext();
     
         return newImage
+    }
+    
+    func setAlbum() {
+        // Find Album
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "title = %@", ALBUM_NAME)
+        let collection : PHFetchResult = PHAssetCollection.fetchAssetCollectionsWithType(.Album, subtype: .Any, options: fetchOptions)
+        if let _: AnyObject = collection.firstObject {
+            photoAlbum = collection.firstObject as! PHAssetCollection
+        } else {
+            // Album Not Found - Create
+            PHPhotoLibrary.sharedPhotoLibrary().performChanges(
+                {
+                let createAlbumRequest : PHAssetCollectionChangeRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollectionWithTitle(self.ALBUM_NAME)
+                self.assetCollectionPlaceholder = createAlbumRequest.placeholderForCreatedAssetCollection
+                }, completionHandler: {
+                    success, error in
+                    
+                    if (success) {
+                        let collectionFetchResult = PHAssetCollection.fetchAssetCollectionsWithLocalIdentifiers([self.assetCollectionPlaceholder.localIdentifier], options: nil)
+                        self.photoAlbum = collectionFetchResult.firstObject as! PHAssetCollection
+                    } else {
+                        let ac = UIAlertController(title: "Save Error", message: error?.localizedDescription, preferredStyle: .Alert)
+                        ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                        self.presentViewController(ac, animated: true, completion: nil)
+                    }
+            })
+        }
+    }
+    
+    func saveImage(image: UIImage){
+        PHPhotoLibrary.sharedPhotoLibrary().performChanges({
+            let assetRequest = PHAssetChangeRequest.creationRequestForAssetFromImage(image)
+            let assetPlaceholder = assetRequest.placeholderForCreatedAsset
+            let albumChangeRequest = PHAssetCollectionChangeRequest(forAssetCollection: self.photoAlbum)
+            albumChangeRequest!.addAssets([assetPlaceholder!])
+            }, completionHandler: { success, error in
+                if error == nil {
+                    let ac = UIAlertController(title: "Created", message: "Your new That Postcard has been created.", preferredStyle: .Alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: {(action:UIAlertAction) in
+                        self.shareImage(image)
+                    }))
+                    self.presentViewController(ac, animated: true, completion: nil)
+                } else {
+                    let ac = UIAlertController(title: "Save Error", message: error?.localizedDescription, preferredStyle: .Alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(ac, animated: true, completion: nil)
+                }
+        })
+    }
+    
+    func shareImage(image: UIImage) {
+        let messageStr:String  = "#ThatPostcard"
+        let shareItems:Array = [image, messageStr]
+        
+        let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
+        activityViewController.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypeCopyToPasteboard, UIActivityTypeAddToReadingList, UIActivityTypePostToVimeo]
+        
+        self.presentViewController(activityViewController, animated: true, completion: nil)
     }
 }
