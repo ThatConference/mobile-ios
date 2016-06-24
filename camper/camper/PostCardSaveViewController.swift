@@ -15,7 +15,7 @@ class PostCardSaveViewController : UIViewController {
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         
-        pictureImage.displayImage(pictureImageFile!)
+        pictureImage.displayImage(padImage(pictureImageFile!))
         frameImage.image = frameImageFile
         frameImage.layer.borderColor = UIColor.redColor().CGColor
         frameImage.layer.borderWidth = 1
@@ -29,7 +29,7 @@ class PostCardSaveViewController : UIViewController {
         let window = UIApplication.sharedApplication().delegate!.window!!
         
         //Capture the Entire Window
-        UIGraphicsBeginImageContextWithOptions(window.bounds.size, false, UIScreen.mainScreen().scale)
+        UIGraphicsBeginImageContextWithOptions(window.bounds.size, view.opaque, 0.0)
         window.drawViewHierarchyInRect(window.bounds, afterScreenUpdates: true)
         let windowImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -44,10 +44,24 @@ class PostCardSaveViewController : UIViewController {
         //Save Image
         let imageData = UIImagePNGRepresentation(image)
         let compressedPNGImage = UIImage(data: imageData!)
-        UIImageWriteToSavedPhotosAlbum(compressedPNGImage!, nil, nil, nil)
+        UIImageWriteToSavedPhotosAlbum(compressedPNGImage!, self, #selector(PostCardSaveViewController.image(_:didFinishSavingWithError:contextInfo:)), nil)
         
         frameImage.layer.borderColor = UIColor.redColor().CGColor
     }
+    
+    func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
+        if error == nil {
+            let ac = UIAlertController(title: "Created", message: "Your new That Postcard has been created.", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
+        } else {
+            let ac = UIAlertController(title: "Save error", message: error?.localizedDescription, preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
+        }
+    }
+    
+    //self.tabBarController?.selectedIndex = tabBarController!.selectedIndex
     
     func getActualImageSize(image: UIImage, ImageView: UIImageView) -> CGSize {
         let tempWidth = image.size.width / ImageView.frame.size.width
@@ -62,5 +76,24 @@ class PostCardSaveViewController : UIViewController {
             toReturn.height = ImageView.frame.size.height
         }
         return toReturn
+    }
+    
+    func padImage(originalImage: UIImage) -> UIImage {
+        let width:CGFloat = originalImage.size.width * 3.0
+        let height:CGFloat = originalImage.size.height * 3.0
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), true, 0.0)
+        let context = UIGraphicsGetCurrentContext()
+        UIGraphicsPushContext(context!)
+
+        // Now we can draw anything we want into this new context.
+        let origin:CGPoint = CGPointMake((width - originalImage.size.width) / 2.0, (height - originalImage.size.height) / 2.0)
+        originalImage.drawAtPoint(origin);
+
+        // Clean up and get the new image.
+        UIGraphicsPopContext();
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    
+        return newImage
     }
 }
