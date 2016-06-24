@@ -27,7 +27,18 @@ class PostCardSaveViewController : UIViewController {
         frameImageHeight.constant = getActualImageSize(frameImageFile!, ImageView: frameImage).height
     }
     
+    @IBAction func sharePostCardPressed(sender: AnyObject) {
+        let image = createImage()
+        shareImage(image)
+    }
+    
     @IBAction func savePostCardPressed(sender: AnyObject) {
+        let image = createImage()
+        setAlbum()
+        saveImage(image)
+    }
+    
+    func createImage() -> UIImage {
         frameImage.layer.borderColor = UIColor.clearColor().CGColor
         
         //Create Snapshot
@@ -46,10 +57,9 @@ class PostCardSaveViewController : UIViewController {
         let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext();
         
-        //Save
         frameImage.layer.borderColor = UIColor.redColor().CGColor
-        setAlbum()
-        saveImage(image)
+        
+        return image
     }
     
     func getActualImageSize(image: UIImage, ImageView: UIImageView) -> CGSize {
@@ -123,9 +133,7 @@ class PostCardSaveViewController : UIViewController {
             }, completionHandler: { success, error in
                 if error == nil {
                     let ac = UIAlertController(title: "Created", message: "Your new That Postcard has been created.", preferredStyle: .Alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: {(action:UIAlertAction) in
-                        self.shareImage(image)
-                    }))
+                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                     self.presentViewController(ac, animated: true, completion: nil)
                 } else {
                     let ac = UIAlertController(title: "Save Error", message: error?.localizedDescription, preferredStyle: .Alert)

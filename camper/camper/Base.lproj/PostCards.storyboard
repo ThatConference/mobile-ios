@@ -276,7 +276,7 @@
                                             <constraint firstAttribute="height" constant="40" id="GML-lh-Xcn"/>
                                         </constraints>
                                         <color key="tintColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Save Post Card">
+                                        <state key="normal" title="Save Postcard">
                                             <color key="titleColor" red="0.63137254899999995" green="0.52549019610000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
@@ -284,15 +284,34 @@
                                             <action selector="savePostCardPressed:" destination="zY5-xn-r0H" eventType="touchUpInside" id="VR0-Dd-cR0"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6c-Zb-ujE">
+                                        <rect key="frame" x="8" y="395" width="584" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="i7v-9K-hkO"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Share Postcard">
+                                            <color key="titleColor" red="0.63137254899999995" green="0.52549019610000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="savePostCardPressed:" destination="zY5-xn-r0H" eventType="touchUpInside" id="TqO-IV-SQR"/>
+                                            <action selector="sharePostCardPressed:" destination="zY5-xn-r0H" eventType="touchUpInside" id="U1n-Sp-t8u"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="d6c-Zb-ujE" secondAttribute="trailing" constant="8" id="0mP-o5-Nim"/>
                                     <constraint firstItem="gAT-Vu-PXI" firstAttribute="leading" secondItem="lFI-Me-Qf3" secondAttribute="leading" constant="8" id="7I6-N3-Gou"/>
                                     <constraint firstAttribute="trailing" secondItem="enk-cb-6e2" secondAttribute="trailing" id="FOf-Jc-kv0"/>
                                     <constraint firstAttribute="bottom" secondItem="enk-cb-6e2" secondAttribute="bottom" id="FwD-Kl-Uvv"/>
                                     <constraint firstItem="enk-cb-6e2" firstAttribute="leading" secondItem="lFI-Me-Qf3" secondAttribute="leading" id="Jsg-Dr-uBZ"/>
                                     <constraint firstAttribute="bottom" secondItem="enk-cb-6e2" secondAttribute="bottom" id="KpH-G5-QgL"/>
                                     <constraint firstAttribute="trailing" secondItem="gAT-Vu-PXI" secondAttribute="trailing" constant="8" id="Ltv-bw-eJa"/>
+                                    <constraint firstItem="gAT-Vu-PXI" firstAttribute="top" secondItem="d6c-Zb-ujE" secondAttribute="bottom" constant="8" id="UnH-a2-dBl"/>
+                                    <constraint firstItem="d6c-Zb-ujE" firstAttribute="leading" secondItem="lFI-Me-Qf3" secondAttribute="leading" constant="8" id="YPU-AA-GQ7"/>
                                     <constraint firstAttribute="bottom" secondItem="gAT-Vu-PXI" secondAttribute="bottom" constant="8" id="Zyr-4C-EvE"/>
                                     <constraint firstItem="enk-cb-6e2" firstAttribute="leading" secondItem="lFI-Me-Qf3" secondAttribute="leading" id="bQc-27-x9c"/>
                                     <constraint firstItem="d2a-Jz-DV4" firstAttribute="leading" secondItem="lFI-Me-Qf3" secondAttribute="leading" id="c7O-3H-Vim"/>
