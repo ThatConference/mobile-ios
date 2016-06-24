@@ -140,7 +140,7 @@ class PostCardSaveViewController : UIViewController {
         let shareItems:Array = [image, messageStr]
         
         let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
-        activityViewController.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypeCopyToPasteboard, UIActivityTypeAddToReadingList, UIActivityTypePostToVimeo]
+        activityViewController.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeMessage, UIActivityTypeMail, UIActivityTypePrint,UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList]
         
         self.presentViewController(activityViewController, animated: true, completion: nil)
     }
