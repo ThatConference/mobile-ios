@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SpeakerProfileViewController : UIViewController {
+class SpeakerProfileViewController : BaseViewController {
     var speaker: Speaker!
     
     @IBOutlet var profileImage: UIImageView!

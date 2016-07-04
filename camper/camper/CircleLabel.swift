@@ -22,7 +22,15 @@ class CircleLabel: UIView {
     
     func toggleCircle() {
         showCircle = !showCircle
-        
+        displayCircle()
+    }
+    
+    func setCircle(display: Bool) {
+        showCircle = display
+        displayCircle()
+    }
+    
+    private func displayCircle() {
         let path = UIBezierPath(ovalInRect: CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height))
         circleLayer.fillColor = UIColor.init(red: 217/255, green: 213/255, blue: 202/255, alpha: 1.0).CGColor
         

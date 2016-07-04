@@ -1,6 +1,6 @@
 import UIKit
 
-class TimeSlotRootViewController : UIViewController, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate {
+class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate {
     
     var store: SessionStore!
     var currentDay: String!
@@ -9,7 +9,6 @@ class TimeSlotRootViewController : UIViewController, UIGestureRecognizerDelegate
     var dailySchedule: DailySchedule!
     var currentlySelectedTimeLabel: CircleLabel!
     var dailySchedules: Dictionary<String, DailySchedule>!
-    var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,12 +18,14 @@ class TimeSlotRootViewController : UIViewController, UIGestureRecognizerDelegate
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         self.navigationController?.delegate = self
         
-        self.activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 80, 80))
-        self.activityIndicator.activityIndicatorViewStyle = .Gray
-        self.activityIndicator.center =  self.view.center
-        self.activityIndicator.backgroundColor = UIColor.whiteColor()
-        self.activityIndicator.hidesWhenStopped = true
-        self.view.addSubview(self.activityIndicator)
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(TimeSlotRootViewController.handleSwipes(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(TimeSlotRootViewController.handleSwipes(_:)))
+        
+        leftSwipe.direction = .Left
+        rightSwipe.direction = .Right
+        
+        view.addGestureRecognizer(leftSwipe)
+        view.addGestureRecognizer(rightSwipe)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -85,7 +86,6 @@ class TimeSlotRootViewController : UIViewController, UIGestureRecognizerDelegate
     }
     
     // MARK: UITableViewDelegate
-    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! TimeSlotRootTableViewCell
         let session =  cell.session
@@ -98,9 +98,29 @@ class TimeSlotRootViewController : UIViewController, UIGestureRecognizerDelegate
     }
     
     // MARK: Data Source
+    func handleSwipes(sender:UISwipeGestureRecognizer) {
+        if (sender.direction == .Left) {
+            moveToNext()
+        }
+        
+        if (sender.direction == .Right) {
+            moveToPrevious()
+        }
+    }
+    
+    internal func moveToNext() {
+        self.moveToDay(self.nextDay)
+    }
+    
+    internal func moveToPrevious() {
+        self.moveToDay(self.previousDay)
+    }
+    
+    internal func moveToDay(day: String!) {
+        fatalError("Must Override")
+    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         fatalError("Must Override")
     }
     

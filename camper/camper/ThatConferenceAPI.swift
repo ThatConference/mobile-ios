@@ -1,12 +1,13 @@
 import Foundation
 
 enum Method: String {
-    case SessionsGetAll = "/api3/Session/GetAllAcceptedSessions"
     case ExternalLogins = "/api3/Account/ExternalLogins"
-    case Token = "/Token"
     case Favorite = "/api3/Favorites/"
-    case UserFavorites = "/api3/Session/GetFavoriteSessions"
     case SessionGetAccepted = "/api3/Session/GetAcceptedSessions"
+    case SessionsGetAll = "/api3/Session/GetAllAcceptedSessions"
+    case Sponsors = "/api3/Sponsors/GetSponsors"
+    case Token = "/Token"
+    case UserFavorites = "/api3/Session/GetFavoriteSessions"
 }
 
 enum SessionsResult {
@@ -17,6 +18,11 @@ enum SessionsResult {
 enum ExternalLoginResult {
     case Success([ExternalLogin])
     case Failure(ErrorType)
+}
+
+enum SponsorsResult {
+    case Success([Sponsor])
+    case Failure([ErrorType])
 }
 
 enum APIError: ErrorType {
@@ -181,7 +187,6 @@ class ThatConferenceAPI {
             isUserFavorite = userFavorite.boolValue
         }
        
-        
         var scheduledDateTime: NSDate?
         if dateString != nil {
             scheduledDateTime = dateFormatter.dateFromString(dateString!)            
@@ -284,7 +289,7 @@ class ThatConferenceAPI {
     
     class func saveFavorite(sessionId: NSNumber?, completionHandler: (data: NSData?, response: NSURLResponse?, error: ErrorType?) -> Void) {
         // save the favorite
-        let url = ThatConferenceAPI.thatConferenceURL(.Favorite, parameters: nil).URLByAppendingPathComponent("Add").URLByAppendingPathComponent("\(sessionId!)")
+        let url = thatConferenceURL(.Favorite, parameters: nil).URLByAppendingPathComponent("Add").URLByAppendingPathComponent("\(sessionId!)")
         let request = NSMutableURLRequest(URL: url,
                                           cachePolicy: .UseProtocolCachePolicy,
                                           timeoutInterval: 10.0)
@@ -299,13 +304,11 @@ class ThatConferenceAPI {
         })
         
         dataTask.resume()
-        
-        // TODO: need to update our sessionStore data...
     }
     
     class func deleteFavorite(sessionId: NSNumber?, completionHandler: (data: NSData?, response: NSURLResponse?, error: ErrorType?) -> Void) {
         // remove the favorite
-        let url = ThatConferenceAPI.thatConferenceURL(.Favorite, parameters: nil).URLByAppendingPathComponent("Remove").URLByAppendingPathComponent("\(sessionId!)")
+        let url = thatConferenceURL(.Favorite, parameters: nil).URLByAppendingPathComponent("Remove").URLByAppendingPathComponent("\(sessionId!)")
         let request = NSMutableURLRequest(URL: url,
                                           cachePolicy: .UseProtocolCachePolicy,
                                           timeoutInterval: 10.0)
@@ -323,7 +326,7 @@ class ThatConferenceAPI {
     }
     
     class func getFavoriteSessions(year: String, completionHandler:(SessionsResult) -> Void) {
-        let url = ThatConferenceAPI.thatConferenceURL(.UserFavorites, parameters: ["year": year])
+        let url = thatConferenceURL(.UserFavorites, parameters: ["year": year])
         let request = NSMutableURLRequest(URL: url,
                                           cachePolicy: .UseProtocolCachePolicy,
                                           timeoutInterval: 10.0)
@@ -337,11 +340,44 @@ class ThatConferenceAPI {
             if error != nil {
                 completionHandler(SessionsResult.Failure(error!))
             } else {
-                let sessions = sessionsFromJSONData(data!);
+                let sessions = sessionsFromJSONData(data!)
                 completionHandler(sessions)
             }
         })
         
         dataTask.resume()
     }
+    
+    // MARK : Sponsors
+//    class func getSponsors(completionHandler:(SponsorsResult) -> Void) {
+//        let url = thatConferenceURL(.Sponsors, parameters: nil)
+//        let request = NSMutableURLRequest(URL: url,
+//                                          cachePolicy: .UseProtocolCachePolicy,
+//                                          timeoutInterval: 10.0)
+//        request.HTTPMethod = "GET"
+//        let session = NSURLSession.sharedSession()
+//        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+//            if error != nil {
+//                completionHandler(SponsorsResult.Failure(error!))
+//            } else {
+//                let sponsors = sponsorsFromJSONData(data!)
+//                completionHandler(sponsors)
+//            }
+//        })
+//            
+//        dataTask.resume()
+//    }
+//    
+//    private class func sponsorsFromJSONData(json: NSData) -> Sponsor? {
+//        guard let
+//            name = json["Name"] as? String
+//        else {
+//            return nil
+//        }
+//     
+//        let sponsor = Sponsor()
+//        sponsor.Name = name
+//        
+//        return sponsor
+//    }
 }

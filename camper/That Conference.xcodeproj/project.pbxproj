@@ -62,9 +62,11 @@
 		31373CA21D027B2300430EC0 /* PostCards.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31373CA01D027B2300430EC0 /* PostCards.storyboard */; };
 		31373CA41D027CCD00430EC0 /* PostCardChooseFrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31373CA31D027CCD00430EC0 /* PostCardChooseFrameViewController.swift */; };
 		313B19021D160B8C00E72562 /* PostCardFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313B19011D160B8C00E72562 /* PostCardFrame.swift */; };
+		314DA0FD1D202B690021E2DA /* Sponsor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314DA0FC1D202B690021E2DA /* Sponsor.swift */; };
 		316269AE1D0117020089D777 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316269AD1D0117020089D777 /* PersistenceManager.swift */; };
 		317154201D1B9784004078E2 /* PostCardSaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3171541F1D1B9784004078E2 /* PostCardSaveViewController.swift */; };
 		317154221D1C340E004078E2 /* PassThroughImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317154211D1C340E004078E2 /* PassThroughImageView.swift */; };
+		317154241D1D8025004078E2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317154231D1D8025004078E2 /* BaseViewController.swift */; };
 		318F268C1CBC65F30065A76F /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318F268B1CBC65F30065A76F /* Authentication.swift */; };
 		3199C7191CD1B968002F01CD /* SpeakerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */; };
 		3199C71C1CD6EFA5002F01CD /* PageDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */; };
@@ -149,9 +151,11 @@
 		31373CA11D027B2300430EC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PostCards.storyboard; sourceTree = "<group>"; };
 		31373CA31D027CCD00430EC0 /* PostCardChooseFrameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCardChooseFrameViewController.swift; sourceTree = "<group>"; };
 		313B19011D160B8C00E72562 /* PostCardFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCardFrame.swift; sourceTree = "<group>"; };
+		314DA0FC1D202B690021E2DA /* Sponsor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sponsor.swift; sourceTree = "<group>"; };
 		316269AD1D0117020089D777 /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		3171541F1D1B9784004078E2 /* PostCardSaveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCardSaveViewController.swift; sourceTree = "<group>"; };
 		317154211D1C340E004078E2 /* PassThroughImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassThroughImageView.swift; sourceTree = "<group>"; };
+		317154231D1D8025004078E2 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		318F268B1CBC65F30065A76F /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerProfileViewController.swift; sourceTree = "<group>"; };
 		3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageDetailCell.swift; sourceTree = "<group>"; };
@@ -215,6 +219,7 @@
 				312A94151C814B6B00AE938B /* AppDelegate.swift */,
 				312A94271C85383200AE938B /* AuthorizationViewController.swift */,
 				31D0D9401CC08282007C5999 /* AuthorizationWebViewController.swift */,
+				317154231D1D8025004078E2 /* BaseViewController.swift */,
 				51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */,
 				312A942B1C85396E00AE938B /* FavoritesViewController.swift */,
 				31D877F71D1864C10045E8DA /* FrameCell.swift */,
@@ -312,6 +317,7 @@
 				512DA03E1CBBE03C006CC1B3 /* Speaker.swift */,
 				512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */,
 				313B19011D160B8C00E72562 /* PostCardFrame.swift */,
+				314DA0FC1D202B690021E2DA /* Sponsor.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -532,12 +538,14 @@
 				512DA03B1CB7585D006CC1B3 /* DailySchedule.swift in Sources */,
 				312A942A1C85390B00AE938B /* ScheduleViewController.swift in Sources */,
 				312A94281C85383200AE938B /* AuthorizationViewController.swift in Sources */,
+				317154241D1D8025004078E2 /* BaseViewController.swift in Sources */,
 				31D0D9451CC48DEE007C5999 /* AuthToken.swift in Sources */,
 				31373CA41D027CCD00430EC0 /* PostCardChooseFrameViewController.swift in Sources */,
 				312A94341C85EE5E00AE938B /* SessionDetailViewController.swift in Sources */,
 				317154201D1B9784004078E2 /* PostCardSaveViewController.swift in Sources */,
 				5113D3881CAC521C00D6B974 /* CircleView.swift in Sources */,
 				31CFD1331D09050C00F1AE23 /* TimeSlotRootViewController.swift in Sources */,
+				314DA0FD1D202B690021E2DA /* Sponsor.swift in Sources */,
 				51A4D1D41CF290BB00F956BC /* FavoritesTableViewCell.swift in Sources */,
 				313B19021D160B8C00E72562 /* PostCardFrame.swift in Sources */,
 				31D877FA1D19CBD30045E8DA /* PostCardChoosePhotoViewController.swift in Sources */,

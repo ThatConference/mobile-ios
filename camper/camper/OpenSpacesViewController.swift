@@ -17,21 +17,17 @@ class OpenSpacesViewController : TimeSlotRootViewController {
         let rightArrow = UIImage(named: "subheader-arrow-right")
         self.nextDayButton.imageEdgeInsets = UIEdgeInsetsMake(0, self.nextDayButton.frame.size.width - (rightArrow!.size.width), 0, 0)
         self.nextDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, -(rightArrow!.size.width + 5), 0, (rightArrow!.size.width + 5))
-        self.nextDayButton.addTarget(self, action: #selector(self.moveToNextDay), forControlEvents: UIControlEvents.TouchUpInside)
+        self.nextDayButton.addTarget(self, action: #selector(self.moveToNext), forControlEvents: UIControlEvents.TouchUpInside)
         
         self.previousDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5)
         self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), forControlEvents: .TouchUpInside)
     }
     
-    @objc private func moveToNextDay() {
-        self.moveToDay(self.nextDay)
-    }
-    
-    @objc private func moveToPrevious() {
-        self.moveToDay(self.previousDay)
-    }
-    
-    private func moveToDay(day: String!) {
+    internal override func moveToDay(day: String!) {
+        if (day == nil) {
+            return
+        }
+        
         self.dailySchedule = self.dailySchedules[day];
         UIView.transitionWithView(self.tableView, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() -> Void in
             self.tableView.reloadData()

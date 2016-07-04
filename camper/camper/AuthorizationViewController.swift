@@ -84,12 +84,8 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
     }
     
     func SignedIn() {
-        let alert = UIAlertController(title: "Success", message: "Sign in was successful", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { action in
-            self.DismissView()
-        }))
         setDirtyData()
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.DismissView()
     }
     
     private func DismissView() {

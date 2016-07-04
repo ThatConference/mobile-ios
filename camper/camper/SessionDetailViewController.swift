@@ -1,9 +1,10 @@
 import UIKit
 
-class SessionDetailViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SessionDetailViewController : BaseViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var labelDate: UILabel!
     @IBOutlet var labelTime: UILabel!
     @IBOutlet var labelTitle: UILabel!
+    @IBOutlet var labelCategory: UILabel!
     @IBOutlet var roomName: UILabel!
     @IBOutlet var labelDescription: UITextView!
     @IBOutlet var detailTable: UITableView!
@@ -26,6 +27,7 @@ class SessionDetailViewController : UIViewController, UITableViewDataSource, UIT
         setTimeLabel(session.scheduledDateTime!)
         
         labelTitle.text = session.title
+        labelCategory.text = session.primaryCategory
         labelDescription.text = session.sessionDescription
         roomName.text = session.scheduledRoom
         

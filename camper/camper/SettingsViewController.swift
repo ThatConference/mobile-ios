@@ -14,6 +14,22 @@ class SettingsViewController : UITableViewController {
         let version = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String
         let build = NSBundle.mainBundle().infoDictionary!["CFBundleVersion"] as! String
         versionNumber.text = "\(version).\(build)"
+        
+        // camera button
+        let cameraBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        cameraBtn.setImage(UIImage(named: "camera"), forState: UIControlState.Normal)
+        cameraBtn.addTarget(self, action: #selector(self.moveToCamera), forControlEvents:  UIControlEvents.TouchUpInside)
+        let item = UIBarButtonItem(customView: cameraBtn)
+        self.navigationItem.rightBarButtonItem = item
+    }
+    
+    @objc private func moveToCamera() {
+        self.moveToPostCard()
+    }
+    
+    private func moveToPostCard() {
+        let postCardVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostCardChooseFrameViewController") as! PostCardChooseFrameViewController
+        self.navigationController!.pushViewController(postCardVC, animated: true)
     }
     
     override func viewWillAppear(animated: Bool) {

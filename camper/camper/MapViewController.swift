@@ -1,6 +1,6 @@
 import UIKit
 
-class MapViewController : UIViewController {
+class MapViewController : BaseViewController {
     @IBOutlet var mapImage: UIImageView!
     var roomName: String?
     

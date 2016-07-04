@@ -17,41 +17,21 @@ class ScheduleViewController : TimeSlotRootViewController {
         let rightArrow = UIImage(named: "subheader-arrow-right")
         self.nextDayButton.imageEdgeInsets = UIEdgeInsetsMake(0, self.nextDayButton.frame.size.width - (rightArrow!.size.width), 0, 0)
         self.nextDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, -(rightArrow!.size.width + 5), 0, (rightArrow!.size.width + 5))
-        self.nextDayButton.addTarget(self, action: #selector(self.moveToNextDay), forControlEvents: UIControlEvents.TouchUpInside)
+        self.nextDayButton.addTarget(self, action: #selector(self.moveToNext), forControlEvents: UIControlEvents.TouchUpInside)
         
         self.previousDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5)
         self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), forControlEvents: .TouchUpInside)
+    }
+    
+    internal override func moveToDay(day: String!) {
+        if (day == nil) {
+            return
+        }
         
-        // camera button
-        let cameraBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        cameraBtn.setImage(UIImage(named: "camera"), forState: UIControlState.Normal)
-        cameraBtn.addTarget(self, action: #selector(self.moveToCamera), forControlEvents:  UIControlEvents.TouchUpInside)
-        let item = UIBarButtonItem(customView: cameraBtn)
-        self.navigationItem.rightBarButtonItem = item
-    }
-    
-    @objc private func moveToCamera() {
-        self.moveToPostCard()
-    }
-    
-    private func moveToPostCard() {
-        let postCardVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostCardChooseFrameViewController") as! PostCardChooseFrameViewController
-        self.navigationController!.pushViewController(postCardVC, animated: true)
-    }
-    
-    @objc private func moveToNextDay() {
-        self.moveToDay(self.nextDay)
-    }
-    
-    @objc private func moveToPrevious() {
-        self.moveToDay(self.previousDay)
-    }
-    
-    private func moveToDay(day: String!) {
         self.dailySchedule = self.dailySchedules[day];
-        UIView.transitionWithView(self.tableView, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() -> Void in
+        UIView.transitionWithView(self.tableView, duration: 0.5, options: .TransitionCrossDissolve, animations: {() -> Void in
                 self.tableView.reloadData()
-            self.tableView.scrollToRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
+                self.tableView.scrollToRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
             }, completion: nil)
         UIView.transitionWithView(self.timeTableView, duration: 0.5, options: .TransitionCrossDissolve, animations: {() -> Void in
                 self.loadTimeTable()
