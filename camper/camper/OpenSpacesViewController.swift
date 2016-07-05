@@ -259,7 +259,7 @@ class OpenSpacesViewController : TimeSlotRootViewController {
         }
     }
     
-    func timeSelected(recognizer: UITapGestureRecognizer) {
+    override func timeSelected(recognizer: UITapGestureRecognizer) {
         let view = recognizer.view  as! CircleLabel
         currentlySelectedTimeLabel = view
         view.toggleCircle()

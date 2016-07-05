@@ -68,11 +68,15 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
     
     func createClickableTimeLabel(value: String) -> CircleLabel {
         let view = createCircleTimeLabel(value)
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(ScheduleViewController.timeSelected(_:)))
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(self.timeSelected(_:)))
         recognizer.delegate = self
         view.addGestureRecognizer(recognizer)
         
         return view
+    }
+    
+    func timeSelected(recognizer: UITapGestureRecognizer) {
+        fatalError("Must Override")
     }
     
     func determineClosestTimeslotSection(hourSelected: NSDate) -> Int {

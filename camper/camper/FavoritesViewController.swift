@@ -144,8 +144,6 @@ class FavoritesViewController : TimeSlotRootViewController {
     }
     
     // MARK: Page State
-    
-    
     private func setCurrentDay(schedules: Dictionary<String, DailySchedule>) {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "mm-dd-yyyy"
@@ -243,7 +241,6 @@ class FavoritesViewController : TimeSlotRootViewController {
     }
     
     // MARK: Time Table Methods
-    
     private func loadTimeTable() {
         for subview in self.timeTableView.arrangedSubviews {
             self.timeTableView.removeArrangedSubview(subview)
@@ -294,9 +291,8 @@ class FavoritesViewController : TimeSlotRootViewController {
         }
     }
     
-    func timeSelected(recognizer: UITapGestureRecognizer) {
+    override func timeSelected(recognizer: UITapGestureRecognizer) {
         let view = recognizer.view  as! CircleLabel
-        currentlySelectedTimeLabel?.toggleCircle()
         currentlySelectedTimeLabel = view
         view.toggleCircle()
         self.scrollToSection(view.timeSlot)
@@ -380,7 +376,6 @@ class FavoritesViewController : TimeSlotRootViewController {
             cell.session = session
             cell.sessionTitle.text = session.title
             cell.sessionTitle.sizeToFit()
-            cell.cancelledTitle.text = session.title
             cell.cancelledOverlay.hidden = !session.cancelled
             cell.category.text = "\(session.primaryCategory!)  |  Room: \(session.scheduledRoom!)"
         }

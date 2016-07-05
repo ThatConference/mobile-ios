@@ -22,7 +22,7 @@ enum ExternalLoginResult {
 
 enum SponsorsResult {
     case Success([Sponsor])
-    case Failure([ErrorType])
+    case Failure(ErrorType)
 }
 
 enum APIError: ErrorType {
@@ -87,10 +87,6 @@ class ThatConferenceAPI {
         return components.URL!
     }
     
-    static func sessionsGetAllURL() -> NSURL {
-        return thatConferenceURL(.SessionsGetAll, parameters: ["year": GetCurrentYear()])
-    }
-    
     static func sessionsGetAcceptedURL(sinceDate: NSDate?) -> NSURL {
         var params: Dictionary<String, String>? = Dictionary<String, String>()
         if let date = sinceDate {
@@ -112,32 +108,7 @@ class ThatConferenceAPI {
         return "2016"
     }
     
-    
-    func localLogin(username: String, password: String) {
-        let headers = [
-            "accept": "application/json",
-            "content-type": "application/x-www-form-urlencoded"
-        ]
-        
-        let postData = NSMutableData(data: "grant_type=password".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&username=\(username)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&password=\(password)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: ThatConferenceAPI.baseURLString + Method.Token.rawValue)!,
-                                          cachePolicy: .UseProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
-        request.HTTPMethod = "POST"
-        request.allHTTPHeaderFields = headers
-        request.HTTPBody = postData
-        
-        let session = NSURLSession.sharedSession()
-        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
-            self.requestCompleteProtocol?.DataReceived(data, response: response, error: error)
-        })
-        
-        dataTask.resume()
-    }
-    
+    // MARK: Sessions
     class func sessionsFromJSONData(data: NSData) -> SessionsResult {
         do {
             let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
@@ -240,6 +211,33 @@ class ThatConferenceAPI {
         return session
     }
     
+    // MARK: Internal Logins
+    func localLogin(username: String, password: String) {
+        let headers = [
+            "accept": "application/json",
+            "content-type": "application/x-www-form-urlencoded"
+        ]
+        
+        let postData = NSMutableData(data: "grant_type=password".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&username=\(username)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&password=\(password)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: ThatConferenceAPI.baseURLString + Method.Token.rawValue)!,
+                                          cachePolicy: .UseProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
+        request.HTTPMethod = "POST"
+        request.allHTTPHeaderFields = headers
+        request.HTTPBody = postData
+        
+        let session = NSURLSession.sharedSession()
+        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+            self.requestCompleteProtocol?.DataReceived(data, response: response, error: error)
+        })
+        
+        dataTask.resume()
+    }
+    
+    // MARK: External Logins
     class func externalLoginsFromJSONData(data: NSData) -> ExternalLoginResult {
         do {
             let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
@@ -286,7 +284,6 @@ class ThatConferenceAPI {
     }
     
     // MARK: Favorites
-    
     class func saveFavorite(sessionId: NSNumber?, completionHandler: (data: NSData?, response: NSURLResponse?, error: ErrorType?) -> Void) {
         // save the favorite
         let url = thatConferenceURL(.Favorite, parameters: nil).URLByAppendingPathComponent("Add").URLByAppendingPathComponent("\(sessionId!)")
@@ -349,35 +346,60 @@ class ThatConferenceAPI {
     }
     
     // MARK : Sponsors
-//    class func getSponsors(completionHandler:(SponsorsResult) -> Void) {
-//        let url = thatConferenceURL(.Sponsors, parameters: nil)
-//        let request = NSMutableURLRequest(URL: url,
-//                                          cachePolicy: .UseProtocolCachePolicy,
-//                                          timeoutInterval: 10.0)
-//        request.HTTPMethod = "GET"
-//        let session = NSURLSession.sharedSession()
-//        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
-//            if error != nil {
-//                completionHandler(SponsorsResult.Failure(error!))
-//            } else {
-//                let sponsors = sponsorsFromJSONData(data!)
-//                completionHandler(sponsors)
-//            }
-//        })
-//            
-//        dataTask.resume()
-//    }
-//    
-//    private class func sponsorsFromJSONData(json: NSData) -> Sponsor? {
-//        guard let
-//            name = json["Name"] as? String
-//        else {
-//            return nil
-//        }
-//     
-//        let sponsor = Sponsor()
-//        sponsor.Name = name
-//        
-//        return sponsor
-//    }
+    class func sponsorsFromJSONData(data: NSData) -> SponsorsResult {
+        do {
+            let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
+
+            guard let sponsors = jsonObject as? [[String:AnyObject]]
+                else {
+                    return .Failure(APIError.InvalidJSONData)
+            }
+
+            var returnSponsors = [Sponsor]()
+
+            for sponsorJSON in sponsors {
+                if let sponsor = sponsorFromJSONData(sponsorJSON) {
+                    returnSponsors.append(sponsor)
+                }
+            }
+
+            if returnSponsors.count == 0 && sponsors.count > 0 {
+                return .Failure(APIError.InvalidJSONData)
+            }
+            
+            return .Success(returnSponsors)
+        }
+        catch let error {
+            return .Failure(error)
+        }
+    }
+    
+    private class func sponsorFromJSONData(json: [String: AnyObject]) -> Sponsor? {
+        guard let
+            name = json["Name"] as? String,
+            sponsorLevel = json["SponsorLevel"] as? String,
+            imageUrl = json["ImageUrl"] as? String,
+            website = json["Website"] as? String,
+            twitter = json["Twitter"] as? String,
+            facebook = json["Facebook"] as? String,
+            googlePlus = json["GooglePlus"] as? String,
+            linkedIn = json["LinkedIn"] as? String,
+            gitHub = json["GitHub"] as? String
+            else {
+                return nil
+        }
+        
+        let sponsor = Sponsor()
+        sponsor.Name = name
+        sponsor.SponsorLevel = sponsorLevel
+        sponsor.ImageUrl = imageUrl
+        sponsor.Website = website
+        sponsor.Twitter = twitter
+        sponsor.Facebook = facebook
+        sponsor.GooglePlus = googlePlus
+        sponsor.LinkedIn = linkedIn
+        sponsor.GitHub = gitHub
+        
+        return sponsor
+    }
 }

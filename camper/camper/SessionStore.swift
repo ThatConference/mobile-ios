@@ -103,7 +103,7 @@ class SessionStore {
         }
     }
     
-    func  addFavorite(session: Session, completion: (SessionsResult) -> Void) {
+    func addFavorite(session: Session, completion: (SessionsResult) -> Void) {
         ThatConferenceAPI.saveFavorite(session.id, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
                 completion(SessionsResult.Failure(error!))
