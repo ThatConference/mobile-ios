@@ -378,13 +378,17 @@ class ThatConferenceAPI {
         guard let
             name = json["Name"] as? String,
             sponsorLevel = json["SponsorLevel"] as? String,
+            levelOrder = json["LevelOrder"] as? Int,
             imageUrl = json["ImageUrl"] as? String,
             website = json["Website"] as? String,
             twitter = json["Twitter"] as? String,
             facebook = json["Facebook"] as? String,
             googlePlus = json["GooglePlus"] as? String,
             linkedIn = json["LinkedIn"] as? String,
-            gitHub = json["GitHub"] as? String
+            gitHub = json["GitHub"] as? String,
+            pinterest = json["Pinterest"] as? String,
+            instragram = json["Instagram"] as? String,
+            youTube = json["YouTube"] as? String
             else {
                 return nil
         }
@@ -392,6 +396,7 @@ class ThatConferenceAPI {
         let sponsor = Sponsor()
         sponsor.Name = name
         sponsor.SponsorLevel = sponsorLevel
+        sponsor.LevelOrder = levelOrder
         sponsor.ImageUrl = imageUrl
         sponsor.Website = website
         sponsor.Twitter = twitter
@@ -399,6 +404,9 @@ class ThatConferenceAPI {
         sponsor.GooglePlus = googlePlus
         sponsor.LinkedIn = linkedIn
         sponsor.GitHub = gitHub
+        sponsor.Pinterest = pinterest
+        sponsor.Instagram = instragram
+        sponsor.YouTube = youTube
         
         return sponsor
     }
