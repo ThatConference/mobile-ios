@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3116C4D11D3BEDB2002E2722 /* SponsorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3116C4D01D3BEDB2002E2722 /* SponsorTableViewCell.swift */; };
 		311E0E6B1CB74D76004FA850 /* ExternalLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */; };
 		3123AC291C90959D0097BF33 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3123AC271C90959D0097BF33 /* Session.swift */; };
 		312A94161C814B6B00AE938B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A94151C814B6B00AE938B /* AppDelegate.swift */; };
@@ -96,6 +97,7 @@
 
 /* Begin PBXFileReference section */
 		16A6CCF3DACA1350BA4E2BF3 /* Pods-That Conference.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-That Conference.debug.xcconfig"; path = "Pods/Target Support Files/Pods-That Conference/Pods-That Conference.debug.xcconfig"; sourceTree = "<group>"; };
+		3116C4D01D3BEDB2002E2722 /* SponsorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SponsorTableViewCell.swift; sourceTree = "<group>"; };
 		311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalLogin.swift; sourceTree = "<group>"; };
 		3123AC271C90959D0097BF33 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		312A94121C814B6B00AE938B /* That Conference.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "That Conference.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,6 +241,8 @@
 				312A94331C85EE5D00AE938B /* SessionDetailViewController.swift */,
 				312A942F1C8539B600AE938B /* SettingsViewController.swift */,
 				3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */,
+				31DEA7631D2B08F40004C2D3 /* SponsorsViewController.swift */,
+				3116C4D01D3BEDB2002E2722 /* SponsorTableViewCell.swift */,
 				31CFD1341D0E3AAB00F1AE23 /* TimeSlotRootTableViewCell.swift */,
 				31CFD1321D09050C00F1AE23 /* TimeSlotRootViewController.swift */,
 				312A941C1C814B6B00AE938B /* Assets.xcassets */,
@@ -248,7 +252,6 @@
 				31CFCD7F1C8A73D700DB2AB2 /* models */,
 				312A94351C88DE1A00AE938B /* resources */,
 				31373C9D1D02735B00430EC0 /* storyboards */,
-				31DEA7631D2B08F40004C2D3 /* SponsorsViewController.swift */,
 			);
 			path = camper;
 			sourceTree = "<group>";
@@ -306,9 +309,9 @@
 				51A4D1CF1CF1532900F956BC /* Favorites.storyboard */,
 				312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */,
 				312A94191C814B6B00AE938B /* Main.storyboard */,
-				31920B771D2B008F0035D14B /* Settings.storyboard */,
 				31373CA01D027B2300430EC0 /* PostCards.storyboard */,
 				51713A911CF150290081549B /* SessionDetails.storyboard */,
+				31920B771D2B008F0035D14B /* Settings.storyboard */,
 			);
 			name = storyboards;
 			sourceTree = "<group>";
@@ -319,11 +322,11 @@
 				31D0D9441CC48DEE007C5999 /* AuthToken.swift */,
 				512DA03A1CB7585D006CC1B3 /* DailySchedule.swift */,
 				311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */,
+				313B19011D160B8C00E72562 /* PostCardFrame.swift */,
 				3123AC271C90959D0097BF33 /* Session.swift */,
 				512DA03E1CBBE03C006CC1B3 /* Speaker.swift */,
-				512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */,
-				313B19011D160B8C00E72562 /* PostCardFrame.swift */,
 				314DA0FC1D202B690021E2DA /* Sponsor.swift */,
+				512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -332,9 +335,9 @@
 			isa = PBXGroup;
 			children = (
 				318F268B1CBC65F30065A76F /* Authentication.swift */,
+				316269AD1D0117020089D777 /* PersistenceManager.swift */,
 				31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */,
 				31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */,
-				316269AD1D0117020089D777 /* PersistenceManager.swift */,
 			);
 			name = datasource;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				31CFCD7C1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift in Sources */,
 				31CFD1371D0E416E00F1AE23 /* OpenSpacesViewController.swift in Sources */,
 				3123AC291C90959D0097BF33 /* Session.swift in Sources */,
+				3116C4D11D3BEDB2002E2722 /* SponsorTableViewCell.swift in Sources */,
 				31D0D9411CC08282007C5999 /* AuthorizationWebViewController.swift in Sources */,
 				311E0E6B1CB74D76004FA850 /* ExternalLogin.swift in Sources */,
 				317154221D1C340E004078E2 /* PassThroughImageView.swift in Sources */,

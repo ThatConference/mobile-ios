@@ -20,4 +20,3 @@ class ScheduleTableViewCell: TimeSlotRootTableViewCell {
         super.init(coder: aDecoder)
     }
 }
-

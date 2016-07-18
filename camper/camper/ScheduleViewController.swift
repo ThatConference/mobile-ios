@@ -205,31 +205,34 @@ class ScheduleViewController : TimeSlotRootViewController {
         var hours: [Int] = []
         for timeSlot in self.dailySchedule.timeSlots {
             var alreadyAdded: Bool = false
-            var hour = NSCalendar.currentCalendar().component(.Hour, fromDate: timeSlot.time)
-            let minutes = NSCalendar.currentCalendar().component(.Minute, fromDate: timeSlot.time)
             
-            for trackedHours in hours {
-                if trackedHours == hour {
-                    alreadyAdded = true
-                    break
-                }
-            }
-            
-            if !alreadyAdded {
-                if hour > 12 {
-                    hour = hour - 12
+            if (timeSlot.time != nil) {
+                var hour = NSCalendar.currentCalendar().component(.Hour, fromDate: timeSlot.time)
+                let minutes = NSCalendar.currentCalendar().component(.Minute, fromDate: timeSlot.time)
+                
+                for trackedHours in hours {
+                    if trackedHours == hour {
+                        alreadyAdded = true
+                        break
+                    }
                 }
                 
-                var padding = ""
-                if (minutes == 0) {
-                    padding = "0"
+                if !alreadyAdded {
+                    if hour > 12 {
+                        hour = hour - 12
+                    }
+                    
+                    var padding = ""
+                    if (minutes == 0) {
+                        padding = "0"
+                    }
+                    
+                    let timeLabel = "\(hour):\(minutes)\(padding)"
+                    let label = createClickableTimeLabel(timeLabel)
+                    label.timeSlot = timeSlot.time
+                    self.timeTableView.addArrangedSubview(label)
+                    hours.append(hour)
                 }
-                
-                let timeLabel = "\(hour):\(minutes)\(padding)"
-                let label = createClickableTimeLabel(timeLabel)
-                label.timeSlot = timeSlot.time
-                self.timeTableView.addArrangedSubview(label)
-                hours.append(hour)
             }
         }
         

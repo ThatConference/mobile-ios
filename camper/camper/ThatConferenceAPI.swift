@@ -10,13 +10,13 @@ enum Method: String {
     case UserFavorites = "/api3/Session/GetFavoriteSessions"
 }
 
-enum SessionsResult {
-    case Success([Session])
+enum ExternalLoginResult {
+    case Success([ExternalLogin])
     case Failure(ErrorType)
 }
 
-enum ExternalLoginResult {
-    case Success([ExternalLogin])
+enum SessionsResult {
+    case Success([Session])
     case Failure(ErrorType)
 }
 
@@ -75,6 +75,10 @@ class ThatConferenceAPI {
     
     class func externalLoginsURL() -> NSURL {
         return thatConferenceURL(.ExternalLogins, parameters: ["returnUrl":"/", "generateState": "true"])
+    }
+    
+    class func sponsorsURL() -> NSURL {
+        return thatConferenceURL(.Sponsors, parameters: nil)
     }
     
     static func resourceURL(partialURL: String) -> NSURL {
@@ -138,20 +142,15 @@ class ThatConferenceAPI {
     }
     
     private class func sessionFromJSONData(json: [String: AnyObject]) -> Session? {
-        guard let
-            id = json["Id"] as? Int,
-            title = json["Title"] as? String,
-            sessionDescription = json["Description"] as? String,
-            dateString = json["ScheduledDateTime"] as? String?,
-            scheduledRoom = json["ScheduledRoom"] as? String,
-            primaryCategory = json["PrimaryCategory"] as? String,
-            level = json["Level"] as? String,
-            accepted = (json["Accepted"] as? NSNumber)?.boolValue,
-            cancelled = (json["Canceled"] as? NSNumber)?.boolValue,
-            isFamilyApproved = (json["IsFamilyApproved"] as? NSNumber)?.boolValue
-        else {
-                return nil
-        }
+        let id = json["Id"] as? Int
+        let title = json["Title"] as? String
+        let sessionDescription = json["Description"] as? String
+        let scheduledRoom = json["ScheduledRoom"] as? String
+        let primaryCategory = json["PrimaryCategory"] as? String
+        let level = json["Level"] as? String
+        let accepted = (json["Accepted"] as? NSNumber)?.boolValue
+        let cancelled = (json["Canceled"] as? NSNumber)?.boolValue
+        let isFamilyApproved = (json["IsFamilyApproved"] as? NSNumber)?.boolValue
         
         var isUserFavorite: Bool = false
         if let userFavorite = (json["IsUserFavorite"] as? NSNumber) {
@@ -159,8 +158,10 @@ class ThatConferenceAPI {
         }
        
         var scheduledDateTime: NSDate?
-        if dateString != nil {
-            scheduledDateTime = dateFormatter.dateFromString(dateString!)            
+        if let dateString = json["ScheduledDateTime"] as? String {
+            scheduledDateTime = dateFormatter.dateFromString(dateString)
+        } else {
+            return nil
         }
 
         let session = Session()
@@ -171,9 +172,9 @@ class ThatConferenceAPI {
         session.scheduledRoom = scheduledRoom
         session.primaryCategory = primaryCategory
         session.level = level
-        session.accepted = accepted
-        session.cancelled = cancelled
-        session.isFamilyApproved = isFamilyApproved
+        session.accepted = accepted!
+        session.cancelled = cancelled!
+        session.isFamilyApproved = isFamilyApproved!
         session.isUserFavorite = isUserFavorite
         
         if let speakers = json["Speakers"] as? [[String: AnyObject]] {
@@ -337,6 +338,8 @@ class ThatConferenceAPI {
             if error != nil {
                 completionHandler(SessionsResult.Failure(error!))
             } else {
+                print("Response: \(response)")
+                print("Favorites Return Data \(data)")
                 let sessions = sessionsFromJSONData(data!)
                 completionHandler(sessions)
             }
@@ -375,38 +378,34 @@ class ThatConferenceAPI {
     }
     
     private class func sponsorFromJSONData(json: [String: AnyObject]) -> Sponsor? {
-        guard let
-            name = json["Name"] as? String,
-            sponsorLevel = json["SponsorLevel"] as? String,
-            levelOrder = json["LevelOrder"] as? Int,
-            imageUrl = json["ImageUrl"] as? String,
-            website = json["Website"] as? String,
-            twitter = json["Twitter"] as? String,
-            facebook = json["Facebook"] as? String,
-            googlePlus = json["GooglePlus"] as? String,
-            linkedIn = json["LinkedIn"] as? String,
-            gitHub = json["GitHub"] as? String,
-            pinterest = json["Pinterest"] as? String,
-            instragram = json["Instagram"] as? String,
-            youTube = json["YouTube"] as? String
-            else {
-                return nil
-        }
+        let name = json["Name"] as? String
+        let sponsorLevel = json["SponsorLevel"] as? String
+        let levelOrder = json["LevelOrder"] as? Int
+        let imageUrl = json["ImageUrl"] as? String
+        let website = json["Website"] as? String
+        let twitter = json["Twitter"] as? String
+        let facebook = json["Facebook"] as? String
+        let googlePlus = json["GooglePlus"] as? String
+        let linkedIn = json["LinkedIn"] as? String
+        let gitHub = json["GitHub"] as? String
+        let pinterest = json["Pinterest"] as? String
+        let instragram = json["Instagram"] as? String
+        let youTube = json["YouTube"] as? String
         
         let sponsor = Sponsor()
-        sponsor.Name = name
-        sponsor.SponsorLevel = sponsorLevel
-        sponsor.LevelOrder = levelOrder
-        sponsor.ImageUrl = imageUrl
-        sponsor.Website = website
-        sponsor.Twitter = twitter
-        sponsor.Facebook = facebook
-        sponsor.GooglePlus = googlePlus
-        sponsor.LinkedIn = linkedIn
-        sponsor.GitHub = gitHub
-        sponsor.Pinterest = pinterest
-        sponsor.Instagram = instragram
-        sponsor.YouTube = youTube
+        sponsor.name = name
+        sponsor.sponsorLevel = sponsorLevel
+        sponsor.levelOrder = levelOrder
+        sponsor.imageUrl = imageUrl
+        sponsor.website = website
+        sponsor.twitter = twitter
+        sponsor.facebook = facebook
+        sponsor.googlePlus = googlePlus
+        sponsor.linkedIn = linkedIn
+        sponsor.gitHub = gitHub
+        sponsor.pinterest = pinterest
+        sponsor.instagram = instragram
+        sponsor.youTube = youTube
         
         return sponsor
     }

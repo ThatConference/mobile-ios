@@ -14,7 +14,7 @@ class BaseViewController: UIViewController {
         self.activityIndicator.hidesWhenStopped = true
         self.view.addSubview(self.activityIndicator)
         
-        // camera button
+        //That Post Card
 //        let cameraBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
 //        cameraBtn.setImage(UIImage(named: "camera"), forState: UIControlState.Normal)
 //        cameraBtn.addTarget(self, action: #selector(self.moveToCamera), forControlEvents:  UIControlEvents.TouchUpInside)

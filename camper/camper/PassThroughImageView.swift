@@ -9,6 +9,4 @@ class PassThroughImageView : UIImageView {
         }
         return false
     }
-    
-    
 }

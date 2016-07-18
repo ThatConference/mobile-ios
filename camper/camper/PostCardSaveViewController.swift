@@ -78,8 +78,8 @@ class PostCardSaveViewController : UIViewController {
     }
     
     func padImage(originalImage: UIImage) -> UIImage {
-        let width:CGFloat = originalImage.size.width * 3.0
-        let height:CGFloat = originalImage.size.height * 3.0
+        let width:CGFloat = originalImage.size.width * 1.5
+        let height:CGFloat = originalImage.size.height * 1.5
         UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), true, 0.0)
         let context = UIGraphicsGetCurrentContext()
         UIGraphicsPushContext(context!)

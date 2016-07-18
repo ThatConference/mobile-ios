@@ -80,15 +80,19 @@ class FavoritesViewController : TimeSlotRootViewController {
                 PersistenceManager.saveDailySchedule(self.dailySchedules, path: Path.Favorites)
                 self.displayData()
                 break
-            case .Failure(_):
+            case .Failure(let error):
+                print("Error: \(error)")
                 self.setData(true)
                 let values = PersistenceManager.loadDailySchedule(Path.Favorites)
                 if values != nil && Authentication.isLoggedIn() {
                     self.dailySchedules = values!
                     self.displayData()
                 } else {
-                    let alert = UIAlertController(title: "Error", message: "Could not retrieve favorites data. Please make sure you are logged in and have a connection.", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction) in
+                    let alert = UIAlertController(title: "Log In Needed", message: "Log in to view favorites.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Log In", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction) in
+                        self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
+                    }))
+                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction) in
                         if (self.dailySchedules != nil) {
                             self.dailySchedules.removeAll()
                         }

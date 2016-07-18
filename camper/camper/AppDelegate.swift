@@ -2,7 +2,6 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
     var dirtyDataSchedule: Bool = false
     var dirtyDataFavorites: Bool = false
@@ -13,6 +12,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navController = rootViewController.childViewControllers.first as! UINavigationController
         let favoritesViewController = navController.topViewController as! FavoritesViewController
         favoritesViewController.store = SessionStore()
+        
+        //Back Image
+        let backArrowImage = UIImage(named: "back")
+        let renderedImage = backArrowImage?.imageWithRenderingMode(.AlwaysOriginal)
+        UINavigationBar.appearance().backIndicatorImage = renderedImage
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = renderedImage
         
         return true
     }

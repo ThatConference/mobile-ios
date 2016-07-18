@@ -18,20 +18,32 @@ class Session: NSObject {
     
     override init() {}
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.cancelled, forKey: "cancelled")
-        aCoder.encodeObject(self.accepted, forKey: "accepted")
-        aCoder.encodeObject(self.id, forKey: "id")
-        aCoder.encodeObject(self.title, forKey: "title")
-        aCoder.encodeObject(self.sessionDescription, forKey: "sessionDescription")
-        aCoder.encodeObject(self.scheduledDateTime, forKey: "scheduledDateTime")
-        aCoder.encodeObject(self.scheduledRoom, forKey: "scheduledRoom")
-        aCoder.encodeObject(self.primaryCategory, forKey: "primaryCategory")
-        aCoder.encodeObject(self.level, forKey: "level")
-        aCoder.encodeObject(self.speakers, forKey: "speakers")
-        aCoder.encodeObject(self.isFamilyApproved, forKey: "isFamilyApproved")
-        aCoder.encodeObject(self.isUserFavorite, forKey: "isUserFavorite")
-        aCoder.encodeObject(self.updated, forKey: "updated")
+    required init(cancelled: Bool,
+                  accepted: Bool,
+                  id: NSNumber?,
+                  title: String?,
+                  sessionDescription: String?,
+                  scheduledDateTime: NSDate?,
+                  scheduledRoom: String?,
+                  primaryCategory: String?,
+                  level: String?,
+                  speakers: [Speaker],
+                  isFamilyApproved: Bool,
+                  isUserFavorite: Bool,
+                  updated: Bool) {
+        self.cancelled = cancelled
+        self.accepted = accepted
+        self.id = id
+        self.title = title
+        self.sessionDescription = sessionDescription
+        self.scheduledDateTime = scheduledDateTime
+        self.scheduledRoom = scheduledRoom
+        self.primaryCategory = primaryCategory
+        self.level = level
+        self.speakers = speakers
+        self.isFamilyApproved = isFamilyApproved
+        self.isUserFavorite = isUserFavorite
+        self.updated = updated
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -62,32 +74,20 @@ class Session: NSObject {
                   isUserFavorite: isUserFavorite,
                   updated: updated)
     }
-    
-    required init(cancelled: Bool,
-                  accepted: Bool,
-                  id: NSNumber?,
-                  title: String?,
-                  sessionDescription: String?,
-                  scheduledDateTime: NSDate?,
-                  scheduledRoom: String?,
-                  primaryCategory: String?,
-                  level: String?,
-                  speakers: [Speaker],
-                  isFamilyApproved: Bool,
-                  isUserFavorite: Bool,
-                  updated: Bool) {
-        self.cancelled = cancelled
-        self.accepted = accepted
-        self.id = id
-        self.title = title
-        self.sessionDescription = sessionDescription
-        self.scheduledDateTime = scheduledDateTime
-        self.scheduledRoom = scheduledRoom
-        self.primaryCategory = primaryCategory
-        self.level = level
-        self.speakers = speakers
-        self.isFamilyApproved = isFamilyApproved
-        self.isUserFavorite = isUserFavorite
-        self.updated = updated
+
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.cancelled, forKey: "cancelled")
+        aCoder.encodeObject(self.accepted, forKey: "accepted")
+        aCoder.encodeObject(self.id, forKey: "id")
+        aCoder.encodeObject(self.title, forKey: "title")
+        aCoder.encodeObject(self.sessionDescription, forKey: "sessionDescription")
+        aCoder.encodeObject(self.scheduledDateTime, forKey: "scheduledDateTime")
+        aCoder.encodeObject(self.scheduledRoom, forKey: "scheduledRoom")
+        aCoder.encodeObject(self.primaryCategory, forKey: "primaryCategory")
+        aCoder.encodeObject(self.level, forKey: "level")
+        aCoder.encodeObject(self.speakers, forKey: "speakers")
+        aCoder.encodeObject(self.isFamilyApproved, forKey: "isFamilyApproved")
+        aCoder.encodeObject(self.isUserFavorite, forKey: "isUserFavorite")
+        aCoder.encodeObject(self.updated, forKey: "updated")
     }
 }
