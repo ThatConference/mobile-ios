@@ -26,6 +26,12 @@ class FavoritesViewController : TimeSlotRootViewController {
         super.viewDidAppear(animated)
         
         if (getDirtyData()) {
+            if (self.dailySchedules != nil) {
+                NSOperationQueue.mainQueue().addOperationWithBlock() {
+                    self.dailySchedules.removeAll()
+                    self.tableView.hidden = true
+                }
+            }
             loadData()
         }
     }
@@ -113,6 +119,7 @@ class FavoritesViewController : TimeSlotRootViewController {
     
     func displayData() {
         NSOperationQueue.mainQueue().addOperationWithBlock() {
+            self.tableView.hidden = false
             self.activityIndicator.stopAnimating()
             
             self.setCurrentDay(self.dailySchedules)

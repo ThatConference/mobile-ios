@@ -7,10 +7,10 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 80, 80))
+        self.activityIndicator = UIActivityIndicatorView(frame: self.view.bounds)
         self.activityIndicator.activityIndicatorViewStyle = .Gray
         self.activityIndicator.center =  self.view.center
-        self.activityIndicator.backgroundColor = UIColor.whiteColor()
+        self.activityIndicator.backgroundColor = UIColor(white: 1, alpha: 0.8)
         self.activityIndicator.hidesWhenStopped = true
         self.view.addSubview(self.activityIndicator)
         

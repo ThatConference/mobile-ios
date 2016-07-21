@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MB1-Be-zlE">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -30,33 +31,27 @@
                         <viewControllerLayoutGuide type="bottom" id="PgP-Fr-Idw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3gO-M1-8k3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-background" translatesAutoresizingMaskIntoConstraints="NO" id="vN0-Af-WSg">
-                                <rect key="frame" x="0.0" y="32" width="600" height="568"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-tclogo" translatesAutoresizingMaskIntoConstraints="NO" id="KnW-c8-xw3">
-                                <rect key="frame" x="20" y="20" width="560" height="225"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="225" id="mQr-YF-EGi"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="168" width="414" height="568"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-mclogo" translatesAutoresizingMaskIntoConstraints="NO" id="aYv-6y-Faz">
-                                <rect key="frame" x="225" y="500" width="150" height="80"/>
+                                <rect key="frame" x="132" y="636" width="150" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="zEH-IS-0qD"/>
                                     <constraint firstAttribute="width" constant="150" id="zLD-Pk-2yT"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.0.2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DdF-ZE-8yg">
-                                <rect key="frame" x="20" y="580" width="560" height="15"/>
+                                <rect key="frame" x="20" y="716" width="374" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGg-xC-GOi">
-                                <rect key="frame" x="20" y="235" width="560" height="40"/>
+                                <rect key="frame" x="20" y="287" width="374" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="OPf-VO-KFv"/>
@@ -70,7 +65,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t6b-uT-nKE" userLabel="Map Button">
-                                <rect key="frame" x="20" y="283" width="560" height="40"/>
+                                <rect key="frame" x="20" y="335" width="374" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="5cl-N4-8tX"/>
@@ -84,7 +79,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="ReportBugButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tai-jz-Tyw" userLabel="Report Bug Button">
-                                <rect key="frame" x="20" y="331" width="560" height="40"/>
+                                <rect key="frame" x="20" y="383" width="374" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration" label="Report Bug"/>
                                 <constraints>
@@ -98,6 +93,18 @@
                                     <action selector="reportBugPressed:" destination="MB1-Be-zlE" eventType="touchUpInside" id="my3-Es-av9"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-tclogo" translatesAutoresizingMaskIntoConstraints="NO" id="KnW-c8-xw3">
+                                <rect key="frame" x="20" y="40" width="374" height="227.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="KnW-c8-xw3" secondAttribute="height" multiplier="288:175" id="f3N-4q-aHf"/>
+                                    <constraint firstAttribute="height" constant="175" id="mQr-YF-EGi"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="mQr-YF-EGi"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -111,7 +118,7 @@
                             <constraint firstItem="t6b-uT-nKE" firstAttribute="leading" secondItem="3gO-M1-8k3" secondAttribute="leadingMargin" id="Jzt-Kl-1kt"/>
                             <constraint firstItem="PgP-Fr-Idw" firstAttribute="top" secondItem="vN0-Af-WSg" secondAttribute="bottom" id="NCU-0C-D58"/>
                             <constraint firstItem="Tai-jz-Tyw" firstAttribute="trailing" secondItem="3gO-M1-8k3" secondAttribute="trailingMargin" id="O7O-eN-9qJ"/>
-                            <constraint firstItem="KnW-c8-xw3" firstAttribute="top" secondItem="07z-GR-FjK" secondAttribute="bottom" id="OZR-QH-aDI"/>
+                            <constraint firstItem="KnW-c8-xw3" firstAttribute="top" secondItem="07z-GR-FjK" secondAttribute="bottom" constant="20" id="OZR-QH-aDI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="t6b-uT-nKE" secondAttribute="trailing" id="cW8-Y9-Lt7"/>
                             <constraint firstItem="DdF-ZE-8yg" firstAttribute="leading" secondItem="3gO-M1-8k3" secondAttribute="leadingMargin" id="dPu-xT-vgQ"/>
                             <constraint firstItem="t6b-uT-nKE" firstAttribute="top" secondItem="bGg-xC-GOi" secondAttribute="bottom" constant="8" id="e0E-Bq-CJv"/>
@@ -120,13 +127,14 @@
                             <constraint firstItem="vN0-Af-WSg" firstAttribute="leading" secondItem="3gO-M1-8k3" secondAttribute="leading" id="gcj-Pg-KCV"/>
                             <constraint firstItem="Tai-jz-Tyw" firstAttribute="top" secondItem="t6b-uT-nKE" secondAttribute="bottom" constant="8" id="h64-9W-gVj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="bGg-xC-GOi" secondAttribute="trailing" id="mb7-cI-IXj"/>
-                            <constraint firstItem="bGg-xC-GOi" firstAttribute="top" secondItem="KnW-c8-xw3" secondAttribute="bottom" constant="-10" id="xwz-PD-Jhp"/>
+                            <constraint firstItem="bGg-xC-GOi" firstAttribute="top" secondItem="KnW-c8-xw3" secondAttribute="bottom" constant="20" id="xwz-PD-Jhp"/>
                             <constraint firstItem="Tai-jz-Tyw" firstAttribute="leading" secondItem="3gO-M1-8k3" secondAttribute="leadingMargin" id="ykZ-Rw-Rzw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SETTINGS" id="CaK-Eg-uxX">
                         <barButtonItem key="backBarButtonItem" title=" " id="JgA-Em-mLg"/>
                     </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="loginButton" destination="bGg-xC-GOi" id="8KC-qG-MvR"/>
                         <outlet property="mcLogo" destination="aYv-6y-Faz" id="LuB-eN-JIh"/>
@@ -151,11 +159,11 @@
                         <viewControllerLayoutGuide type="bottom" id="1KT-Yn-Fq1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WPJ-dp-WJ2">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baseMap" translatesAutoresizingMaskIntoConstraints="NO" id="3aY-7S-uQV">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -182,6 +190,6 @@
         <image name="baseMap" width="634" height="898"/>
         <image name="splash-background" width="320" height="568"/>
         <image name="splash-mclogo" width="131" height="65"/>
-        <image name="splash-tclogo" width="231" height="231"/>
+        <image name="splash-tclogo" width="234" height="196"/>
     </resources>
 </document>

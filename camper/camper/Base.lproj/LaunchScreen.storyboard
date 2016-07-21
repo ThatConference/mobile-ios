@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -20,9 +21,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-tclogo" translatesAutoresizingMaskIntoConstraints="NO" id="8DN-Vb-yqJ">
-                                <rect key="frame" x="-13" y="70" width="400" height="270"/>
+                                <rect key="frame" x="16" y="70" width="343" height="270"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="400" id="hK7-Hh-qzz"/>
                                     <constraint firstAttribute="height" constant="270" id="um4-Zh-BTI"/>
                                 </constraints>
                             </imageView>
@@ -40,6 +40,8 @@
                             <constraint firstItem="hVL-wW-U8Q" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="3as-oa-wdN"/>
                             <constraint firstItem="hVL-wW-U8Q" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="4Cc-PN-Sbs"/>
                             <constraint firstAttribute="trailing" secondItem="hVL-wW-U8Q" secondAttribute="trailing" id="Dw4-g1-AQh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8DN-Vb-yqJ" secondAttribute="trailing" id="PTw-3G-DV7"/>
+                            <constraint firstItem="8DN-Vb-yqJ" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="U3a-rA-Knu"/>
                             <constraint firstItem="anO-yB-ECq" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ZDg-V3-dId"/>
                             <constraint firstItem="8DN-Vb-yqJ" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="50" id="b9g-E1-ucs"/>
                             <constraint firstItem="hVL-wW-U8Q" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="fdr-bw-640"/>
@@ -58,6 +60,6 @@
     <resources>
         <image name="splash-background" width="320" height="568"/>
         <image name="splash-mclogo" width="131" height="65"/>
-        <image name="splash-tclogo" width="231" height="231"/>
+        <image name="splash-tclogo" width="234" height="196"/>
     </resources>
 </document>

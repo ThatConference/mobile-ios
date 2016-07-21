@@ -370,38 +370,41 @@ class ScheduleViewController : TimeSlotRootViewController {
     
     func SessionFavorited(sender: UITapGestureRecognizer) {
         if Authentication.isLoggedIn() {
+            let sessionStore = SessionStore()
             if let cell = sender.view?.superview?.superview as? ScheduleTableViewCell {
-                let sessionStore = SessionStore()
+                self.startIndicator()
                 if cell.session.isUserFavorite {
                     sessionStore.removeFavorite(cell.session, completion:{(sessionsResult) -> Void in
                         switch sessionsResult {
                         case .Success(let sessions):
-                            self.setData(true)
+                            self.stopIndicator()
+                            self.setDirtyData()
                             cell.session = sessions.first
                             self.setFavoriteIcon(cell, animated: true)
                             break
                         case .Failure(_):
+                            self.stopIndicator()
+                            let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.Alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                            self.presentViewController(alert, animated: true, completion: nil)
                             break
                         }
                     })
-                    
                 }
                 else {
-                    CATransaction.begin()
-                    CATransaction.setAnimationDuration(1.5)
-                    let transition = CATransition()
-                    transition.type = kCATransitionFade
-                    cell.favoriteIcon!.layer.addAnimation(transition, forKey: kCATransitionFade)
-                    CATransaction.commit()
-                    cell.favoriteIcon!.image = UIImage(named:"likeadded")
                     sessionStore.addFavorite(cell.session, completion:{(sessionsResult) -> Void in
                         switch sessionsResult {
                         case .Success(let sessions):
-                            self.setData(true)
+                            self.stopIndicator()
+                            self.setDirtyData()
                             cell.session = sessions.first
                             self.setFavoriteIcon(cell, animated: true)
                             break
                         case .Failure(_):
+                            self.stopIndicator()
+                            let alert = UIAlertController(title: "Error", message: "Could not add favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.Alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                            self.presentViewController(alert, animated: true, completion: nil)
                             break
                         }
                     })

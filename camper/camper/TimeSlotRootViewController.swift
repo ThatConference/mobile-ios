@@ -154,6 +154,18 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
         appDelegate.dirtyDataFavorites = true;
     }
     
+    func startIndicator() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.activityIndicator.startAnimating()
+        })
+    }
+    
+    func stopIndicator() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.activityIndicator.stopAnimating()
+        })
+    }
+    
     func setFavoriteIcon(cell: ScheduleTableViewCell, animated: Bool) {
         dispatch_async(dispatch_get_main_queue(), {
             if animated {

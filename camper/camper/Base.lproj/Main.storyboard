@@ -372,7 +372,7 @@
                                                         <constraint firstAttribute="height" constant="20" id="gnh-jm-bWj"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Session Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCd-NM-RmI">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Session Title" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZCd-NM-RmI">
                                                     <rect key="frame" x="56" y="8" width="496" height="17"/>
                                                     <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1057,13 +1057,13 @@
                                                                         <constraint firstAttribute="height" constant="180" id="ZrO-n4-hGB"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sponsor Name" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t7y-GN-wIc">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sponsor Name" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t7y-GN-wIc">
                                                                     <rect key="frame" x="8" y="188" width="584" height="23"/>
                                                                     <fontDescription key="fontDescription" name="Knockout-HTF31-JuniorMiddlewt" family="Knockout" pointSize="20"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="left" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yI0-da-ede" userLabel="Website">
+                                                                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yI0-da-ede" userLabel="Website">
                                                                     <rect key="frame" x="8" y="215" width="584" height="28"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                     <state key="normal" title="Website">
@@ -1073,11 +1073,11 @@
                                                                         <action selector="WebsitePressed:" destination="2VS-fW-VOH" eventType="touchUpInside" id="Vko-9r-R0Y"/>
                                                                     </connections>
                                                                 </button>
-                                                                <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="yA9-hq-zzp" userLabel="SocialSharing">
+                                                                <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="yA9-hq-zzp" userLabel="SocialSharing">
                                                                     <rect key="frame" x="8" y="247" width="584" height="40"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dT1-bL-df7">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                                                            <rect key="frame" x="132" y="0.0" width="320" height="40"/>
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHm-kb-tCn" userLabel="twitterButton">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -1192,6 +1192,7 @@
                                                                         <constraint firstItem="dT1-bL-df7" firstAttribute="centerY" secondItem="yA9-hq-zzp" secondAttribute="centerY" id="0ut-QP-dLu"/>
                                                                         <constraint firstItem="dT1-bL-df7" firstAttribute="top" secondItem="yA9-hq-zzp" secondAttribute="top" id="4QF-lR-Hkh"/>
                                                                         <constraint firstItem="dT1-bL-df7" firstAttribute="leading" secondItem="yA9-hq-zzp" secondAttribute="leading" priority="750" id="EXA-zd-Srb"/>
+                                                                        <constraint firstItem="dT1-bL-df7" firstAttribute="centerX" secondItem="yA9-hq-zzp" secondAttribute="centerX" id="fxN-Nz-SO9"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>

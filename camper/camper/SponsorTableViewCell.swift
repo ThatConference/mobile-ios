@@ -33,6 +33,7 @@ class SponsorTableViewCell: UITableViewCell {
                     if let data = NSData(contentsOfURL: url.URL!) {
                         dispatch_async(dispatch_get_main_queue(), {
                             self.LogoImage.image = UIImage(data: data)
+                            self.LogoImage.clipsToBounds = true
                         });
                     }
                 }

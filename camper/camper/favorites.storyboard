@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qdJ-ki-6Nd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qdJ-ki-6Nd">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -84,7 +84,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Category" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBk-gn-1kL">
-                                                    <rect key="frame" x="8" y="31" width="544" height="15.5"/>
+                                                    <rect key="frame" x="8" y="31.5" width="544" height="15"/>
                                                     <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="15"/>
                                                     <color key="textColor" red="0.63137254899999995" green="0.52549019610000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -92,8 +92,8 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAa-oc-ZHr">
                                                     <rect key="frame" x="0.0" y="0.0" width="560" height="55"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CANCELLED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlJ-yp-NMx">
-                                                            <rect key="frame" x="8" y="31" width="552" height="23.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CANCELLED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlJ-yp-NMx">
+                                                            <rect key="frame" x="8" y="31" width="552" height="20"/>
                                                             <fontDescription key="fontDescription" name="NeutrafaceText-Bold" family="Neutraface Text" pointSize="20"/>
                                                             <color key="textColor" red="0.66666666669999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -103,15 +103,12 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="55" id="6RR-sH-qyj"/>
                                                         <constraint firstAttribute="trailing" secondItem="xlJ-yp-NMx" secondAttribute="trailing" id="706-L5-GTu"/>
-                                                        <constraint firstAttribute="bottom" secondItem="xlJ-yp-NMx" secondAttribute="bottom" constant="8" id="C1T-en-hel"/>
-                                                        <constraint firstAttribute="bottom" secondItem="xlJ-yp-NMx" secondAttribute="bottom" id="JtV-e6-F1g"/>
+                                                        <constraint firstAttribute="bottom" secondItem="xlJ-yp-NMx" secondAttribute="bottom" constant="4" id="C1T-en-hel"/>
                                                         <constraint firstItem="xlJ-yp-NMx" firstAttribute="leading" secondItem="SAa-oc-ZHr" secondAttribute="leading" constant="8" id="d7i-52-BPi"/>
-                                                        <constraint firstItem="xlJ-yp-NMx" firstAttribute="leading" secondItem="SAa-oc-ZHr" secondAttribute="leading" constant="8" id="hLL-nW-ZKl"/>
-                                                        <constraint firstAttribute="trailing" secondItem="xlJ-yp-NMx" secondAttribute="trailing" id="qUa-PS-ZNj"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Session Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDg-G0-h0X">
-                                                    <rect key="frame" x="8" y="8" width="544" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Session Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDg-G0-h0X">
+                                                    <rect key="frame" x="8" y="8" width="544" height="17"/>
                                                     <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -130,6 +127,11 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="BBk-gn-1kL" secondAttribute="bottom" id="tKd-la-ZVM"/>
                                                 <constraint firstItem="PDg-G0-h0X" firstAttribute="leading" secondItem="2Ci-Ah-LSH" secondAttribute="leadingMargin" id="wXr-9X-iww"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="bqR-fn-p3e"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="cancelledOverlay" destination="SAa-oc-ZHr" id="YJD-59-Wq9"/>

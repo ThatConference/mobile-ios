@@ -42,7 +42,6 @@ class SessionDetailViewController : BaseViewController, UITableViewDataSource, U
         
         favoriteButton.userInteractionEnabled = true
         favoriteButton!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SessionDetailViewController.SessionFavorited(_:))))
-        setFavoriteIcon(animated: false)
     }
     
     override func viewDidLayoutSubviews() {
@@ -112,33 +111,45 @@ class SessionDetailViewController : BaseViewController, UITableViewDataSource, U
                 sessionStore.removeFavorite(self.session, completion:{(sessionsResult) -> Void in
                     switch sessionsResult {
                     case .Success(let sessions):
+                        CATransaction.begin()
+                        CATransaction.setAnimationDuration(1.5)
+                        let transition = CATransition()
+                        transition.type = kCATransitionFade
+                        self.favoriteButton!.layer.addAnimation(transition, forKey: kCATransitionFade)
+                        CATransaction.commit()
+                        self.favoriteButton!.image = UIImage(named:"like-remove")
+                        
                         self.setDirtyData()
                         self.session = sessions.first
                         self.setFavoriteIcon(animated: true)
                         break
                     case .Failure(_):
+                        let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.Alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                        self.presentViewController(alert, animated: true, completion: nil)
                         break
                     }
                 })
                 
             }
             else {
-                CATransaction.begin()
-                CATransaction.setAnimationDuration(1.5)
-                let transition = CATransition()
-                transition.type = kCATransitionFade
-                self.favoriteButton!.layer.addAnimation(transition, forKey: kCATransitionFade)
-                CATransaction.commit()
-                self.favoriteButton!.image = UIImage(named:"likeadded")
                 sessionStore.addFavorite(self.session, completion:{(sessionsResult) -> Void in
                     switch sessionsResult {
                     case .Success(let sessions):
+                        CATransaction.begin()
+                        CATransaction.setAnimationDuration(1.5)
+                        let transition = CATransition()
+                        transition.type = kCATransitionFade
+                        self.favoriteButton!.layer.addAnimation(transition, forKey: kCATransitionFade)
+                        CATransaction.commit()
+                        self.favoriteButton!.image = UIImage(named:"likeadded")
+                        
                         self.setDirtyData()
                         self.session = sessions.first
                         self.setFavoriteIcon(animated: true)
                         break
                     case .Failure(_):
-                        let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time", preferredStyle: UIAlertControllerStyle.Alert)
+                        let alert = UIAlertController(title: "Error", message: "Could not add favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.Alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                         self.presentViewController(alert, animated: true, completion: nil)
                         break

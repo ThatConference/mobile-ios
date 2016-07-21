@@ -41,7 +41,7 @@ class Speaker: NSObject {
         let headShotURL = aDecoder.decodeObjectForKey("headShotURL") as! NSURL
         let userName = aDecoder.decodeObjectForKey("userName") as? String
         let biography = aDecoder.decodeObjectForKey("biography") as? String
-        let website = aDecoder.decodeObjectForKey("website") as! NSURL
+        let website = aDecoder.decodeObjectForKey("website") as? NSURL
         let company = aDecoder.decodeObjectForKey("company") as? String
         let title = aDecoder.decodeObjectForKey("title") as? String
         let twitter = aDecoder.decodeObjectForKey("twitter") as? String
@@ -71,7 +71,7 @@ class Speaker: NSObject {
                   headShotURL: NSURL,
                   userName: String?,
                   biography: String?,
-                  website: NSURL,
+                  website: NSURL?,
                   company: String?,
                   title: String?,
                   twitter: String?,

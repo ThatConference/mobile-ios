@@ -106,23 +106,22 @@ class SessionStore {
     func addFavorite(session: Session, completion: (SessionsResult) -> Void) {
         ThatConferenceAPI.saveFavorite(session.id, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
-                completion(SessionsResult.Failure(error!))
+                return completion(SessionsResult.Failure(error!))
             }
             
             session.isUserFavorite = true
-            
-            completion(.Success([session]))
+            return completion(.Success([session]))
         })
     }
     
     func removeFavorite(session: Session, completion: (SessionsResult) -> Void) {
         ThatConferenceAPI.deleteFavorite(session.id, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
-                completion(SessionsResult.Failure(error!))
+                return completion(SessionsResult.Failure(error!))
             }
             
             session.isUserFavorite = false
-            completion(.Success([session]))
+            return completion(.Success([session]))
         })
 
     }
@@ -193,7 +192,7 @@ class SessionStore {
             
             let result = self.processSessionsRequest(data: data, error: error)
             
-            completion(result)
+            return completion(result)
         }
         task.resume()
     }
