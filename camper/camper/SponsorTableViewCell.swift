@@ -9,6 +9,9 @@ class SponsorTableViewCell: UITableViewCell {
     @IBOutlet var SocialGoogle: UIButton!
     @IBOutlet var SocialLinkedIn: UIButton!
     @IBOutlet var SocialGitHub: UIButton!
+    @IBOutlet var SocialInstagram: UIButton!
+    @IBOutlet var SocialPinterest: UIButton!
+    @IBOutlet var SocialYouTube: UIButton!
     @IBOutlet var SocialSharingView: UIView!
     
     var sponsor: Sponsor!
@@ -21,6 +24,7 @@ class SponsorTableViewCell: UITableViewCell {
             Website.setTitle(url, forState: .Normal)
         }
         
+        self.LogoImage.image = UIImage(named: "blank")
         if var sponsorImage = sponsor.imageUrl
         {
             sponsorImage = sponsorImage.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
@@ -43,36 +47,69 @@ class SponsorTableViewCell: UITableViewCell {
 
     private func setSocialButtons() {
         var hasOneButton = false
-        SocialTwitter.hidden = true
-        SocialFacebook.hidden = true
-        SocialGoogle.hidden = true
-        SocialLinkedIn.hidden = true
-        SocialGitHub.hidden = true
         
         if sponsor?.twitter != nil
         {
             hasOneButton = true
             SocialTwitter.hidden = false
+        } else {
+            SocialTwitter.hidden = true
         }
+        
         if sponsor?.facebook != nil
         {
             hasOneButton = true
             SocialFacebook.hidden = false
+        } else {
+            SocialFacebook.hidden = true
         }
+        
         if sponsor?.googlePlus != nil
         {
             hasOneButton = true
             SocialGoogle.hidden = false
+        } else {
+            SocialGoogle.hidden = true
         }
+        
         if sponsor?.linkedIn != nil
         {
             hasOneButton = true
             SocialLinkedIn.hidden = false
+        } else {
+            SocialLinkedIn.hidden = true
         }
+        
         if sponsor?.gitHub != nil
         {
             hasOneButton = true
             SocialGitHub.hidden = false
+        } else {
+            SocialGitHub.hidden = true
+        }
+        
+        if sponsor?.instagram != nil
+        {
+            hasOneButton = true
+            SocialInstagram.hidden = false
+        } else {
+            SocialInstagram.hidden = true
+        }
+        
+        if sponsor?.pinterest != nil
+        {
+            hasOneButton = true
+            SocialPinterest.hidden = false
+        } else {
+            SocialPinterest.hidden = true
+        }
+        
+        if sponsor?.youTube != nil
+        {
+            hasOneButton = true
+            SocialYouTube.hidden = false
+        } else {
+            SocialYouTube.hidden = true
         }
         
         SocialSharingView.hidden = !hasOneButton
@@ -115,6 +152,27 @@ class SponsorTableViewCell: UITableViewCell {
     
     @IBAction func GitHubPressed(sender: AnyObject) {
         if let url = sponsor?.gitHub
+        {
+            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+        }
+    }
+    
+    @IBAction func InstagramPressed(sender: AnyObject) {
+        if let url = sponsor?.instagram
+        {
+            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+        }
+    }
+    
+    @IBAction func PinterestPressed(sender: AnyObject) {
+        if let url = sponsor?.pinterest
+        {
+            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+        }
+    }
+    
+    @IBAction func YouTubePressed(sender: AnyObject) {
+        if let url = sponsor?.youTube
         {
             UIApplication.sharedApplication().openURL(NSURL(string: url)!)
         }

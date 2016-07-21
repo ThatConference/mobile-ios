@@ -26,10 +26,6 @@ class SettingsViewController : BaseViewController {
         let mcTapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(SettingsViewController.milkcanPressed(_:)))
         mcLogo.userInteractionEnabled = true
         mcLogo.addGestureRecognizer(mcTapGestureRecognizer)
-        
-        //Sponsors Button
-        let currentYear = ThatConferenceAPI.GetCurrentYear()
-        sponsorsButton.setTitle("\(currentYear) Sponsors", forState: .Normal)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -71,8 +67,13 @@ class SettingsViewController : BaseViewController {
     }
     
     @IBAction func sponsorsPressed(sender: AnyObject) {
-        let sponsorsVC = self.storyboard?.instantiateViewControllerWithIdentifier("SponsorsViewController") as! SponsorsViewController
-        self.navigationController!.pushViewController(sponsorsVC, animated: true)
+        let mapVC = self.storyboard?.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
+        self.navigationController!.pushViewController(mapVC, animated: true)
+    }
+    
+    @IBAction func reportBugPressed(sender: AnyObject) {
+        let url = "https://github.com/ThatConference/mobile-ios/issues"
+        UIApplication.sharedApplication().openURL(NSURL(string: url)!)
     }
 
     func setDirtyData() {
