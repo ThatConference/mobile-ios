@@ -7,5 +7,7 @@ target 'That Conference' do
 
 pod 'Locksmith', '2.0.8'
 pod 'ImageScrollView'
+pod 'Fabric'
+pod 'Crashlytics'
 
 end

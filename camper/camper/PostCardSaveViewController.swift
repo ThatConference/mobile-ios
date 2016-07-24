@@ -7,8 +7,8 @@ class PostCardSaveViewController : UIViewController {
     @IBOutlet var frameImage: UIImageView!
     @IBOutlet var frameImageHeight: NSLayoutConstraint!
     
-    var pictureImageFile: UIImage?
-    var frameImageFile: UIImage?
+    var pictureImageFile: UIImage!
+    var frameImageFile: UIImage!
     var photoAlbum: PHAssetCollection!
     var assetCollectionPlaceholder: PHObjectPlaceholder!
     
@@ -24,7 +24,7 @@ class PostCardSaveViewController : UIViewController {
         frameImage.image = frameImageFile
         frameImage.layer.borderColor = UIColor.redColor().CGColor
         frameImage.layer.borderWidth = 1
-        frameImageHeight.constant = getActualImageSize(frameImageFile!, ImageView: frameImage).height
+        frameImageHeight.constant = getActualImageSize(frameImageFile, ImageView: frameImage).height
     }
     
     @IBAction func sharePostCardPressed(sender: AnyObject) {

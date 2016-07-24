@@ -64,7 +64,25 @@ class PostCardChooseFrameViewController : UIViewController, UICollectionViewData
     }
 
     func populateData() {
-        let frame1 = PostCardFrame(title: "Test Frame", filename: "test-frame")
+        let frame1 = PostCardFrame(title: "Camper", filename: "camperland")
         frames.append(frame1)
+        
+        let frame2 = PostCardFrame(title: "Kids", filename: "kidsland")
+        frames.append(frame2)
+        
+        let frame3 = PostCardFrame(title: "Magic", filename: "magicland")
+        frames.append(frame3)
+        
+        let frame4 = PostCardFrame(title: "Vintage", filename: "vintageland")
+        frames.append(frame4)
+        
+        let frame5 = PostCardFrame(title: "Camper (Portrait)", filename: "camperland-portrait")
+        frames.append(frame5)
+        
+        let frame6 = PostCardFrame(title: "Magic (Portrait)", filename: "magicland-portrait")
+        frames.append(frame6)
+        
+        let frame7 = PostCardFrame(title: "Vintage (Portrait)", filename: "vintageland-portrait")
+        frames.append(frame7)
     }
 }

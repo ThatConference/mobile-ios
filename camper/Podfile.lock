@@ -1,12 +1,19 @@
 PODS:
+  - Crashlytics (3.7.2):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.7)
   - ImageScrollView (1.1)
   - Locksmith (2.0.8)
 
 DEPENDENCIES:
+  - Crashlytics
+  - Fabric
   - ImageScrollView
   - Locksmith (= 2.0.8)
 
 SPEC CHECKSUMS:
+  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   ImageScrollView: 2c9adef18c5b6bd9a499c9babaf4cd7b6df703eb
   Locksmith: a8ed41ac4c06506ea8cb199d8ec8a8d3d108eb2a
 

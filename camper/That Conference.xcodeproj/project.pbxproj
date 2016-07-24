@@ -389,6 +389,7 @@
 				312A94101C814B6B00AE938B /* Resources */,
 				4048D040420E5C1885EB1858 /* Embed Pods Frameworks */,
 				9FA1F718F4E075891D2A9973 /* Copy Pods Resources */,
+				315C2FBB1D41CEC900C9500E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -491,6 +492,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		315C2FBB1D41CEC900C9500E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 79456d018e9ca5ff70e27dabea582f2700718838 0587bec5a22dba2f2b4a28bf902cce9c7658969d820816cdd17fb57cb633248d";
+		};
 		4048D040420E5C1885EB1858 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -719,6 +733,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = camper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
