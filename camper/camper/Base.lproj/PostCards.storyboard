@@ -148,12 +148,31 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ygv-4U-FoQ" userLabel="Frame Preview">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eSx-aH-EOB" userLabel="ReverseCamera">
+                                        <rect key="frame" x="68" y="491" width="50" height="50"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="Der-Zz-sHX"/>
+                                            <constraint firstAttribute="height" constant="50" id="ftY-pG-EEg"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.63137254899999995" green="0.52549019610000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="contentEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                                        <state key="normal" image="camera-reverse">
+                                            <color key="titleColor" red="0.63137254899999995" green="0.52549019610000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="reverseCamera:" destination="WDH-PO-Qja" eventType="touchUpInside" id="6sj-iy-pCW"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="eSx-aH-EOB" firstAttribute="leading" secondItem="lTV-iu-wsZ" secondAttribute="leading" constant="68" id="3rO-HE-hsj"/>
                                     <constraint firstAttribute="trailing" secondItem="Ygv-4U-FoQ" secondAttribute="trailing" id="8xL-fB-pTZ"/>
                                     <constraint firstAttribute="bottom" secondItem="Ygv-4U-FoQ" secondAttribute="bottom" id="Bvz-sJ-A23"/>
                                     <constraint firstItem="Ygv-4U-FoQ" firstAttribute="leading" secondItem="lTV-iu-wsZ" secondAttribute="leading" id="HMt-4R-rDw"/>
+                                    <constraint firstAttribute="bottom" secondItem="eSx-aH-EOB" secondAttribute="bottom" constant="10" id="MAZ-FS-rBY"/>
                                     <constraint firstItem="Ygv-4U-FoQ" firstAttribute="top" secondItem="lTV-iu-wsZ" secondAttribute="top" id="icX-eY-YWS"/>
                                 </constraints>
                             </view>
@@ -319,5 +338,6 @@
     </scenes>
     <resources>
         <image name="camera" width="350" height="375"/>
+        <image name="camera-reverse" width="300" height="300"/>
     </resources>
 </document>
