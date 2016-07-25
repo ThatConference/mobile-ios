@@ -1,3 +1,4 @@
+import AVFoundation
 import UIKit
 
 class PostCardChooseFrameViewController : UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -64,25 +65,25 @@ class PostCardChooseFrameViewController : UIViewController, UICollectionViewData
     }
 
     func populateData() {
-        let frame1 = PostCardFrame(title: "Camper", filename: "camperland")
+        let frame1 = PostCardFrame(title: "Camper", filename: "camperland", orientation: AVCaptureVideoOrientation.LandscapeRight)
         frames.append(frame1)
         
-        let frame2 = PostCardFrame(title: "Kids", filename: "kidsland")
+        let frame2 = PostCardFrame(title: "Kids", filename: "kidsland", orientation: AVCaptureVideoOrientation.LandscapeRight)
         frames.append(frame2)
         
-        let frame3 = PostCardFrame(title: "Magic", filename: "magicland")
+        let frame3 = PostCardFrame(title: "Magic", filename: "magicland", orientation: AVCaptureVideoOrientation.LandscapeRight)
         frames.append(frame3)
         
-        let frame4 = PostCardFrame(title: "Vintage", filename: "vintageland")
+        let frame4 = PostCardFrame(title: "Vintage", filename: "vintageland", orientation: AVCaptureVideoOrientation.LandscapeRight)
         frames.append(frame4)
         
-        let frame5 = PostCardFrame(title: "Camper (Portrait)", filename: "camperland-portrait")
+        let frame5 = PostCardFrame(title: "Camper (Portrait)", filename: "camperland-portrait", orientation: AVCaptureVideoOrientation.Portrait)
         frames.append(frame5)
         
-        let frame6 = PostCardFrame(title: "Magic (Portrait)", filename: "magicland-portrait")
+        let frame6 = PostCardFrame(title: "Magic (Portrait)", filename: "magicland-portrait", orientation: AVCaptureVideoOrientation.Portrait)
         frames.append(frame6)
         
-        let frame7 = PostCardFrame(title: "Vintage (Portrait)", filename: "vintageland-portrait")
+        let frame7 = PostCardFrame(title: "Vintage (Portrait)", filename: "vintageland-portrait", orientation: AVCaptureVideoOrientation.Portrait)
         frames.append(frame7)
     }
 }

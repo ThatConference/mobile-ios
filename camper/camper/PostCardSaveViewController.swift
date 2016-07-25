@@ -3,12 +3,10 @@ import Photos
 import UIKit
 
 class PostCardSaveViewController : UIViewController {
-    @IBOutlet var pictureImage: ImageScrollView!
-    @IBOutlet var frameImage: UIImageView!
-    @IBOutlet var frameImageHeight: NSLayoutConstraint!
+    @IBOutlet var ImagePreview: UIImageView!
     
-    var pictureImageFile: UIImage!
-    var frameImageFile: UIImage!
+    var activityIndicator: UIActivityIndicatorView!
+    var createdImage: UIImage?
     var photoAlbum: PHAssetCollection!
     var assetCollectionPlaceholder: PHObjectPlaceholder!
     
@@ -20,46 +18,29 @@ class PostCardSaveViewController : UIViewController {
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         
-        pictureImage.displayImage(padImage(pictureImageFile!))
-        frameImage.image = frameImageFile
-        frameImage.layer.borderColor = UIColor.redColor().CGColor
-        frameImage.layer.borderWidth = 1
-        frameImageHeight.constant = getActualImageSize(frameImageFile, ImageView: frameImage).height
+        self.activityIndicator = UIActivityIndicatorView()
+        self.activityIndicator.frame = CGRectMake(0, 0, 80, 80)
+        self.activityIndicator.backgroundColor = UIColor(white: 0, alpha: 0.4)
+        self.activityIndicator.layer.cornerRadius = 10
+        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        self.activityIndicator.clipsToBounds = true
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.center = self.view.center
+        
+        self.view.addSubview(self.activityIndicator)
+        
+        ImagePreview.image = createdImage
     }
     
     @IBAction func sharePostCardPressed(sender: AnyObject) {
-        let image = createImage()
-        shareImage(image)
+        startIndicator()
+        shareImage(createdImage!)
     }
     
     @IBAction func savePostCardPressed(sender: AnyObject) {
-        let image = createImage()
+        startIndicator()
         setAlbum()
-        saveImage(image)
-    }
-    
-    func createImage() -> UIImage {
-        frameImage.layer.borderColor = UIColor.clearColor().CGColor
-        
-        //Create Snapshot
-        let window = UIApplication.sharedApplication().delegate!.window!!
-        
-        //Capture the Entire Window
-        UIGraphicsBeginImageContextWithOptions(window.bounds.size, view.opaque, 0.0)
-        window.drawViewHierarchyInRect(window.bounds, afterScreenUpdates: true)
-        let windowImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        //Now position the image x/y away from the top-left corner to get the portion we want
-        UIGraphicsBeginImageContext(frameImage.frame.size)
-        let globalPoint = frameImage.superview?.convertPoint(frameImage.frame.origin, toView: nil)
-        windowImage.drawAtPoint(CGPoint(x: -globalPoint!.x, y: -globalPoint!.y))
-        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
-        
-        frameImage.layer.borderColor = UIColor.redColor().CGColor
-        
-        return image
+        saveImage(createdImage!)
     }
     
     func getActualImageSize(image: UIImage, ImageView: UIImageView) -> CGSize {
@@ -119,6 +100,7 @@ class PostCardSaveViewController : UIViewController {
                         let ac = UIAlertController(title: "Save Error", message: error?.localizedDescription, preferredStyle: .Alert)
                         ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                         self.presentViewController(ac, animated: true, completion: nil)
+                        self.stopIndicator()
                     }
             })
         }
@@ -140,6 +122,7 @@ class PostCardSaveViewController : UIViewController {
                     ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                     self.presentViewController(ac, animated: true, completion: nil)
                 }
+                self.stopIndicator()
         })
     }
     
@@ -151,5 +134,18 @@ class PostCardSaveViewController : UIViewController {
         activityViewController.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeMessage, UIActivityTypeMail, UIActivityTypePrint,UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList]
         
         self.presentViewController(activityViewController, animated: true, completion: nil)
+        self.stopIndicator()
+    }
+    
+    func startIndicator() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.activityIndicator.startAnimating()
+        })
+    }
+    
+    func stopIndicator() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.activityIndicator.stopAnimating()
+        })
     }
 }
