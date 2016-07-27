@@ -93,6 +93,7 @@ class SponsorsViewController: BaseViewController, UITableViewDataSource, UITable
                     }
                 }
                 dispatch_async(dispatch_get_main_queue(), {
+                    self.CurrentLevel.numberOfPages = (self.loadedSponsors?.count)!
                     self.activityIndicator.stopAnimating()
                 })
                 self.refreshTable()
