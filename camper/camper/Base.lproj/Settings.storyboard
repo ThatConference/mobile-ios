@@ -144,11 +144,20 @@
                         <segue destination="kCv-mK-lxY" kind="show" identifier="ShowPostCard" id="GVR-Zm-Uam"/>
                         <segue destination="Qh1-IP-LF3" kind="presentation" identifier="ShowSignIn" id="99L-vU-xax"/>
                         <segue destination="ZTs-ZH-b7b" kind="show" identifier="ShowMap" id="FJA-bF-0uI"/>
+                        <segue destination="otN-6l-01q" kind="presentation" identifier="show_login" id="fwi-Ue-S5k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rjj-y0-66K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2491" y="1413"/>
+        </scene>
+        <!--AuthorizationViewController-->
+        <scene sceneID="wJt-Sw-Ys4">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="AuthorizationViewController" id="otN-6l-01q" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5gV-41-lF3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2931.5" y="1838"/>
         </scene>
         <!--FAVORITES MAP-->
         <scene sceneID="P07-xe-Ydb">

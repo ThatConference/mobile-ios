@@ -104,7 +104,7 @@ class ScheduleViewController : TimeSlotRootViewController {
         }
     }
     
-    func setData(isDirty: Bool) {
+    override func setData(isDirty: Bool) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.dirtyDataSchedule = isDirty;
     }

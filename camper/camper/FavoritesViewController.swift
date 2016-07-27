@@ -66,7 +66,7 @@ class FavoritesViewController : TimeSlotRootViewController {
         //Show login screen if not logged in
         if (!Authentication.isLoggedIn()) {
             setData(true)
-            self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
+            self.performSegueWithIdentifier("show_login", sender: self)
         } else {
             self.view.addSubview(self.activityIndicator)
             loadData()
@@ -94,23 +94,25 @@ class FavoritesViewController : TimeSlotRootViewController {
                     self.dailySchedules = values!
                     self.displayData()
                 } else {
-                    let alert = UIAlertController(title: "Log In Needed", message: "Log in to view favorites.", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Log In", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction) in
-                        self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
-                    }))
-                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction) in
-                        if (self.dailySchedules != nil) {
-                            self.dailySchedules.removeAll()
-                        }
-                        
-                        self.tableView.delegate = self
-                        self.tableView.dataSource = self
-                        self.tableView.reloadData()
-                        self.activityIndicator.stopAnimating()
-                        
-                        self.navigateToSchedule()
-                    }))
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    if (self.isViewLoaded() && self.view.window != nil) {
+                        self.alert = UIAlertController(title: "Log In Needed", message: "Log in to view favorites.", preferredStyle: UIAlertControllerStyle.Alert)
+                        self.alert.addAction(UIAlertAction(title: "Log In", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction) in
+                            self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
+                        }))
+                        self.alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction) in
+                            if (self.dailySchedules != nil) {
+                                self.dailySchedules.removeAll()
+                            }
+                            
+                            self.tableView.delegate = self
+                            self.tableView.dataSource = self
+                            self.tableView.reloadData()
+                            self.activityIndicator.stopAnimating()
+                            
+                            self.navigateToSchedule()
+                        }))
+                        self.presentViewController(self.alert, animated: true, completion: nil)
+                    }
                 }
                 break
             }
@@ -144,7 +146,7 @@ class FavoritesViewController : TimeSlotRootViewController {
         }
     }
     
-    func setData(isDirty: Bool) {
+    override func setData(isDirty: Bool) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.dirtyDataFavorites = isDirty;
     }
@@ -167,11 +169,6 @@ class FavoritesViewController : TimeSlotRootViewController {
         else {
             self.setPageState(nil)
         }
-    }
-    
-    private func navigateToSchedule() {
-        setData(true)
-        self.tabBarController?.selectedIndex = 1
     }
     
     private func setPageState(currentDay: String!) {

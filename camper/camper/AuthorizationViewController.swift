@@ -1,5 +1,9 @@
 import UIKit
 
+protocol AuthorizationFormDelegate: class {
+    func dismissViewController(controller: UIViewController)
+}
+
 class AuthorizationViewController : UIViewController, ContainerDelegateProtocol, RequestCompleteProtocol {
     @IBOutlet var webContainer: UIView!
     @IBOutlet var username: UITextField!
@@ -14,6 +18,7 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
     @IBOutlet var githubButton: UIButton!
     
     private var embeddedViewController: AuthorizationWebViewController!
+    var delegate: AuthorizationFormDelegate!
     
     override func viewDidLoad() {
         clearErrors()
@@ -56,7 +61,11 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
         authentication.performLocalLogin(username.text!, password: password.text!, completionDelegate: self)
     }
     @IBAction func continueAsGuest(sender: AnyObject) {
-        self.dismissViewControllerAnimated(false, completion: nil)
+        if self.delegate != nil {
+            self.delegate.dismissViewController(self)
+        } else {
+            self.dismissViewControllerAnimated(false, completion: nil)
+        }
     }
     
     @IBAction func facebookPressed(sender: AnyObject) {

@@ -32,21 +32,21 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I06-ru-CL8">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
                                 <subviews>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jir-Ao-ZuK">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jir-Ao-ZuK">
                                         <rect key="frame" x="532" y="12" width="58" height="15"/>
                                         <fontDescription key="fontDescription" name="NeutrafaceText-Bold" family="Neutraface Text" pointSize="15"/>
                                         <state key="normal" title="Button" image="subheader-arrow-right">
                                             <color key="titleColor" red="0.37647058820000001" green="0.51372549020000002" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T17-GO-a9K">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T17-GO-a9K">
                                         <rect key="frame" x="10" y="12" width="58" height="15"/>
                                         <fontDescription key="fontDescription" name="NeutrafaceText-Bold" family="Neutraface Text" pointSize="15"/>
                                         <state key="normal" title="Button" image="subheader-arrow-left">
                                             <color key="titleColor" red="0.37647058820000001" green="0.51372549020000002" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" misplaced="YES" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5uy-GS-wxq">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5uy-GS-wxq">
                                         <rect key="frame" x="78" y="10" width="444" height="20"/>
                                         <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -83,7 +83,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="54.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Category" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBk-gn-1kL">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBk-gn-1kL">
                                                     <rect key="frame" x="8" y="31.5" width="544" height="15"/>
                                                     <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="15"/>
                                                     <color key="textColor" red="0.63137254899999995" green="0.52549019610000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
@@ -92,7 +92,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAa-oc-ZHr">
                                                     <rect key="frame" x="0.0" y="0.0" width="560" height="55"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CANCELLED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlJ-yp-NMx">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CANCELLED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlJ-yp-NMx">
                                                             <rect key="frame" x="8" y="31" width="552" height="20"/>
                                                             <fontDescription key="fontDescription" name="NeutrafaceText-Bold" family="Neutraface Text" pointSize="20"/>
                                                             <color key="textColor" red="0.66666666669999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -107,7 +107,7 @@
                                                         <constraint firstItem="xlJ-yp-NMx" firstAttribute="leading" secondItem="SAa-oc-ZHr" secondAttribute="leading" constant="8" id="d7i-52-BPi"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Session Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDg-G0-h0X">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Session Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDg-G0-h0X">
                                                     <rect key="frame" x="8" y="8" width="544" height="17"/>
                                                     <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -177,6 +177,7 @@
                         <segue destination="Emb-WN-eRK" kind="show" identifier="SpeakerDetail" id="YCT-GA-C7h"/>
                         <segue destination="Egp-xr-dBs" kind="show" identifier="ShowSchedule" id="au9-cG-I2D"/>
                         <segue destination="5Su-C5-Zvd" kind="show" identifier="LoadPostcards" id="INw-Nk-ggv"/>
+                        <segue destination="RcL-N1-6sn" kind="presentation" identifier="show_login" id="ONP-81-kWh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Qe-lw-ugZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -206,6 +207,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hRZ-iq-1UY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3231.5" y="256"/>
+        </scene>
+        <!--AuthorizationViewController-->
+        <scene sceneID="Omc-4p-YzL">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="AuthorizationViewController" id="RcL-N1-6sn" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zc2-VV-yO1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3175" y="397"/>
         </scene>
         <!--SpeakerProfileViewController-->
         <scene sceneID="Yy7-qi-eeL">

@@ -1,8 +1,9 @@
 import UIKit
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController, AuthorizationFormDelegate {
     
     var activityIndicator: UIActivityIndicatorView!
+    var alert: UIAlertController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,28 @@ class BaseViewController: UIViewController {
         cameraBtn.addTarget(self, action: #selector(self.moveToCamera), forControlEvents:  UIControlEvents.TouchUpInside)
         let item = UIBarButtonItem(customView: cameraBtn)
         self.navigationItem.rightBarButtonItem = item
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let newVC = segue.destinationViewController as? AuthorizationViewController {
+            newVC.delegate = self
+        }
+    }
+    
+    func dismissViewController(controller: UIViewController) {
+        controller.dismissViewControllerAnimated(true) { () -> Void in
+            self.navigateToSchedule()
+        }
+    }
+    
+    internal func navigateToSchedule() {
+        setData(true)
+        self.tabBarController?.selectedIndex = 1
+    }
+    
+    internal func setData(isDirty: Bool) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.dirtyDataFavorites = isDirty;
     }
     
     @objc private func moveToCamera() {
