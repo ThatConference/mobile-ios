@@ -93,8 +93,8 @@
                                     <action selector="reportBugPressed:" destination="MB1-Be-zlE" eventType="touchUpInside" id="my3-Es-av9"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-tclogo" translatesAutoresizingMaskIntoConstraints="NO" id="KnW-c8-xw3">
-                                <rect key="frame" x="20" y="40" width="374" height="227.5"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="splash-tclogo" translatesAutoresizingMaskIntoConstraints="NO" id="KnW-c8-xw3">
+                                <rect key="frame" x="20" y="40" width="374" height="228"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="KnW-c8-xw3" secondAttribute="height" multiplier="288:175" id="f3N-4q-aHf"/>
                                     <constraint firstAttribute="height" constant="175" id="mQr-YF-EGi"/>
