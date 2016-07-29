@@ -3,12 +3,12 @@ import Foundation
 
 class PostCardFrame {
     var Title:String?
-    var Filename:String?
-    var Orientation:AVCaptureVideoOrientation?
+    var FilenameLandscape:String?
+    var FilenamePortrait:String?
     
-    init(title:String, filename:String, orientation:AVCaptureVideoOrientation) {
+    init(title:String, filenameLandscape:String, filenamePortrait:String) {
         self.Title = title
-        self.Filename = filename
-        self.Orientation = orientation
+        self.FilenameLandscape = filenameLandscape
+        self.FilenamePortrait = filenamePortrait
     }
 }

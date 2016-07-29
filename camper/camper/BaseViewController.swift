@@ -54,8 +54,8 @@ class BaseViewController: UIViewController, AuthorizationFormDelegate {
     }
     
     private func moveToPostCard() {
-        let postCardVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostCardChooseFrameViewController") as! PostCardChooseFrameViewController
-        self.navigationController!.pushViewController(postCardVC, animated: true)
+        let postCardVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostCardChoosePhotoViewController") as! PostCardChoosePhotoViewController
+        self.presentViewController(postCardVC, animated: true, completion: nil)
     }
     
     func startIndicator() {

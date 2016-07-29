@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "filename" : "FINALDRAFT_Postcard_3264x2448_Portrait_TC_Logo_top_light.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "FINALDRAFT_Postcard_3264x2448_Portrait_TC_Logo_top_light-1.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "FINALDRAFT_Postcard_3264x2448_Portrait_TC_Logo_top_light-2.png",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

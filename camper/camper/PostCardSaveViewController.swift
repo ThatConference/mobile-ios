@@ -148,4 +148,8 @@ class PostCardSaveViewController : UIViewController {
             self.activityIndicator.stopAnimating()
         })
     }
+    
+    @IBAction func closePressed(sender: AnyObject) {
+        self.dismissViewControllerAnimated(false, completion: nil)
+    }
 }

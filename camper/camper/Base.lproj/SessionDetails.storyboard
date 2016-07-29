@@ -63,7 +63,7 @@
                                             <constraint firstAttribute="trailing" secondItem="ppl-ki-QKI" secondAttribute="trailing" constant="20" id="jWL-Xk-XLA"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FVd-TQ-8jP">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FVd-TQ-8jP">
                                         <rect key="frame" x="0.0" y="40" width="600" height="153"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like-1" translatesAutoresizingMaskIntoConstraints="NO" id="mM5-Ii-xKZ">
@@ -104,7 +104,7 @@
                                                         <rect key="frame" x="0.0" y="1" width="495" height="30"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vle-Bx-ofo" id="onw-dF-Mm7">
-                                                            <rect key="frame" x="0.0" y="0.0" width="495" height="29.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="495" height="29"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name Last Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXM-9R-3aK">
@@ -190,7 +190,7 @@
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EsC-s3-7Lk">
                                         <rect key="frame" x="0.0" y="193" width="600" height="294"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EhJ-dP-kJN" userLabel="Biography">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EhJ-dP-kJN" userLabel="Biography">
                                                 <rect key="frame" x="20" y="0.0" width="560" height="274.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -258,10 +258,10 @@
             </objects>
             <point key="canvasLocation" x="3915.5" y="282"/>
         </scene>
-        <!--PostCardChooseFrameViewController-->
+        <!--PostCardChoosePhotoViewController-->
         <scene sceneID="Uxi-VS-s5D">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="PostCardChooseFrameViewController" storyboardName="PostCards" referencedIdentifier="PostCardChooseFrameViewController" id="MSP-Ww-G8h" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="PostCardChoosePhotoViewController" storyboardName="PostCards" referencedIdentifier="PostCardChoosePhotoViewController" id="MSP-Ww-G8h" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zis-Aw-Idg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3914.5" y="487"/>

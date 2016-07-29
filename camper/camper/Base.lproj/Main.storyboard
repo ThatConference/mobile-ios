@@ -694,10 +694,10 @@
             </objects>
             <point key="canvasLocation" x="877" y="-1948"/>
         </scene>
-        <!--PostCardChooseFrameViewController-->
+        <!--PostCardChoosePhotoViewController-->
         <scene sceneID="clA-Rs-vDh">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="PostCardChooseFrameViewController" storyboardName="PostCards" referencedIdentifier="PostCardChooseFrameViewController" id="kCv-mK-lxY" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="PostCardChoosePhotoViewController" storyboardName="PostCards" referencedIdentifier="PostCardChoosePhotoViewController" id="kCv-mK-lxY" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="utX-J9-1t0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3156.5" y="-675"/>

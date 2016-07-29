@@ -61,7 +61,6 @@
 		312A94861C89325D00AE938B /* NeutraText-LightIA.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94601C89325D00AE938B /* NeutraText-LightIA.otf */; };
 		312A94871C89325D00AE938B /* NeutraText-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 312A94611C89325D00AE938B /* NeutraText-LightItalic.otf */; };
 		31373CA21D027B2300430EC0 /* PostCards.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31373CA01D027B2300430EC0 /* PostCards.storyboard */; };
-		31373CA41D027CCD00430EC0 /* PostCardChooseFrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31373CA31D027CCD00430EC0 /* PostCardChooseFrameViewController.swift */; };
 		313B19021D160B8C00E72562 /* PostCardFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313B19011D160B8C00E72562 /* PostCardFrame.swift */; };
 		314DA0FD1D202B690021E2DA /* Sponsor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314DA0FC1D202B690021E2DA /* Sponsor.swift */; };
 		316269AE1D0117020089D777 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316269AD1D0117020089D777 /* PersistenceManager.swift */; };
@@ -153,7 +152,6 @@
 		312A94601C89325D00AE938B /* NeutraText-LightIA.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-LightIA.otf"; sourceTree = "<group>"; };
 		312A94611C89325D00AE938B /* NeutraText-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeutraText-LightItalic.otf"; sourceTree = "<group>"; };
 		31373CA11D027B2300430EC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PostCards.storyboard; sourceTree = "<group>"; };
-		31373CA31D027CCD00430EC0 /* PostCardChooseFrameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCardChooseFrameViewController.swift; sourceTree = "<group>"; };
 		313B19011D160B8C00E72562 /* PostCardFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCardFrame.swift; sourceTree = "<group>"; };
 		314DA0FC1D202B690021E2DA /* Sponsor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sponsor.swift; sourceTree = "<group>"; };
 		316269AD1D0117020089D777 /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
@@ -233,7 +231,6 @@
 				31CFD1361D0E416E00F1AE23 /* OpenSpacesViewController.swift */,
 				3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */,
 				317154211D1C340E004078E2 /* PassThroughImageView.swift */,
-				31373CA31D027CCD00430EC0 /* PostCardChooseFrameViewController.swift */,
 				31D877F91D19CBD30045E8DA /* PostCardChoosePhotoViewController.swift */,
 				3171541F1D1B9784004078E2 /* PostCardSaveViewController.swift */,
 				5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */,
@@ -564,7 +561,6 @@
 				312A94281C85383200AE938B /* AuthorizationViewController.swift in Sources */,
 				317154241D1D8025004078E2 /* BaseViewController.swift in Sources */,
 				31D0D9451CC48DEE007C5999 /* AuthToken.swift in Sources */,
-				31373CA41D027CCD00430EC0 /* PostCardChooseFrameViewController.swift in Sources */,
 				312A94341C85EE5E00AE938B /* SessionDetailViewController.swift in Sources */,
 				317154201D1B9784004078E2 /* PostCardSaveViewController.swift in Sources */,
 				5113D3881CAC521C00D6B974 /* CircleView.swift in Sources */,
