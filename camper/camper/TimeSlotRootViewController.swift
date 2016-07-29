@@ -99,6 +99,7 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
             sessionDetailVC.session = session
             self.navigationController!.pushViewController(sessionDetailVC, animated: true)
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     // MARK: Data Source

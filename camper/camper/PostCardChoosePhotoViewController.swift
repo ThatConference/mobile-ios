@@ -176,7 +176,7 @@ class PostCardChoosePhotoViewController: UIViewController,
         
         let frame2 = PostCardFrame(title: "Kids",
                                    filenameLandscape: "kidsland",
-                                   filenamePortrait: "kidsland")
+                                   filenamePortrait: "kidsland-portrait")
         frames.append(frame2)
         
         let frame3 = PostCardFrame(title: "Vintage",

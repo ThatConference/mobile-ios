@@ -369,11 +369,6 @@ class FavoritesViewController : TimeSlotRootViewController {
         }
     }
     
-    // MARK: UITableViewDelegate
-    func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
-        return "Remove"
-    }
-    
     // MARK: DataSource
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FavoritesTableViewCell") as! FavoritesTableViewCell
@@ -383,37 +378,100 @@ class FavoritesViewController : TimeSlotRootViewController {
             let session  = timeSlots.sessions[indexPath.row]
             cell.session = session
             cell.sessionTitle.text = session.title
+            cell.sessionTitleCancelled.text = session.title
             cell.sessionTitle.sizeToFit()
-            cell.cancelledOverlay.hidden = !session.cancelled
-            cell.category.text = "\(session.primaryCategory!)  |  Room: \(session.scheduledRoom!)"
+            cell.categoryLabel.text = session.primaryCategory
+            
+            cell.favoriteIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.SessionFavorited(_:))))
+            removeFavoriteIcon(cell, animated: false)
+            
+            //set up speaker text
+            var speakerString: String = ""
+            var firstSpeaker: Bool = true
+            for speaker in session.speakers {
+                if !firstSpeaker {
+                    speakerString.appendContentsOf(", ")
+                } else {
+                    firstSpeaker = false
+                }
+                
+                speakerString.appendContentsOf("\(speaker.firstName!) \(speaker.lastName!)")
+            }
+            
+            cell.speakerLabel.text = speakerString
+            cell.roomLabel.text = session.scheduledRoom
+            cell.updateFlag.hidden = !session.updated
+            cell.cancelledCover.hidden = !session.cancelled
         }
         
         return cell
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    func SessionFavorited(sender: UITapGestureRecognizer) {
+        if Authentication.isLoggedIn() {
             let sessionStore = SessionStore()
-            
-            sessionStore.removeFavorite(dailySchedule.timeSlots[indexPath.section].sessions[indexPath.row], completion:{(sessionsResult) -> Void in
-                switch sessionsResult {
-                case .Success(_):
-                    dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-                        self.dailySchedule.timeSlots[indexPath.section].sessions.removeAtIndex(indexPath.row)
-                        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                        
-                        if (self.dailySchedule.timeSlots[indexPath.section].sessions.count == 0) {
-                            self.dailySchedule.timeSlots.removeAtIndex(indexPath.section)
-                            let indexSet = NSMutableIndexSet()
-                            indexSet.addIndex(indexPath.section)
-                            tableView.deleteSections(indexSet, withRowAnimation: UITableViewRowAnimation.Automatic)
+            if let cell = sender.view?.superview?.superview as? FavoritesTableViewCell {
+                self.startIndicator()
+                if cell.session.isUserFavorite {
+                    sessionStore.removeFavorite(cell.session, completion:{(sessionsResult) -> Void in
+                        switch sessionsResult {
+                        case .Success(let sessions):
+                            self.stopIndicator()
+                            self.setDirtyData()
+                            cell.session = sessions.first
+                            self.removeFavoriteIcon(cell, animated: true)
+                            break
+                        case .Failure(_):
+                            self.stopIndicator()
+                            let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.Alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                            self.presentViewController(alert, animated: true, completion: nil)
+                            break
                         }
-                    }
-                    break
-                case .Failure(_):
-                    break
+                    })
                 }
-            })
+                else {
+                    sessionStore.addFavorite(cell.session, completion:{(sessionsResult) -> Void in
+                        switch sessionsResult {
+                        case .Success(let sessions):
+                            self.stopIndicator()
+                            self.setDirtyData()
+                            cell.session = sessions.first
+                            self.removeFavoriteIcon(cell, animated: true)
+                            break
+                        case .Failure(_):
+                            self.stopIndicator()
+                            let alert = UIAlertController(title: "Error", message: "Could not add favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.Alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                            self.presentViewController(alert, animated: true, completion: nil)
+                            break
+                        }
+                    })
+                }
+            }
         }
+        else
+        {
+            self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
+        }
+    }
+    
+    func removeFavoriteIcon(cell: FavoritesTableViewCell, animated: Bool) {
+        dispatch_async(dispatch_get_main_queue(), {
+            if animated {
+                CATransaction.begin()
+                CATransaction.setAnimationDuration(1.5)
+                let transition = CATransition()
+                transition.type = kCATransitionFade
+                cell.favoriteIcon!.layer.addAnimation(transition, forKey: kCATransitionFade)
+                CATransaction.commit()
+            }
+            if cell.session.isUserFavorite {
+                cell.favoriteIcon!.image = UIImage(named:"like-remove")
+            }
+            else {
+                cell.favoriteIcon!.image = UIImage(named:"like-1")
+            }
+        })
     }
 }

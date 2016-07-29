@@ -6,7 +6,6 @@ class ScheduleViewController : TimeSlotRootViewController {
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var nextDayButton: UIButton!
     @IBOutlet var previousDayButton: UIButton!
-    @IBOutlet var updatedFlag: UIImageView!
    
     override func viewDidLoad() {
         super.viewDidLoad()
