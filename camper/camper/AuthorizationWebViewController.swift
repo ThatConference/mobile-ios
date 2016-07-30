@@ -8,6 +8,8 @@
 
 import UIKit
 import Foundation
+import Fabric
+import Crashlytics
 
 protocol ContainerDelegateProtocol
 {
@@ -79,6 +81,7 @@ class AuthorizationWebViewController: UIViewController, UIWebViewDelegate {
                     }
                     
                     Authentication.saveAuthToken(authToken)
+                    Answers.logLoginWithMethod("oAuth Login", success: true, customAttributes: [:])
                     delegate?.SignedIn()
                 }
             }

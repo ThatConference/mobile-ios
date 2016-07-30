@@ -271,6 +271,7 @@
                     </simulatedTabBarMetrics>
                     <connections>
                         <outlet property="ImagePreview" destination="KTc-JS-dlB" id="0sN-Sg-VyD"/>
+                        <outlet property="savePostCardButton" destination="4kB-9Z-Xpt" id="hi5-1p-m9j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LsT-4c-2Pm" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -1,9 +1,12 @@
 import ImageScrollView
 import Photos
 import UIKit
+import Fabric
+import Crashlytics
 
 class PostCardSaveViewController : UIViewController {
     @IBOutlet var ImagePreview: UIImageView!
+    @IBOutlet var savePostCardButton: UIButton!
     
     var activityIndicator: UIActivityIndicatorView!
     var createdImage: UIImage?
@@ -32,15 +35,66 @@ class PostCardSaveViewController : UIViewController {
         ImagePreview.image = createdImage
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        checkPhotoLibraryPermission()
+    }
+    
+    func checkPhotoLibraryPermission() {
+        let status = PHPhotoLibrary.authorizationStatus()
+        switch status {
+        case .Authorized:
+            break
+        case .Denied, .Restricted :
+            self.alertToEncouragePhotosAccessInitially()
+            break
+        case .NotDetermined:
+            PHPhotoLibrary.requestAuthorization() { (status) -> Void in
+                switch status {
+                case .Authorized:
+                    break
+                case .Denied, .Restricted:
+                    self.alertToEncouragePhotosAccessInitially()
+                    break
+                case .NotDetermined:
+                    self.savePostCardButton.enabled = false
+                    break
+                }
+            }
+        }
+    }
+    
+    func alertToEncouragePhotosAccessInitially() {
+        let alert = UIAlertController(
+            title: "IMPORTANT",
+            message: "Photo Album access required to save Post Card",
+            preferredStyle: UIAlertControllerStyle.Alert
+        )
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (alert) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
+                self.dismissViewControllerAnimated(false, completion: nil)
+            })
+        }))
+        alert.addAction(UIAlertAction(title: "Allow Photos", style: .Cancel, handler: { (alert) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
+                UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+            })
+        }))
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func sharePostCardPressed(sender: AnyObject) {
         startIndicator()
         shareImage(createdImage!)
+        Answers.logCustomEventWithName("Photo Shared", customAttributes: [:])
     }
     
     @IBAction func savePostCardPressed(sender: AnyObject) {
         startIndicator()
         setAlbum()
         saveImage(createdImage!)
+        Answers.logCustomEventWithName("Photo Saved", customAttributes: [:])
     }
     
     func getActualImageSize(image: UIImage, ImageView: UIImageView) -> CGSize {

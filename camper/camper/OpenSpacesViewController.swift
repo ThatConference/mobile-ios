@@ -1,4 +1,6 @@
 import UIKit
+import Fabric
+import Crashlytics
 
 class OpenSpacesViewController : TimeSlotRootViewController {
     @IBOutlet var tableView: UITableView!
@@ -393,6 +395,7 @@ class OpenSpacesViewController : TimeSlotRootViewController {
                             self.setDirtyData()
                             cell.session = sessions.first
                             self.setFavoriteIcon(cell, animated: true)
+                            Answers.logCustomEventWithName("Removed Favorite", customAttributes: [:])
                             break
                         case .Failure(_):
                             self.stopIndicator()
@@ -411,6 +414,7 @@ class OpenSpacesViewController : TimeSlotRootViewController {
                             self.setDirtyData()
                             cell.session = sessions.first
                             self.setFavoriteIcon(cell, animated: true)
+                            Answers.logCustomEventWithName("Added Favorite", customAttributes: [:])
                             break
                         case .Failure(_):
                             self.stopIndicator()

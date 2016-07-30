@@ -1,4 +1,6 @@
 import UIKit
+import Fabric
+import Crashlytics
 
 protocol AuthorizationFormDelegate: class {
     func dismissViewController(controller: UIViewController)
@@ -187,6 +189,7 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
         Authentication.saveAuthToken(token)
         
         print("Sign in was successful")
+        Answers.logLoginWithMethod("InternalLogin", success: true, customAttributes: [:])
         dispatch_async(dispatch_get_main_queue()) {
             self.SignedIn()
         }

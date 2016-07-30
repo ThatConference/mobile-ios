@@ -1,6 +1,8 @@
 import AVFoundation
 import Photos
 import UIKit
+import Fabric
+import Crashlytics
 
 class PostCardChoosePhotoViewController: UIViewController,
     UIImagePickerControllerDelegate,
@@ -73,6 +75,10 @@ class PostCardChoosePhotoViewController: UIViewController,
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        checkCamera()
+    }
+    
+    func finalSetUp() {
         //Set Camera Preview Bounds
         let rect = AVMakeRectWithAspectRatioInsideRect(frameImage!.size, frameView.bounds)
         cameraView.bounds = frameView.bounds
@@ -95,6 +101,53 @@ class PostCardChoosePhotoViewController: UIViewController,
             defaults.setBool(true, forKey: "tutorialWasShown")
             NSUserDefaults.standardUserDefaults().synchronize()
         }
+    }
+    
+    func checkCamera() {
+        let authStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+        switch authStatus {
+        case .Authorized:
+            finalSetUp()
+            break
+        case .Denied: alertToEncourageCameraAccessInitially()
+        case .NotDetermined: alertPromptToAllowCameraAccessViaSetting()
+        default: alertToEncourageCameraAccessInitially()
+        }
+    }
+    
+    func alertToEncourageCameraAccessInitially() {
+        let alert = UIAlertController(
+            title: "IMPORTANT",
+            message: "Camera access required for Photo Taking",
+            preferredStyle: UIAlertControllerStyle.Alert
+        )
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (alert) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
+                self.dismissViewControllerAnimated(false, completion: nil)
+            })
+        }))
+        alert.addAction(UIAlertAction(title: "Allow Camera", style: .Cancel, handler: { (alert) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
+                UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+            })
+        }))
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func alertPromptToAllowCameraAccessViaSetting() {
+        let alert = UIAlertController(
+            title: "IMPORTANT",
+            message: "Please allow camera access for Photo Taking",
+            preferredStyle: UIAlertControllerStyle.Alert
+        )
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .Cancel) { alert in
+            if AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo).count > 0 {
+                AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) { granted in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.checkCamera() } }
+            }
+        })
+        presentViewController(alert, animated: true, completion: nil)
     }
     
     func handleSwipes(sender:UISwipeGestureRecognizer) {
@@ -403,6 +456,8 @@ class PostCardChoosePhotoViewController: UIViewController,
                     
                     let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
                     UIGraphicsEndImageContext()
+                    
+                    Answers.logCustomEventWithName("Photo Taken", customAttributes: [:])
                     
                     let postCardVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostCardSaveViewController") as! PostCardSaveViewController
                     postCardVC.createdImage = newImage

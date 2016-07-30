@@ -1,4 +1,6 @@
 import UIKit
+import Fabric
+import Crashlytics
 
 class FavoritesViewController : TimeSlotRootViewController {
     @IBOutlet var tableView: UITableView!
@@ -420,6 +422,7 @@ class FavoritesViewController : TimeSlotRootViewController {
                             self.setDirtyData()
                             cell.session = sessions.first
                             self.removeFavoriteIcon(cell, animated: true)
+                            Answers.logCustomEventWithName("Removed Favorite", customAttributes: [:])
                             break
                         case .Failure(_):
                             self.stopIndicator()
@@ -438,6 +441,7 @@ class FavoritesViewController : TimeSlotRootViewController {
                             self.setDirtyData()
                             cell.session = sessions.first
                             self.removeFavoriteIcon(cell, animated: true)
+                            Answers.logCustomEventWithName("Added Favorite", customAttributes: [:])
                             break
                         case .Failure(_):
                             self.stopIndicator()
