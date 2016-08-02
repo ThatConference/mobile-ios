@@ -164,19 +164,20 @@ class PostCardSaveViewController : UIViewController {
         PHPhotoLibrary.sharedPhotoLibrary().performChanges({
             let assetRequest = PHAssetChangeRequest.creationRequestForAssetFromImage(image)
             let assetPlaceholder = assetRequest.placeholderForCreatedAsset
-            let albumChangeRequest = PHAssetCollectionChangeRequest(forAssetCollection: self.photoAlbum)
-            albumChangeRequest!.addAssets([assetPlaceholder!])
-            }, completionHandler: { success, error in
-                if error == nil {
-                    let ac = UIAlertController(title: "Created", message: "Your new That Postcard has been created.", preferredStyle: .Alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    self.presentViewController(ac, animated: true, completion: nil)
-                } else {
-                    let ac = UIAlertController(title: "Save Error", message: error?.localizedDescription, preferredStyle: .Alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    self.presentViewController(ac, animated: true, completion: nil)
-                }
-                self.stopIndicator()
+            if let albumChangeRequest = PHAssetCollectionChangeRequest(forAssetCollection: self.photoAlbum) {
+                albumChangeRequest.addAssets([assetPlaceholder!])
+            }
+        }, completionHandler: { success, error in
+            if error == nil {
+                let ac = UIAlertController(title: "Created", message: "Your new That Postcard has been created.", preferredStyle: .Alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                self.presentViewController(ac, animated: true, completion: nil)
+            } else {
+                let ac = UIAlertController(title: "Save Error", message: error?.localizedDescription, preferredStyle: .Alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                self.presentViewController(ac, animated: true, completion: nil)
+            }
+            self.stopIndicator()
         })
     }
     

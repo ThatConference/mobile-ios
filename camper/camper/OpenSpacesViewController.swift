@@ -25,6 +25,15 @@ class OpenSpacesViewController : TimeSlotRootViewController {
         self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), forControlEvents: .TouchUpInside)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Answers.logContentViewWithName("Open Spaces",
+                                       contentType: "Page",
+                                       contentId: "",
+                                       customAttributes: [:])
+    }
+    
     internal override func moveToDay(day: String!) {
         if (day == nil) {
             return

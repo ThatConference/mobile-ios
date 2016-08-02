@@ -36,6 +36,11 @@ class FavoritesViewController : TimeSlotRootViewController {
             }
             loadData()
         }
+        
+        Answers.logContentViewWithName("Open Spaces",
+                                       contentType: "Page",
+                                       contentId: "",
+                                       customAttributes: [:])
     }
     
     internal override func moveToDay(day: String!) {

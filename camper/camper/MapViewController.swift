@@ -1,4 +1,6 @@
 import UIKit
+import Fabric
+import Crashlytics
 
 class MapViewController : BaseViewController {
     @IBOutlet var mapImage: UIImageView!
@@ -10,6 +12,11 @@ class MapViewController : BaseViewController {
         if let setRoomName = roomName {
             setRoom(setRoomName.lowercaseString)
         }
+        
+        Answers.logContentViewWithName("Map",
+                                       contentType: "Page",
+                                       contentId: roomName,
+                                       customAttributes: [:])
     }
     
     private func setRoom(roomName: String) {

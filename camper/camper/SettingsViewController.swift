@@ -1,4 +1,6 @@
 import UIKit
+import Crashlytics
+import Fabric
 
 class SettingsViewController : BaseViewController {
     @IBOutlet var versionNumber: UILabel!
@@ -31,6 +33,11 @@ class SettingsViewController : BaseViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         setSignInButton()
+        
+        Answers.logContentViewWithName("Settings",
+                                       contentType: "Page",
+                                       contentId: "",
+                                       customAttributes: [:])
     }
     
     func setSignInButton() {

@@ -1,4 +1,6 @@
 import UIKit
+import Fabric
+import Crashlytics
 
 class SessionDetailViewController : BaseViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var labelDate: UILabel!
@@ -42,6 +44,11 @@ class SessionDetailViewController : BaseViewController, UITableViewDataSource, U
         
         favoriteButton.userInteractionEnabled = true
         favoriteButton!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SessionDetailViewController.SessionFavorited(_:))))
+        
+        Answers.logContentViewWithName("Session Detail",
+                                       contentType: "Page",
+                                       contentId: session.title,
+                                       customAttributes: [:])
     }
     
     override func viewDidLayoutSubviews() {

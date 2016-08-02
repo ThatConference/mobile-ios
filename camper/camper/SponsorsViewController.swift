@@ -1,4 +1,6 @@
 import UIKit
+import Fabric
+import Crashlytics
 
 class SponsorsViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var SponsorLevel: UILabel!
@@ -28,6 +30,15 @@ class SponsorsViewController: BaseViewController, UITableViewDataSource, UITable
         
         SponsorTable.dataSource = self
         SponsorTable.delegate = self
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        Answers.logContentViewWithName("Sponsors",
+                                       contentType: "Page",
+                                       contentId: "",
+                                       customAttributes: [:])
     }
     
     // MARK: Data Source

@@ -1,12 +1,6 @@
-//
-//  SpeakerProfileViewController.swift
-//  That Conference
-//
-//  Created by Matthew Ridley on 4/27/16.
-//  Copyright © 2016 That Conference. All rights reserved.
-//
-
 import UIKit
+import Fabric
+import Crashlytics
 
 class SpeakerProfileViewController : BaseViewController {
     var speaker: Speaker!
@@ -85,7 +79,8 @@ class SpeakerProfileViewController : BaseViewController {
             }
         }
 
-        speakerName.text = "\(speaker.firstName!) \(speaker.lastName!)"
+        let speakerFullName = "\(speaker.firstName!) \(speaker.lastName!)"
+        speakerName.text = speakerFullName
         jobTitle.text = speaker.title
         company.text = speaker.company
         
@@ -101,6 +96,11 @@ class SpeakerProfileViewController : BaseViewController {
         }
         
         setSocialButtons()
+        
+        Answers.logContentViewWithName("Session Detail",
+                                       contentType: "Page",
+                                       contentId: speakerFullName,
+                                       customAttributes: [:])
     }
     
     override func viewDidLayoutSubviews() {
