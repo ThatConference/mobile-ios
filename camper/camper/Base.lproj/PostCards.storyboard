@@ -192,7 +192,7 @@
                                             <constraint firstAttribute="height" constant="40" id="0fJ-fy-C1q"/>
                                         </constraints>
                                         <color key="tintColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Save Post Card">
+                                        <state key="normal" title="Save Postcard">
                                             <color key="titleColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
@@ -221,7 +221,7 @@
                                             <constraint firstAttribute="height" constant="40" id="Q0U-Wl-Jg9"/>
                                         </constraints>
                                         <color key="tintColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Share Post Card">
+                                        <state key="normal" title="Share Postcard">
                                             <color key="titleColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>

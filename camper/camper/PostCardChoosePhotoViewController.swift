@@ -32,6 +32,7 @@ class PostCardChoosePhotoViewController: UIViewController,
     var useRearCamera = true
     var videoDeviceInput: AVCaptureDeviceInput?
     var filterIsOn = false
+    var selfieModeIsOn = false
     
     let ALBUM_NAME: String = "That Conference"
     
@@ -242,6 +243,16 @@ class PostCardChoosePhotoViewController: UIViewController,
                                    filenamePortrait: "magicland-portrait")
         frames.append(frame4)
         
+        let frame9 = PostCardFrame(title: "Bear with Trees",
+                                   filenameLandscape: "bear-with-trees",
+                                   filenamePortrait: "bear-with-trees-portrait")
+        frames.append(frame9)
+        
+        let frame10 = PostCardFrame(title: "Bear Friend",
+                                   filenameLandscape: "bear",
+                                   filenamePortrait: "bear-portrait")
+        frames.append(frame10)
+        
         let frame5 = PostCardFrame(title: "TC Bottom Dark",
                                    filenameLandscape: "tc-bottom-dark",
                                    filenamePortrait: "tc-bottom-dark-portrait")
@@ -344,18 +355,30 @@ class PostCardChoosePhotoViewController: UIViewController,
             self.previewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.LandscapeRight
             self.cameraView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
             self.imageView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
-            self.frameView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
             changeCameraButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
             takePictureButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
             filterButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
+            
+            if (selfieModeIsOn) {
+                let frameTransform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
+                self.frameView.transform = CGAffineTransformScale(frameTransform, -1, 1);
+            } else {
+                self.frameView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
+            }
         } else if (currentOrientation == AVCaptureVideoOrientation.LandscapeRight) {
             self.previewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.LandscapeLeft
             self.cameraView.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
             self.imageView.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
-            self.frameView.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
             changeCameraButton.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
             takePictureButton.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
             filterButton.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
+            
+            if (selfieModeIsOn) {
+                let frameTransform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
+                self.frameView.transform = CGAffineTransformScale(frameTransform, -1, 1);
+            } else {
+                self.frameView.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
+            }
         } else {
             self.previewLayer!.connection?.videoOrientation = currentOrientation!
             self.cameraView.transform = CGAffineTransformIdentity
@@ -364,6 +387,10 @@ class PostCardChoosePhotoViewController: UIViewController,
             changeCameraButton.transform = CGAffineTransformIdentity
             takePictureButton.transform = CGAffineTransformIdentity
             filterButton.transform = CGAffineTransformIdentity
+            
+            if (selfieModeIsOn) {
+                self.frameView.transform = CGAffineTransformMakeScale(-1, 1);
+            }
         }
         
         previewLayer!.videoGravity = AVLayerVideoGravityResizeAspect
@@ -377,10 +404,13 @@ class PostCardChoosePhotoViewController: UIViewController,
             let currentPosition: AVCaptureDevicePosition = currentVideoDevice.position
             var preferredPosition: AVCaptureDevicePosition = AVCaptureDevicePosition.Unspecified
             
+            self.selfieModeIsOn = false
+            
             switch currentPosition{
             case AVCaptureDevicePosition.Front:
                 preferredPosition = AVCaptureDevicePosition.Back
             case AVCaptureDevicePosition.Back:
+                self.selfieModeIsOn = true
                 preferredPosition = AVCaptureDevicePosition.Front
             case AVCaptureDevicePosition.Unspecified:
                 preferredPosition = AVCaptureDevicePosition.Back
@@ -412,6 +442,7 @@ class PostCardChoosePhotoViewController: UIViewController,
             
             self.captureSession!.commitConfiguration()
             
+            self.setScreenRotation()
         })
     }
     
@@ -440,10 +471,18 @@ class PostCardChoosePhotoViewController: UIViewController,
                     
                     var image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Right)
                     if (self.currentOrientation == AVCaptureVideoOrientation.LandscapeRight) {
-                        image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Down)
+                        if (self.selfieModeIsOn) {
+                            image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Up)
+                        } else {
+                            image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Down)
+                        }
                     }
                     if (self.currentOrientation == AVCaptureVideoOrientation.LandscapeLeft) {
-                        image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Up)
+                        if (self.selfieModeIsOn) {
+                            image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Down)
+                        } else {
+                            image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Up)
+                        }
                     }
                     
                     let size = CGSize(width: self.frameImage!.size.width, height: self.frameImage!.size.height)

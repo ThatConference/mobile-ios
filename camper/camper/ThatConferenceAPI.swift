@@ -146,7 +146,7 @@ class ThatConferenceAPI {
         let title = json["Title"] as? String
         let sessionDescription = json["Description"] as? String
         let scheduledRoom = json["ScheduledRoom"] as? String
-        let primaryCategory = json["PrimaryCategory"] as? String
+        let primaryCategory = json["PrimaryCategoryDisplayText"] as? String
         let level = json["Level"] as? String
         let accepted = (json["Accepted"] as? NSNumber)?.boolValue
         let cancelled = (json["Canceled"] as? NSNumber)?.boolValue

@@ -68,7 +68,7 @@ class PostCardSaveViewController : UIViewController {
     func alertToEncouragePhotosAccessInitially() {
         let alert = UIAlertController(
             title: "IMPORTANT",
-            message: "Photo Album access required to save Post Card",
+            message: "Photo Album access required to save Postcard",
             preferredStyle: UIAlertControllerStyle.Alert
         )
         alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (alert) -> Void in
@@ -163,9 +163,10 @@ class PostCardSaveViewController : UIViewController {
     func saveImage(image: UIImage){
         PHPhotoLibrary.sharedPhotoLibrary().performChanges({
             let assetRequest = PHAssetChangeRequest.creationRequestForAssetFromImage(image)
-            let assetPlaceholder = assetRequest.placeholderForCreatedAsset
-            if let albumChangeRequest = PHAssetCollectionChangeRequest(forAssetCollection: self.photoAlbum) {
-                albumChangeRequest.addAssets([assetPlaceholder!])
+            if let assetPlaceholder = assetRequest.placeholderForCreatedAsset {
+                if let albumChangeRequest = PHAssetCollectionChangeRequest(forAssetCollection: self.photoAlbum) {
+                    albumChangeRequest.addAssets([assetPlaceholder])
+                }
             }
         }, completionHandler: { success, error in
             if error == nil {
