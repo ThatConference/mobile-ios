@@ -49,6 +49,8 @@ class SessionDetailViewController : BaseViewController, UITableViewDataSource, U
                                        contentType: "Page",
                                        contentId: session.title,
                                        customAttributes: [:])
+        
+        setFavoriteIcon(animated: false)
     }
     
     override func viewDidLayoutSubviews() {

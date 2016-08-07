@@ -10,6 +10,8 @@ class OpenSpacesViewController : TimeSlotRootViewController {
     @IBOutlet var previousDayButton: UIButton!
     @IBOutlet var updatedFlag: UIImageView!
     
+    var refreshControl: UIRefreshControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +25,11 @@ class OpenSpacesViewController : TimeSlotRootViewController {
         
         self.previousDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5)
         self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), forControlEvents: .TouchUpInside)
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(OpenSpacesViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(self.refreshControl)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -59,10 +66,18 @@ class OpenSpacesViewController : TimeSlotRootViewController {
     }
     
     // MARK: Data
+    func refresh(sender:AnyObject) {
+        loadData()
+    }
+    
     override func loadData() {
         let sessionStore = SessionStore()
         self.dateLabel.text = "Loading"
         self.activityIndicator.startAnimating()
+        
+        if (self.refreshControl != nil) {
+            self.refreshControl.endRefreshing()
+        }
         
         sessionStore.getDailySchedules(false) {
             (results) -> Void in
@@ -322,19 +337,23 @@ class OpenSpacesViewController : TimeSlotRootViewController {
         let tableView = scrollView as! UITableView
         
         if let visibleRows = tableView.indexPathsForVisibleRows {
-            let section = visibleRows[0].section; //top visible time
-            
-            let timeSlot = dailySchedules[self.currentDay]?.timeSlots[section];
-            
-            for timeView in self.timeTableView.subviews {
-                if timeView.isKindOfClass(CircleLabel) {
-                    let circleView = (timeView as! CircleLabel)
-                    if circleView.timeSlot.isEqualToDate(timeSlot!.time!) {
-                        if circleView.circleVisible() == false {
-                            circleView.toggleCircle()
+            if (visibleRows.count > 0) {
+                let section = visibleRows[0].section; //top visible time
+                
+                if let timeSlot = dailySchedules[self.currentDay]?.timeSlots[section] {
+                    do {
+                        for timeView in self.timeTableView.subviews {
+                            if timeView.isKindOfClass(CircleLabel) {
+                                let circleView = (timeView as! CircleLabel)
+                                if circleView.timeSlot.isEqualToDate(timeSlot.time!) {
+                                    if circleView.circleVisible() == false {
+                                        circleView.toggleCircle()
+                                    }
+                                } else if circleView.circleVisible() {
+                                    circleView.toggleCircle()
+                                }
+                            }
                         }
-                    } else if circleView.circleVisible() {
-                        circleView.toggleCircle()
                     }
                 }
             }

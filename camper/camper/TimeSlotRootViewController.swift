@@ -80,10 +80,12 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
     }
     
     func determineClosestTimeslotSection(hourSelected: NSDate) -> Int {
-        for index in 0...dailySchedule.timeSlots.count - 1 {
-            let timeSlot = dailySchedule.timeSlots[index]
-            if timeSlot.time == hourSelected {
-                return index
+        if (dailySchedule.timeSlots.count > 0) {
+            for index in 0...dailySchedule.timeSlots.count - 1 {
+                let timeSlot = dailySchedule.timeSlots[index]
+                if timeSlot.time == hourSelected {
+                    return index
+                }
             }
         }
         return 0
@@ -91,15 +93,16 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
     
     // MARK: UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! TimeSlotRootTableViewCell
-        let session =  cell.session
-        
-        if (!session.cancelled) {
-            let sessionDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("SessionDetailViewController") as! SessionDetailViewController
-            sessionDetailVC.session = session
-            self.navigationController!.pushViewController(sessionDetailVC, animated: true)
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? TimeSlotRootTableViewCell {
+            let session =  cell.session
+            
+            if (!session.cancelled) {
+                let sessionDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("SessionDetailViewController") as! SessionDetailViewController
+                sessionDetailVC.session = session
+                self.navigationController!.pushViewController(sessionDetailVC, animated: true)
+            }
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     // MARK: Data Source
