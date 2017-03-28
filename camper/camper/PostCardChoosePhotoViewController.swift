@@ -39,13 +39,13 @@ class PostCardChoosePhotoViewController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        currentOrientation = AVCaptureVideoOrientation.Portrait
+        currentOrientation = AVCaptureVideoOrientation.portrait
         
         updateFrameInfo()
         
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         
-        self.imageView.hidden = true
+        self.imageView.isHidden = true
         //setCameraWitHFilter()
         setCamera()
         
@@ -54,10 +54,10 @@ class PostCardChoosePhotoViewController: UIViewController,
         let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(PostCardChoosePhotoViewController.handleSwipes(_:)))
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(PostCardChoosePhotoViewController.handleSwipes(_:)))
         
-        leftSwipe.direction = .Left
-        rightSwipe.direction = .Right
-        upSwipe.direction = .Up
-        downSwipe.direction = .Down
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
+        upSwipe.direction = .up
+        downSwipe.direction = .down
         
         view.addGestureRecognizer(leftSwipe)
         view.addGestureRecognizer(rightSwipe)
@@ -65,15 +65,15 @@ class PostCardChoosePhotoViewController: UIViewController,
         view.addGestureRecognizer(downSwipe)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PostCardChoosePhotoViewController.DidRotate), name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(PostCardChoosePhotoViewController.DidRotate), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
         self.captureSession?.startRunning()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         checkCamera()
@@ -81,37 +81,37 @@ class PostCardChoosePhotoViewController: UIViewController,
     
     func finalSetUp() {
         //Set Camera Preview Bounds
-        let rect = AVMakeRectWithAspectRatioInsideRect(frameImage!.size, frameView.bounds)
+        let rect = AVMakeRect(aspectRatio: frameImage!.size, insideRect: frameView.bounds)
         cameraView.bounds = frameView.bounds
         previewLayer!.frame = rect
         //imageView.frame = rect
         
         //Frame Message
-        let defaults = NSUserDefaults.standardUserDefaults()
-        if !defaults.boolForKey("tutorialWasShown") {
-            let alertController = UIAlertController(title: nil, message: "Swipe To Change Frame Style", preferredStyle: .Alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(alertController, animated: true, completion: nil)
+        let defaults = UserDefaults.standard
+        if !defaults.bool(forKey: "tutorialWasShown") {
+            let alertController = UIAlertController(title: nil, message: "Swipe To Change Frame Style", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alertController, animated: true, completion: nil)
             let delay = 4.0 * Double(NSEC_PER_SEC)
-            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-            dispatch_after(time, dispatch_get_main_queue(), {
-                alertController.dismissViewControllerAnimated(true, completion: nil);
+            let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: time, execute: {
+                alertController.dismiss(animated: true, completion: nil);
             })
             
             // Update defaults
-            defaults.setBool(true, forKey: "tutorialWasShown")
-            NSUserDefaults.standardUserDefaults().synchronize()
+            defaults.set(true, forKey: "tutorialWasShown")
+            UserDefaults.standard.synchronize()
         }
     }
     
     func checkCamera() {
-        let authStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+        let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         switch authStatus {
-        case .Authorized:
+        case .authorized:
             finalSetUp()
             break
-        case .Denied: alertToEncourageCameraAccessInitially()
-        case .NotDetermined: alertPromptToAllowCameraAccessViaSetting()
+        case .denied: alertToEncourageCameraAccessInitially()
+        case .notDetermined: alertPromptToAllowCameraAccessViaSetting()
         default: alertToEncourageCameraAccessInitially()
         }
     }
@@ -120,56 +120,56 @@ class PostCardChoosePhotoViewController: UIViewController,
         let alert = UIAlertController(
             title: "IMPORTANT",
             message: "Camera access required for Photo Taking",
-            preferredStyle: UIAlertControllerStyle.Alert
+            preferredStyle: UIAlertControllerStyle.alert
         )
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (alert) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
-                self.dismissViewControllerAnimated(false, completion: nil)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (alert) -> Void in
+            DispatchQueue.main.async(execute: {
+                self.dismiss(animated: false, completion: nil)
             })
         }))
-        alert.addAction(UIAlertAction(title: "Allow Camera", style: .Cancel, handler: { (alert) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
-                UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+        alert.addAction(UIAlertAction(title: "Allow Camera", style: .cancel, handler: { (alert) -> Void in
+            DispatchQueue.main.async(execute: {
+                UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
             })
         }))
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     func alertPromptToAllowCameraAccessViaSetting() {
         let alert = UIAlertController(
             title: "IMPORTANT",
             message: "Please allow camera access for Photo Taking",
-            preferredStyle: UIAlertControllerStyle.Alert
+            preferredStyle: UIAlertControllerStyle.alert
         )
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .Cancel) { alert in
-            if AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo).count > 0 {
-                AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) { granted in
-                    dispatch_async(dispatch_get_main_queue()) {
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel) { alert in
+            if AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo).count > 0 {
+                AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { granted in
+                    DispatchQueue.main.async {
                         self.checkCamera() } }
             }
         })
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
-    func handleSwipes(sender:UISwipeGestureRecognizer) {
-        if (sender.direction == .Left) {
+    func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+        if (sender.direction == .left) {
             moveToNext()
         }
         
-        if (sender.direction == .Right) {
+        if (sender.direction == .right) {
             moveToPrevious()
         }
         
-        if (sender.direction == .Up) {
+        if (sender.direction == .up) {
             moveToNext()
         }
         
-        if (sender.direction == .Down) {
+        if (sender.direction == .down) {
             moveToPrevious()
         }
     }
     
-    private func moveToNext() {
+    fileprivate func moveToNext() {
         frameIndex += 1
         
         if (frameIndex >= frames.count) {
@@ -179,7 +179,7 @@ class PostCardChoosePhotoViewController: UIViewController,
         updateFrameInfo()
     }
     
-    private func moveToPrevious() {
+    fileprivate func moveToPrevious() {
         frameIndex -= 1
         
         if (frameIndex < 0) {
@@ -190,19 +190,19 @@ class PostCardChoosePhotoViewController: UIViewController,
     }
     
     func DidRotate() {
-        switch UIDevice.currentDevice().orientation {
-        case UIDeviceOrientation.LandscapeLeft:
-            currentOrientation = AVCaptureVideoOrientation.LandscapeLeft
+        switch UIDevice.current.orientation {
+        case UIDeviceOrientation.landscapeLeft:
+            currentOrientation = AVCaptureVideoOrientation.landscapeLeft
             break;
-        case UIDeviceOrientation.LandscapeRight:
-            currentOrientation = AVCaptureVideoOrientation.LandscapeRight
+        case UIDeviceOrientation.landscapeRight:
+            currentOrientation = AVCaptureVideoOrientation.landscapeRight
             break;
         default:
-            currentOrientation = AVCaptureVideoOrientation.Portrait
+            currentOrientation = AVCaptureVideoOrientation.portrait
             break;
         }
         
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             self.updateFrameInfo()
             self.setScreenRotation()
         })
@@ -212,11 +212,11 @@ class PostCardChoosePhotoViewController: UIViewController,
         populateFrames()
         frame = frames[frameIndex]
         
-        if ((currentOrientation == AVCaptureVideoOrientation.LandscapeLeft)
-            || (currentOrientation == AVCaptureVideoOrientation.LandscapeRight) ) {
-            frameImage = UIImage(named: (frame!.FilenameLandscape!.lowercaseString))!
+        if ((currentOrientation == AVCaptureVideoOrientation.landscapeLeft)
+            || (currentOrientation == AVCaptureVideoOrientation.landscapeRight) ) {
+            frameImage = UIImage(named: (frame!.FilenameLandscape!.lowercased()))!
         } else {
-            frameImage = UIImage(named: (frame!.FilenamePortrait!.lowercaseString))!
+            frameImage = UIImage(named: (frame!.FilenamePortrait!.lowercased()))!
         }
         
         frameView.image = frameImage
@@ -280,7 +280,7 @@ class PostCardChoosePhotoViewController: UIViewController,
         
         var error: NSError?
         
-        let backCamera = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        let backCamera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
         do {
             videoDeviceInput = try AVCaptureDeviceInput(device: backCamera)
@@ -311,7 +311,7 @@ class PostCardChoosePhotoViewController: UIViewController,
         captureSession = AVCaptureSession()
         captureSession!.sessionPreset = AVCaptureSessionPresetPhoto
         
-        let backCamera = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        let backCamera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
         do {
             videoDeviceInput = try AVCaptureDeviceInput(device: backCamera)
@@ -325,71 +325,71 @@ class PostCardChoosePhotoViewController: UIViewController,
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer!.videoGravity = AVLayerVideoGravityResizeAspect
         previewLayer!.connection?.videoOrientation = currentOrientation!
-        cameraView.layer.addSublayer(previewLayer)
+        cameraView.layer.addSublayer(previewLayer!)
         
         let videoOutput = AVCaptureVideoDataOutput()
-        videoOutput.setSampleBufferDelegate(self, queue: dispatch_queue_create("sample buffer delegate", DISPATCH_QUEUE_SERIAL))
+        videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "sample buffer delegate", attributes: []))
         
         captureSession!.addOutput(videoOutput)
         captureSession!.startRunning()
     }
     
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!)
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!)
     {
         let videoEffect = CIFilter(name: "CIPhotoEffectInstant")
         let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
-        let cameraImage = CIImage(CVPixelBuffer: pixelBuffer!)
+        let cameraImage = CIImage(cvPixelBuffer: pixelBuffer!)
         
         videoEffect!.setValue(cameraImage, forKey: kCIInputImageKey)
         
-        let filteredImage = UIImage(CIImage: videoEffect!.valueForKey(kCIOutputImageKey) as! CIImage!)
+        let filteredImage = UIImage(ciImage: videoEffect!.value(forKey: kCIOutputImageKey) as! CIImage!)
         
-        dispatch_async(dispatch_get_main_queue())
+        DispatchQueue.main.async
         {
             self.imageView.image = filteredImage
         }
     }
     
     func setScreenRotation() {
-        if (currentOrientation == AVCaptureVideoOrientation.LandscapeLeft) {
-            self.previewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.LandscapeRight
-            self.cameraView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
-            self.imageView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
-            changeCameraButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
-            takePictureButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
-            filterButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
+        if (currentOrientation == AVCaptureVideoOrientation.landscapeLeft) {
+            self.previewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.landscapeRight
+            self.cameraView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+            self.imageView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+            changeCameraButton.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+            takePictureButton.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+            filterButton.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
             
             if (selfieModeIsOn) {
-                let frameTransform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
-                self.frameView.transform = CGAffineTransformScale(frameTransform, -1, 1);
+                let frameTransform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+                self.frameView.transform = frameTransform.scaledBy(x: -1, y: 1);
             } else {
-                self.frameView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
+                self.frameView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
             }
-        } else if (currentOrientation == AVCaptureVideoOrientation.LandscapeRight) {
-            self.previewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.LandscapeLeft
-            self.cameraView.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
-            self.imageView.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
-            changeCameraButton.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
-            takePictureButton.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
-            filterButton.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
+        } else if (currentOrientation == AVCaptureVideoOrientation.landscapeRight) {
+            self.previewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.landscapeLeft
+            self.cameraView.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
+            self.imageView.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
+            changeCameraButton.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
+            takePictureButton.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
+            filterButton.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
             
             if (selfieModeIsOn) {
-                let frameTransform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
-                self.frameView.transform = CGAffineTransformScale(frameTransform, -1, 1);
+                let frameTransform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
+                self.frameView.transform = frameTransform.scaledBy(x: -1, y: 1);
             } else {
-                self.frameView.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
+                self.frameView.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
             }
         } else {
             self.previewLayer!.connection?.videoOrientation = currentOrientation!
-            self.cameraView.transform = CGAffineTransformIdentity
-            self.imageView.transform = CGAffineTransformIdentity
-            self.frameView.transform = CGAffineTransformIdentity
-            changeCameraButton.transform = CGAffineTransformIdentity
-            takePictureButton.transform = CGAffineTransformIdentity
-            filterButton.transform = CGAffineTransformIdentity
+            self.cameraView.transform = CGAffineTransform.identity
+            self.imageView.transform = CGAffineTransform.identity
+            self.frameView.transform = CGAffineTransform.identity
+            changeCameraButton.transform = CGAffineTransform.identity
+            takePictureButton.transform = CGAffineTransform.identity
+            filterButton.transform = CGAffineTransform.identity
             
             if (selfieModeIsOn) {
-                self.frameView.transform = CGAffineTransformMakeScale(-1, 1);
+                self.frameView.transform = CGAffineTransform(scaleX: -1, y: 1);
             }
         }
         
@@ -397,26 +397,26 @@ class PostCardChoosePhotoViewController: UIViewController,
         cameraView.bounds = frameView.bounds
     }
     
-    @IBAction func reverseCamera(sender: AnyObject) {
-        dispatch_async(dispatch_get_main_queue(), {
+    @IBAction func reverseCamera(_ sender: AnyObject) {
+        DispatchQueue.main.async(execute: {
             
             let currentVideoDevice:AVCaptureDevice = self.videoDeviceInput!.device
             let currentPosition: AVCaptureDevicePosition = currentVideoDevice.position
-            var preferredPosition: AVCaptureDevicePosition = AVCaptureDevicePosition.Unspecified
+            var preferredPosition: AVCaptureDevicePosition = AVCaptureDevicePosition.unspecified
             
             self.selfieModeIsOn = false
             
             switch currentPosition{
-            case AVCaptureDevicePosition.Front:
-                preferredPosition = AVCaptureDevicePosition.Back
-            case AVCaptureDevicePosition.Back:
+            case AVCaptureDevicePosition.front:
+                preferredPosition = AVCaptureDevicePosition.back
+            case AVCaptureDevicePosition.back:
                 self.selfieModeIsOn = true
-                preferredPosition = AVCaptureDevicePosition.Front
-            case AVCaptureDevicePosition.Unspecified:
-                preferredPosition = AVCaptureDevicePosition.Back
+                preferredPosition = AVCaptureDevicePosition.front
+            case AVCaptureDevicePosition.unspecified:
+                preferredPosition = AVCaptureDevicePosition.back
             }
             
-            let device:AVCaptureDevice = PostCardChoosePhotoViewController.deviceWithMediaType(AVMediaTypeVideo, preferringPosition: preferredPosition)
+            let device:AVCaptureDevice = PostCardChoosePhotoViewController.deviceWithMediaType(AVMediaTypeVideo as NSString, preferringPosition: preferredPosition)
             
             var videoDeviceInput: AVCaptureDeviceInput?
             
@@ -432,7 +432,7 @@ class PostCardChoosePhotoViewController: UIViewController,
             self.captureSession!.removeInput(self.videoDeviceInput)
             
             if self.captureSession!.canAddInput(videoDeviceInput){
-                NSNotificationCenter.defaultCenter().removeObserver(self, name:AVCaptureDeviceSubjectAreaDidChangeNotification, object:currentVideoDevice)
+                NotificationCenter.default.removeObserver(self, name:NSNotification.Name.AVCaptureDeviceSubjectAreaDidChange, object:currentVideoDevice)
                 self.captureSession!.addInput(videoDeviceInput)
                 self.videoDeviceInput = videoDeviceInput
                 
@@ -446,8 +446,8 @@ class PostCardChoosePhotoViewController: UIViewController,
         })
     }
     
-    class func deviceWithMediaType(mediaType: NSString, preferringPosition position: AVCaptureDevicePosition) -> AVCaptureDevice {
-        let devices = AVCaptureDevice.devicesWithMediaType(mediaType as String) as! [AVCaptureDevice]
+    class func deviceWithMediaType(_ mediaType: NSString, preferringPosition position: AVCaptureDevicePosition) -> AVCaptureDevice {
+        let devices = AVCaptureDevice.devices(withMediaType: mediaType as String) as! [AVCaptureDevice]
         var captureDevice = devices[0]
         
         for device in devices {
@@ -460,28 +460,28 @@ class PostCardChoosePhotoViewController: UIViewController,
         return captureDevice;
     }
     
-    @IBAction func takePhoto(sender: AnyObject) {
-        if let videoConnection = stillImageOutput!.connectionWithMediaType(AVMediaTypeVideo) {
-            videoConnection.videoOrientation = AVCaptureVideoOrientation.Portrait
-            stillImageOutput?.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {(sampleBuffer, error) in
+    @IBAction func takePhoto(_ sender: AnyObject) {
+        if let videoConnection = stillImageOutput!.connection(withMediaType: AVMediaTypeVideo) {
+            videoConnection.videoOrientation = AVCaptureVideoOrientation.portrait
+            stillImageOutput?.captureStillImageAsynchronously(from: videoConnection, completionHandler: {(sampleBuffer, error) in
                 if (sampleBuffer != nil) {
                     let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
-                    let dataProvider = CGDataProviderCreateWithCFData(imageData)
-                    let cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
+                    let dataProvider = CGDataProvider(data: imageData as! CFData)
+                    let cgImageRef = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent)
                     
-                    var image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Right)
-                    if (self.currentOrientation == AVCaptureVideoOrientation.LandscapeRight) {
+                    var image = UIImage(cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
+                    if (self.currentOrientation == AVCaptureVideoOrientation.landscapeRight) {
                         if (self.selfieModeIsOn) {
-                            image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Up)
+                            image = UIImage(cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.up)
                         } else {
-                            image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Down)
+                            image = UIImage(cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.down)
                         }
                     }
-                    if (self.currentOrientation == AVCaptureVideoOrientation.LandscapeLeft) {
+                    if (self.currentOrientation == AVCaptureVideoOrientation.landscapeLeft) {
                         if (self.selfieModeIsOn) {
-                            image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Down)
+                            image = UIImage(cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.down)
                         } else {
-                            image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Up)
+                            image = UIImage(cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.up)
                         }
                     }
                     
@@ -489,29 +489,29 @@ class PostCardChoosePhotoViewController: UIViewController,
                     UIGraphicsBeginImageContext(size)
                     
                     let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-                    image.drawInRect(areaSize)
+                    image.draw(in: areaSize)
                     
-                    self.frameImage!.drawInRect(areaSize, blendMode: CGBlendMode.Normal, alpha: 1.0)
+                    self.frameImage!.draw(in: areaSize, blendMode: CGBlendMode.normal, alpha: 1.0)
                     
-                    let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+                    let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
                     UIGraphicsEndImageContext()
                     
-                    Answers.logCustomEventWithName("Photo Taken", customAttributes: [:])
+                    Answers.logCustomEvent(withName: "Photo Taken", customAttributes: [:])
                     
-                    let postCardVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostCardSaveViewController") as! PostCardSaveViewController
+                    let postCardVC = self.storyboard?.instantiateViewController(withIdentifier: "PostCardSaveViewController") as! PostCardSaveViewController
                     postCardVC.createdImage = newImage
-                    self.presentViewController(postCardVC, animated: true, completion: nil)
+                    self.present(postCardVC, animated: true, completion: nil)
                 }
             })
         }
     }
     
-    @IBAction func closePressed(sender: AnyObject) {
-        self.dismissViewControllerAnimated(false, completion: nil)
+    @IBAction func closePressed(_ sender: AnyObject) {
+        self.dismiss(animated: false, completion: nil)
     }
     
-    @IBAction func filterPressed(sender: AnyObject) {
+    @IBAction func filterPressed(_ sender: AnyObject) {
         filterIsOn = !filterIsOn
-        self.imageView.hidden = !filterIsOn
+        self.imageView.isHidden = !filterIsOn
     }
 }

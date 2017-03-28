@@ -15,26 +15,26 @@ class SettingsViewController : BaseViewController {
         super.viewDidLoad()
         
         //Set Version Number
-        let version = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String
-        let build = NSBundle.mainBundle().infoDictionary!["CFBundleVersion"] as! String
+        let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+        let build = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
         versionNumber.text = "\(version).\(build)"
         
         //Add TC Logo Tap
         let tcTapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(SettingsViewController.thatConferencePressed(_:)))
-        tcLogo.userInteractionEnabled = true
+        tcLogo.isUserInteractionEnabled = true
         tcLogo.addGestureRecognizer(tcTapGestureRecognizer)
         
         //Add MC Logo Tap
         let mcTapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(SettingsViewController.milkcanPressed(_:)))
-        mcLogo.userInteractionEnabled = true
+        mcLogo.isUserInteractionEnabled = true
         mcLogo.addGestureRecognizer(mcTapGestureRecognizer)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setSignInButton()
         
-        Answers.logContentViewWithName("Settings",
+        Answers.logContentView(withName: "Settings",
                                        contentType: "Page",
                                        contentId: "",
                                        customAttributes: [:])
@@ -42,49 +42,49 @@ class SettingsViewController : BaseViewController {
     
     func setSignInButton() {
         if (Authentication.isLoggedIn()) {
-            loginButton.setTitle("Sign Out", forState: UIControlState.Normal)
+            loginButton.setTitle("Sign Out", for: UIControlState())
         } else {
-            loginButton.setTitle("Sign In", forState: UIControlState.Normal)
+            loginButton.setTitle("Sign In", for: UIControlState())
         }
     }
     
-    @IBAction func loginPressed(sender: AnyObject) {
+    @IBAction func loginPressed(_ sender: AnyObject) {
         if (Authentication.isLoggedIn()) {
             Authentication.removeAuthToken()
             setDirtyData()
-            PersistenceManager.deleteDailySchedule(Path.Favorites)
-            let alert = UIAlertController(title: "Signed Out", message: "Sign out was successful. You can now sign in with a different account or continue as a guest.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            _ = PersistenceManager.deleteDailySchedule(Path.Favorites)
+            let alert = UIAlertController(title: "Signed Out", message: "Sign out was successful. You can now sign in with a different account or continue as a guest.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         } else {
-            self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
+            self.parent!.parent!.performSegue(withIdentifier: "show_login", sender: self)
         }
         
         setSignInButton()
     }
     
-    func thatConferencePressed(sender: AnyObject) {
+    func thatConferencePressed(_ sender: AnyObject) {
         let url = "http://thatconference.com"
-        UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+        UIApplication.shared.openURL(URL(string: url)!)
     }
     
-    func milkcanPressed(sender: AnyObject) {
+    func milkcanPressed(_ sender: AnyObject) {
         let url = "http://milkcan.io"
-        UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+        UIApplication.shared.openURL(URL(string: url)!)
     }
     
-    @IBAction func sponsorsPressed(sender: AnyObject) {
-        let mapVC = self.storyboard?.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
+    @IBAction func sponsorsPressed(_ sender: AnyObject) {
+        let mapVC = self.storyboard?.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
         self.navigationController!.pushViewController(mapVC, animated: true)
     }
     
-    @IBAction func reportBugPressed(sender: AnyObject) {
+    @IBAction func reportBugPressed(_ sender: AnyObject) {
         let url = "https://github.com/ThatConference/mobile-ios/issues"
-        UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+        UIApplication.shared.openURL(URL(string: url)!)
     }
 
     func setDirtyData() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.dirtyDataSchedule = true;
         appDelegate.dirtyDataFavorites = true;
     }

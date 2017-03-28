@@ -7,7 +7,7 @@ class Session: NSObject {
     var id: NSNumber?
     var title: String?
     var sessionDescription: String?
-    var scheduledDateTime: NSDate?
+    var scheduledDateTime: Date?
     var scheduledRoom: String?
     var primaryCategory: String?
     var level: String?
@@ -23,7 +23,7 @@ class Session: NSObject {
                   id: NSNumber?,
                   title: String?,
                   sessionDescription: String?,
-                  scheduledDateTime: NSDate?,
+                  scheduledDateTime: Date?,
                   scheduledRoom: String?,
                   primaryCategory: String?,
                   level: String?,
@@ -47,19 +47,19 @@ class Session: NSObject {
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        let cancelled = aDecoder.decodeObjectForKey("cancelled") as! Bool
-        let accepted = aDecoder.decodeObjectForKey("accepted") as! Bool
-        let id = aDecoder.decodeObjectForKey("id") as? NSNumber
-        let title = aDecoder.decodeObjectForKey("title") as? String
-        let sessionDescription = aDecoder.decodeObjectForKey("sessionDescription") as? String
-        let scheduledDateTime = aDecoder.decodeObjectForKey("scheduledDateTime") as? NSDate
-        let scheduledRoom = aDecoder.decodeObjectForKey("scheduledRoom") as? String
-        let primaryCategory = aDecoder.decodeObjectForKey("primaryCategory") as? String
-        let level = aDecoder.decodeObjectForKey("level") as? String
-        let speakers = aDecoder.decodeObjectForKey("speakers") as! [Speaker]
-        let isFamilyApproved = aDecoder.decodeObjectForKey("isFamilyApproved") as! Bool
-        let isUserFavorite = aDecoder.decodeObjectForKey("isUserFavorite") as! Bool
-        let updated = aDecoder.decodeObjectForKey("updated") as! Bool
+        let cancelled = aDecoder.decodeObject(forKey: "cancelled") as! Bool
+        let accepted = aDecoder.decodeObject(forKey: "accepted") as! Bool
+        let id = aDecoder.decodeObject(forKey: "id") as? NSNumber
+        let title = aDecoder.decodeObject(forKey: "title") as? String
+        let sessionDescription = aDecoder.decodeObject(forKey: "sessionDescription") as? String
+        let scheduledDateTime = aDecoder.decodeObject(forKey: "scheduledDateTime") as? Date
+        let scheduledRoom = aDecoder.decodeObject(forKey: "scheduledRoom") as? String
+        let primaryCategory = aDecoder.decodeObject(forKey: "primaryCategory") as? String
+        let level = aDecoder.decodeObject(forKey: "level") as? String
+        let speakers = aDecoder.decodeObject(forKey: "speakers") as! [Speaker]
+        let isFamilyApproved = aDecoder.decodeObject(forKey: "isFamilyApproved") as! Bool
+        let isUserFavorite = aDecoder.decodeObject(forKey: "isUserFavorite") as! Bool
+        let updated = aDecoder.decodeObject(forKey: "updated") as! Bool
         self.init(cancelled: cancelled,
                   accepted: accepted,
                   id: id,
@@ -75,19 +75,19 @@ class Session: NSObject {
                   updated: updated)
     }
 
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.cancelled, forKey: "cancelled")
-        aCoder.encodeObject(self.accepted, forKey: "accepted")
-        aCoder.encodeObject(self.id, forKey: "id")
-        aCoder.encodeObject(self.title, forKey: "title")
-        aCoder.encodeObject(self.sessionDescription, forKey: "sessionDescription")
-        aCoder.encodeObject(self.scheduledDateTime, forKey: "scheduledDateTime")
-        aCoder.encodeObject(self.scheduledRoom, forKey: "scheduledRoom")
-        aCoder.encodeObject(self.primaryCategory, forKey: "primaryCategory")
-        aCoder.encodeObject(self.level, forKey: "level")
-        aCoder.encodeObject(self.speakers, forKey: "speakers")
-        aCoder.encodeObject(self.isFamilyApproved, forKey: "isFamilyApproved")
-        aCoder.encodeObject(self.isUserFavorite, forKey: "isUserFavorite")
-        aCoder.encodeObject(self.updated, forKey: "updated")
+    func encodeWithCoder(_ aCoder: NSCoder) {
+        aCoder.encode(self.cancelled, forKey: "cancelled")
+        aCoder.encode(self.accepted, forKey: "accepted")
+        aCoder.encode(self.id, forKey: "id")
+        aCoder.encode(self.title, forKey: "title")
+        aCoder.encode(self.sessionDescription, forKey: "sessionDescription")
+        aCoder.encode(self.scheduledDateTime, forKey: "scheduledDateTime")
+        aCoder.encode(self.scheduledRoom, forKey: "scheduledRoom")
+        aCoder.encode(self.primaryCategory, forKey: "primaryCategory")
+        aCoder.encode(self.level, forKey: "level")
+        aCoder.encode(self.speakers, forKey: "speakers")
+        aCoder.encode(self.isFamilyApproved, forKey: "isFamilyApproved")
+        aCoder.encode(self.isUserFavorite, forKey: "isUserFavorite")
+        aCoder.encode(self.updated, forKey: "updated")
     }
 }

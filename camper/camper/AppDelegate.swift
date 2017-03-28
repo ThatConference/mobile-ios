@@ -8,7 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var dirtyDataSchedule: Bool = false
     var dirtyDataFavorites: Bool = false
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         Fabric.with([Crashlytics.self])
         
@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Back Image
         let backArrowImage = UIImage(named: "back")
-        let renderedImage = backArrowImage?.imageWithRenderingMode(.AlwaysOriginal)
+        let renderedImage = backArrowImage?.withRenderingMode(.alwaysOriginal)
         UINavigationBar.appearance().backIndicatorImage = renderedImage
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = renderedImage
         

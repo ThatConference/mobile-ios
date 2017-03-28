@@ -10,16 +10,16 @@ class MapViewController : BaseViewController {
         super.viewDidLoad()
         
         if let setRoomName = roomName {
-            setRoom(setRoomName.lowercaseString)
+            setRoom(setRoomName.lowercased())
         }
         
-        Answers.logContentViewWithName("Map",
+        Answers.logContentView(withName: "Map",
                                        contentType: "Page",
                                        contentId: roomName,
                                        customAttributes: [:])
     }
     
-    private func setRoom(roomName: String) {
+    fileprivate func setRoom(_ roomName: String) {
         switch roomName {
         case "acadia" :
             mapImage.image = UIImage(named: "map-acadia")

@@ -23,17 +23,17 @@ class SessionDetailViewController : BaseViewController, UITableViewDataSource, U
         
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         
-        setDateLabel(session.scheduledDateTime!)
-        setTimeLabel(session.scheduledDateTime!)
+        setDateLabel(session.scheduledDateTime! as Date)
+        setTimeLabel(session.scheduledDateTime! as Date)
         
         labelTitle.text = session.title
         labelCategory.text = session.primaryCategory
         labelDescription.text = session.sessionDescription
         roomName.text = session.scheduledRoom
         
-        self.detailTable.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.detailTable.separatorStyle = UITableViewCellSeparatorStyle.none
         self.detailTable.delegate = self
         self.detailTable.dataSource = self
         
@@ -42,56 +42,56 @@ class SessionDetailViewController : BaseViewController, UITableViewDataSource, U
         detailSectionHeight.constant = newTableHeight + 105
         self.view.layoutIfNeeded()
         
-        favoriteButton.userInteractionEnabled = true
+        favoriteButton.isUserInteractionEnabled = true
         favoriteButton!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SessionDetailViewController.SessionFavorited(_:))))
         
-        Answers.logContentViewWithName("Session Detail",
+        Answers.logContentView(withName: "Session Detail",
                                        contentType: "Page",
                                        contentId: session.title,
                                        customAttributes: [:])
         
-        setFavoriteIcon(animated: false)
+        setFavoriteIcon(false)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        labelDescription.setContentOffset(CGPointZero, animated: false)
+        labelDescription.setContentOffset(CGPoint.zero, animated: false)
     }
     
-    @IBAction func RoomButtonPressed(sender: AnyObject) {
-        performSegueWithIdentifier("OpenMap", sender: self)
+    @IBAction func RoomButtonPressed(_ sender: AnyObject) {
+        performSegue(withIdentifier: "OpenMap", sender: self)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "OpenMap"
         {
-            if let mapVC = segue.destinationViewController as? MapViewController {
+            if let mapVC = segue.destination as? MapViewController {
                 mapVC.roomName = session.scheduledRoom
             }
         }
     }
     
-    private func setDateLabel(date: NSDate) {
-        let dateFormatter = NSDateFormatter()
+    fileprivate func setDateLabel(_ date: Date) {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE MMM dd"
-        self.labelDate.text = dateFormatter.stringFromDate(date)
+        self.labelDate.text = dateFormatter.string(from: date)
     }
     
-    private func setTimeLabel(date: NSDate) {
-        let dateFormatter = NSDateFormatter()
+    fileprivate func setTimeLabel(_ date: Date) {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h:mm a"
-        self.labelTime.text = dateFormatter.stringFromDate(date)
+        self.labelTime.text = dateFormatter.string(from: date)
     }
     
     // MARK:  UITextFieldDelegate Methods
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return session.speakers.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as! PageDetailCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath) as! PageDetailCell
         
-        let row = indexPath.row
+        let row = (indexPath as NSIndexPath).row
         let speaker = session.speakers[row]
         
         cell.speaker = speaker
@@ -101,41 +101,41 @@ class SessionDetailViewController : BaseViewController, UITableViewDataSource, U
     }
     
     // MARK:  UITableViewDelegate Methods
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! PageDetailCell
+        let cell = tableView.cellForRow(at: indexPath) as! PageDetailCell
         let speaker =  cell.speaker
-        let speakerDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("SpeakerProfileViewController") as! SpeakerProfileViewController
+        let speakerDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "SpeakerProfileViewController") as! SpeakerProfileViewController
         speakerDetailVC.speaker = speaker
         self.navigationController!.pushViewController(speakerDetailVC, animated: true)
     }
     
     // MARK: Favoriting
     
-    func SessionFavorited(sender: UITapGestureRecognizer) {
+    func SessionFavorited(_ sender: UITapGestureRecognizer) {
         if Authentication.isLoggedIn() {
             let sessionStore = SessionStore()
             if self.session.isUserFavorite {
                 sessionStore.removeFavorite(self.session, completion:{(sessionsResult) -> Void in
                     switch sessionsResult {
-                    case .Success(let sessions):
+                    case .success(let sessions):
                         CATransaction.begin()
                         CATransaction.setAnimationDuration(1.5)
                         let transition = CATransition()
                         transition.type = kCATransitionFade
-                        self.favoriteButton!.layer.addAnimation(transition, forKey: kCATransitionFade)
+                        self.favoriteButton!.layer.add(transition, forKey: kCATransitionFade)
                         CATransaction.commit()
                         self.favoriteButton!.image = UIImage(named:"like-remove")
                         
                         self.setDirtyData()
                         self.session = sessions.first
-                        self.setFavoriteIcon(animated: true)
+                        self.setFavoriteIcon(true)
                         break
-                    case .Failure(_):
-                        let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.Alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                        self.presentViewController(alert, animated: true, completion: nil)
+                    case .failure(_):
+                        let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
                         break
                     }
                 })
@@ -144,23 +144,23 @@ class SessionDetailViewController : BaseViewController, UITableViewDataSource, U
             else {
                 sessionStore.addFavorite(self.session, completion:{(sessionsResult) -> Void in
                     switch sessionsResult {
-                    case .Success(let sessions):
+                    case .success(let sessions):
                         CATransaction.begin()
                         CATransaction.setAnimationDuration(1.5)
                         let transition = CATransition()
                         transition.type = kCATransitionFade
-                        self.favoriteButton!.layer.addAnimation(transition, forKey: kCATransitionFade)
+                        self.favoriteButton!.layer.add(transition, forKey: kCATransitionFade)
                         CATransaction.commit()
                         self.favoriteButton!.image = UIImage(named:"likeadded")
                         
                         self.setDirtyData()
                         self.session = sessions.first
-                        self.setFavoriteIcon(animated: true)
+                        self.setFavoriteIcon(true)
                         break
-                    case .Failure(_):
-                        let alert = UIAlertController(title: "Error", message: "Could not add favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.Alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                        self.presentViewController(alert, animated: true, completion: nil)
+                    case .failure(_):
+                        let alert = UIAlertController(title: "Error", message: "Could not add favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
                         break
                     }
                 })
@@ -168,23 +168,23 @@ class SessionDetailViewController : BaseViewController, UITableViewDataSource, U
         }
         else
         {
-            self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
+            self.parent!.parent!.performSegue(withIdentifier: "show_login", sender: self)
         }
     }
     
     func setDirtyData() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.dirtyDataFavorites = true;
     }
     
-    private func setFavoriteIcon(animated animated: Bool) {
-        dispatch_async(dispatch_get_main_queue(), { 
+    fileprivate func setFavoriteIcon(_ animated: Bool) {
+        DispatchQueue.main.async(execute: { 
             if animated {
                 CATransaction.begin()
                 CATransaction.setAnimationDuration(1.5)
                 let transition = CATransition()
                 transition.type = kCATransitionFade
-                self.favoriteButton!.layer.addAnimation(transition, forKey: kCATransitionFade)
+                self.favoriteButton!.layer.add(transition, forKey: kCATransitionFade)
                 CATransaction.commit()
             }
             if self.session.isUserFavorite {

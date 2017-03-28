@@ -10,6 +10,26 @@ import UIKit
 import Foundation
 import Fabric
 import Crashlytics
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
 
 protocol ContainerDelegateProtocol
 {
@@ -27,61 +47,51 @@ class AuthorizationWebViewController: UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.spinner = UIActivityIndicatorView(frame: CGRectMake(0,0, 50, 50)) as UIActivityIndicatorView
+        self.spinner = UIActivityIndicatorView(frame: CGRect(x: 0,y: 0, width: 50, height: 50)) as UIActivityIndicatorView
         self.spinner.center = self.view.center
         self.spinner.hidesWhenStopped = true
-        self.spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        self.spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
         self.view.addSubview(self.spinner)
     }
     
-    func openOAuthDestination(url: NSURL, provider: String) {
+    func openOAuthDestination(_ url: URL, provider: String) {
         self.currentProvider = provider
-        let request = NSURLRequest(URL: url)
+        let request = URLRequest(url: url)
         webView.loadRequest(request)
     }
     
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         self.spinner.startAnimating()
         return true
     }
     
-    let expires = "expires_in="
-    
-    func webViewDidFinishLoad(webView: UIWebView) {
-        if let currentURL = webView.request?.URL! {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        if var currentURL = webView.request?.url! {
+            print("CURRENT URL:\(currentURL)")
+            
             let baseURL = currentURL.host!
+            let stringURL = currentURL.absoluteString.replacingOccurrences(of: "/#access_token", with: "?access_token")
+            currentURL = URL(string: stringURL)!
+            
+            print("UPDATED URL:\(currentURL)")
             
             //Only handle when it comes back to That Conference
-            if baseURL.containsString("thatconference") {
+            if baseURL.contains("thatconference") {
                 let fullURL = currentURL.absoluteString
-                let result = fullURL.rangeOfString("token",
-                                                      options: NSStringCompareOptions.LiteralSearch,
-                                                      range: fullURL.startIndex..<fullURL.endIndex,
-                                                      locale: nil)
-                if let range = result {
-                    let start = range.startIndex.advancedBy(6)
-                    let queryString = fullURL[start..<fullURL.endIndex]
-                    let queryArray = queryString.characters.split{$0 == "&"}.map(String.init)
-                    
-                    //Save Values to KeyChain
+                let result = fullURL.range(of: "access_token" )
+                if result != nil {
                     let authToken = AuthToken()
-                    authToken.token = queryArray[0]
+                    authToken.token = currentURL.getQueryItemValueForKey(key: "access_token")
+                    authToken.expiration = Date().addDays(7)
                     
-                    for index in 0...queryArray.count - 1 {
-                        let value = queryArray[index]
-                        let location_Expires = value.rangeOfString(expires, options: NSStringCompareOptions.LiteralSearch,
-                                                                   range: value.startIndex..<value.endIndex,
-                                                                   locale: nil)
-                        if (location_Expires?.count >= 0) {
-                            let expireStart = value.startIndex.advancedBy(expires.characters.count)
-                            let expireSeconds = value[expireStart..<value.endIndex]
-                            let numericValue = Double(expireSeconds)!
-                            authToken.expiration = NSDate().dateByAddingTimeInterval(numericValue)
-                        }
+                    let expireSeconds = currentURL.getQueryItemValueForKey(key: "expires_in")
+                    if (expireSeconds != nil) {
+                        let numericValue = Double(expireSeconds!)!
+                        authToken.expiration = Date().addingTimeInterval(numericValue)
                     }
-                    
+
                     Authentication.saveAuthToken(authToken)
-                    Answers.logLoginWithMethod("oAuth Login", success: true, customAttributes: [:])
+                    Answers.logLogin(withMethod: "oAuth Login", success: true, customAttributes: [:])
                     delegate?.SignedIn()
                 }
             }
@@ -90,11 +100,11 @@ class AuthorizationWebViewController: UIViewController, UIWebViewDelegate {
         self.spinner.stopAnimating()
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         self.spinner.stopAnimating()
     }
     
-    @IBAction func cancelWasPressed(sender: AnyObject) {
+    @IBAction func cancelWasPressed(_ sender: AnyObject) {
         delegate?.Close()
     }
 }

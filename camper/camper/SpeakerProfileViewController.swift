@@ -18,45 +18,45 @@ class SpeakerProfileViewController : BaseViewController {
     @IBOutlet var linkedInButton: UIButton!
     @IBOutlet var gitHubButton: UIButton!
     
-    @IBAction func websiteButton(sender: AnyObject) {
+    @IBAction func websiteButton(_ sender: AnyObject) {
         if let url = speaker.website
         {
-            UIApplication.sharedApplication().openURL(url)
+            UIApplication.shared.openURL(url as URL)
         }
     }
     
-    @IBAction func twitterButton(sender: AnyObject) {
+    @IBAction func twitterButton(_ sender: AnyObject) {
         if let url = speaker.twitter
         {
-            UIApplication.sharedApplication().openURL(NSURL(string: "https://twitter.com/" + url)!)
+            UIApplication.shared.openURL(URL(string: "https://twitter.com/" + url)!)
         }
     }
     
-    @IBAction func facebookButton(sender: AnyObject) {
+    @IBAction func facebookButton(_ sender: AnyObject) {
         if let url = speaker.facebook
         {
-            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+            UIApplication.shared.openURL(URL(string: url)!)
         }
     }
     
-    @IBAction func googleButton(sender: AnyObject) {
+    @IBAction func googleButton(_ sender: AnyObject) {
         if let url = speaker.googlePlus
         {
-            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+            UIApplication.shared.openURL(URL(string: url)!)
         }
     }
     
-    @IBAction func linkedinButton(sender: AnyObject) {
+    @IBAction func linkedinButton(_ sender: AnyObject) {
         if let url = speaker.linkedIn
         {
-            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+            UIApplication.shared.openURL(URL(string: url)!)
         }
     }
     
-    @IBAction func githubButton(sender: AnyObject) {
+    @IBAction func githubButton(_ sender: AnyObject) {
         if let url = speaker.gitHub
         {
-            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+            UIApplication.shared.openURL(URL(string: url)!)
         }
     }
     
@@ -65,14 +65,14 @@ class SpeakerProfileViewController : BaseViewController {
         
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         
         if let headshot = speaker.headShotURL
         {
             let url = ThatConferenceAPI.resourceURL(headshot.absoluteString)
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                if let data = NSData(contentsOfURL: url) {
-                    dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.global().async {
+                if let data = try? Data(contentsOf: url) {
+                    DispatchQueue.main.async(execute: {
                         self.profileImage.image = UIImage(data: data)
                     });
                 }
@@ -87,7 +87,7 @@ class SpeakerProfileViewController : BaseViewController {
         website.titleLabel?.text = ""
         if let speakerWebsite = speaker.website
         {
-            website.setTitle(speakerWebsite.absoluteString, forState: UIControlState.Normal)
+            website.setTitle(speakerWebsite.absoluteString, for: UIControlState())
         }
         
         if let bioText = speaker.biography
@@ -97,7 +97,7 @@ class SpeakerProfileViewController : BaseViewController {
         
         setSocialButtons()
         
-        Answers.logContentViewWithName("Session Detail",
+        Answers.logContentView(withName: "Session Detail",
                                        contentType: "Page",
                                        contentId: speakerFullName,
                                        customAttributes: [:])
@@ -105,29 +105,29 @@ class SpeakerProfileViewController : BaseViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        biography.setContentOffset(CGPointZero, animated: false)
+        biography.setContentOffset(CGPoint.zero, animated: false)
     }
     
-    private func setSocialButtons() {
+    fileprivate func setSocialButtons() {
         if speaker.twitter == nil
         {
-            twitterButton.hidden = true
+            twitterButton.isHidden = true
         }
         if speaker.facebook == nil
         {
-            facebookButton.hidden = true
+            facebookButton.isHidden = true
         }
         if speaker.googlePlus == nil
         {
-            googleButton.hidden = true
+            googleButton.isHidden = true
         }
         if speaker.linkedIn == nil
         {
-            linkedInButton.hidden = true
+            linkedInButton.isHidden = true
         }
         if speaker.gitHub == nil
         {
-            gitHubButton.hidden = true
+            gitHubButton.isHidden = true
         }
     }
 }

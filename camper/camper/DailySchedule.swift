@@ -1,34 +1,34 @@
 import Foundation
 
 class DailySchedule: NSObject, NSCoding {
-    var date: NSDate!
-    var timeSlots: [TimeSlot!] = []
-    var timeSaved: NSDate?
+    var date: Date!
+    var timeSlots: [TimeSlot?] = []
+    var timeSaved: Date?
     
     override init() {
-        timeSaved = NSDate()
+        timeSaved = Date()
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.date, forKey: "date")
-        aCoder.encodeObject(self.timeSlots, forKey: "timeSlots")
-        aCoder.encodeObject(self.timeSaved, forKey: "timeSaved")
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.date, forKey: "date")
+        aCoder.encode(self.timeSlots, forKey: "timeSlots")
+        aCoder.encode(self.timeSaved, forKey: "timeSaved")
     }
     
     func cleanData() {
-        date = NSDate()
+        date = Date()
         timeSlots.removeAll()
         timeSaved = nil
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        let date = aDecoder.decodeObjectForKey("date") as! NSDate
-        let timeSlots = aDecoder.decodeObjectForKey("timeSlots") as! [TimeSlot!]
-        let timeSaved = aDecoder.decodeObjectForKey("timeSaved") as? NSDate
+        let date = aDecoder.decodeObject(forKey: "date") as! Date
+        let timeSlots = aDecoder.decodeObject(forKey: "timeSlots") as! [TimeSlot?]
+        let timeSaved = aDecoder.decodeObject(forKey: "timeSaved") as? Date
         self.init(date: date, timeSlots: timeSlots, timeSaved: timeSaved)
     }
     
-    required init(date: NSDate, timeSlots: [TimeSlot!], timeSaved: NSDate?) {
+    required init(date: Date, timeSlots: [TimeSlot?], timeSaved: Date?) {
         self.date = date
         self.timeSlots = timeSlots
         self.timeSaved = timeSaved

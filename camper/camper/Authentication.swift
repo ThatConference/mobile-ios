@@ -2,28 +2,28 @@ import Foundation
 import Locksmith
 
 class Authentication {
-    func performLocalLogin(username: String, password: String, completionDelegate: RequestCompleteProtocol) {
+    func performLocalLogin(_ username: String, password: String, completionDelegate: RequestCompleteProtocol) {
         let tcAPI = ThatConferenceAPI()
         tcAPI.requestCompleteProtocol = completionDelegate
         tcAPI.localLogin(username, password: password)
     }
     
-    func fetchExternalLogins(completion completion: (ExternalLoginResult) -> Void) {
+    func fetchExternalLogins(completion: @escaping (ExternalLoginResult) -> Void) {
         let url = ThatConferenceAPI.externalLoginsURL()
-        let request = NSURLRequest(URL: url)
-        let task = ThatConferenceAPI.nsurlSession.dataTaskWithRequest(request) {
+        let request = URLRequest(url: url as URL)
+        let task = ThatConferenceAPI.nsurlSession.dataTask(with: request, completionHandler: {
             (data, response, error) -> Void in
             
-            let result = self.processExternalLoginsRequest(data: data, error: error)
+            let result = self.processExternalLoginsRequest(data: data, error: error as NSError?)
             completion(result)
-        }
+        }) 
         task.resume()
     }
 
-    func processExternalLoginsRequest(data data: NSData?, error: NSError?) -> ExternalLoginResult {
+    func processExternalLoginsRequest(data: Data?, error: NSError?) -> ExternalLoginResult {
         guard let jsonData = data
             else {
-                return .Failure(error!)
+                return .failure(error!)
         }
         
         return ThatConferenceAPI.externalLoginsFromJSONData(jsonData)
@@ -33,19 +33,19 @@ class Authentication {
     static let key_Token = "token"
     static let key_Expiration = "expires"
     
-    static func saveAuthToken(authToken: AuthToken) {
+    static func saveAuthToken(_ authToken: AuthToken) {
         do {
-            try Locksmith.updateData([key_Token: authToken.token, key_Expiration: authToken.expiration], forUserAccount: AuthTokenLocation)
+            try Locksmith.updateData(data: [key_Token: authToken.token, key_Expiration: authToken.expiration], forUserAccount: AuthTokenLocation)
         } catch {
             print ("Could not save auth token")
         }
     }
     
     static func loadAuthToken() -> AuthToken? {
-        if let dictionary = Locksmith.loadDataForUserAccount(AuthTokenLocation) as Dictionary<String, AnyObject>! {
+        if let dictionary = Locksmith.loadDataForUserAccount(userAccount: AuthTokenLocation) as Dictionary<String, AnyObject>! {
             let authToken = AuthToken()
             authToken.token = dictionary[key_Token] as! String
-            authToken.expiration = dictionary[key_Expiration] as! NSDate
+            authToken.expiration = (dictionary[key_Expiration] as! NSDate) as Date!
             return authToken
         }
         return nil
@@ -53,7 +53,7 @@ class Authentication {
     
     static func removeAuthToken() {
         do {
-            try Locksmith.deleteDataForUserAccount(AuthTokenLocation)
+            try Locksmith.deleteDataForUserAccount(userAccount: AuthTokenLocation)
         } catch {
             print ("Could not remove auth token")
         }
@@ -63,7 +63,7 @@ class Authentication {
         var loggedIn = false
         
         if let authToken = Authentication.loadAuthToken() {
-            if authToken.expiration.isGreaterThanDate(NSDate()) {
+            if authToken.expiration.isGreaterThanDate(Date()) {
                 loggedIn = true
             } else {
                 Authentication.removeAuthToken()

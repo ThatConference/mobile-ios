@@ -3,10 +3,10 @@ import Foundation
 class Speaker: NSObject {
     var firstName: String?
     var lastName: String?
-    var headShotURL: NSURL!
+    var headShotURL: URL!
     var userName: String?
     var biography: String?
-    var website: NSURL!
+    var website: URL!
     var company: String?
     var title: String?
     var twitter: String?
@@ -14,42 +14,42 @@ class Speaker: NSObject {
     var googlePlus: String?
     var linkedIn: String?
     var gitHub: String?
-    var lastUpdated: NSDate?
+    var lastUpdated: Date?
     
     override init() {}
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.firstName, forKey: "firstName")
-        aCoder.encodeObject(self.lastName, forKey: "lastName")
-        aCoder.encodeObject(self.headShotURL, forKey: "headShotURL")
-        aCoder.encodeObject(self.userName, forKey: "userName")
-        aCoder.encodeObject(self.biography, forKey: "biography")
-        aCoder.encodeObject(self.website, forKey: "website")
-        aCoder.encodeObject(self.company, forKey: "company")
-        aCoder.encodeObject(self.title, forKey: "title")
-        aCoder.encodeObject(self.twitter, forKey: "twitter")
-        aCoder.encodeObject(self.facebook, forKey: "facebook")
-        aCoder.encodeObject(self.googlePlus, forKey: "googlePlus")
-        aCoder.encodeObject(self.linkedIn, forKey: "linkedIn")
-        aCoder.encodeObject(self.gitHub, forKey: "gitHub")
-        aCoder.encodeObject(self.lastUpdated, forKey: "lastUpdated")
+    func encodeWithCoder(_ aCoder: NSCoder) {
+        aCoder.encode(self.firstName, forKey: "firstName")
+        aCoder.encode(self.lastName, forKey: "lastName")
+        aCoder.encode(self.headShotURL, forKey: "headShotURL")
+        aCoder.encode(self.userName, forKey: "userName")
+        aCoder.encode(self.biography, forKey: "biography")
+        aCoder.encode(self.website, forKey: "website")
+        aCoder.encode(self.company, forKey: "company")
+        aCoder.encode(self.title, forKey: "title")
+        aCoder.encode(self.twitter, forKey: "twitter")
+        aCoder.encode(self.facebook, forKey: "facebook")
+        aCoder.encode(self.googlePlus, forKey: "googlePlus")
+        aCoder.encode(self.linkedIn, forKey: "linkedIn")
+        aCoder.encode(self.gitHub, forKey: "gitHub")
+        aCoder.encode(self.lastUpdated, forKey: "lastUpdated")
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        let firstName = aDecoder.decodeObjectForKey("firstName") as? String
-        let lastName = aDecoder.decodeObjectForKey("lastName") as? String
-        let headShotURL = aDecoder.decodeObjectForKey("headShotURL") as! NSURL
-        let userName = aDecoder.decodeObjectForKey("userName") as? String
-        let biography = aDecoder.decodeObjectForKey("biography") as? String
-        let website = aDecoder.decodeObjectForKey("website") as? NSURL
-        let company = aDecoder.decodeObjectForKey("company") as? String
-        let title = aDecoder.decodeObjectForKey("title") as? String
-        let twitter = aDecoder.decodeObjectForKey("twitter") as? String
-        let facebook = aDecoder.decodeObjectForKey("facebook") as? String
-        let googlePlus = aDecoder.decodeObjectForKey("googlePlus") as? String
-        let linkedIn = aDecoder.decodeObjectForKey("linkedIn") as? String
-        let gitHub = aDecoder.decodeObjectForKey("gitHub") as? String
-        let lastUpdated = aDecoder.decodeObjectForKey("lastUpdated") as? NSDate
+        let firstName = aDecoder.decodeObject(forKey: "firstName") as? String
+        let lastName = aDecoder.decodeObject(forKey: "lastName") as? String
+        let headShotURL = aDecoder.decodeObject(forKey: "headShotURL") as! URL
+        let userName = aDecoder.decodeObject(forKey: "userName") as? String
+        let biography = aDecoder.decodeObject(forKey: "biography") as? String
+        let website = aDecoder.decodeObject(forKey: "website") as? URL
+        let company = aDecoder.decodeObject(forKey: "company") as? String
+        let title = aDecoder.decodeObject(forKey: "title") as? String
+        let twitter = aDecoder.decodeObject(forKey: "twitter") as? String
+        let facebook = aDecoder.decodeObject(forKey: "facebook") as? String
+        let googlePlus = aDecoder.decodeObject(forKey: "googlePlus") as? String
+        let linkedIn = aDecoder.decodeObject(forKey: "linkedIn") as? String
+        let gitHub = aDecoder.decodeObject(forKey: "gitHub") as? String
+        let lastUpdated = aDecoder.decodeObject(forKey: "lastUpdated") as? Date
         self.init(firstName: firstName,
                   lastName: lastName,
                   headShotURL: headShotURL,
@@ -68,10 +68,10 @@ class Speaker: NSObject {
     
     required init(firstName: String?,
                   lastName: String?,
-                  headShotURL: NSURL,
+                  headShotURL: URL,
                   userName: String?,
                   biography: String?,
-                  website: NSURL?,
+                  website: URL?,
                   company: String?,
                   title: String?,
                   twitter: String?,
@@ -79,7 +79,7 @@ class Speaker: NSObject {
                   googlePlus: String?,
                   linkedIn: String?,
                   gitHub: String?,
-                  lastUpdated: NSDate?) {
+                  lastUpdated: Date?) {
         self.firstName = firstName
         self.lastName = lastName
         self.headShotURL = headShotURL

@@ -9,10 +9,10 @@ class BaseViewController: UIViewController, AuthorizationFormDelegate {
         super.viewDidLoad()
         
         self.activityIndicator = UIActivityIndicatorView()
-        self.activityIndicator.frame = CGRectMake(0, 0, 80, 80)
+        self.activityIndicator.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
         self.activityIndicator.backgroundColor = UIColor(white: 0, alpha: 0.4)
         self.activityIndicator.layer.cornerRadius = 10
-        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         self.activityIndicator.clipsToBounds = true
         self.activityIndicator.hidesWhenStopped = true
         self.activityIndicator.center = self.view.center
@@ -21,20 +21,20 @@ class BaseViewController: UIViewController, AuthorizationFormDelegate {
         
         // That Post Card
         let cameraBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        cameraBtn.setImage(UIImage(named: "camera"), forState: UIControlState.Normal)
-        cameraBtn.addTarget(self, action: #selector(self.moveToCamera), forControlEvents:  UIControlEvents.TouchUpInside)
+        cameraBtn.setImage(UIImage(named: "camera"), for: UIControlState())
+        cameraBtn.addTarget(self, action: #selector(self.moveToCamera), for:  UIControlEvents.touchUpInside)
         let item = UIBarButtonItem(customView: cameraBtn)
         self.navigationItem.rightBarButtonItem = item
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let newVC = segue.destinationViewController as? AuthorizationViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let newVC = segue.destination as? AuthorizationViewController {
             newVC.delegate = self
         }
     }
     
-    func dismissViewController(controller: UIViewController) {
-        controller.dismissViewControllerAnimated(true) { () -> Void in
+    func dismissViewController(_ controller: UIViewController) {
+        controller.dismiss(animated: true) { () -> Void in
             self.navigateToSchedule()
         }
     }
@@ -44,29 +44,37 @@ class BaseViewController: UIViewController, AuthorizationFormDelegate {
         self.tabBarController?.selectedIndex = 1
     }
     
-    internal func setData(isDirty: Bool) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    internal func setData(_ isDirty: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.dirtyDataFavorites = isDirty;
     }
     
-    @objc private func moveToCamera() {
+    @objc fileprivate func moveToCamera() {
         self.moveToPostCard()
     }
     
-    private func moveToPostCard() {
-        let postCardVC = self.storyboard?.instantiateViewControllerWithIdentifier("PostCardChoosePhotoViewController") as! PostCardChoosePhotoViewController
-        self.presentViewController(postCardVC, animated: true, completion: nil)
+    fileprivate func moveToPostCard() {
+        let postCardVC = self.storyboard?.instantiateViewController(withIdentifier: "PostCardChoosePhotoViewController") as! PostCardChoosePhotoViewController
+        self.present(postCardVC, animated: true, completion: nil)
     }
     
     func startIndicator() {
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             self.activityIndicator.startAnimating()
         })
     }
     
     func stopIndicator() {
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             self.activityIndicator.stopAnimating()
+        })
+    }
+    
+    func simpleAlert(title: String, body: String) {
+        DispatchQueue.main.async(execute: {
+            let alert = UIAlertController(title: title, message: body, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         })
     }
 }

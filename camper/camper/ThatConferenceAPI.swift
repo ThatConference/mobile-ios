@@ -11,53 +11,54 @@ enum Method: String {
 }
 
 enum ExternalLoginResult {
-    case Success([ExternalLogin])
-    case Failure(ErrorType)
+    case success([ExternalLogin])
+    case failure(Error)
 }
 
 enum SessionsResult {
-    case Success([Session])
-    case Failure(ErrorType)
+    case success([Session])
+    case failure(Error)
 }
 
 enum SponsorsResult {
-    case Success([Sponsor])
-    case Failure(ErrorType)
+    case success([Sponsor])
+    case failure(Error)
 }
 
-enum APIError: ErrorType {
-    case InvalidJSONData
+enum APIError: Error {
+    case invalidJSONData
+    case notLoggedIn
 }
 
 protocol RequestCompleteProtocol {
-    func DataReceived(data : NSData?, response : NSURLResponse?, error : NSError?)
+    func DataReceived(data : Data?, response : URLResponse?, error : Error?)
 }
 
 class ThatConferenceAPI {
     var requestCompleteProtocol: RequestCompleteProtocol?
     
-    static let nsurlSession: NSURLSession = {
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        return NSURLSession(configuration: config)
+    static let nsurlSession: URLSession = {
+        let config = URLSessionConfiguration.default
+        return URLSession(configuration: config)
     }()
     
     static let baseURLString = "https://www.thatconference.com"
     static let baseResourceURLString = "https://thatconference.blob.core.windows.net"
     
-    private static let dateFormatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
+    fileprivate static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         return formatter
     }()
     
-    private static func thatConferenceURL(method: Method, parameters: [String:String]?) -> NSURL {
+    fileprivate static func thatConferenceURL(_ method: Method, parameters: [String:String]?) -> URL {
         let fullURL = baseURLString + method.rawValue;
-        let components = NSURLComponents(string: fullURL)!
-        var queryItems = [NSURLQueryItem]()
+        var components = URLComponents(string: fullURL)!
+        var queryItems = [URLQueryItem]()
         
         if let additionalParams = parameters {
             for (key, value) in additionalParams {
-                let item = NSURLQueryItem(name: key, value: value)
+                let item = URLQueryItem(name: key, value: value)
                 queryItems.append(item)
             }
         }
@@ -66,45 +67,45 @@ class ThatConferenceAPI {
             components.queryItems = queryItems
         }
         
-        return components.URL!
+        return components.url!
     }
     
-    class func authorizationExternalLogins() -> NSURL {
+    class func authorizationExternalLogins() -> URL {
         return thatConferenceURL(.ExternalLogins, parameters: nil)
     }
     
-    class func externalLoginsURL() -> NSURL {
+    class func externalLoginsURL() -> URL {
         return thatConferenceURL(.ExternalLogins, parameters: ["returnUrl":"/", "generateState": "true"])
     }
     
-    class func sponsorsURL() -> NSURL {
+    class func sponsorsURL() -> URL {
         return thatConferenceURL(.Sponsors, parameters: nil)
     }
     
-    static func resourceURL(partialURL: String) -> NSURL {
+    static func resourceURL(_ partialURL: String) -> URL {
         let badPrefix = "cloud/"
-        let index1 = partialURL.startIndex.advancedBy(badPrefix.characters.count)
-        let substringURL = partialURL.substringFromIndex(index1)
+        let index1 = partialURL.characters.index(partialURL.startIndex, offsetBy: badPrefix.characters.count)
+        let substringURL = partialURL.substring(from: index1)
         
         let fullURL = baseResourceURLString + substringURL;
-        let components = NSURLComponents(string: fullURL)!
-        return components.URL!
+        let components = URLComponents(string: fullURL)!
+        return components.url!
     }
     
-    static func sessionsGetAcceptedURL(sinceDate: NSDate?) -> NSURL {
+    static func sessionsGetAcceptedURL(_ sinceDate: Date?) -> URL {
         var params: Dictionary<String, String>? = Dictionary<String, String>()
         if let date = sinceDate {
-            let dateString = dateFormatter.stringFromDate(date)
+            let dateString = dateFormatter.string(from: date)
             params = ["sinceUpdatedDate": dateString]
         }
         return thatConferenceURL(.SessionGetAccepted, parameters: params!)
     }
     
-    class func convertToBool(value: NSNumber?) -> Bool {
+    class func convertToBool(_ value: NSNumber?) -> Bool {
         return value == 1
     }
     
-    class func convertToBool(value: String?) -> Bool {
+    class func convertToBool(_ value: String?) -> Bool {
         return value == "1"
     }
     
@@ -113,13 +114,13 @@ class ThatConferenceAPI {
     }
     
     // MARK: Sessions
-    class func sessionsFromJSONData(data: NSData) -> SessionsResult {
+    class func sessionsFromJSONData(_ data: Data) -> SessionsResult {
         do {
-            let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
+            let jsonObject: Any = try JSONSerialization.jsonObject(with: data, options: [])
             
             guard let sessions = jsonObject as? [[String:AnyObject]]
                 else {
-                    return .Failure(APIError.InvalidJSONData)
+                    return .failure(APIError.invalidJSONData)
             }
             
             var finalSessions = [Session]()
@@ -131,17 +132,17 @@ class ThatConferenceAPI {
             }
             
             if finalSessions.count == 0 && sessions.count > 0 {
-                return .Failure(APIError.InvalidJSONData)
+                return .failure(APIError.invalidJSONData)
             }
             
-            return .Success(finalSessions)
+            return .success(finalSessions)
         }
         catch let error {
-            return .Failure(error)
+            return .failure(error)
         }
     }
     
-    private class func sessionFromJSONData(json: [String: AnyObject]) -> Session? {
+    fileprivate class func sessionFromJSONData(_ json: [String: AnyObject]) -> Session? {
         let id = json["Id"] as? Int
         let title = json["Title"] as? String
         let sessionDescription = json["Description"] as? String
@@ -157,15 +158,15 @@ class ThatConferenceAPI {
             isUserFavorite = userFavorite.boolValue
         }
        
-        var scheduledDateTime: NSDate?
+        var scheduledDateTime: Date?
         if let dateString = json["ScheduledDateTime"] as? String {
-            scheduledDateTime = dateFormatter.dateFromString(dateString)
+            scheduledDateTime = dateFormatter.date(from: dateString)
         } else {
             return nil
         }
 
         let session = Session()
-        session.id = id
+        session.id = id as NSNumber?
         session.title = title
         session.sessionDescription = sessionDescription
         session.scheduledDateTime = scheduledDateTime
@@ -184,13 +185,13 @@ class ThatConferenceAPI {
                 speaker.lastName = jsonSpeaker["LastName"] as? String
                 
                 if let headshotString = jsonSpeaker["HeadShot"] as? String {
-                    speaker.headShotURL = NSURL(string: headshotString)
+                    speaker.headShotURL = URL(string: headshotString)
                 }
                 
                 speaker.biography = jsonSpeaker["Biography"] as? String
                 
                 if let websiteString = jsonSpeaker["WebSite"] as? String {
-                    speaker.website = NSURL(string: websiteString)
+                    speaker.website = URL(string: websiteString)
                 }
                 
                 speaker.company = jsonSpeaker["Company"] as? String
@@ -202,7 +203,7 @@ class ThatConferenceAPI {
                 speaker.gitHub = jsonSpeaker["GitHub"] as? String
                 
                 if let lastUpdatedString = jsonSpeaker["LastUpdated"] as? String {
-                    speaker.lastUpdated = dateFormatter.dateFromString(lastUpdatedString)
+                    speaker.lastUpdated = dateFormatter.date(from: lastUpdatedString)
                 }
                 
                 session.speakers.append(speaker)
@@ -213,39 +214,39 @@ class ThatConferenceAPI {
     }
     
     // MARK: Internal Logins
-    func localLogin(username: String, password: String) {
+    func localLogin(_ username: String, password: String) {
         let headers = [
             "accept": "application/json",
             "content-type": "application/x-www-form-urlencoded"
         ]
         
-        let postData = NSMutableData(data: "grant_type=password".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&username=\(username)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&password=\(password)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        var postData = NSData(data: "grant_type=password".data(using: String.Encoding.utf8)!) as Data
+        postData.append("&username=\(username)".data(using: String.Encoding.utf8)!)
+        postData.append("&password=\(password)".data(using: String.Encoding.utf8)!)
         
-        let request = NSMutableURLRequest(URL: NSURL(string: ThatConferenceAPI.baseURLString + Method.Token.rawValue)!,
-                                          cachePolicy: .UseProtocolCachePolicy,
+        var request = URLRequest(url: URL(string: ThatConferenceAPI.baseURLString + Method.Token.rawValue)!,
+                                          cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
-        request.HTTPMethod = "POST"
+        request.httpMethod = "POST"
         request.allHTTPHeaderFields = headers
-        request.HTTPBody = postData
+        request.httpBody = postData
         
-        let session = NSURLSession.sharedSession()
-        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
-            self.requestCompleteProtocol?.DataReceived(data, response: response, error: error)
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
+            self.requestCompleteProtocol?.DataReceived(data: data, response: response, error: error)
         })
         
         dataTask.resume()
     }
     
     // MARK: External Logins
-    class func externalLoginsFromJSONData(data: NSData) -> ExternalLoginResult {
+    class func externalLoginsFromJSONData(_ data: Data) -> ExternalLoginResult {
         do {
-            let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
+            let jsonObject: Any = try JSONSerialization.jsonObject(with: data, options: [])
             
             guard let logins = jsonObject as? [[String:AnyObject]]
                 else {
-                    return .Failure(APIError.InvalidJSONData)
+                    return .failure(APIError.invalidJSONData)
             }
             
             var returnLogins = [ExternalLogin]()
@@ -257,21 +258,21 @@ class ThatConferenceAPI {
             }
             
             if returnLogins.count == 0 && logins.count > 0 {
-                return .Failure(APIError.InvalidJSONData)
+                return .failure(APIError.invalidJSONData)
             }
             
-            return .Success(returnLogins)
+            return .success(returnLogins)
         }
         catch let error {
-            return .Failure(error)
+            return .failure(error)
         }
     }
     
-    private class func externalLoginFromJSONData(json: [String: AnyObject]) -> ExternalLogin? {
+    fileprivate class func externalLoginFromJSONData(_ json: [String: AnyObject]) -> ExternalLogin? {
         guard let
             name = json["Name"] as? String,
-            state = json["State"] as? String,
-            url = json["Url"] as? String
+            let state = json["State"] as? String,
+            let url = json["Url"] as? String
         else {
             return nil
         }
@@ -285,58 +286,58 @@ class ThatConferenceAPI {
     }
     
     // MARK: Favorites
-    class func saveFavorite(sessionId: NSNumber?, completionHandler: (data: NSData?, response: NSURLResponse?, error: ErrorType?) -> Void) {
+    class func saveFavorite(_ sessionId: NSNumber?, completionHandler: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
         // save the favorite
-        let url = thatConferenceURL(.Favorite, parameters: nil).URLByAppendingPathComponent("Add").URLByAppendingPathComponent("\(sessionId!)")
-        let request = NSMutableURLRequest(URL: url,
-                                          cachePolicy: .UseProtocolCachePolicy,
+        let url = thatConferenceURL(.Favorite, parameters: nil).appendingPathComponent("Add").appendingPathComponent("\(sessionId!)")
+        var request = URLRequest(url: url,
+                                          cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
-        request.HTTPMethod = "GET"
+        request.httpMethod = "GET"
         if let token = Authentication.loadAuthToken() {
                 request.addValue("Bearer \(token.token!)", forHTTPHeaderField: "Authorization")
         }
         
-        let session = NSURLSession.sharedSession()
-        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
-            completionHandler(data: data, response: response, error: error)
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
+            completionHandler(data, response, error)
         })
         
         dataTask.resume()
     }
     
-    class func deleteFavorite(sessionId: NSNumber?, completionHandler: (data: NSData?, response: NSURLResponse?, error: ErrorType?) -> Void) {
+    class func deleteFavorite(_ sessionId: NSNumber?, completionHandler: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
         // remove the favorite
-        let url = thatConferenceURL(.Favorite, parameters: nil).URLByAppendingPathComponent("Remove").URLByAppendingPathComponent("\(sessionId!)")
-        let request = NSMutableURLRequest(URL: url,
-                                          cachePolicy: .UseProtocolCachePolicy,
+        let url = thatConferenceURL(.Favorite, parameters: nil).appendingPathComponent("Remove").appendingPathComponent("\(sessionId!)")
+        var request = URLRequest(url: url,
+                                          cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
-        request.HTTPMethod = "GET"
+        request.httpMethod = "GET"
         if let token = Authentication.loadAuthToken() {
             request.addValue("Bearer \(token.token!)", forHTTPHeaderField: "Authorization")
         }
         
-        let session = NSURLSession.sharedSession()
-        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
-            completionHandler(data: data, response: response, error: error)
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
+            completionHandler(data, response, error)
         })
 
         dataTask.resume()
     }
     
-    class func getFavoriteSessions(year: String, completionHandler:(SessionsResult) -> Void) {
+    class func getFavoriteSessions(_ year: String, completionHandler:@escaping (SessionsResult) -> Void) {
         let url = thatConferenceURL(.UserFavorites, parameters: ["year": year])
-        let request = NSMutableURLRequest(URL: url,
-                                          cachePolicy: .UseProtocolCachePolicy,
+        var request = URLRequest(url: url,
+                                          cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
-        request.HTTPMethod = "GET"
+        request.httpMethod = "GET"
         if let token = Authentication.loadAuthToken() {
             request.addValue("Bearer \(token.token!)", forHTTPHeaderField: "Authorization")
         }
         
-        let session = NSURLSession.sharedSession()
-        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
             if error != nil {
-                completionHandler(SessionsResult.Failure(error!))
+                completionHandler(SessionsResult.failure(error!))
             } else {
                 print("Response: \(response)")
                 print("Favorites Return Data \(data)")
@@ -349,13 +350,13 @@ class ThatConferenceAPI {
     }
     
     // MARK : Sponsors
-    class func sponsorsFromJSONData(data: NSData) -> SponsorsResult {
+    class func sponsorsFromJSONData(_ data: Data) -> SponsorsResult {
         do {
-            let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: [])
+            let jsonObject: Any = try JSONSerialization.jsonObject(with: data, options: [])
 
             guard let sponsors = jsonObject as? [[String:AnyObject]]
                 else {
-                    return .Failure(APIError.InvalidJSONData)
+                    return .failure(APIError.invalidJSONData)
             }
 
             var returnSponsors = [Sponsor]()
@@ -367,17 +368,17 @@ class ThatConferenceAPI {
             }
 
             if returnSponsors.count == 0 && sponsors.count > 0 {
-                return .Failure(APIError.InvalidJSONData)
+                return .failure(APIError.invalidJSONData)
             }
             
-            return .Success(returnSponsors)
+            return .success(returnSponsors)
         }
         catch let error {
-            return .Failure(error)
+            return .failure(error)
         }
     }
     
-    private class func sponsorFromJSONData(json: [String: AnyObject]) -> Sponsor? {
+    fileprivate class func sponsorFromJSONData(_ json: [String: AnyObject]) -> Sponsor? {
         let name = json["Name"] as? String
         let sponsorLevel = json["SponsorLevel"] as? String
         let levelOrder = json["LevelOrder"] as? Int

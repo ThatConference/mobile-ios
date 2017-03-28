@@ -1,9 +1,9 @@
 # ImageScrollView
 
-A control help you display an image, with zoomable and scrollable feature easily.
+A control help you display an image, with zoomable and scrollable features easily.
 
 ### About
-When you make an application, has photo viewer feature, the photo viewer usually need zoomable and scrollable feature, to make user view photo more detail.  
+When you make an application, has photo viewer feature, the photo viewer usually need zoomable and scrollable features, to make user view photo more details.  
 This control help you display image, with zoomable and scrollable feature easily.
 
 #### Compatible
@@ -17,7 +17,7 @@ This control help you display image, with zoomable and scrollable feature easily
 Add below line to Podfile:  
 
 ```
-pod ImageScrollView
+pod 'ImageScrollView'
 ```  
 and run below command in Terminal to install:  
 `pod install`
@@ -46,7 +46,9 @@ imageScrollView.displayImage(image)
 ```
 That's all. Now try zooming and scrolling to see the result.
 ### About this source
-This open source is base on PhotoScroller demo in Apple site. The origin source is written by Objective C. This source rewrite it use Swift, and add the double tap to zooming feature.
+This open source is base on PhotoScroller demo in Apple site. The origin source is written by Objective C. This source rewrite it use Swift, and add some new features:
+- Double tap to zooming feature.
+- Smoother, fix bug when zoom out, then control auto zoom in, it zoom in from center, not from corner.
 
 ### License
 ImageScrollView is released under the MIT license. See LICENSE for details. Copyright © Nguyen Cong Huy

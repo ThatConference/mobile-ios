@@ -15,20 +15,20 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
         
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         self.navigationController?.delegate = self
         
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(TimeSlotRootViewController.handleSwipes(_:)))
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(TimeSlotRootViewController.handleSwipes(_:)))
         
-        leftSwipe.direction = .Left
-        rightSwipe.direction = .Right
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
         
         view.addGestureRecognizer(leftSwipe)
         view.addGestureRecognizer(rightSwipe)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if (getDirtyData()) {
@@ -45,28 +45,28 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
     }
     
     // MARK: Time Table Methods
-    func createTimeLabel(value: String) -> UILabel {
+    func createTimeLabel(_ value: String) -> UILabel {
         let label = UILabel()
-        label.userInteractionEnabled = true
-        label.backgroundColor = UIColor.clearColor()
+        label.isUserInteractionEnabled = true
+        label.backgroundColor = UIColor.clear
         label.text = "\(value)"
         label.font = UIFont(name: "Neutraface Text", size: 14.0)
         
         return label
     }
     
-    func createCircleTimeLabel(value: String) -> CircleLabel {
+    func createCircleTimeLabel(_ value: String) -> CircleLabel {
         let view = CircleLabel(frame: CGRect(x: 0, y: 0, width: 35.0, height: 35.0))
-        view.userInteractionEnabled = true
+        view.isUserInteractionEnabled = true
         view.label.text = "\(value)"
         view.label.font = UIFont(name: "Neutraface Text", size: 14.0)
         view.sizeToFit()
-        view.heightAnchor.constraintEqualToConstant(35).active = true
-        view.widthAnchor.constraintEqualToConstant(35).active = true
+        view.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        view.widthAnchor.constraint(equalToConstant: 35).isActive = true
         return view
     }
     
-    func createClickableTimeLabel(value: String) -> CircleLabel {
+    func createClickableTimeLabel(_ value: String) -> CircleLabel {
         let view = createCircleTimeLabel(value)
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(self.timeSelected(_:)))
         recognizer.delegate = self
@@ -75,15 +75,15 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
         return view
     }
     
-    func timeSelected(recognizer: UITapGestureRecognizer) {
+    func timeSelected(_ recognizer: UITapGestureRecognizer) {
         fatalError("Must Override")
     }
     
-    func determineClosestTimeslotSection(hourSelected: NSDate) -> Int {
+    func determineClosestTimeslotSection(_ hourSelected: Date) -> Int {
         if (dailySchedule.timeSlots.count > 0) {
             for index in 0...dailySchedule.timeSlots.count - 1 {
                 let timeSlot = dailySchedule.timeSlots[index]
-                if timeSlot.time == hourSelected {
+                if timeSlot?.time == hourSelected {
                     return index
                 }
             }
@@ -92,26 +92,26 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
     }
     
     // MARK: UITableViewDelegate
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? TimeSlotRootTableViewCell {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? TimeSlotRootTableViewCell {
             let session =  cell.session
             
-            if (!session.cancelled) {
-                let sessionDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("SessionDetailViewController") as! SessionDetailViewController
+            if (!(session?.cancelled)!) {
+                let sessionDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "SessionDetailViewController") as! SessionDetailViewController
                 sessionDetailVC.session = session
                 self.navigationController!.pushViewController(sessionDetailVC, animated: true)
             }
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     
     // MARK: Data Source
-    func handleSwipes(sender:UISwipeGestureRecognizer) {
-        if (sender.direction == .Left) {
+    func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+        if (sender.direction == .left) {
             moveToNext()
         }
         
-        if (sender.direction == .Right) {
+        if (sender.direction == .right) {
             moveToPrevious()
         }
     }
@@ -124,28 +124,28 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
         self.moveToDay(self.previousDay)
     }
     
-    internal func moveToDay(day: String!) {
+    internal func moveToDay(_ day: String!) {
         fatalError("Must Override")
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         fatalError("Must Override")
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if dailySchedule.timeSlots[section].sessions.count > 0 {
-            return dailySchedule.timeSlots[section].sessions.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (dailySchedule.timeSlots[section]?.sessions.count)! > 0 {
+            return dailySchedule.timeSlots[section]!.sessions.count
         }
         else {
             return 0
         }
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return SessionStore.getFormattedTime(dailySchedule.timeSlots[section].time)
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return SessionStore.getFormattedTime(dailySchedule.timeSlots[section]?.time)
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         if (dailySchedule == nil) {
             return 0
         }
@@ -154,18 +154,18 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
     }
     
     func setDirtyData() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.dirtyDataFavorites = true;
     }
     
-    func setFavoriteIcon(cell: ScheduleTableViewCell, animated: Bool) {
-        dispatch_async(dispatch_get_main_queue(), {
+    func setFavoriteIcon(_ cell: ScheduleTableViewCell, animated: Bool) {
+        DispatchQueue.main.async(execute: {
             if animated {
                 CATransaction.begin()
                 CATransaction.setAnimationDuration(1.5)
                 let transition = CATransition()
                 transition.type = kCATransitionFade
-                cell.favoriteIcon!.layer.addAnimation(transition, forKey: kCATransitionFade)
+                cell.favoriteIcon!.layer.add(transition, forKey: kCATransitionFade)
                 CATransaction.commit()
             }
             if cell.session.isUserFavorite {

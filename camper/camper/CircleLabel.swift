@@ -2,15 +2,15 @@ import UIKit
 
 class CircleLabel: UIView {
     var label: UILabel!
-    var timeSlot: NSDate!
+    var timeSlot: Date!
     
-    private var showCircle: Bool = false
-    private var circleLayer: CAShapeLayer!
+    fileprivate var showCircle: Bool = false
+    fileprivate var circleLayer: CAShapeLayer!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         label = UILabel(frame: frame)
-        label.textAlignment = NSTextAlignment.Center
+        label.textAlignment = NSTextAlignment.center
         circleLayer = CAShapeLayer()
             
         self.addSubview(label)
@@ -25,21 +25,21 @@ class CircleLabel: UIView {
         displayCircle()
     }
     
-    func setCircle(display: Bool) {
+    func setCircle(_ display: Bool) {
         showCircle = display
         displayCircle()
     }
     
-    private func displayCircle() {
-        let path = UIBezierPath(ovalInRect: CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height))
-        circleLayer.fillColor = UIColor.init(red: 217/255, green: 213/255, blue: 202/255, alpha: 1.0).CGColor
+    fileprivate func displayCircle() {
+        let path = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height))
+        circleLayer.fillColor = UIColor.init(red: 217/255, green: 213/255, blue: 202/255, alpha: 1.0).cgColor
         
-        circleLayer.path = path.CGPath
+        circleLayer.path = path.cgPath
         
         if showCircle {
-            self.layer.insertSublayer(circleLayer, atIndex: 0)
+            self.layer.insertSublayer(circleLayer, at: 0)
         } else {
-            self.layer.sublayers?.removeAtIndex((self.layer.sublayers?.indexOf(circleLayer))!)
+            self.layer.sublayers?.remove(at: (self.layer.sublayers?.index(of: circleLayer))!)
         }
     }
     

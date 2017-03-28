@@ -17,36 +17,36 @@ class Sponsor : NSObject, NSCoding {
     
     override init() {}
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.name, forKey: "Name")
-        aCoder.encodeObject(self.sponsorLevel, forKey: "SponsorLevel")
-        aCoder.encodeObject(self.levelOrder, forKey: "LevelOrder")
-        aCoder.encodeObject(self.imageUrl, forKey: "ImageUrl")
-        aCoder.encodeObject(self.website, forKey: "Website")
-        aCoder.encodeObject(self.twitter, forKey: "Twitter")
-        aCoder.encodeObject(self.facebook, forKey: "Facebook")
-        aCoder.encodeObject(self.googlePlus, forKey: "GooglePlus")
-        aCoder.encodeObject(self.linkedIn, forKey: "LinkedIn")
-        aCoder.encodeObject(self.gitHub, forKey: "GitHub")
-        aCoder.encodeObject(self.pinterest, forKey: "Pinterest")
-        aCoder.encodeObject(self.instagram, forKey: "Instagram")
-        aCoder.encodeObject(self.youTube, forKey: "YouTube")
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.name, forKey: "Name")
+        aCoder.encode(self.sponsorLevel, forKey: "SponsorLevel")
+        aCoder.encode(self.levelOrder, forKey: "LevelOrder")
+        aCoder.encode(self.imageUrl, forKey: "ImageUrl")
+        aCoder.encode(self.website, forKey: "Website")
+        aCoder.encode(self.twitter, forKey: "Twitter")
+        aCoder.encode(self.facebook, forKey: "Facebook")
+        aCoder.encode(self.googlePlus, forKey: "GooglePlus")
+        aCoder.encode(self.linkedIn, forKey: "LinkedIn")
+        aCoder.encode(self.gitHub, forKey: "GitHub")
+        aCoder.encode(self.pinterest, forKey: "Pinterest")
+        aCoder.encode(self.instagram, forKey: "Instagram")
+        aCoder.encode(self.youTube, forKey: "YouTube")
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        let name = aDecoder.decodeObjectForKey("Name") as! String
-        let sponsorLevel = aDecoder.decodeObjectForKey("SponsorLevel") as! String
-        let levelOrder = aDecoder.decodeObjectForKey("LevelOrder") as! Int
-        let imageUrl = aDecoder.decodeObjectForKey("ImageUrl") as! String
-        let website = aDecoder.decodeObjectForKey("Website") as! String
-        let twitter = aDecoder.decodeObjectForKey("Twitter") as! String
-        let facebook = aDecoder.decodeObjectForKey("Facebook") as! String
-        let googlePlus = aDecoder.decodeObjectForKey("GooglePlus") as! String
-        let linkedIn = aDecoder.decodeObjectForKey("LinkedIn") as! String
-        let gitHub = aDecoder.decodeObjectForKey("GitHub") as! String
-        let pinterest = aDecoder.decodeObjectForKey("Pinterest") as! String
-        let instagram = aDecoder.decodeObjectForKey("Instagram") as! String
-        let youTube = aDecoder.decodeObjectForKey("YouTube") as! String
+        let name = aDecoder.decodeObject(forKey: "Name") as! String
+        let sponsorLevel = aDecoder.decodeObject(forKey: "SponsorLevel") as! String
+        let levelOrder = aDecoder.decodeObject(forKey: "LevelOrder") as! Int
+        let imageUrl = aDecoder.decodeObject(forKey: "ImageUrl") as! String
+        let website = aDecoder.decodeObject(forKey: "Website") as! String
+        let twitter = aDecoder.decodeObject(forKey: "Twitter") as! String
+        let facebook = aDecoder.decodeObject(forKey: "Facebook") as! String
+        let googlePlus = aDecoder.decodeObject(forKey: "GooglePlus") as! String
+        let linkedIn = aDecoder.decodeObject(forKey: "LinkedIn") as! String
+        let gitHub = aDecoder.decodeObject(forKey: "GitHub") as! String
+        let pinterest = aDecoder.decodeObject(forKey: "Pinterest") as! String
+        let instagram = aDecoder.decodeObject(forKey: "Instagram") as! String
+        let youTube = aDecoder.decodeObject(forKey: "YouTube") as! String
         
         self.init(name: name,
                   sponsorLevel: sponsorLevel,

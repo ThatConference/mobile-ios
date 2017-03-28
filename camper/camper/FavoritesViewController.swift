@@ -20,74 +20,74 @@ class FavoritesViewController : TimeSlotRootViewController {
         let rightArrow = UIImage(named: "subheader-arrow-right")
         self.nextDayButton.imageEdgeInsets = UIEdgeInsetsMake(0, self.nextDayButton.frame.size.width - (rightArrow!.size.width), 0, 0)
         self.nextDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, -(rightArrow!.size.width + 5), 0, (rightArrow!.size.width + 5))
-        self.nextDayButton.addTarget(self, action: #selector(self.moveToNext), forControlEvents: UIControlEvents.TouchUpInside)
+        self.nextDayButton.addTarget(self, action: #selector(self.moveToNext), for: UIControlEvents.touchUpInside)
     
         self.previousDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5)
-        self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), forControlEvents: .TouchUpInside)
+        self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), for: .touchUpInside)
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: #selector(FavoritesViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(FavoritesViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(self.refreshControl)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if (getDirtyData()) {
             if (self.dailySchedules != nil) {
-                NSOperationQueue.mainQueue().addOperationWithBlock() {
+                OperationQueue.main.addOperation() {
                     self.dailySchedules.removeAll()
-                    self.tableView.hidden = true
+                    self.tableView.isHidden = true
                 }
             }
             loadData()
         }
         
-        Answers.logContentViewWithName("Open Spaces",
+        Answers.logContentView(withName: "Open Spaces",
                                        contentType: "Page",
                                        contentId: "",
                                        customAttributes: [:])
     }
     
-    internal override func moveToDay(day: String!) {
+    internal override func moveToDay(_ day: String!) {
         if (day == nil) {
             return
         }
         
         self.dailySchedule = self.dailySchedules[day];
-        UIView.transitionWithView(self.tableView, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() -> Void in
+        UIView.transition(with: self.tableView, duration: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {() -> Void in
             self.tableView.reloadData()
-            self.tableView.scrollToRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
+            self.tableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
             }, completion: nil)
-        UIView.transitionWithView(self.timeTableView, duration: 0.5, options: .TransitionCrossDissolve, animations: {() -> Void in
+        UIView.transition(with: self.timeTableView, duration: 0.5, options: .transitionCrossDissolve, animations: {() -> Void in
             self.loadTimeTable()
             }, completion: nil)
-        UIView.transitionWithView(self.dateLabel, duration: 0.5, options: .TransitionCrossDissolve, animations: {() -> Void in
-            self.setDateLabel(self.dailySchedule.date!)
+        UIView.transition(with: self.dateLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {() -> Void in
+            self.setDateLabel(self.dailySchedule.date! as Date)
             self.setPageState(day)
             }, completion: nil)
     
-        let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.dailySchedule.date, toUnitGranularity: .Day)
-        if order == NSComparisonResult.OrderedSame {
+        let order = (Calendar.current as NSCalendar).compare(Date(), to: self.dailySchedule.date as Date, toUnitGranularity: .day)
+        if order == ComparisonResult.orderedSame {
             self.jumpToTimeOfDay()
         }
     }
     
     // MARK: Page Data
-    private func checkUserStatus()
+    fileprivate func checkUserStatus()
     {
         //Show login screen if not logged in
         if (!Authentication.isLoggedIn()) {
             setData(true)
-            self.performSegueWithIdentifier("show_login", sender: self)
+            self.performSegue(withIdentifier: "show_login", sender: self)
         } else {
             self.view.addSubview(self.activityIndicator)
             loadData()
         }
     }
     
-    func refresh(sender:AnyObject) {
+    func refresh(_ sender:AnyObject) {
         loadData()
     }
     
@@ -102,13 +102,13 @@ class FavoritesViewController : TimeSlotRootViewController {
         
         sessionStore.getFavoriteSessions(completion: {(sessionResult) -> Void in
             switch sessionResult {
-            case .Success(let sessions):
+            case .success(let sessions):
                 self.setData(false)
                 self.dailySchedules = sessions
                 PersistenceManager.saveDailySchedule(self.dailySchedules, path: Path.Favorites)
                 self.displayData()
                 break
-            case .Failure(let error):
+            case .failure(let error):
                 print("Error: \(error)")
                 self.setData(true)
                 let values = PersistenceManager.loadDailySchedule(Path.Favorites)
@@ -116,12 +116,12 @@ class FavoritesViewController : TimeSlotRootViewController {
                     self.dailySchedules = values!
                     self.displayData()
                 } else {
-                    if (self.isViewLoaded() && self.view.window != nil) {
-                        self.alert = UIAlertController(title: "Log In Needed", message: "Log in to view favorites.", preferredStyle: UIAlertControllerStyle.Alert)
-                        self.alert.addAction(UIAlertAction(title: "Log In", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction) in
-                            self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
+                    if (self.isViewLoaded && self.view.window != nil) {
+                        self.alert = UIAlertController(title: "Log In Needed", message: "Log in to view favorites.", preferredStyle: UIAlertControllerStyle.alert)
+                        self.alert.addAction(UIAlertAction(title: "Log In", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
+                            self.parent!.parent!.performSegue(withIdentifier: "show_login", sender: self)
                         }))
-                        self.alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction) in
+                        self.alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
                             if (self.dailySchedules != nil) {
                                 self.dailySchedules.removeAll()
                             }
@@ -133,7 +133,7 @@ class FavoritesViewController : TimeSlotRootViewController {
                             
                             self.navigateToSchedule()
                         }))
-                        self.presentViewController(self.alert, animated: true, completion: nil)
+                        self.present(self.alert, animated: true, completion: nil)
                     }
                 }
                 break
@@ -142,8 +142,8 @@ class FavoritesViewController : TimeSlotRootViewController {
     }
     
     func displayData() {
-        NSOperationQueue.mainQueue().addOperationWithBlock() {
-            self.tableView.hidden = false
+        OperationQueue.main.addOperation() {
+            self.tableView.isHidden = false
             self.activityIndicator.stopAnimating()
             
             self.setCurrentDay(self.dailySchedules)
@@ -158,34 +158,34 @@ class FavoritesViewController : TimeSlotRootViewController {
                 self.tableView.dataSource = self
                 self.tableView.reloadData()
                 
-                self.setDateLabel(self.dailySchedule.date!)
+                self.setDateLabel(self.dailySchedule.date! as Date)
                 
-                let order = NSCalendar.currentCalendar().compareDate(NSDate(), toDate: self.dailySchedule.date, toUnitGranularity: .Day)
-                if order == NSComparisonResult.OrderedSame {
+                let order = (Calendar.current as NSCalendar).compare(Date(), to: self.dailySchedule.date as Date, toUnitGranularity: .day)
+                if order == ComparisonResult.orderedSame {
                     self.jumpToTimeOfDay()
                 }
             }
         }
     }
     
-    override func setData(isDirty: Bool) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    override func setData(_ isDirty: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.dirtyDataFavorites = isDirty;
     }
     
     override func getDirtyData() -> Bool {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.dirtyDataFavorites;
     }
     
     // MARK: Page State
-    private func setCurrentDay(schedules: Dictionary<String, DailySchedule>) {
-        let formatter = NSDateFormatter()
+    fileprivate func setCurrentDay(_ schedules: Dictionary<String, DailySchedule>) {
+        let formatter = DateFormatter()
         formatter.dateFormat = "mm-dd-yyyy"
-        let today = formatter.stringFromDate(NSDate())
+        let today = formatter.string(from: Date())
     
         // set the date to today, unless we're outside the conference
-        if schedules.indexForKey(today) != nil {
+        if schedules.index(forKey: today) != nil {
             self.setPageState(today)
         }
         else {
@@ -193,16 +193,16 @@ class FavoritesViewController : TimeSlotRootViewController {
         }
     }
     
-    private func setPageState(currentDay: String!) {
-        let sortedDates = Array(self.dailySchedules.keys).sort()
+    fileprivate func setPageState(_ currentDay: String!) {
+        let sortedDates = Array(self.dailySchedules.keys).sorted()
         
         if sortedDates.count == 0 {
-            let alert = UIAlertController(title: "No Favorites", message: "No favorites found. Please select some favorites to view this page", preferredStyle: UIAlertControllerStyle.Alert)
-            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+            let alert = UIAlertController(title: "No Favorites", message: "No favorites found. Please select some favorites to view this page", preferredStyle: UIAlertControllerStyle.alert)
+            let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
                 self.navigateToSchedule()
             }
             alert.addAction(OKAction)
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
             self.dateLabel.text = ""
             return
         }
@@ -238,40 +238,40 @@ class FavoritesViewController : TimeSlotRootViewController {
         setButtonValues(self.dailySchedules)
     }
     
-    private func setDateLabel(date: NSDate) {
-        let dateFormatter = NSDateFormatter()
+    fileprivate func setDateLabel(_ date: Date) {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE MMM dd"
-        self.dateLabel.text = dateFormatter.stringFromDate(date)
+        self.dateLabel.text = dateFormatter.string(from: date)
     }
     
-    private func setButtonValues(schedules: Dictionary<String, DailySchedule>) {
-        let buttonLabelFormatter = NSDateFormatter()
+    fileprivate func setButtonValues(_ schedules: Dictionary<String, DailySchedule>) {
+        let buttonLabelFormatter = DateFormatter()
         buttonLabelFormatter.dateFormat = "MMM dd"
     
-        let getDateFormatter = NSDateFormatter()
+        let getDateFormatter = DateFormatter()
         getDateFormatter.dateFormat = "MM-dd-yyyy"
     
         if let previous = self.previousDay {
-            self.previousDayButton.hidden = false
-            let date = getDateFormatter.dateFromString(previous)
-            self.previousDayButton.setTitle(buttonLabelFormatter.stringFromDate(date!), forState: .Normal)
+            self.previousDayButton.isHidden = false
+            let date = getDateFormatter.date(from: previous)
+            self.previousDayButton.setTitle(buttonLabelFormatter.string(from: date!), for: UIControlState())
         }
         else {
-            self.previousDayButton.hidden = true
+            self.previousDayButton.isHidden = true
         }
     
         if let next = self.nextDay {
-            self.nextDayButton.hidden = false
-            let date = getDateFormatter.dateFromString(next)
-            self.nextDayButton.setTitle(buttonLabelFormatter.stringFromDate(date!), forState: .Normal)
+            self.nextDayButton.isHidden = false
+            let date = getDateFormatter.date(from: next)
+            self.nextDayButton.setTitle(buttonLabelFormatter.string(from: date!), for: UIControlState())
         }
         else {
-            self.nextDayButton.hidden = true
+            self.nextDayButton.isHidden = true
         }
     }
     
     // MARK: Time Table Methods
-    private func loadTimeTable() {
+    fileprivate func loadTimeTable() {
         for subview in self.timeTableView.arrangedSubviews {
             self.timeTableView.removeArrangedSubview(subview)
             subview.removeFromSuperview()
@@ -282,8 +282,8 @@ class FavoritesViewController : TimeSlotRootViewController {
         var hours: [Int] = []
         for timeSlot in self.dailySchedule.timeSlots {
             var alreadyAdded: Bool = false
-            var hour = NSCalendar.currentCalendar().component(.Hour, fromDate: timeSlot.time)
-            let minutes = NSCalendar.currentCalendar().component(.Minute, fromDate: timeSlot.time)
+            var hour = (Calendar.current as NSCalendar).component(.hour, from: (timeSlot?.time)!)
+            let minutes = (Calendar.current as NSCalendar).component(.minute, from: (timeSlot?.time)!)
             
             for trackedHours in hours {
                 if trackedHours == hour {
@@ -304,7 +304,7 @@ class FavoritesViewController : TimeSlotRootViewController {
                 
                 let timeLabel = "\(hour):\(minutes)\(padding)"
                 let label = createClickableTimeLabel(timeLabel)
-                label.timeSlot = timeSlot.time
+                label.timeSlot = timeSlot?.time
                 self.timeTableView.addArrangedSubview(label)
                 hours.append(hour)
             }
@@ -314,33 +314,33 @@ class FavoritesViewController : TimeSlotRootViewController {
         
         //set initial time to circle
         for circleView in self.timeTableView.subviews {
-            if circleView.isKindOfClass(CircleLabel) {
+            if circleView.isKind(of: CircleLabel.self) {
                 (circleView as! CircleLabel).toggleCircle()
                 break
             }
         }
     }
     
-    override func timeSelected(recognizer: UITapGestureRecognizer) {
+    override func timeSelected(_ recognizer: UITapGestureRecognizer) {
         let view = recognizer.view  as! CircleLabel
         currentlySelectedTimeLabel = view
         view.toggleCircle()
-        self.scrollToSection(view.timeSlot)
+        self.scrollToSection(view.timeSlot as Date)
     }
     
-    private func jumpToTimeOfDay() {
-        let nowHour = NSCalendar.currentCalendar().component(.Hour, fromDate: NSDate())
+    fileprivate func jumpToTimeOfDay() {
+        let nowHour = (Calendar.current as NSCalendar).component(.hour, from: Date())
     
         var locationSet: Bool = false
         var lastTimeVew: CircleLabel?
         for timeView in self.timeTableView.subviews {
-            if timeView.isKindOfClass(CircleLabel) {
+            if timeView.isKind(of: CircleLabel.self) {
                 lastTimeVew = (timeView as! CircleLabel)
-                let viewHour = NSCalendar.currentCalendar().component(.Hour, fromDate: (timeView as! CircleLabel).timeSlot)
+                let viewHour = (Calendar.current as NSCalendar).component(.hour, from: (timeView as! CircleLabel).timeSlot as Date)
                 if viewHour >= nowHour {
                     self.currentlySelectedTimeLabel = (timeView as! CircleLabel)
                     self.currentlySelectedTimeLabel.toggleCircle()
-                    self.scrollToSection((timeView as! CircleLabel).timeSlot)
+                    self.scrollToSection((timeView as! CircleLabel).timeSlot as Date)
                     locationSet = true
                     break
                 }
@@ -350,7 +350,7 @@ class FavoritesViewController : TimeSlotRootViewController {
         if !locationSet {
             // didn't find a next/current time - go to the end
             if let view = lastTimeVew {
-                self.scrollToSection(view.timeSlot)
+                self.scrollToSection(view.timeSlot as Date)
     
                 if let currentSelected = self.currentlySelectedTimeLabel {
                     currentSelected.toggleCircle()
@@ -361,26 +361,26 @@ class FavoritesViewController : TimeSlotRootViewController {
         }
     }
     
-    private func scrollToSection(timeSlot: NSDate) {
+    fileprivate func scrollToSection(_ timeSlot: Date) {
         let section = determineClosestTimeslotSection(timeSlot)
-        let indexPath = NSIndexPath(forRow: 0, inSection: section)
-        self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
+        let indexPath = IndexPath(row: 0, section: section)
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
     
     //set the proper selected Time
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let tableView = scrollView as! UITableView
         
         if let visibleRows = tableView.indexPathsForVisibleRows {
             if (visibleRows.count > 0) {
-                let section = visibleRows[0].section; //top visible time
+                let section = (visibleRows[0] as NSIndexPath).section; //top visible time
                 
                 if let timeSlot = dailySchedules[self.currentDay]?.timeSlots[section] {
                     do {
                         for timeView in self.timeTableView.subviews {
-                            if timeView.isKindOfClass(CircleLabel) {
+                            if timeView.isKind(of: CircleLabel.self) {
                                 let circleView = (timeView as! CircleLabel)
-                                if circleView.timeSlot.isEqualToDate(timeSlot.time!) {
+                                if circleView.timeSlot == timeSlot.time! as Date {
                                     if circleView.circleVisible() == false {
                                         circleView.toggleCircle()
                                     }
@@ -396,17 +396,17 @@ class FavoritesViewController : TimeSlotRootViewController {
     }
     
     // MARK: DataSource
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("FavoritesTableViewCell") as! FavoritesTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesTableViewCell") as! FavoritesTableViewCell
         
         if let schedule = dailySchedule {
-            let timeSlots = schedule.timeSlots[indexPath.section]
-            let session  = timeSlots.sessions[indexPath.row]
+            let timeSlots = schedule.timeSlots[(indexPath as NSIndexPath).section]
+            let session  = timeSlots?.sessions[(indexPath as NSIndexPath).row]
             cell.session = session
-            cell.sessionTitle.text = session.title
-            cell.sessionTitleCancelled.text = session.title
+            cell.sessionTitle.text = session?.title
+            cell.sessionTitleCancelled.text = session?.title
             cell.sessionTitle.sizeToFit()
-            cell.categoryLabel.text = session.primaryCategory
+            cell.categoryLabel.text = session?.primaryCategory
             
             cell.favoriteIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.SessionFavorited(_:))))
             removeFavoriteIcon(cell, animated: false)
@@ -414,26 +414,26 @@ class FavoritesViewController : TimeSlotRootViewController {
             //set up speaker text
             var speakerString: String = ""
             var firstSpeaker: Bool = true
-            for speaker in session.speakers {
+            for speaker in (session?.speakers)! {
                 if !firstSpeaker {
-                    speakerString.appendContentsOf(", ")
+                    speakerString.append(", ")
                 } else {
                     firstSpeaker = false
                 }
                 
-                speakerString.appendContentsOf("\(speaker.firstName!) \(speaker.lastName!)")
+                speakerString.append("\(speaker.firstName!) \(speaker.lastName!)")
             }
             
             cell.speakerLabel.text = speakerString
-            cell.roomLabel.text = session.scheduledRoom
-            cell.updateFlag.hidden = !session.updated
-            cell.cancelledCover.hidden = !session.cancelled
+            cell.roomLabel.text = session?.scheduledRoom
+            cell.updateFlag.isHidden = !(session?.updated)!
+            cell.cancelledCover.isHidden = !(session?.cancelled)!
         }
         
         return cell
     }
     
-    func SessionFavorited(sender: UITapGestureRecognizer) {
+    func SessionFavorited(_ sender: UITapGestureRecognizer) {
         if Authentication.isLoggedIn() {
             let sessionStore = SessionStore()
             if let cell = sender.view?.superview?.superview as? FavoritesTableViewCell {
@@ -441,18 +441,18 @@ class FavoritesViewController : TimeSlotRootViewController {
                 if cell.session.isUserFavorite {
                     sessionStore.removeFavorite(cell.session, completion:{(sessionsResult) -> Void in
                         switch sessionsResult {
-                        case .Success(let sessions):
+                        case .success(let sessions):
                             self.stopIndicator()
                             self.setDirtyData()
                             cell.session = sessions.first
                             self.removeFavoriteIcon(cell, animated: true)
-                            Answers.logCustomEventWithName("Removed Favorite", customAttributes: [:])
+                            Answers.logCustomEvent(withName: "Removed Favorite", customAttributes: [:])
                             break
-                        case .Failure(_):
+                        case .failure(_):
                             self.stopIndicator()
-                            let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.Alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                            self.presentViewController(alert, animated: true, completion: nil)
+                            let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
                             break
                         }
                     })
@@ -460,18 +460,18 @@ class FavoritesViewController : TimeSlotRootViewController {
                 else {
                     sessionStore.addFavorite(cell.session, completion:{(sessionsResult) -> Void in
                         switch sessionsResult {
-                        case .Success(let sessions):
+                        case .success(let sessions):
                             self.stopIndicator()
                             self.setDirtyData()
                             cell.session = sessions.first
                             self.removeFavoriteIcon(cell, animated: true)
-                            Answers.logCustomEventWithName("Added Favorite", customAttributes: [:])
+                            Answers.logCustomEvent(withName: "Added Favorite", customAttributes: [:])
                             break
-                        case .Failure(_):
+                        case .failure(_):
                             self.stopIndicator()
-                            let alert = UIAlertController(title: "Error", message: "Could not add favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.Alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                            self.presentViewController(alert, animated: true, completion: nil)
+                            let alert = UIAlertController(title: "Error", message: "Could not add favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
                             break
                         }
                     })
@@ -480,18 +480,18 @@ class FavoritesViewController : TimeSlotRootViewController {
         }
         else
         {
-            self.parentViewController!.parentViewController!.performSegueWithIdentifier("show_login", sender: self)
+            self.parent!.parent!.performSegue(withIdentifier: "show_login", sender: self)
         }
     }
     
-    func removeFavoriteIcon(cell: FavoritesTableViewCell, animated: Bool) {
-        dispatch_async(dispatch_get_main_queue(), {
+    func removeFavoriteIcon(_ cell: FavoritesTableViewCell, animated: Bool) {
+        DispatchQueue.main.async(execute: {
             if animated {
                 CATransaction.begin()
                 CATransaction.setAnimationDuration(1.5)
                 let transition = CATransition()
                 transition.type = kCATransitionFade
-                cell.favoriteIcon!.layer.addAnimation(transition, forKey: kCATransitionFade)
+                cell.favoriteIcon!.layer.add(transition, forKey: kCATransitionFade)
                 CATransaction.commit()
             }
             if cell.session.isUserFavorite {

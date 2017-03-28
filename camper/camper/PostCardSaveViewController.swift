@@ -19,13 +19,13 @@ class PostCardSaveViewController : UIViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         
         self.activityIndicator = UIActivityIndicatorView()
-        self.activityIndicator.frame = CGRectMake(0, 0, 80, 80)
+        self.activityIndicator.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
         self.activityIndicator.backgroundColor = UIColor(white: 0, alpha: 0.4)
         self.activityIndicator.layer.cornerRadius = 10
-        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         self.activityIndicator.clipsToBounds = true
         self.activityIndicator.hidesWhenStopped = true
         self.activityIndicator.center = self.view.center
@@ -35,7 +35,7 @@ class PostCardSaveViewController : UIViewController {
         ImagePreview.image = createdImage
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         checkPhotoLibraryPermission()
@@ -44,21 +44,21 @@ class PostCardSaveViewController : UIViewController {
     func checkPhotoLibraryPermission() {
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
-        case .Authorized:
+        case .authorized:
             break
-        case .Denied, .Restricted :
+        case .denied, .restricted :
             self.alertToEncouragePhotosAccessInitially()
             break
-        case .NotDetermined:
+        case .notDetermined:
             PHPhotoLibrary.requestAuthorization() { (status) -> Void in
                 switch status {
-                case .Authorized:
+                case .authorized:
                     break
-                case .Denied, .Restricted:
+                case .denied, .restricted:
                     self.alertToEncouragePhotosAccessInitially()
                     break
-                case .NotDetermined:
-                    self.savePostCardButton.enabled = false
+                case .notDetermined:
+                    self.savePostCardButton.isEnabled = false
                     break
                 }
             }
@@ -69,35 +69,35 @@ class PostCardSaveViewController : UIViewController {
         let alert = UIAlertController(
             title: "IMPORTANT",
             message: "Photo Album access required to save Postcard",
-            preferredStyle: UIAlertControllerStyle.Alert
+            preferredStyle: UIAlertControllerStyle.alert
         )
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (alert) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
-                self.dismissViewControllerAnimated(false, completion: nil)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (alert) -> Void in
+            DispatchQueue.main.async(execute: {
+                self.dismiss(animated: false, completion: nil)
             })
         }))
-        alert.addAction(UIAlertAction(title: "Allow Photos", style: .Cancel, handler: { (alert) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
-                UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+        alert.addAction(UIAlertAction(title: "Allow Photos", style: .cancel, handler: { (alert) -> Void in
+            DispatchQueue.main.async(execute: {
+                UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
             })
         }))
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func sharePostCardPressed(sender: AnyObject) {
+    @IBAction func sharePostCardPressed(_ sender: AnyObject) {
         startIndicator()
         shareImage(createdImage!)
-        Answers.logCustomEventWithName("Photo Shared", customAttributes: [:])
+        Answers.logCustomEvent(withName: "Photo Shared", customAttributes: [:])
     }
     
-    @IBAction func savePostCardPressed(sender: AnyObject) {
+    @IBAction func savePostCardPressed(_ sender: AnyObject) {
         startIndicator()
         setAlbum()
         saveImage(createdImage!)
-        Answers.logCustomEventWithName("Photo Saved", customAttributes: [:])
+        Answers.logCustomEvent(withName: "Photo Saved", customAttributes: [:])
     }
     
-    func getActualImageSize(image: UIImage, ImageView: UIImageView) -> CGSize {
+    func getActualImageSize(_ image: UIImage, ImageView: UIImageView) -> CGSize {
         let tempWidth = image.size.width / ImageView.frame.size.width
         let tempHeight = image.size.height / ImageView.frame.size.height
         
@@ -112,20 +112,20 @@ class PostCardSaveViewController : UIViewController {
         return toReturn
     }
     
-    func padImage(originalImage: UIImage) -> UIImage {
+    func padImage(_ originalImage: UIImage) -> UIImage {
         let width:CGFloat = originalImage.size.width * 1.5
         let height:CGFloat = originalImage.size.height * 1.5
-        UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), true, 0.0)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: width, height: height), true, 0.0)
         let context = UIGraphicsGetCurrentContext()
         UIGraphicsPushContext(context!)
 
         // Now we can draw anything we want into this new context.
-        let origin:CGPoint = CGPointMake((width - originalImage.size.width) / 2.0, (height - originalImage.size.height) / 2.0)
-        originalImage.drawAtPoint(origin);
+        let origin:CGPoint = CGPoint(x: (width - originalImage.size.width) / 2.0, y: (height - originalImage.size.height) / 2.0)
+        originalImage.draw(at: origin);
 
         // Clean up and get the new image.
         UIGraphicsPopContext();
-        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext();
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!;
         UIGraphicsEndImageContext();
     
         return newImage
@@ -135,77 +135,83 @@ class PostCardSaveViewController : UIViewController {
         // Find Album
         let fetchOptions = PHFetchOptions()
         fetchOptions.predicate = NSPredicate(format: "title = %@", ALBUM_NAME)
-        let collection : PHFetchResult = PHAssetCollection.fetchAssetCollectionsWithType(.Album, subtype: .Any, options: fetchOptions)
+        let collection : PHFetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
         if let _: AnyObject = collection.firstObject {
-            photoAlbum = collection.firstObject as! PHAssetCollection
+            photoAlbum = collection.firstObject
         } else {
             // Album Not Found - Create
-            PHPhotoLibrary.sharedPhotoLibrary().performChanges(
+            PHPhotoLibrary.shared().performChanges(
                 {
-                let createAlbumRequest : PHAssetCollectionChangeRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollectionWithTitle(self.ALBUM_NAME)
+                let createAlbumRequest : PHAssetCollectionChangeRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: self.ALBUM_NAME)
                 self.assetCollectionPlaceholder = createAlbumRequest.placeholderForCreatedAssetCollection
                 }, completionHandler: {
                     success, error in
                     
                     if (success) {
-                        let collectionFetchResult = PHAssetCollection.fetchAssetCollectionsWithLocalIdentifiers([self.assetCollectionPlaceholder.localIdentifier], options: nil)
-                        self.photoAlbum = collectionFetchResult.firstObject as! PHAssetCollection
+                        let collectionFetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [self.assetCollectionPlaceholder.localIdentifier], options: nil)
+                        self.photoAlbum = collectionFetchResult.firstObject
                     } else {
-                        let ac = UIAlertController(title: "Save Error", message: error?.localizedDescription, preferredStyle: .Alert)
-                        ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                        self.presentViewController(ac, animated: true, completion: nil)
+                        let ac = UIAlertController(title: "Save Error", message: error?.localizedDescription, preferredStyle: .alert)
+                        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(ac, animated: true, completion: nil)
                         self.stopIndicator()
                     }
             })
         }
     }
     
-    func saveImage(image: UIImage){
-        PHPhotoLibrary.sharedPhotoLibrary().performChanges({
-            let assetRequest = PHAssetChangeRequest.creationRequestForAssetFromImage(image)
+    func saveImage(_ image: UIImage){
+        PHPhotoLibrary.shared().performChanges({
+            let assetRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
             if let assetPlaceholder = assetRequest.placeholderForCreatedAsset {
-                if let albumChangeRequest = PHAssetCollectionChangeRequest(forAssetCollection: self.photoAlbum) {
-                    albumChangeRequest.addAssets([assetPlaceholder])
+                if self.photoAlbum != nil {
+                    if let albumChangeRequest = PHAssetCollectionChangeRequest(for: self.photoAlbum) {
+                        albumChangeRequest.addAssets([assetPlaceholder] as NSArray)
+                    }
+                } else {
+                    let ac = UIAlertController(title: "Save Error", message: "Could not save to your device. Please check your permissions.", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(ac, animated: true, completion: nil)
                 }
             }
         }, completionHandler: { success, error in
             if error == nil {
-                let ac = UIAlertController(title: "Created", message: "Your new That Postcard has been created.", preferredStyle: .Alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                self.presentViewController(ac, animated: true, completion: nil)
+                let ac = UIAlertController(title: "Got it!", message: "Your new That Postcard has been created.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(ac, animated: true, completion: nil)
             } else {
-                let ac = UIAlertController(title: "Save Error", message: error?.localizedDescription, preferredStyle: .Alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                self.presentViewController(ac, animated: true, completion: nil)
+                let ac = UIAlertController(title: "Save Error", message: error?.localizedDescription, preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(ac, animated: true, completion: nil)
             }
             self.stopIndicator()
         })
     }
     
-    func shareImage(image: UIImage) {
-        let messageStr:String  = "#ThatPostcard"
-        let shareItems:Array = [image, messageStr]
+    func shareImage(_ image: UIImage) {
+        let messageStr:String  = " #ThatPostcard "
+        let shareItems:Array = [image, messageStr] as [Any]
         
         let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
-        activityViewController.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeMessage, UIActivityTypeMail, UIActivityTypePrint,UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList]
+        activityViewController.excludedActivityTypes = [UIActivityType.print, UIActivityType.message, UIActivityType.mail, UIActivityType.print,UIActivityType.assignToContact, UIActivityType.saveToCameraRoll, UIActivityType.addToReadingList]
         
-        self.presentViewController(activityViewController, animated: true, completion: nil)
+        self.present(activityViewController, animated: true, completion: nil)
         self.stopIndicator()
     }
     
     func startIndicator() {
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             self.activityIndicator.startAnimating()
         })
     }
     
     func stopIndicator() {
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             self.activityIndicator.stopAnimating()
         })
     }
     
-    @IBAction func closePressed(sender: AnyObject) {
-        self.dismissViewControllerAnimated(false, completion: nil)
+    @IBAction func closePressed(_ sender: AnyObject) {
+        self.dismiss(animated: false, completion: nil)
     }
 }

@@ -5,7 +5,7 @@ use_frameworks!
 
 target 'That Conference' do
 
-pod 'Locksmith', '2.0.8'
+pod 'Locksmith'
 pod 'ImageScrollView'
 pod 'Fabric'
 pod 'Crashlytics'
