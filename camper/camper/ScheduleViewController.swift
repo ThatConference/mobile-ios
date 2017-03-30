@@ -372,6 +372,9 @@ class ScheduleViewController : TimeSlotRootViewController {
             cell.sessionTitleCancelled.text = session?.title
             cell.sessionTitle.sizeToFit()
             cell.categoryLabel.text = session?.primaryCategory
+            if let level = session?.level {
+                cell.levelLabel.text = "Level: \(level)"
+            }
             
             cell.favoriteIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.SessionFavorited(_:))))
             setFavoriteIcon(cell, animated: false)

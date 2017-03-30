@@ -3,16 +3,17 @@ import Fabric
 import Crashlytics
 
 class SessionDetailViewController : BaseViewController, UITableViewDataSource, UITableViewDelegate {
-    @IBOutlet var labelDate: UILabel!
-    @IBOutlet var labelTime: UILabel!
-    @IBOutlet var labelTitle: UILabel!
-    @IBOutlet var labelCategory: UILabel!
-    @IBOutlet var roomName: UILabel!
-    @IBOutlet var labelDescription: UITextView!
-    @IBOutlet var detailTable: UITableView!
-    @IBOutlet var detailTableHeight: NSLayoutConstraint!
-    @IBOutlet var detailSectionHeight: NSLayoutConstraint!
-    @IBOutlet var favoriteButton: UIImageView!
+    @IBOutlet weak var labelDate: UILabel!
+    @IBOutlet weak var labelTime: UILabel!
+    @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var labelCategory: UILabel!
+    @IBOutlet weak var roomName: UILabel!
+    @IBOutlet weak var labelDescription: UITextView!
+    @IBOutlet weak var detailTable: UITableView!
+    @IBOutlet weak var detailTableHeight: NSLayoutConstraint!
+    @IBOutlet weak var detailSectionHeight: NSLayoutConstraint!
+    @IBOutlet weak var favoriteButton: UIImageView!
+    @IBOutlet weak var levelLabel: UILabel!
     
     var session: Session!
     var newTableHeight = CGFloat(0)
@@ -32,6 +33,9 @@ class SessionDetailViewController : BaseViewController, UITableViewDataSource, U
         labelCategory.text = session.primaryCategory
         labelDescription.text = session.sessionDescription
         roomName.text = session.scheduledRoom
+        if let level = session.level {
+            levelLabel.text = "Level: \(level)"
+        }
         
         self.detailTable.separatorStyle = UITableViewCellSeparatorStyle.none
         self.detailTable.delegate = self

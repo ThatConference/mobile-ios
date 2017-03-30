@@ -339,8 +339,8 @@ class ThatConferenceAPI {
             if error != nil {
                 completionHandler(SessionsResult.failure(error!))
             } else {
-                print("Response: \(response)")
-                print("Favorites Return Data \(data)")
+                print("Response: \(String(describing: response))")
+                print("Favorites Return Data \(String(describing: data))")
                 let sessions = sessionsFromJSONData(data!)
                 completionHandler(sessions)
             }

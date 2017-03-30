@@ -87,7 +87,7 @@ open class ImageScrollView: UIScrollView {
         
         // If we're at the minimum zoom scale, preserve that by returning 0, which will be converted to the minimum
         // allowable scale when the scale is restored.
-        if scaleToRestoreAfterResize <= minimumZoomScale + CGFloat(FLT_EPSILON) {
+        if scaleToRestoreAfterResize <= minimumZoomScale + CGFloat(Float.ulpOfOne) {
             scaleToRestoreAfterResize = 0
         }
     }
@@ -130,7 +130,7 @@ open class ImageScrollView: UIScrollView {
 
     // MARK: - Display image
     
-    open func display(image image: UIImage) {
+    open func display(image: UIImage) {
 
         if let zoomView = zoomView {
             zoomView.removeFromSuperview()

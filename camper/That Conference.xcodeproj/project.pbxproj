@@ -232,36 +232,16 @@
 		312A94141C814B6B00AE938B /* camper */ = {
 			isa = PBXGroup;
 			children = (
+				31CFCD821C8B6E1400DB2AB2 /* datasource */,
+				7BD3621B1E8D4670009C3A5E /* Utilities */,
+				7BD362181E8D45FD009C3A5E /* Model */,
+				7BD362191E8D4605009C3A5E /* View */,
+				31373C9D1D02735B00430EC0 /* storyboards */,
+				7BD3621A1E8D460A009C3A5E /* Controller */,
 				312A94211C814B6B00AE938B /* Info.plist */,
 				312A94151C814B6B00AE938B /* AppDelegate.swift */,
-				312A94271C85383200AE938B /* AuthorizationViewController.swift */,
-				31D0D9401CC08282007C5999 /* AuthorizationWebViewController.swift */,
-				317154231D1D8025004078E2 /* BaseViewController.swift */,
-				51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */,
-				312A942B1C85396E00AE938B /* FavoritesViewController.swift */,
-				31D877F71D1864C10045E8DA /* FrameCell.swift */,
-				312A942D1C85399900AE938B /* MapViewController.swift */,
-				31CFD1361D0E416E00F1AE23 /* OpenSpacesViewController.swift */,
-				3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */,
-				317154211D1C340E004078E2 /* PassThroughImageView.swift */,
-				31D877F91D19CBD30045E8DA /* PostCardChoosePhotoViewController.swift */,
-				3171541F1D1B9784004078E2 /* PostCardSaveViewController.swift */,
-				5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */,
-				312A94291C85390B00AE938B /* ScheduleViewController.swift */,
-				312A94331C85EE5D00AE938B /* SessionDetailViewController.swift */,
-				312A942F1C8539B600AE938B /* SettingsViewController.swift */,
-				3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */,
-				31DEA7631D2B08F40004C2D3 /* SponsorsViewController.swift */,
-				3116C4D01D3BEDB2002E2722 /* SponsorTableViewCell.swift */,
-				31CFD1341D0E3AAB00F1AE23 /* TimeSlotRootTableViewCell.swift */,
-				31CFD1321D09050C00F1AE23 /* TimeSlotRootViewController.swift */,
 				312A941C1C814B6B00AE938B /* Assets.xcassets */,
-				5113D3861CAC51AE00D6B974 /* custom views */,
-				31CFCD821C8B6E1400DB2AB2 /* datasource */,
-				31D0D9461CC5DB4D007C5999 /* extensions */,
-				31CFCD7F1C8A73D700DB2AB2 /* models */,
 				312A94351C88DE1A00AE938B /* resources */,
-				31373C9D1D02735B00430EC0 /* storyboards */,
 			);
 			path = camper;
 			sourceTree = "<group>";
@@ -326,21 +306,6 @@
 			name = storyboards;
 			sourceTree = "<group>";
 		};
-		31CFCD7F1C8A73D700DB2AB2 /* models */ = {
-			isa = PBXGroup;
-			children = (
-				31D0D9441CC48DEE007C5999 /* AuthToken.swift */,
-				512DA03A1CB7585D006CC1B3 /* DailySchedule.swift */,
-				311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */,
-				313B19011D160B8C00E72562 /* PostCardFrame.swift */,
-				3123AC271C90959D0097BF33 /* Session.swift */,
-				512DA03E1CBBE03C006CC1B3 /* Speaker.swift */,
-				314DA0FC1D202B690021E2DA /* Sponsor.swift */,
-				512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */,
-			);
-			name = models;
-			sourceTree = "<group>";
-		};
 		31CFCD821C8B6E1400DB2AB2 /* datasource */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,13 +334,64 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5113D3861CAC51AE00D6B974 /* custom views */ = {
+		7BD362181E8D45FD009C3A5E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				31D0D9441CC48DEE007C5999 /* AuthToken.swift */,
+				512DA03A1CB7585D006CC1B3 /* DailySchedule.swift */,
+				311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */,
+				313B19011D160B8C00E72562 /* PostCardFrame.swift */,
+				3123AC271C90959D0097BF33 /* Session.swift */,
+				512DA03E1CBBE03C006CC1B3 /* Speaker.swift */,
+				314DA0FC1D202B690021E2DA /* Sponsor.swift */,
+				512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		7BD362191E8D4605009C3A5E /* View */ = {
 			isa = PBXGroup;
 			children = (
 				5113D3871CAC521C00D6B974 /* CircleView.swift */,
 				5113D3891CAF58A100D6B974 /* CircleLabel.swift */,
+				51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */,
+				31D877F71D1864C10045E8DA /* FrameCell.swift */,
+				3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */,
+				5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */,
+				3116C4D01D3BEDB2002E2722 /* SponsorTableViewCell.swift */,
+				31CFD1341D0E3AAB00F1AE23 /* TimeSlotRootTableViewCell.swift */,
 			);
-			name = "custom views";
+			name = View;
+			sourceTree = "<group>";
+		};
+		7BD3621A1E8D460A009C3A5E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				312A94271C85383200AE938B /* AuthorizationViewController.swift */,
+				31D0D9401CC08282007C5999 /* AuthorizationWebViewController.swift */,
+				317154231D1D8025004078E2 /* BaseViewController.swift */,
+				312A942B1C85396E00AE938B /* FavoritesViewController.swift */,
+				312A942D1C85399900AE938B /* MapViewController.swift */,
+				31CFD1361D0E416E00F1AE23 /* OpenSpacesViewController.swift */,
+				317154211D1C340E004078E2 /* PassThroughImageView.swift */,
+				31D877F91D19CBD30045E8DA /* PostCardChoosePhotoViewController.swift */,
+				3171541F1D1B9784004078E2 /* PostCardSaveViewController.swift */,
+				312A94291C85390B00AE938B /* ScheduleViewController.swift */,
+				312A94331C85EE5D00AE938B /* SessionDetailViewController.swift */,
+				312A942F1C8539B600AE938B /* SettingsViewController.swift */,
+				3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */,
+				31DEA7631D2B08F40004C2D3 /* SponsorsViewController.swift */,
+				31CFD1321D09050C00F1AE23 /* TimeSlotRootViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		7BD3621B1E8D4670009C3A5E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				31D0D9461CC5DB4D007C5999 /* extensions */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -414,7 +430,7 @@
 				TargetAttributes = {
 					312A94111C814B6B00AE938B = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 2VX3GW8TL8;
+						DevelopmentTeam = TP9E7CXU62;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -749,6 +765,7 @@
 				CODE_SIGN_ENTITLEMENTS = "That Conference.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = TP9E7CXU62;
 				INFOPLIST_FILE = camper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -766,6 +783,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "That Conference.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = TP9E7CXU62;
 				INFOPLIST_FILE = camper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

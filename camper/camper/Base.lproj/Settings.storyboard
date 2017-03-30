@@ -1,9 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MB1-Be-zlE">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MB1-Be-zlE">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--PostCardChoosePhotoViewController-->
@@ -31,70 +35,70 @@
                         <viewControllerLayoutGuide type="bottom" id="PgP-Fr-Idw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3gO-M1-8k3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-background" translatesAutoresizingMaskIntoConstraints="NO" id="vN0-Af-WSg">
-                                <rect key="frame" x="0.0" y="168" width="414" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-mclogo" translatesAutoresizingMaskIntoConstraints="NO" id="aYv-6y-Faz">
-                                <rect key="frame" x="132" y="636" width="150" height="80"/>
+                                <rect key="frame" x="112.5" y="567" width="150" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="zEH-IS-0qD"/>
                                     <constraint firstAttribute="width" constant="150" id="zLD-Pk-2yT"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.0.2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DdF-ZE-8yg">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="version 1.0.2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DdF-ZE-8yg">
                                 <rect key="frame" x="20" y="716" width="374" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGg-xC-GOi">
-                                <rect key="frame" x="20" y="287" width="374" height="40"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="16" y="268.5" width="343" height="40"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="OPf-VO-KFv"/>
                                 </constraints>
-                                <color key="tintColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Sign In">
-                                    <color key="titleColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="loginPressed:" destination="MB1-Be-zlE" eventType="touchUpInside" id="Wr8-ba-Q9l"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t6b-uT-nKE" userLabel="Map Button">
-                                <rect key="frame" x="20" y="335" width="374" height="40"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="16" y="316.5" width="343" height="40"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="5cl-N4-8tX"/>
                                 </constraints>
-                                <color key="tintColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Conference Map">
-                                    <color key="titleColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="sponsorsPressed:" destination="MB1-Be-zlE" eventType="touchUpInside" id="5Xe-py-h6F"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="ReportBugButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tai-jz-Tyw" userLabel="Report Bug Button">
-                                <rect key="frame" x="20" y="383" width="374" height="40"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="16" y="364.5" width="343" height="40"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <accessibility key="accessibilityConfiguration" label="Report Bug"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="sBJ-Bs-3Vo"/>
                                 </constraints>
-                                <color key="tintColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Report A Bug">
-                                    <color key="titleColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="reportBugPressed:" destination="MB1-Be-zlE" eventType="touchUpInside" id="my3-Es-av9"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="splash-tclogo" translatesAutoresizingMaskIntoConstraints="NO" id="KnW-c8-xw3">
-                                <rect key="frame" x="20" y="40" width="374" height="228"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-tclogo" translatesAutoresizingMaskIntoConstraints="NO" id="KnW-c8-xw3">
+                                <rect key="frame" x="16" y="40" width="343" height="208.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="KnW-c8-xw3" secondAttribute="height" multiplier="288:175" id="f3N-4q-aHf"/>
                                     <constraint firstAttribute="height" constant="175" id="mQr-YF-EGi"/>
@@ -106,7 +110,7 @@
                                 </variation>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="DdF-ZE-8yg" secondAttribute="trailing" id="043-x4-tHS"/>
                             <constraint firstItem="aYv-6y-Faz" firstAttribute="centerX" secondItem="3gO-M1-8k3" secondAttribute="centerX" id="1pL-5E-3ng"/>
@@ -127,6 +131,7 @@
                             <constraint firstItem="vN0-Af-WSg" firstAttribute="leading" secondItem="3gO-M1-8k3" secondAttribute="leading" id="gcj-Pg-KCV"/>
                             <constraint firstItem="Tai-jz-Tyw" firstAttribute="top" secondItem="t6b-uT-nKE" secondAttribute="bottom" constant="8" id="h64-9W-gVj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="bGg-xC-GOi" secondAttribute="trailing" id="mb7-cI-IXj"/>
+                            <constraint firstItem="vN0-Af-WSg" firstAttribute="top" secondItem="3gO-M1-8k3" secondAttribute="top" id="sv9-qI-PNZ"/>
                             <constraint firstItem="bGg-xC-GOi" firstAttribute="top" secondItem="KnW-c8-xw3" secondAttribute="bottom" constant="20" id="xwz-PD-Jhp"/>
                             <constraint firstItem="Tai-jz-Tyw" firstAttribute="leading" secondItem="3gO-M1-8k3" secondAttribute="leadingMargin" id="ykZ-Rw-Rzw"/>
                         </constraints>
@@ -134,7 +139,6 @@
                     <navigationItem key="navigationItem" title="SETTINGS" id="CaK-Eg-uxX">
                         <barButtonItem key="backBarButtonItem" title=" " id="JgA-Em-mLg"/>
                     </navigationItem>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="loginButton" destination="bGg-xC-GOi" id="8KC-qG-MvR"/>
                         <outlet property="mcLogo" destination="aYv-6y-Faz" id="LuB-eN-JIh"/>
@@ -149,7 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rjj-y0-66K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2491" y="1413"/>
+            <point key="canvasLocation" x="2490.4000000000001" y="1412.7436281859073"/>
         </scene>
         <!--AuthorizationViewController-->
         <scene sceneID="wJt-Sw-Ys4">
@@ -168,14 +172,14 @@
                         <viewControllerLayoutGuide type="bottom" id="1KT-Yn-Fq1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WPJ-dp-WJ2">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baseMap" translatesAutoresizingMaskIntoConstraints="NO" id="3aY-7S-uQV">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="1KT-Yn-Fq1" firstAttribute="top" secondItem="3aY-7S-uQV" secondAttribute="bottom" id="5tr-xG-Egj"/>
                             <constraint firstAttribute="trailing" secondItem="3aY-7S-uQV" secondAttribute="trailing" id="Ekw-WC-CkB"/>
@@ -196,9 +200,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="baseMap" width="634" height="898"/>
+        <image name="baseMap" width="643" height="911"/>
         <image name="splash-background" width="320" height="568"/>
-        <image name="splash-mclogo" width="131" height="65"/>
-        <image name="splash-tclogo" width="234" height="196"/>
+        <image name="splash-mclogo" width="130" height="64"/>
+        <image name="splash-tclogo" width="233" height="194"/>
     </resources>
 </document>

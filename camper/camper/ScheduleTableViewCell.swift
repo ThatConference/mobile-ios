@@ -2,14 +2,15 @@ import UIKit
 import CoreGraphics
 
 class ScheduleTableViewCell: TimeSlotRootTableViewCell {
-    @IBOutlet var updateFlag: UIImageView!
-    @IBOutlet var sessionTitle: UILabel!
-    @IBOutlet var categoryLabel: UILabel!
-    @IBOutlet var speakerLabel: UILabel!
-    @IBOutlet var roomLabel: UILabel!
-    @IBOutlet var favoriteIcon: UIImageView!
-    @IBOutlet var cancelledCover: UIView!
-    @IBOutlet var sessionTitleCancelled: UILabel!
+    @IBOutlet weak var updateFlag: UIImageView!
+    @IBOutlet weak var sessionTitle: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var speakerLabel: UILabel!
+    @IBOutlet weak var roomLabel: UILabel!
+    @IBOutlet weak var favoriteIcon: UIImageView!
+    @IBOutlet weak var cancelledCover: UIView!
+    @IBOutlet weak var sessionTitleCancelled: UILabel!
+    @IBOutlet weak var levelLabel: UILabel!
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

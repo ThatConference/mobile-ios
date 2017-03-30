@@ -353,31 +353,31 @@ class PostCardChoosePhotoViewController: UIViewController,
     func setScreenRotation() {
         if (currentOrientation == AVCaptureVideoOrientation.landscapeLeft) {
             self.previewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.landscapeRight
-            self.cameraView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-            self.imageView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-            changeCameraButton.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-            takePictureButton.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-            filterButton.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+            self.cameraView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
+            self.imageView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
+            changeCameraButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
+            takePictureButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
+            filterButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
             
             if (selfieModeIsOn) {
-                let frameTransform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+                let frameTransform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
                 self.frameView.transform = frameTransform.scaledBy(x: -1, y: 1);
             } else {
-                self.frameView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+                self.frameView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
             }
         } else if (currentOrientation == AVCaptureVideoOrientation.landscapeRight) {
             self.previewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.landscapeLeft
-            self.cameraView.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
-            self.imageView.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
-            changeCameraButton.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
-            takePictureButton.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
-            filterButton.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
+            self.cameraView.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2))
+            self.imageView.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2))
+            changeCameraButton.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2))
+            takePictureButton.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2))
+            filterButton.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2))
             
             if (selfieModeIsOn) {
-                let frameTransform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
+                let frameTransform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2))
                 self.frameView.transform = frameTransform.scaledBy(x: -1, y: 1);
             } else {
-                self.frameView.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
+                self.frameView.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2))
             }
         } else {
             self.previewLayer!.connection?.videoOrientation = currentOrientation!
@@ -466,7 +466,7 @@ class PostCardChoosePhotoViewController: UIViewController,
             stillImageOutput?.captureStillImageAsynchronously(from: videoConnection, completionHandler: {(sampleBuffer, error) in
                 if (sampleBuffer != nil) {
                     let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
-                    let dataProvider = CGDataProvider(data: imageData as! CFData)
+                    let dataProvider = CGDataProvider(data: imageData! as CFData)
                     let cgImageRef = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent)
                     
                     var image = UIImage(cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
