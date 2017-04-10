@@ -62,6 +62,7 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
         let authentication = Authentication()
         authentication.performLocalLogin(username.text!, password: password.text!, completionDelegate: self)
     }
+    
     @IBAction func continueAsGuest(_ sender: AnyObject) {
         if self.delegate != nil {
             self.delegate.dismissViewController(self)

@@ -9,6 +9,7 @@ class OpenSpacesViewController : TimeSlotRootViewController {
     @IBOutlet var nextDayButton: UIButton!
     @IBOutlet var previousDayButton: UIButton!
     @IBOutlet var updatedFlag: UIImageView!
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     
     var refreshControl: UIRefreshControl!
     
@@ -30,6 +31,8 @@ class OpenSpacesViewController : TimeSlotRootViewController {
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(OpenSpacesViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(self.refreshControl)
+        
+        self.revealViewControllerFunc(barButton: menuButton)
     }
     
     override func viewDidAppear(_ animated: Bool) {

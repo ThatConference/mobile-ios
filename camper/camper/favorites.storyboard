@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qdJ-ki-6Nd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2rC-Jv-422">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -54,7 +54,7 @@
                                         </state>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5uy-GS-wxq">
-                                        <rect key="frame" x="79" y="10" width="217" height="20"/>
+                                        <rect key="frame" x="79" y="10.5" width="217" height="20"/>
                                         <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -254,7 +254,9 @@
                             <constraint firstItem="Rih-ot-k34" firstAttribute="leading" secondItem="UnJ-OO-tTv" secondAttribute="trailing" id="y4O-KZ-Usu"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="MY FAVORITES" id="IRQ-qa-TFU"/>
+                    <navigationItem key="navigationItem" title="MY FAVORITES" id="IRQ-qa-TFU">
+                        <barButtonItem key="leftBarButtonItem" image="hamburger" id="zF0-vH-iRT"/>
+                    </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO">
                         <color key="barTintColor" red="0.035294117649999998" green="0.10980392160000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -265,6 +267,7 @@
                     </simulatedTabBarMetrics>
                     <connections>
                         <outlet property="dateLabel" destination="5uy-GS-wxq" id="7lV-I0-pKW"/>
+                        <outlet property="menuButton" destination="zF0-vH-iRT" id="jHS-ja-7EQ"/>
                         <outlet property="nextDayButton" destination="Jir-Ao-ZuK" id="kfm-2u-AvE"/>
                         <outlet property="previousDayButton" destination="T17-GO-a9K" id="aoG-t1-gNH"/>
                         <outlet property="tableView" destination="UnJ-OO-tTv" id="1MC-F3-az6"/>
@@ -278,7 +281,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Qe-lw-ugZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2562.4000000000001" y="84.107946026986511"/>
+            <point key="canvasLocation" x="3501.5999999999999" y="84.107946026986511"/>
         </scene>
         <!--PostCardChoosePhotoViewController-->
         <scene sceneID="oDb-SL-k7y">
@@ -286,7 +289,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="PostCardChoosePhotoViewController" storyboardName="PostCards" referencedIdentifier="PostCardChoosePhotoViewController" id="5Su-C5-Zvd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B8T-Em-K2K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3091.5" y="-73"/>
+            <point key="canvasLocation" x="4214" y="-85"/>
         </scene>
         <!--SessionDetailViewController-->
         <scene sceneID="dqa-Ex-7a3">
@@ -294,23 +297,23 @@
                 <viewControllerPlaceholder storyboardIdentifier="SessionDetailViewController" storyboardName="SessionDetails" referencedIdentifier="SessionDetailViewController" id="DWb-sB-Sus" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3eO-cA-PBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3344" y="85"/>
+            <point key="canvasLocation" x="4282.3999999999996" y="84.557721139430285"/>
         </scene>
         <!--ScheduleViewController-->
         <scene sceneID="pEc-pV-6lv">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="ScheduleViewController" storyboardName="Main" referencedIdentifier="ScheduleViewController" id="Egp-xr-dBs" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hRZ-iq-1UY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardIdentifier="ScheduleViewController" storyboardName="Schedule" referencedIdentifier="ScheduleViewController" id="Egp-xr-dBs" sceneMemberID="viewController"/>
             </objects>
-            <point key="canvasLocation" x="3231.5" y="256"/>
+            <point key="canvasLocation" x="4169.6000000000004" y="255.47226386806599"/>
         </scene>
         <!--AuthorizationViewController-->
         <scene sceneID="Omc-4p-YzL">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="AuthorizationViewController" id="RcL-N1-6sn" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Login" referencedIdentifier="AuthorizationViewController" id="RcL-N1-6sn" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zc2-VV-yO1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3175" y="397"/>
+            <point key="canvasLocation" x="4170" y="392"/>
         </scene>
         <!--SpeakerProfileViewController-->
         <scene sceneID="Yy7-qi-eeL">
@@ -320,11 +323,39 @@
             </objects>
             <point key="canvasLocation" x="3344" y="753"/>
         </scene>
+        <!--Favorites-->
+        <scene sceneID="9ew-pA-oAB">
+            <objects>
+                <navigationController title="Favorites" automaticallyAdjustsScrollViewInsets="NO" id="2rC-Jv-422" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="schedule" image="schedule" id="iqL-7L-Dqn"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleAspectFit" misplaced="YES" translucent="NO" id="bWb-Ij-UiM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <rect key="contentStretch" x="0.0" y="0.0" width="0.29999999999999999" height="0.29999999999999999"/>
+                        <color key="tintColor" red="0.63137254899999995" green="0.52549019610000003" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.035294117649999998" green="0.10980392160000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="22"/>
+                            <color key="textColor" red="0.84313725490000002" green="0.83137254900000002" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qdJ-ki-6Nd" kind="relationship" relationship="rootViewController" id="6JL-mA-nsB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qAV-rh-jGy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2751" y="84"/>
+        </scene>
     </scenes>
     <resources>
         <image name="flag" width="80" height="99"/>
+        <image name="hamburger" width="24" height="20"/>
         <image name="like-1" width="95" height="95"/>
         <image name="room" width="89" height="77"/>
+        <image name="schedule" width="27" height="28"/>
         <image name="speaker" width="66" height="75"/>
         <image name="subheader-arrow-left" width="15" height="12"/>
         <image name="subheader-arrow-right" width="15" height="12"/>

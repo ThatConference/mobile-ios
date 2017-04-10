@@ -4,7 +4,10 @@ import Crashlytics
 
 class MapViewController : BaseViewController {
     @IBOutlet var mapImage: UIImageView!
+    @IBOutlet weak var menuButton: UIBarButtonItem!
+    
     var roomName: String?
+    var isFromSessionDetail: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +20,18 @@ class MapViewController : BaseViewController {
                                        contentType: "Page",
                                        contentId: roomName,
                                        customAttributes: [:])
+        
+        if let fromSessionDetail = isFromSessionDetail {
+            if fromSessionDetail == true {
+                self.navigationItem.leftBarButtonItem = nil
+                self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
+                self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
+                self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
+            }
+        } else {
+            menuButton.image = UIImage(named: "hamburger")
+            self.revealViewControllerFunc(barButton: menuButton)
+        }
     }
     
     fileprivate func setRoom(_ roomName: String) {

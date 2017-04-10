@@ -8,6 +8,7 @@ class FavoritesViewController : TimeSlotRootViewController {
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var nextDayButton: UIButton!
     @IBOutlet var previousDayButton: UIButton!
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     
     var refreshControl: UIRefreshControl!
     
@@ -29,6 +30,7 @@ class FavoritesViewController : TimeSlotRootViewController {
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(FavoritesViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(self.refreshControl)
+        self.revealViewControllerFunc(barButton: menuButton)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,7 +43,10 @@ class FavoritesViewController : TimeSlotRootViewController {
                     self.tableView.isHidden = true
                 }
             }
-            loadData()
+            
+            if (!Authentication.isLoggedIn()) {
+                loadData()
+            }
         }
         
         Answers.logContentView(withName: "Open Spaces",
@@ -92,53 +97,55 @@ class FavoritesViewController : TimeSlotRootViewController {
     }
     
     override func loadData() {
-        let sessionStore = SessionStore()
-        self.dateLabel.text = "Loading"
-        self.activityIndicator.startAnimating()
         
-        if (self.refreshControl != nil) {
-            self.refreshControl.endRefreshing()
-        }
-        
-        sessionStore.getFavoriteSessions(completion: {(sessionResult) -> Void in
-            switch sessionResult {
-            case .success(let sessions):
-                self.setData(false)
-                self.dailySchedules = sessions
-                PersistenceManager.saveDailySchedule(self.dailySchedules, path: Path.Favorites)
-                self.displayData()
-                break
-            case .failure(let error):
-                print("Error: \(error)")
-                self.setData(true)
-                let values = PersistenceManager.loadDailySchedule(Path.Favorites)
-                if values != nil && Authentication.isLoggedIn() {
-                    self.dailySchedules = values!
-                    self.displayData()
-                } else {
-                    if (self.isViewLoaded && self.view.window != nil) {
-                        self.alert = UIAlertController(title: "Log In Needed", message: "Log in to view favorites.", preferredStyle: UIAlertControllerStyle.alert)
-                        self.alert.addAction(UIAlertAction(title: "Log In", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
-                            self.parent!.parent!.performSegue(withIdentifier: "show_login", sender: self)
-                        }))
-                        self.alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
-                            if (self.dailySchedules != nil) {
-                                self.dailySchedules.removeAll()
-                            }
-                            
-                            self.tableView.delegate = self
-                            self.tableView.dataSource = self
-                            self.tableView.reloadData()
-                            self.activityIndicator.stopAnimating()
-                            
-                            self.navigateToSchedule()
-                        }))
-                        self.present(self.alert, animated: true, completion: nil)
-                    }
-                }
-                break
+        if let sessionStore = StateData.instance.sessionStore {
+            self.dateLabel.text = "Loading"
+            self.activityIndicator.startAnimating()
+            
+            if (self.refreshControl != nil) {
+                self.refreshControl.endRefreshing()
             }
-        })
+            
+            sessionStore.getFavoriteSessions(completion: {(sessionResult) -> Void in
+                switch sessionResult {
+                case .success(let sessions):
+                    self.setData(false)
+                    self.dailySchedules = sessions
+                    PersistenceManager.saveDailySchedule(self.dailySchedules, path: Path.Favorites)
+                    self.displayData()
+                    break
+                case .failure(let error):
+                    print("Error: \(error)")
+                    self.setData(true)
+                    let values = PersistenceManager.loadDailySchedule(Path.Favorites)
+                    if values != nil && Authentication.isLoggedIn() {
+                        self.dailySchedules = values!
+                        self.displayData()
+                    } else {
+                        if (self.isViewLoaded && self.view.window != nil) {
+                            self.alert = UIAlertController(title: "Log In Needed", message: "Log in to view favorites.", preferredStyle: UIAlertControllerStyle.alert)
+                            self.alert.addAction(UIAlertAction(title: "Log In", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
+                                self.parent!.parent!.performSegue(withIdentifier: "show_login", sender: self)
+                            }))
+                            self.alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
+                                if (self.dailySchedules != nil) {
+                                    self.dailySchedules.removeAll()
+                                }
+                                
+                                self.tableView.delegate = self
+                                self.tableView.dataSource = self
+                                self.tableView.reloadData()
+                                self.activityIndicator.stopAnimating()
+                                
+                                self.navigateToSchedule()
+                            }))
+                            self.present(self.alert, animated: true, completion: nil)
+                        }
+                    }
+                    break
+                }
+            })
+        }
     }
     
     func displayData() {
@@ -438,52 +445,53 @@ class FavoritesViewController : TimeSlotRootViewController {
     
     func SessionFavorited(_ sender: UITapGestureRecognizer) {
         if Authentication.isLoggedIn() {
-            let sessionStore = SessionStore()
-            if let cell = sender.view?.superview?.superview as? FavoritesTableViewCell {
-                self.startIndicator()
-                if cell.session.isUserFavorite {
-                    sessionStore.removeFavorite(cell.session, completion:{(sessionsResult) -> Void in
-                        switch sessionsResult {
-                        case .success(let sessions):
-                            self.stopIndicator()
-                            self.setDirtyData()
-                            cell.session = sessions.first
-                            self.removeFavoriteIcon(cell, animated: true)
-                            Answers.logCustomEvent(withName: "Removed Favorite", customAttributes: [:])
-                            break
-                        case .failure(_):
-                            self.stopIndicator()
-                            let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                            self.present(alert, animated: true, completion: nil)
-                            break
-                        }
-                    })
-                }
-                else {
-                    sessionStore.addFavorite(cell.session, completion:{(sessionsResult) -> Void in
-                        switch sessionsResult {
-                        case .success(let sessions):
-                            self.stopIndicator()
-                            self.setDirtyData()
-                            cell.session = sessions.first
-                            self.removeFavoriteIcon(cell, animated: true)
-                            Answers.logCustomEvent(withName: "Added Favorite", customAttributes: [:])
-                            break
-                        case .failure(_):
-                            self.stopIndicator()
-                            let alert = UIAlertController(title: "Error", message: "Could not add favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                            self.present(alert, animated: true, completion: nil)
-                            break
-                        }
-                    })
+            if let sessionStore = StateData.instance.sessionStore {
+                if let cell = sender.view as? FavoritesTableViewCell {
+                    self.startIndicator()
+                    if cell.session.isUserFavorite {
+                        sessionStore.removeFavorite(cell.session, completion:{(sessionsResult) -> Void in
+                            switch sessionsResult {
+                            case .success(let sessions):
+                                self.stopIndicator()
+                                self.setDirtyData()
+                                cell.session = sessions.first
+                                self.removeFavoriteIcon(cell, animated: true)
+                                Answers.logCustomEvent(withName: "Removed Favorite", customAttributes: [:])
+                                break
+                            case .failure(_):
+                                self.stopIndicator()
+                                let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
+                                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                                self.present(alert, animated: true, completion: nil)
+                                break
+                            }
+                        })
+                    }
+                    else {
+                        sessionStore.addFavorite(cell.session, completion:{(sessionsResult) -> Void in
+                            switch sessionsResult {
+                            case .success(let sessions):
+                                self.stopIndicator()
+                                self.setDirtyData()
+                                cell.session = sessions.first
+                                self.removeFavoriteIcon(cell, animated: true)
+                                Answers.logCustomEvent(withName: "Added Favorite", customAttributes: [:])
+                                break
+                            case .failure(_):
+                                self.stopIndicator()
+                                let alert = UIAlertController(title: "Error", message: "Could not add favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
+                                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                                self.present(alert, animated: true, completion: nil)
+                                break
+                            }
+                        })
+                    }
                 }
             }
         }
         else
         {
-            self.parent!.parent!.performSegue(withIdentifier: "show_login", sender: self)
+            self.performSegue(withIdentifier: "show_login", sender: self)
         }
     }
     

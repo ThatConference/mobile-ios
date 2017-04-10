@@ -4,12 +4,9 @@ import Fabric
 
 class SettingsViewController : BaseViewController {
     @IBOutlet var versionNumber: UILabel!
-    @IBOutlet var loginButton: UIButton!
     @IBOutlet var tcLogo: UIImageView!
     @IBOutlet var mcLogo: UIImageView!
-    @IBOutlet var sponsorsButton: UIButton!
-    
-    var loggedIn = false
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,39 +25,16 @@ class SettingsViewController : BaseViewController {
         let mcTapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(SettingsViewController.milkcanPressed(_:)))
         mcLogo.isUserInteractionEnabled = true
         mcLogo.addGestureRecognizer(mcTapGestureRecognizer)
+        self.revealViewControllerFunc(barButton: menuButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setSignInButton()
         
         Answers.logContentView(withName: "Settings",
                                        contentType: "Page",
                                        contentId: "",
                                        customAttributes: [:])
-    }
-    
-    func setSignInButton() {
-        if (Authentication.isLoggedIn()) {
-            loginButton.setTitle("Sign Out", for: UIControlState())
-        } else {
-            loginButton.setTitle("Sign In", for: UIControlState())
-        }
-    }
-    
-    @IBAction func loginPressed(_ sender: AnyObject) {
-        if (Authentication.isLoggedIn()) {
-            Authentication.removeAuthToken()
-            setDirtyData()
-            _ = PersistenceManager.deleteDailySchedule(Path.Favorites)
-            let alert = UIAlertController(title: "Signed Out", message: "Sign out was successful. You can now sign in with a different account or continue as a guest.", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        } else {
-            self.parent!.parent!.performSegue(withIdentifier: "show_login", sender: self)
-        }
-        
-        setSignInButton()
     }
     
     func thatConferencePressed(_ sender: AnyObject) {

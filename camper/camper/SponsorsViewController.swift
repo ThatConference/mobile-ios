@@ -27,6 +27,7 @@ class SponsorsViewController: BaseViewController, UITableViewDataSource, UITable
     @IBOutlet var SponsorLevel: UILabel!
     @IBOutlet var CurrentLevel: UIPageControl!
     @IBOutlet var SponsorTable: UITableView!
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     
     var loadedSponsors: Dictionary<String, [Sponsor]>?
     var sponsorLevels: [String]?
@@ -51,6 +52,7 @@ class SponsorsViewController: BaseViewController, UITableViewDataSource, UITable
         
         SponsorTable.dataSource = self
         SponsorTable.delegate = self
+        self.revealViewControllerFunc(barButton: menuButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -8,6 +8,7 @@ class ScheduleViewController : TimeSlotRootViewController {
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var nextDayButton: UIButton!
     @IBOutlet var previousDayButton: UIButton!
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     
     var refreshControl: UIRefreshControl!
    
@@ -29,6 +30,7 @@ class ScheduleViewController : TimeSlotRootViewController {
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(ScheduleViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(self.refreshControl)
+        self.revealViewControllerFunc(barButton: menuButton)
     }
     
     override func viewDidAppear(_ animated: Bool) {

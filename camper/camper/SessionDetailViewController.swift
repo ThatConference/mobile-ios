@@ -71,6 +71,7 @@ class SessionDetailViewController : BaseViewController, UITableViewDataSource, U
         {
             if let mapVC = segue.destination as? MapViewController {
                 mapVC.roomName = session.scheduledRoom
+                mapVC.isFromSessionDetail = true
             }
         }
     }
