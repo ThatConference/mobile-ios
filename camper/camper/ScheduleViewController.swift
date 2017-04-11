@@ -89,7 +89,8 @@ class ScheduleViewController : TimeSlotRootViewController {
                 self.dailySchedules = schedules
                 self.displayData()
                 break
-            case .failure(_):
+            case .failure(let error):
+                print("ERROR:\(error)")
                 if let values = PersistenceManager.loadDailySchedule(Path.Schedule) {
                     self.setData(true)
                     self.dailySchedules = values

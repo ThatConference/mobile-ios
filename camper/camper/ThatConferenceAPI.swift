@@ -109,10 +109,10 @@ class ThatConferenceAPI {
         return value == "1"
     }
     
-    // MUST CHANGE YEARLY
-    class func GetCurrentYear() -> String {
-        return "2017"
-    }
+//    // MUST CHANGE YEARLY
+//    class func GetCurrentYear() -> String {
+//        return "2017"
+//    }
     
     // MARK: Sessions
     class func sessionsFromJSONData(_ data: Data) -> SessionsResult {
@@ -325,8 +325,8 @@ class ThatConferenceAPI {
         dataTask.resume()
     }
     
-    class func getFavoriteSessions(_ year: String, completionHandler:@escaping (SessionsResult) -> Void) {
-        let url = thatConferenceURL(.UserFavorites, parameters: ["year": year])
+    class func getFavoriteSessions(completionHandler:@escaping (SessionsResult) -> Void) {
+        let url = thatConferenceURL(.UserFavorites, parameters: [:])
         var request = URLRequest(url: url,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)

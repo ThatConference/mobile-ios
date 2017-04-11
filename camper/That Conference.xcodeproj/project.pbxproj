@@ -11,7 +11,6 @@
 		311E0E6B1CB74D76004FA850 /* ExternalLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */; };
 		3123AC291C90959D0097BF33 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3123AC271C90959D0097BF33 /* Session.swift */; };
 		312A94161C814B6B00AE938B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A94151C814B6B00AE938B /* AppDelegate.swift */; };
-		312A941B1C814B6B00AE938B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 312A94191C814B6B00AE938B /* Main.storyboard */; };
 		312A941D1C814B6B00AE938B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 312A941C1C814B6B00AE938B /* Assets.xcassets */; };
 		312A94201C814B6B00AE938B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */; };
 		312A94281C85383200AE938B /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312A94271C85383200AE938B /* AuthorizationViewController.swift */; };
@@ -112,7 +111,6 @@
 		3123AC271C90959D0097BF33 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		312A94121C814B6B00AE938B /* That Conference.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "That Conference.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		312A94151C814B6B00AE938B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		312A941A1C814B6B00AE938B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		312A941C1C814B6B00AE938B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		312A941F1C814B6B00AE938B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		312A94211C814B6B00AE938B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -322,7 +320,6 @@
 				51A4D1CF1CF1532900F956BC /* Favorites.storyboard */,
 				312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */,
 				7BD3625B1E942E27009C3A5E /* Login.storyboard */,
-				312A94191C814B6B00AE938B /* Main.storyboard */,
 				7B3C383A1E95A27F00FEA4A5 /* Map.storyboard */,
 				7BD3621C1E8DB096009C3A5E /* Menu.storyboard */,
 				7BD362601E943065009C3A5E /* OpenSpaces.storyboard */,
@@ -536,7 +533,7 @@
 				TargetAttributes = {
 					312A94111C814B6B00AE938B = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = TP9E7CXU62;
+						DevelopmentTeam = 2VX3GW8TL8;
 						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -619,7 +616,6 @@
 				312A94651C89325D00AE938B /* NeutraCond-LightAlt.otf in Resources */,
 				312A94771C89325D00AE938B /* NeutraDisplay-Titling.otf in Resources */,
 				312A94751C89325D00AE938B /* NeutraDisplay-Thin.otf in Resources */,
-				312A941B1C814B6B00AE938B /* Main.storyboard in Resources */,
 				7BD362621E943065009C3A5E /* OpenSpaces.storyboard in Resources */,
 				312A946D1C89325D00AE938B /* NeutraDisplay-Draft.otf in Resources */,
 			);
@@ -741,14 +737,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		312A94191C814B6B00AE938B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				312A941A1C814B6B00AE938B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -906,7 +894,7 @@
 				CODE_SIGN_ENTITLEMENTS = "That Conference.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = TP9E7CXU62;
+				DEVELOPMENT_TEAM = 2VX3GW8TL8;
 				INFOPLIST_FILE = camper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -927,7 +915,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "That Conference.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = TP9E7CXU62;
+				DEVELOPMENT_TEAM = 2VX3GW8TL8;
 				INFOPLIST_FILE = camper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

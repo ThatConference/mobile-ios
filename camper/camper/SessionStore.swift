@@ -10,7 +10,7 @@ class SessionStore {
         var sessions = [Session]()
         
         do {
-            try self.fetchAll() {
+            try self.fetchAll(requiresLogin: false) {
                 (sessionResult) -> Void in
                 switch sessionResult {
                 case .success(let returnedSessions):
@@ -134,7 +134,7 @@ class SessionStore {
     func getFavoriteSessions(completion: @escaping (SessionDataRetrieval) -> Void) {
         var sessions = [Session]()
         
-        ThatConferenceAPI.getFavoriteSessions(ThatConferenceAPI.GetCurrentYear(), completionHandler: {(sessionsResult) -> Void in
+        ThatConferenceAPI.getFavoriteSessions(completionHandler: {(sessionsResult) -> Void in
             switch sessionsResult {
             case .success(let returnedSessions):
                 sessions = returnedSessions
@@ -188,14 +188,16 @@ class SessionStore {
         })
     }
     
-    fileprivate func fetchAll(completion: @escaping (SessionsResult) -> Void) throws {
+    fileprivate func fetchAll(requiresLogin: Bool, completion: @escaping (SessionsResult) -> Void) throws {
         let url = ThatConferenceAPI.sessionsGetAcceptedURL(nil)
         var request = URLRequest(url: url)
         
         if let token = Authentication.loadAuthToken() {
             request.addValue("Bearer \(token.token!)", forHTTPHeaderField: "Authorization")
         } else {
-            throw APIError.notLoggedIn
+            if requiresLogin {
+                throw APIError.notLoggedIn
+            }
         }
         
         let task = ThatConferenceAPI.nsurlSession.dataTask(with: request, completionHandler: {

@@ -32,9 +32,9 @@ class MenuTableViewController: UITableViewController {
     
     func setSignInButton() {
         if (Authentication.isLoggedIn()) {
-            logOffLabel.text = "Sign Off"
+            logOffLabel.text = "Sign Out"
         } else {
-            logOffLabel.text = "Sign On"
+            logOffLabel.text = "Sign In"
         }
     }
     
