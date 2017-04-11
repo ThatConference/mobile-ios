@@ -16,7 +16,7 @@ class FavoritesViewController : TimeSlotRootViewController {
         super.viewDidLoad()
         
         checkUserStatus()
-    
+        
         // set up controls
         let rightArrow = UIImage(named: "subheader-arrow-right")
         self.nextDayButton.imageEdgeInsets = UIEdgeInsetsMake(0, self.nextDayButton.frame.size.width - (rightArrow!.size.width), 0, 0)
@@ -72,7 +72,7 @@ class FavoritesViewController : TimeSlotRootViewController {
             self.setDateLabel(self.dailySchedule.date! as Date)
             self.setPageState(day)
             }, completion: nil)
-    
+        
         let order = (Calendar.current as NSCalendar).compare(Date(), to: self.dailySchedule.date as Date, toUnitGranularity: .day)
         if order == ComparisonResult.orderedSame {
             self.jumpToTimeOfDay()
@@ -154,6 +154,7 @@ class FavoritesViewController : TimeSlotRootViewController {
             self.activityIndicator.stopAnimating()
             
             self.setCurrentDay(self.dailySchedules)
+            self.jumpToTimeOfDay()
             
             if (self.currentDay != nil) {
                 if let schedule = self.dailySchedules[self.currentDay] {
@@ -188,7 +189,7 @@ class FavoritesViewController : TimeSlotRootViewController {
     // MARK: Page State
     fileprivate func setCurrentDay(_ schedules: Dictionary<String, DailySchedule>) {
         let formatter = DateFormatter()
-        formatter.dateFormat = "mm-dd-yyyy"
+        formatter.dateFormat = "MM-dd-yyyy"
         let today = formatter.string(from: Date())
     
         // set the date to today, unless we're outside the conference

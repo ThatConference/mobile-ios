@@ -431,7 +431,7 @@
                 <viewControllerPlaceholder storyboardName="Login" referencedIdentifier="AuthorizationViewController" id="8v0-UB-oaJ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PQc-yS-z3T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="122" y="99"/>
+            <point key="canvasLocation" x="117" y="130"/>
         </scene>
     </scenes>
     <resources>

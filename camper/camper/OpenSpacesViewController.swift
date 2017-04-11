@@ -126,6 +126,7 @@ class OpenSpacesViewController : TimeSlotRootViewController {
             self.activityIndicator.stopAnimating()
             
             self.setCurrentDay(self.dailySchedules)
+            self.jumpToTimeOfDay()
             
             if self.dailySchedules.count > 0 {
                 if let schedule = self.dailySchedules[self.currentDay] {
@@ -161,7 +162,7 @@ class OpenSpacesViewController : TimeSlotRootViewController {
     
     fileprivate func setCurrentDay(_ schedules: Dictionary<String, DailySchedule>) {
         let formatter = DateFormatter()
-        formatter.dateFormat = "mm-dd-yyyy"
+        formatter.dateFormat = "MM-dd-yyyy"
         let today = formatter.string(from: Date())
         
         // set the date to today, unless we're outside the conference
