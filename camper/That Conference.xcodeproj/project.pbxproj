@@ -92,6 +92,7 @@
 		51713A931CF150290081549B /* SessionDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51713A911CF150290081549B /* SessionDetails.storyboard */; };
 		51A4D1D01CF1532900F956BC /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51A4D1CF1CF1532900F956BC /* Favorites.storyboard */; };
 		51A4D1D41CF290BB00F956BC /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */; };
+		7B02FE941E9C0DDF001396B6 /* String+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02FE931E9C0DDF001396B6 /* String+Extention.swift */; };
 		7B3C38391E955E8100FEA4A5 /* StateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3C38381E955E8100FEA4A5 /* StateData.swift */; };
 		7B3C383C1E95A27F00FEA4A5 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B3C383A1E95A27F00FEA4A5 /* Map.storyboard */; };
 		7BD3621D1E8DB097009C3A5E /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BD3621C1E8DB096009C3A5E /* Menu.storyboard */; };
@@ -195,6 +196,7 @@
 		51713A921CF150290081549B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SessionDetails.storyboard; sourceTree = "<group>"; };
 		51A4D1CF1CF1532900F956BC /* Favorites.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Favorites.storyboard; sourceTree = "<group>"; };
 		51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
+		7B02FE931E9C0DDF001396B6 /* String+Extention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extention.swift"; sourceTree = "<group>"; };
 		7B3C38381E955E8100FEA4A5 /* StateData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateData.swift; sourceTree = "<group>"; };
 		7B3C383B1E95A27F00FEA4A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Map.storyboard; sourceTree = "<group>"; };
 		7BD3621C1E8DB096009C3A5E /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 			children = (
 				31D0D9471CC5DB6A007C5999 /* Date.swift */,
 				31D39F451DE3E5FD00EC7145 /* URL.swift */,
+				7B02FE931E9C0DDF001396B6 /* String+Extention.swift */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -707,6 +710,7 @@
 				5113D3881CAC521C00D6B974 /* CircleView.swift in Sources */,
 				31CFD1331D09050C00F1AE23 /* TimeSlotRootViewController.swift in Sources */,
 				7BD362301E8ED8E5009C3A5E /* MenuTableViewController.swift in Sources */,
+				7B02FE941E9C0DDF001396B6 /* String+Extention.swift in Sources */,
 				314DA0FD1D202B690021E2DA /* Sponsor.swift in Sources */,
 				51A4D1D41CF290BB00F956BC /* FavoritesTableViewCell.swift in Sources */,
 				313B19021D160B8C00E72562 /* PostCardFrame.swift in Sources */,

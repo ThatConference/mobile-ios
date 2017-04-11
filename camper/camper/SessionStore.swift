@@ -9,12 +9,38 @@ class SessionStore {
     func getDailySchedules(_ returnSchedule: Bool, completion: @escaping (SessionDataRetrieval) -> Void) {
         var sessions = [Session]()
         
+        let dateString1 = "2017-04-10 18:00:00 +0000"
+        let dateString2 = "2017-04-10 12:30:00 +0000"
+        let dateString3 = "2017-04-10 19:45:00 +0000"
+        let dateString4 = "2017-04-10 17:00:00 +0000"
+        let dateString5 = "2017-04-10 21:45:00 +0000"
+        let dateString6 = "2017-04-10 13:00:00 +0000"
+        
+        let sessionOne = Session(cancelled: false, accepted: true, id: 190, title: "You Are Alive!", sessionDescription: "There is something coo;", scheduledDateTime: dateString1.stringToDate, scheduledRoom: "B", primaryCategory: "That Conference", level: "100", speakers: [], isFamilyApproved: true, isUserFavorite: false, updated: false)
+        
+        let sessionTwo = Session(cancelled: false, accepted: true, id: 191, title: "You Are Alive!", sessionDescription: "There is something coo;", scheduledDateTime: dateString2.stringToDate, scheduledRoom: "B", primaryCategory: "Open Spaces", level: "100", speakers: [], isFamilyApproved: true, isUserFavorite: false, updated: false)
+        
+        let sessionThree = Session(cancelled: false, accepted: true, id: 192, title: "You Are Alive!", sessionDescription: "There is something coo;", scheduledDateTime: dateString3.stringToDate, scheduledRoom: "B", primaryCategory: "That Conference", level: "100", speakers: [], isFamilyApproved: true, isUserFavorite: false, updated: false)
+        
+        let sessionFour = Session(cancelled: false, accepted: true, id: 193, title: "You Are Alive!", sessionDescription: "There is something coo;", scheduledDateTime: dateString4.stringToDate, scheduledRoom: "B", primaryCategory: "That Conference", level: "100", speakers: [], isFamilyApproved: true, isUserFavorite: false, updated: false)
+        
+        let sessionFive = Session(cancelled: false, accepted: true, id: 192, title: "You Are Alive!", sessionDescription: "There is something coo;", scheduledDateTime: dateString5.stringToDate, scheduledRoom: "B", primaryCategory: "That Conference", level: "100", speakers: [], isFamilyApproved: true, isUserFavorite: false, updated: false)
+        
+        let sessionSix = Session(cancelled: false, accepted: true, id: 193, title: "You Are Alive!", sessionDescription: "There is something coo;", scheduledDateTime: dateString6.stringToDate, scheduledRoom: "B", primaryCategory: "That Conference", level: "100", speakers: [], isFamilyApproved: true, isUserFavorite: false, updated: false)
+
         do {
             try self.fetchAll() {
                 (sessionResult) -> Void in
                 switch sessionResult {
                 case .success(let returnedSessions):
                     sessions = returnedSessions
+                    sessions.append(sessionOne)
+                    sessions.append(sessionTwo)
+                    sessions.append(sessionThree)
+                    sessions.append(sessionFour)
+                    sessions.append(sessionFive)
+                    sessions.append(sessionSix)
+                    
                     var schedule = Dictionary<String, DailySchedule>()
                     var openspaces = Dictionary<String, DailySchedule>()
                     var cancelled: Int = 0

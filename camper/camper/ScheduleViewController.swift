@@ -1,3 +1,4 @@
+        let nowHour = (Calendar.current as NSCalendar).component(.hour, from: Date())
 import UIKit
 import Fabric
 import Crashlytics
@@ -30,6 +31,12 @@ class ScheduleViewController : TimeSlotRootViewController {
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(ScheduleViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(self.refreshControl)
+
+        let nowHour = (Calendar.current as NSCalendar).component(.hour, from: Date())
+        
+        print(nowHour)
+//        self.scrollToSection(view.timeSlot as Date)
+        
         self.revealViewControllerFunc(barButton: menuButton)
     }
     
@@ -312,7 +319,6 @@ class ScheduleViewController : TimeSlotRootViewController {
                 self.currentlySelectedTimeLabel = view
                 self.currentlySelectedTimeLabel.toggleCircle()
             }
-            
         }
     }
    
