@@ -58,39 +58,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fcl-2c-olx">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-logo" translatesAutoresizingMaskIntoConstraints="NO" id="SJe-sA-9xg">
-                                        <rect key="frame" x="86" y="0.0" width="202" height="120"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="120" id="FZa-0B-6ej"/>
-                                        </constraints>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header-logo" translatesAutoresizingMaskIntoConstraints="NO" id="SJe-sA-9xg">
+                                        <rect key="frame" x="87.5" y="25" width="140" height="30"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Matt Leblanc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVH-xh-9XH">
-                                        <rect key="frame" x="48" y="44" width="146" height="33"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="146" id="hje-gN-nbd"/>
-                                            <constraint firstAttribute="height" constant="33" id="lzi-mP-bko"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="NeutrafaceText-Book" family="Neutraface Text" pointSize="21"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.25958269834518433" green="0.49147826433181763" blue="0.47960716485977173" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.035241130739450455" green="0.11184763163328171" blue="0.19903132319450378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="FVH-xh-9XH" firstAttribute="top" secondItem="fcl-2c-olx" secondAttribute="top" constant="44" id="1d1-zI-gX5"/>
-                                    <constraint firstItem="SJe-sA-9xg" firstAttribute="top" secondItem="fcl-2c-olx" secondAttribute="top" id="3y2-ml-CwX"/>
-                                    <constraint firstItem="FVH-xh-9XH" firstAttribute="leading" secondItem="fcl-2c-olx" secondAttribute="leading" constant="48" id="Fuh-bR-eua"/>
-                                    <constraint firstAttribute="bottom" secondItem="FVH-xh-9XH" secondAttribute="bottom" constant="43" id="HMO-IV-9LI"/>
-                                    <constraint firstAttribute="height" constant="120" id="Kfn-Cg-pjU"/>
-                                    <constraint firstAttribute="trailing" secondItem="SJe-sA-9xg" secondAttribute="trailing" constant="87" id="XTY-TO-77p"/>
-                                    <constraint firstItem="SJe-sA-9xg" firstAttribute="leading" secondItem="fcl-2c-olx" secondAttribute="leading" constant="86" id="a0r-L4-fVZ"/>
+                                    <constraint firstAttribute="height" constant="65" id="Kfn-Cg-pjU"/>
+                                    <constraint firstAttribute="bottom" secondItem="SJe-sA-9xg" secondAttribute="bottom" constant="10" id="Kph-DN-UBE"/>
+                                    <constraint firstItem="SJe-sA-9xg" firstAttribute="centerX" secondItem="fcl-2c-olx" secondAttribute="centerX" constant="-30" id="obT-SX-LaH"/>
+                                    <constraint firstItem="SJe-sA-9xg" firstAttribute="top" secondItem="fcl-2c-olx" secondAttribute="top" constant="25" id="r2q-GA-3li"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOs-gK-lCF">
-                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
+                                <rect key="frame" x="0.0" y="65" width="375" height="602"/>
                                 <connections>
                                     <segue destination="mBG-KN-9wI" kind="embed" id="Urn-0p-FpY"/>
                                 </connections>
@@ -107,9 +91,6 @@
                             <constraint firstItem="fcl-2c-olx" firstAttribute="leading" secondItem="SO9-XZ-fBz" secondAttribute="leading" id="gsp-05-0zC"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="nameLabel" destination="FVH-xh-9XH" id="0dE-1W-6YD"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZ7-lF-c1y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -120,7 +101,7 @@
             <objects>
                 <tableViewController id="mBG-KN-9wI" customClass="MenuTableViewController" customModule="That_Conference" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Oxa-JD-chx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="547"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="602"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -351,7 +332,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log On" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6AF-hc-YwG">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6AF-hc-YwG">
                                                     <rect key="frame" x="23" y="12" width="101" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="101" id="wmE-Ls-cqY"/>
@@ -455,7 +436,7 @@
     </scenes>
     <resources>
         <image name="favorites" width="28" height="28"/>
-        <image name="login-logo" width="240" height="108"/>
+        <image name="header-logo" width="140" height="62"/>
         <image name="map" width="28" height="28"/>
         <image name="open-spaces" width="28" height="29"/>
         <image name="schedule" width="27" height="28"/>
