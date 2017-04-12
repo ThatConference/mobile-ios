@@ -221,9 +221,11 @@ class ThatConferenceAPI {
             "content-type": "application/x-www-form-urlencoded"
         ]
         
+        let convertedPassword = password.replacingOccurrences(of: "+", with: "%2B", options: [], range: nil)
+        
         var postData = NSData(data: "grant_type=password".data(using: String.Encoding.utf8)!) as Data
         postData.append("&username=\(username)".data(using: String.Encoding.utf8)!)
-        postData.append("&password=\(password)".data(using: String.Encoding.utf8)!)
+        postData.append("&password=\(convertedPassword)".data(using: String.Encoding.utf8)!)
         
         var request = URLRequest(url: URL(string: ThatConferenceAPI.baseURLString + Method.Token.rawValue)!,
                                           cachePolicy: .useProtocolCachePolicy,

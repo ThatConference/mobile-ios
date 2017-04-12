@@ -11,6 +11,7 @@ class ScheduleViewController : TimeSlotRootViewController {
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     var refreshControl: UIRefreshControl!
+    var currentDateTime: Date!
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,7 @@ class ScheduleViewController : TimeSlotRootViewController {
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(ScheduleViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(self.refreshControl)
+        
         self.revealViewControllerFunc(barButton: menuButton)
     }
     
@@ -72,38 +74,40 @@ class ScheduleViewController : TimeSlotRootViewController {
     
     // MARK: Data
     override func loadData() {
-        let sessionStore = SessionStore()
-        self.dateLabel.text = "Loading"
-        self.activityIndicator.startAnimating()
-        
-        if (self.refreshControl != nil) {
-            self.refreshControl.endRefreshing()
-        }
-        
-        sessionStore.getDailySchedules(true) {
-            (results) -> Void in
+        if let sessionStore = StateData.instance.sessionStore {
+            self.dateLabel.text = "Loading"
+            self.activityIndicator.startAnimating()
             
-            switch results {
-            case .success(let schedules):
-                self.setData(false)
-                self.dailySchedules = schedules
-                self.displayData()
-                break
-            case .failure(let error):
-                print("ERROR:\(error)")
-                if let values = PersistenceManager.loadDailySchedule(Path.Schedule) {
-                    self.setData(true)
-                    self.dailySchedules = values
-                    self.displayData()
-                } else {
-                    let alert = UIAlertController(title: "Error", message: "Could not retrieve schedule data. Please try again later.", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                    self.activityIndicator.stopAnimating()
-                    return
-                }
-                break
+            if (self.refreshControl != nil) {
+                self.refreshControl.endRefreshing()
             }
+            
+            sessionStore.getDailySchedules(true) {
+                (results) -> Void in
+                
+                switch results {
+                case .success(let schedules):
+                    self.setData(false)
+                    self.dailySchedules = schedules
+                    self.displayData()
+                    break
+                case .failure(let error):
+                    print("ERROR:\(error)")
+                    if let values = PersistenceManager.loadDailySchedule(Path.Schedule) {
+                        self.setData(true)
+                        self.dailySchedules = values
+                        self.displayData()
+                    } else {
+                        let alert = UIAlertController(title: "Error", message: "Could not retrieve schedule data. Please try again later.", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        self.activityIndicator.stopAnimating()
+                        return
+                    }
+                    break
+                }
+            }
+
         }
     }
     
@@ -112,6 +116,7 @@ class ScheduleViewController : TimeSlotRootViewController {
             self.activityIndicator.stopAnimating()
             
             self.setCurrentDay(self.dailySchedules)
+            self.jumpToTimeOfDay()
             
             if self.dailySchedules.count > 0 {
                 if let schedule = self.dailySchedules[self.currentDay] {
@@ -147,7 +152,7 @@ class ScheduleViewController : TimeSlotRootViewController {
     
     fileprivate func setCurrentDay(_ schedules: Dictionary<String, DailySchedule>) {
         let formatter = DateFormatter()
-        formatter.dateFormat = "mm-dd-yyyy"
+        formatter.dateFormat = "MM-dd-yyyy"
         let today = formatter.string(from: Date())
         
         // set the date to today, unless we're outside the conference
@@ -313,7 +318,6 @@ class ScheduleViewController : TimeSlotRootViewController {
                 self.currentlySelectedTimeLabel = view
                 self.currentlySelectedTimeLabel.toggleCircle()
             }
-            
         }
     }
    
@@ -406,56 +410,57 @@ class ScheduleViewController : TimeSlotRootViewController {
     
     func SessionFavorited(_ sender: UITapGestureRecognizer) {
         if Authentication.isLoggedIn() {
-            let sessionStore = SessionStore()
-            if let cell = sender.view?.superview?.superview as? ScheduleTableViewCell {
-                self.startIndicator()
-                if cell.session.isUserFavorite {
-                    sessionStore.removeFavorite(cell.session, completion:{(sessionsResult) -> Void in
-                        switch sessionsResult {
-                        case .success(let sessions):
-                            self.stopIndicator()
-                            self.setDirtyData()
-                            let currentSession = sessions.first
-                            currentSession?.isUserFavorite = false
-                            cell.session = currentSession
-                            self.setFavoriteIcon(cell, animated: true)
-                            Answers.logCustomEvent(withName: "Removed Favorite", customAttributes: [:])
-                            break
-                        case .failure(_):
-                            self.stopIndicator()
-                            let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                            self.present(alert, animated: true, completion: nil)
-                            break
-                        }
-                    })
-                }
-                else {
-                    sessionStore.addFavorite(cell.session, completion:{(sessionsResult) -> Void in
-                        switch sessionsResult {
-                        case .success(let sessions):
-                            self.stopIndicator()
-                            self.setDirtyData()
-                            let currentSession = sessions.first
-                            currentSession?.isUserFavorite = true
-                            cell.session = currentSession
-                            self.setFavoriteIcon(cell, animated: true)
-                            Answers.logCustomEvent(withName: "Added Favorite", customAttributes: [:])
-                            break
-                        case .failure(_):
-                            self.stopIndicator()
-                            let alert = UIAlertController(title: "Error", message: "Could not add favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                            self.present(alert, animated: true, completion: nil)
-                            break
-                        }
-                    })
+            if let sessionStore = StateData.instance.sessionStore {
+                if let cell = sender.view?.superview?.superview as? ScheduleTableViewCell {
+                    self.startIndicator()
+                    if cell.session.isUserFavorite {
+                        sessionStore.removeFavorite(cell.session, completion:{(sessionsResult) -> Void in
+                            switch sessionsResult {
+                            case .success(let sessions):
+                                self.stopIndicator()
+                                self.setDirtyData()
+                                let currentSession = sessions.first
+                                currentSession?.isUserFavorite = false
+                                cell.session = currentSession
+                                self.setFavoriteIcon(cell, animated: true)
+                                Answers.logCustomEvent(withName: "Removed Favorite", customAttributes: [:])
+                                break
+                            case .failure(_):
+                                self.stopIndicator()
+                                let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
+                                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                                self.present(alert, animated: true, completion: nil)
+                                break
+                            }
+                        })
+                    }
+                    else {
+                        sessionStore.addFavorite(cell.session, completion:{(sessionsResult) -> Void in
+                            switch sessionsResult {
+                            case .success(let sessions):
+                                self.stopIndicator()
+                                self.setDirtyData()
+                                let currentSession = sessions.first
+                                currentSession?.isUserFavorite = true
+                                cell.session = currentSession
+                                self.setFavoriteIcon(cell, animated: true)
+                                Answers.logCustomEvent(withName: "Added Favorite", customAttributes: [:])
+                                break
+                            case .failure(_):
+                                self.stopIndicator()
+                                let alert = UIAlertController(title: "Error", message: "Could not add favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
+                                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                                self.present(alert, animated: true, completion: nil)
+                                break
+                            }
+                        })
+                    }
                 }
             }
-        }
-        else
-        {
-            self.parent!.parent!.performSegue(withIdentifier: "show_login", sender: self)
+            else
+            {
+                self.parent!.parent!.performSegue(withIdentifier: "show_login", sender: self)
+            }
         }
     }
 }
