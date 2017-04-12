@@ -389,6 +389,7 @@ class OpenSpacesViewController : TimeSlotRootViewController {
             cell.sessionTitle.text = session?.title
             cell.sessionTitleCancelled.text = session?.title
             cell.sessionTitle.sizeToFit()
+            cell.delegate = self
             cell.categoryLabel.text = session?.primaryCategory
             if let level = session?.level {
                 cell.levelLabel.text = "Level: \(level)"

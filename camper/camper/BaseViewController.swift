@@ -82,7 +82,7 @@ class BaseViewController: UIViewController, AuthorizationFormDelegate {
         if revealViewController() != nil {
             barButton.target = revealViewController()
             barButton.action = #selector(SWRevealViewController.revealToggle(_:))
-            
+            revealViewController().panGestureRecognizer().isEnabled = false
             view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
     }

@@ -11,7 +11,12 @@ class ScheduleTableViewCell: TimeSlotRootTableViewCell {
     @IBOutlet weak var cancelledCover: UIView!
     @IBOutlet weak var sessionTitleCancelled: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
-
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -20,4 +25,5 @@ class ScheduleTableViewCell: TimeSlotRootTableViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
 }

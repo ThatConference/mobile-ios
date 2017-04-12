@@ -11,7 +11,6 @@ class FavoritesTableViewCell: TimeSlotRootTableViewCell {
     @IBOutlet weak var sessionTitleCancelled: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
     
-    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

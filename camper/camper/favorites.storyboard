@@ -128,19 +128,19 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Session Title" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="6ep-fU-V7l">
-                                                    <rect key="frame" x="56" y="8" width="275" height="17"/>
+                                                    <rect key="frame" x="56" y="8" width="245" height="17"/>
                                                     <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q5R-oG-qeM">
-                                                    <rect key="frame" x="56" y="33" width="275" height="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Q5R-oG-qeM">
+                                                    <rect key="frame" x="56" y="33" width="245" height="15"/>
                                                     <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="15"/>
                                                     <color key="textColor" red="0.63137254899999995" green="0.52549019610000003" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name Last Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSP-qV-nT1">
-                                                    <rect key="frame" x="104" y="57.5" width="227" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name Last Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JSP-qV-nT1">
+                                                    <rect key="frame" x="104" y="58" width="197" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="253" id="TbP-K4-dyx"/>
                                                     </constraints>
@@ -153,23 +153,30 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="whG-kI-yk5">
-                                                    <rect key="frame" x="104" y="85.5" width="227" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="whG-kI-yk5">
+                                                    <rect key="frame" x="104" y="86" width="197" height="17"/>
                                                     <fontDescription key="fontDescription" name="NeutrafaceText-BookAlt" family="Neutraface Text" pointSize="17"/>
                                                     <color key="textColor" red="0.43581283092498779" green="0.44019779562950134" blue="0.43185979127883911" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level: Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Vm-Xe-3Jn">
-                                                    <rect key="frame" x="104" y="112" width="227" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level: Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4Vm-Xe-3Jn">
+                                                    <rect key="frame" x="104" y="112" width="197" height="17"/>
                                                     <fontDescription key="fontDescription" name="NeutrafaceText-Book" family="Neutraface Text" pointSize="17"/>
                                                     <color key="textColor" red="0.4358128309" green="0.4401977956" blue="0.43185979130000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="forward" translatesAutoresizingMaskIntoConstraints="NO" id="K7e-sN-ud1">
+                                                    <rect key="frame" x="309" y="68" width="22" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="22" id="QrG-gn-n1B"/>
+                                                        <constraint firstAttribute="width" constant="22" id="s2u-RS-ium"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWC-5K-sDP">
                                                     <rect key="frame" x="8" y="0.0" width="331" height="159.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CANCELLED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZE-Zq-xy8">
-                                                            <rect key="frame" x="85" y="66" width="161.5" height="28"/>
+                                                            <rect key="frame" x="85.5" y="66" width="161.5" height="28"/>
                                                             <fontDescription key="fontDescription" name="NeutrafaceText-Bold" family="Neutraface Text" pointSize="28"/>
                                                             <color key="textColor" red="0.66666666669999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -192,7 +199,7 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="whG-kI-yk5" secondAttribute="trailing" id="3J6-LP-HBM"/>
+                                                <constraint firstItem="whG-kI-yk5" firstAttribute="trailing" secondItem="6ep-fU-V7l" secondAttribute="trailing" id="0g6-xZ-q6h"/>
                                                 <constraint firstItem="4Vm-Xe-3Jn" firstAttribute="leading" secondItem="whG-kI-yk5" secondAttribute="leading" id="3ec-OA-wSI"/>
                                                 <constraint firstItem="JSP-qV-nT1" firstAttribute="leading" secondItem="UoQ-I3-tVZ" secondAttribute="trailing" constant="8" id="ADe-qE-1u9"/>
                                                 <constraint firstItem="7GR-9h-sxh" firstAttribute="leading" secondItem="DKf-TM-FIi" secondAttribute="leadingMargin" id="Aif-dB-VBQ"/>
@@ -205,18 +212,20 @@
                                                 <constraint firstAttribute="trailing" secondItem="SWC-5K-sDP" secondAttribute="trailing" id="KjS-U5-jMq"/>
                                                 <constraint firstItem="4Vm-Xe-3Jn" firstAttribute="top" secondItem="vBd-c2-8Ly" secondAttribute="bottom" constant="8" id="LNV-ma-uoe"/>
                                                 <constraint firstItem="whG-kI-yk5" firstAttribute="leading" secondItem="vBd-c2-8Ly" secondAttribute="trailing" constant="8" id="LRy-g6-Fco"/>
+                                                <constraint firstItem="Q5R-oG-qeM" firstAttribute="trailing" secondItem="6ep-fU-V7l" secondAttribute="trailing" id="P1K-Jx-b7B"/>
                                                 <constraint firstItem="6ep-fU-V7l" firstAttribute="top" secondItem="DKf-TM-FIi" secondAttribute="topMargin" id="PzB-a7-H9b"/>
                                                 <constraint firstItem="JSP-qV-nT1" firstAttribute="centerY" secondItem="UoQ-I3-tVZ" secondAttribute="centerY" id="RGG-T4-zdK"/>
                                                 <constraint firstItem="whG-kI-yk5" firstAttribute="centerY" secondItem="vBd-c2-8Ly" secondAttribute="centerY" id="SC4-OJ-MnH"/>
-                                                <constraint firstItem="JSP-qV-nT1" firstAttribute="trailing" secondItem="DKf-TM-FIi" secondAttribute="trailingMargin" id="WMg-0C-wrK"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="6ep-fU-V7l" secondAttribute="trailing" id="ZV6-fo-ZrU"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="6ep-fU-V7l" secondAttribute="trailing" constant="30" id="ZV6-fo-ZrU"/>
+                                                <constraint firstItem="K7e-sN-ud1" firstAttribute="centerY" secondItem="DKf-TM-FIi" secondAttribute="centerY" id="ack-ZQ-7eu"/>
                                                 <constraint firstAttribute="bottom" secondItem="SWC-5K-sDP" secondAttribute="bottom" id="bxw-Fw-EK5"/>
                                                 <constraint firstItem="SWC-5K-sDP" firstAttribute="leading" secondItem="DKf-TM-FIi" secondAttribute="leadingMargin" id="dRj-dy-UvQ"/>
                                                 <constraint firstItem="UoQ-I3-tVZ" firstAttribute="top" secondItem="Q5R-oG-qeM" secondAttribute="bottom" constant="8" id="eUg-v7-BsR"/>
                                                 <constraint firstItem="Q5R-oG-qeM" firstAttribute="leading" secondItem="R3y-P1-087" secondAttribute="trailing" constant="8" id="goL-ex-Ui7"/>
-                                                <constraint firstItem="4Vm-Xe-3Jn" firstAttribute="trailing" secondItem="DKf-TM-FIi" secondAttribute="trailingMargin" id="pjW-Dq-nWz"/>
+                                                <constraint firstItem="4Vm-Xe-3Jn" firstAttribute="trailing" secondItem="6ep-fU-V7l" secondAttribute="trailing" id="iYh-Ad-6hv"/>
+                                                <constraint firstItem="JSP-qV-nT1" firstAttribute="trailing" secondItem="6ep-fU-V7l" secondAttribute="trailing" id="iys-nf-9Z6"/>
                                                 <constraint firstItem="6ep-fU-V7l" firstAttribute="leading" secondItem="R3y-P1-087" secondAttribute="trailing" constant="8" id="ry8-aB-9Cc"/>
-                                                <constraint firstItem="Q5R-oG-qeM" firstAttribute="trailing" secondItem="DKf-TM-FIi" secondAttribute="trailingMargin" id="sEZ-8B-JDy"/>
+                                                <constraint firstItem="K7e-sN-ud1" firstAttribute="trailing" secondItem="DKf-TM-FIi" secondAttribute="trailingMargin" id="vAd-7e-6am"/>
                                                 <constraint firstItem="7GR-9h-sxh" firstAttribute="top" secondItem="R3y-P1-087" secondAttribute="bottom" id="voO-dB-XBA"/>
                                                 <constraint firstItem="whG-kI-yk5" firstAttribute="leading" secondItem="vBd-c2-8Ly" secondAttribute="trailing" constant="8" id="wrQ-L2-g4a"/>
                                                 <constraint firstItem="vBd-c2-8Ly" firstAttribute="leading" secondItem="R3y-P1-087" secondAttribute="trailing" constant="8" id="xMw-fO-jfE"/>
@@ -329,7 +338,7 @@
                 <navigationController title="Favorites" automaticallyAdjustsScrollViewInsets="NO" id="2rC-Jv-422" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="schedule" image="schedule" id="iqL-7L-Dqn"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleAspectFit" misplaced="YES" translucent="NO" id="bWb-Ij-UiM">
+                    <navigationBar key="navigationBar" contentMode="scaleAspectFit" translucent="NO" id="bWb-Ij-UiM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <rect key="contentStretch" x="0.0" y="0.0" width="0.29999999999999999" height="0.29999999999999999"/>
@@ -352,6 +361,7 @@
     </scenes>
     <resources>
         <image name="flag" width="80" height="99"/>
+        <image name="forward" width="25" height="25"/>
         <image name="hamburger" width="24" height="20"/>
         <image name="like-1" width="95" height="95"/>
         <image name="room" width="89" height="77"/>
