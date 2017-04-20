@@ -44,6 +44,15 @@ class ScheduleViewController : TimeSlotRootViewController {
                                        customAttributes: [:])
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if currentReachabilityStatus != .notReachable {
+            if StateData.instance.offlineFavoriteSessions.sessions.count > 0 {
+                ThatConferenceAPI.saveOfflineFavorites(offlineFavorites: StateData.instance.offlineFavoriteSessions.sessions)
+            }
+        }
+    }
+    
     internal override func moveToDay(_ day: String!) {
         if (day == nil) {
             return
@@ -74,6 +83,12 @@ class ScheduleViewController : TimeSlotRootViewController {
     
     // MARK: Data
     override func loadData() {
+        if currentReachabilityStatus != .notReachable {
+            if StateData.instance.offlineFavoriteSessions.sessions.count > 0 {
+                ThatConferenceAPI.saveOfflineFavorites(offlineFavorites: StateData.instance.offlineFavoriteSessions.sessions)
+            }
+        }
+        
         if let sessionStore = StateData.instance.sessionStore {
             self.dateLabel.text = "Loading"
             self.activityIndicator.startAnimating()
@@ -107,7 +122,6 @@ class ScheduleViewController : TimeSlotRootViewController {
                     break
                 }
             }
-
         }
     }
     
@@ -409,6 +423,19 @@ class ScheduleViewController : TimeSlotRootViewController {
         return cell
     }
     
+    func saveOfflineFavorites(currentSession: Session, completed: @escaping DownloadComplete) {
+        guard let sessionId = currentSession.id else {return}
+
+        let sessions = Sessions()
+        sessions.sessions[String(describing: sessionId)] = currentSession
+        
+        StateData.instance.offlineFavoriteSessions.sessions[String(describing: sessionId)] = currentSession
+        
+        PersistenceManager.saveOfflineFavorites(sessions, path: Path.OfflineFavorites)
+        
+        completed()
+    }
+    
     func SessionFavorited(_ sender: UITapGestureRecognizer) {
         if Authentication.isLoggedIn() {
             if let sessionStore = StateData.instance.sessionStore {
@@ -428,9 +455,18 @@ class ScheduleViewController : TimeSlotRootViewController {
                                 break
                             case .failure(_):
                                 self.stopIndicator()
-                                let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
-                                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                                self.present(alert, animated: true, completion: nil)
+                                guard let currentSession = cell.session else {return}
+                                currentSession.isUserFavorite = false
+                                self.saveOfflineFavorites(currentSession: currentSession) {
+                                    self.setFavoriteIcon(cell, animated: true)
+                                    Answers.logCustomEvent(withName: "Removed Favorite", customAttributes: [:])
+                                    if let _ = PersistenceManager.loadOfflineFavorites(.OfflineFavorites) {
+                                        print("Something in here, but what?")
+                                    } else {
+                                        print("Nothing in here")
+                                    }
+
+                                }
                                 break
                             }
                         })
@@ -449,9 +485,12 @@ class ScheduleViewController : TimeSlotRootViewController {
                                 break
                             case .failure(_):
                                 self.stopIndicator()
-                                let alert = UIAlertController(title: "Error", message: "Could not add favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
-                                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                                self.present(alert, animated: true, completion: nil)
+                                guard let currentSession = cell.session else {return}
+                                currentSession.isUserFavorite = true
+                                self.saveOfflineFavorites(currentSession: currentSession) {
+                                    self.setFavoriteIcon(cell, animated: true)
+                                    Answers.logCustomEvent(withName: "Added Favorite", customAttributes: [:])
+                                }
                                 break
                             }
                         })

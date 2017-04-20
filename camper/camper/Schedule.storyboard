@@ -238,6 +238,9 @@
                                                 <constraint firstItem="v1D-UJ-9X5" firstAttribute="top" secondItem="yMW-cN-zKi" secondAttribute="bottom" constant="8" id="ytK-1b-een"/>
                                             </constraints>
                                             <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="Kia-zx-uXw"/>
+                                                </mask>
                                                 <mask key="constraints">
                                                     <exclude reference="nEf-3b-epV"/>
                                                     <exclude reference="2f9-vv-jtN"/>

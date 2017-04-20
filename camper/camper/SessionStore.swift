@@ -93,7 +93,7 @@ class SessionStore {
                     
                     PersistenceManager.saveDailySchedule(schedule, path: Path.Schedule)
                     PersistenceManager.saveDailySchedule(openspaces, path: Path.OpenSpaces)
-                
+                    
                     if (returnSchedule) {
                         return completion(.success(schedule))
                     } else {
@@ -159,7 +159,6 @@ class SessionStore {
             session.isUserFavorite = false
             return completion(.success([session]))
         })
-
     }
     
     func getFavoriteSessions(completion: @escaping (SessionDataRetrieval) -> Void) {

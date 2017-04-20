@@ -1,6 +1,6 @@
 import Foundation
 
-class Speaker: NSObject {
+class Speaker: NSObject, NSCoding {
     var firstName: String?
     var lastName: String?
     var headShotURL: URL!
@@ -18,7 +18,7 @@ class Speaker: NSObject {
     
     override init() {}
     
-    func encodeWithCoder(_ aCoder: NSCoder) {
+    func encode(with aCoder: NSCoder) {
         aCoder.encode(self.firstName, forKey: "firstName")
         aCoder.encode(self.lastName, forKey: "lastName")
         aCoder.encode(self.headShotURL, forKey: "headShotURL")

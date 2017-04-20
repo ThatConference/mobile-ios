@@ -11,6 +11,7 @@ import Foundation
 class StateData {
     static let instance = StateData()
     public var sessionStore: SessionStore! = SessionStore()
+    public var offlineFavoriteSessions: Sessions = Sessions()
     
     private init() {}
 }

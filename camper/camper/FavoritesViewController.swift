@@ -31,11 +31,17 @@ class FavoritesViewController : TimeSlotRootViewController {
         refreshControl.addTarget(self, action: #selector(FavoritesViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(self.refreshControl)
         self.revealViewControllerFunc(barButton: menuButton)
+        
+        if currentReachabilityStatus != .notReachable {
+            if StateData.instance.offlineFavoriteSessions.sessions.count > 0 {
+                ThatConferenceAPI.saveOfflineFavorites(offlineFavorites: StateData.instance.offlineFavoriteSessions.sessions)
+            }
+        }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+                
         if (getDirtyData()) {
             if (self.dailySchedules != nil) {
                 OperationQueue.main.addOperation() {
@@ -45,6 +51,7 @@ class FavoritesViewController : TimeSlotRootViewController {
             }
             
             if (!Authentication.isLoggedIn()) {
+
                 loadData()
             }
         }
@@ -97,6 +104,11 @@ class FavoritesViewController : TimeSlotRootViewController {
     }
     
     override func loadData() {
+        if currentReachabilityStatus != .notReachable {
+            if StateData.instance.offlineFavoriteSessions.sessions.count > 0 {
+                ThatConferenceAPI.saveOfflineFavorites(offlineFavorites: StateData.instance.offlineFavoriteSessions.sessions)
+            }
+        }
         
         if let sessionStore = StateData.instance.sessionStore {
             self.dateLabel.text = "Loading"

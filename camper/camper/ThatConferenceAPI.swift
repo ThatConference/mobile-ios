@@ -109,10 +109,10 @@ class ThatConferenceAPI {
         return value == "1"
     }
     
-//    // MUST CHANGE YEARLY
-//    class func GetCurrentYear() -> String {
-//        return "2017"
-//    }
+    // MUST CHANGE YEARLY
+    class func GetCurrentYear() -> String {
+        return "2017"
+    }
     
     // MARK: Sessions
     class func sessionsFromJSONData(_ data: Data) -> SessionsResult {
@@ -165,22 +165,28 @@ class ThatConferenceAPI {
         } else {
             return nil
         }
-
-        let session = Session()
-        session.id = id as NSNumber?
-        session.title = title
-        session.sessionDescription = sessionDescription
-        session.scheduledDateTime = scheduledDateTime
-        session.scheduledRoom = scheduledRoom
-        session.primaryCategory = primaryCategory
-        session.level = level
-        session.accepted = accepted!
-        session.cancelled = cancelled!
-        session.isFamilyApproved = isFamilyApproved!
-        session.isUserFavorite = isUserFavorite
+        
+        var isUpdated: Bool = false
+        if let updated = (json["Updated"] as? Bool) {
+            isUpdated = updated
+        }
+        let session = Session(cancelled: cancelled!,
+                              accepted: accepted!,
+                              id: id as NSNumber?,
+                              title: title,
+                              sessionDescription: sessionDescription,
+                              scheduledDateTime: scheduledDateTime,
+                              scheduledRoom: scheduledRoom,
+                              primaryCategory: primaryCategory,
+                              level: level,
+                              speakers: [],
+                              isFamilyApproved: isFamilyApproved!,
+                              isUserFavorite: isUserFavorite,
+                              updated: isUpdated)
         
         if let speakers = json["Speakers"] as? [[String: AnyObject]] {
             for jsonSpeaker in speakers {
+                
                 let speaker = Speaker()
                 speaker.firstName = jsonSpeaker["FirstName"] as? String
                 speaker.lastName = jsonSpeaker["LastName"] as? String
@@ -395,7 +401,7 @@ class ThatConferenceAPI {
         let pinterest = json["Pinterest"] as? String
         let instragram = json["Instagram"] as? String
         let youTube = json["YouTube"] as? String
-        
+
         let sponsor = Sponsor()
         sponsor.name = name
         sponsor.sponsorLevel = sponsorLevel
@@ -412,5 +418,13 @@ class ThatConferenceAPI {
         sponsor.youTube = youTube
         
         return sponsor
+    }
+    
+    class func saveOfflineFavorites(offlineFavorites: Dictionary<String, Session>) {
+        for session in offlineFavorites {
+            ThatConferenceAPI.saveFavorite(session.value.id, completionHandler: { (data, response, error) in
+                StateData.instance.offlineFavoriteSessions.sessions.removeValue(forKey: session.key)
+            })
+        }
     }
 }

@@ -21,7 +21,7 @@ class MenuViewController: UIViewController {
         if let destination = segue.destination as? FavoritesViewController {
             if segue.identifier == "favoriteSegue" {
                 print("Prepare for segue")
-                destination.store = SessionStore()
+                destination.store = StateData.instance.sessionStore
             }
             
         }

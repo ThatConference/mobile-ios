@@ -74,6 +74,13 @@ class OpenSpacesViewController : TimeSlotRootViewController {
     }
     
     override func loadData() {
+        if currentReachabilityStatus != .notReachable {
+            if StateData.instance.offlineFavoriteSessions.sessions.count > 0 {
+                print(StateData.instance.offlineFavoriteSessions.sessions.count)
+                ThatConferenceAPI.saveOfflineFavorites(offlineFavorites: StateData.instance.offlineFavoriteSessions.sessions)
+            }
+        }
+        
         let sessionStore = SessionStore()
         self.dateLabel.text = "Loading"
         self.activityIndicator.startAnimating()

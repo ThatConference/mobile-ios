@@ -92,6 +92,9 @@
 		51A4D1D01CF1532900F956BC /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51A4D1CF1CF1532900F956BC /* Favorites.storyboard */; };
 		51A4D1D41CF290BB00F956BC /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */; };
 		7B02FE941E9C0DDF001396B6 /* String+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02FE931E9C0DDF001396B6 /* String+Extention.swift */; };
+		7B02FE961E9FE875001396B6 /* Sessions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02FE951E9FE875001396B6 /* Sessions.swift */; };
+		7B02FE981EA020E7001396B6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02FE971EA020E7001396B6 /* Constants.swift */; };
+		7B177E281EA1414500F52BC8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B177E271EA1414500F52BC8 /* Reachability.swift */; };
 		7B3C38391E955E8100FEA4A5 /* StateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3C38381E955E8100FEA4A5 /* StateData.swift */; };
 		7B3C383C1E95A27F00FEA4A5 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B3C383A1E95A27F00FEA4A5 /* Map.storyboard */; };
 		7BD3621D1E8DB097009C3A5E /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BD3621C1E8DB096009C3A5E /* Menu.storyboard */; };
@@ -195,6 +198,9 @@
 		51A4D1CF1CF1532900F956BC /* Favorites.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Favorites.storyboard; sourceTree = "<group>"; };
 		51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		7B02FE931E9C0DDF001396B6 /* String+Extention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extention.swift"; sourceTree = "<group>"; };
+		7B02FE951E9FE875001396B6 /* Sessions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sessions.swift; sourceTree = "<group>"; };
+		7B02FE971EA020E7001396B6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7B177E271EA1414500F52BC8 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		7B3C38381E955E8100FEA4A5 /* StateData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateData.swift; sourceTree = "<group>"; };
 		7B3C383B1E95A27F00FEA4A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Map.storyboard; sourceTree = "<group>"; };
 		7BD3621C1E8DB096009C3A5E /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
@@ -339,6 +345,7 @@
 			children = (
 				318F268B1CBC65F30065A76F /* Authentication.swift */,
 				316269AD1D0117020089D777 /* PersistenceManager.swift */,
+				7B177E271EA1414500F52BC8 /* Reachability.swift */,
 				31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */,
 				7B3C38381E955E8100FEA4A5 /* StateData.swift */,
 				31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */,
@@ -368,10 +375,12 @@
 			isa = PBXGroup;
 			children = (
 				7BD362201E8DB720009C3A5E /* Data */,
+				7B02FE971EA020E7001396B6 /* Constants.swift */,
 				512DA03A1CB7585D006CC1B3 /* DailySchedule.swift */,
 				311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */,
 				313B19011D160B8C00E72562 /* PostCardFrame.swift */,
 				3123AC271C90959D0097BF33 /* Session.swift */,
+				7B02FE951E9FE875001396B6 /* Sessions.swift */,
 				512DA03E1CBBE03C006CC1B3 /* Speaker.swift */,
 				314DA0FC1D202B690021E2DA /* Sponsor.swift */,
 				512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */,
@@ -694,6 +703,7 @@
 			files = (
 				512DA03D1CB758B9006CC1B3 /* TimeSlot.swift in Sources */,
 				3199C71C1CD6EFA5002F01CD /* PageDetailCell.swift in Sources */,
+				7B02FE981EA020E7001396B6 /* Constants.swift in Sources */,
 				7BD362361E929FD4009C3A5E /* SWRevealViewController.m in Sources */,
 				512DA03B1CB7585D006CC1B3 /* DailySchedule.swift in Sources */,
 				312A942A1C85390B00AE938B /* ScheduleViewController.swift in Sources */,
@@ -728,6 +738,8 @@
 				317154221D1C340E004078E2 /* PassThroughImageView.swift in Sources */,
 				318F268C1CBC65F30065A76F /* Authentication.swift in Sources */,
 				31D39F461DE3E5FD00EC7145 /* URL.swift in Sources */,
+				7B02FE961E9FE875001396B6 /* Sessions.swift in Sources */,
+				7B177E281EA1414500F52BC8 /* Reachability.swift in Sources */,
 				31CFCD841C8B70ED00DB2AB2 /* SessionStore.swift in Sources */,
 				31D877F81D1864C10045E8DA /* FrameCell.swift in Sources */,
 				312A94161C814B6B00AE938B /* AppDelegate.swift in Sources */,
