@@ -1,11 +1,12 @@
-# mobile-ios
+# That Conference - Mobile App - iOS
+
+2017 Version 4.x.x
 
 Notes:
 
 * Open project with: "That Conference.xcworkspace"
 * Currently using XCode 8.3
 * Swift 3.1
-
 
 ## Installation ##
 

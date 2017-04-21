@@ -393,7 +393,6 @@ class ScheduleViewController : TimeSlotRootViewController {
             cell.sessionTitleCancelled.text = session?.title
             cell.sessionTitle.sizeToFit()
             cell.categoryLabel.text = session?.primaryCategory
-            cell.delegate = self
             if let level = session?.level {
                 cell.levelLabel.text = "Level: \(level)"
             }

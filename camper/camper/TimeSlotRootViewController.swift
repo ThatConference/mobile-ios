@@ -1,6 +1,6 @@
 import UIKit
 
-class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, ScheduleCellDelegate {
+class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate {
     
     var store: SessionStore!
     var currentDay: String!
@@ -92,14 +92,16 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
     }
     
     // MARK: UITableViewDelegate
-    
-    func ScheduleCellDelegate(_ session: Session) {
-        let session =  session
-        
-        if !(session.cancelled) {
-            let sessionDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "SessionDetailViewController") as! SessionDetailViewController
-            sessionDetailVC.session = session
-            self.navigationController!.pushViewController(sessionDetailVC, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? TimeSlotRootTableViewCell {
+            let session =  cell.session
+            
+            if (!(session?.cancelled)!) {
+                let sessionDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "SessionDetailViewController") as! SessionDetailViewController
+                sessionDetailVC.session = session
+                self.navigationController!.pushViewController(sessionDetailVC, animated: true)
+            }
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     
