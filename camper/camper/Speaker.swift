@@ -38,7 +38,7 @@ class Speaker: NSObject, NSCoding {
     required convenience init?(coder aDecoder: NSCoder) {
         let firstName = aDecoder.decodeObject(forKey: "firstName") as? String
         let lastName = aDecoder.decodeObject(forKey: "lastName") as? String
-        let headShotURL = aDecoder.decodeObject(forKey: "headShotURL") as! URL
+        let headShotURL = aDecoder.decodeObject(forKey: "headShotURL") as? URL
         let userName = aDecoder.decodeObject(forKey: "userName") as? String
         let biography = aDecoder.decodeObject(forKey: "biography") as? String
         let website = aDecoder.decodeObject(forKey: "website") as? URL
@@ -68,7 +68,7 @@ class Speaker: NSObject, NSCoding {
     
     required init(firstName: String?,
                   lastName: String?,
-                  headShotURL: URL,
+                  headShotURL: URL?,
                   userName: String?,
                   biography: String?,
                   website: URL?,

@@ -23,8 +23,14 @@ class DailySchedule: NSObject, NSCoding {
     
     required convenience init?(coder aDecoder: NSCoder) {
         let date = aDecoder.decodeObject(forKey: "date") as! Date
-        let timeSlots = aDecoder.decodeObject(forKey: "timeSlots") as! [TimeSlot?]
+        
+        var timeSlots: [TimeSlot] = []
+        if (aDecoder.decodeObject(forKey: "timeSlots") as? [TimeSlot]) != nil {
+            timeSlots = aDecoder.decodeObject(forKey: "timeSlots") as! [TimeSlot]
+        }
+        
         let timeSaved = aDecoder.decodeObject(forKey: "timeSaved") as? Date
+        
         self.init(date: date, timeSlots: timeSlots, timeSaved: timeSaved)
     }
     
