@@ -1,8 +1,16 @@
+//
+//  FamilyEventsViewController.swift
+//  That Conference
+//
+//  Created by Steven Yang on 4/21/17.
+//  Copyright © 2017 That Conference. All rights reserved.
+//
+
 import UIKit
 import Fabric
 import Crashlytics
 
-class FavoritesViewController : TimeSlotRootViewController {
+class FamilyEventsViewController : TimeSlotRootViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timeTableView: UIStackView!
     @IBOutlet var dateLabel: UILabel!
@@ -11,54 +19,48 @@ class FavoritesViewController : TimeSlotRootViewController {
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     var refreshControl: UIRefreshControl!
+    var currentDateTime: Date!
+    var familyApprovedSessions: Dictionary<String, DailySchedule>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        familyApprovedSessions = Dictionary<String, DailySchedule>()
         
-        checkUserStatus()
+        loadData()
         
         // set up controls
         let rightArrow = UIImage(named: "subheader-arrow-right")
         self.nextDayButton.imageEdgeInsets = UIEdgeInsetsMake(0, self.nextDayButton.frame.size.width - (rightArrow!.size.width), 0, 0)
         self.nextDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, -(rightArrow!.size.width + 5), 0, (rightArrow!.size.width + 5))
         self.nextDayButton.addTarget(self, action: #selector(self.moveToNext), for: UIControlEvents.touchUpInside)
-    
+        
         self.previousDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5)
         self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), for: .touchUpInside)
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: #selector(FavoritesViewController.refresh(_:)), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action: #selector(FamilyEventsViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(self.refreshControl)
-        self.revealViewControllerFunc(barButton: menuButton)
         
+        self.revealViewControllerFunc(barButton: menuButton)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Answers.logContentView(withName: "Open Spaces",
+                               contentType: "Page",
+                               contentId: "",
+                               customAttributes: [:])
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         if currentReachabilityStatus != .notReachable {
             if StateData.instance.offlineFavoriteSessions.sessions.count > 0 {
                 ThatConferenceAPI.saveOfflineFavorites(offlineFavorites: StateData.instance.offlineFavoriteSessions.sessions)
             }
         }
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-                
-        if (getDirtyData()) {
-            if (self.dailySchedules != nil) {
-                OperationQueue.main.addOperation() {
-                    self.dailySchedules.removeAll()
-                    self.tableView.isHidden = true
-                }
-            }
-            
-            if (!Authentication.isLoggedIn()) {
-                loadData()
-            }
-        }
-        
-        Answers.logContentView(withName: "Open Spaces",
-                                       contentType: "Page",
-                                       contentId: "",
-                                       customAttributes: [:])
     }
     
     internal override func moveToDay(_ day: String!) {
@@ -67,17 +69,17 @@ class FavoritesViewController : TimeSlotRootViewController {
         }
         
         self.dailySchedule = self.dailySchedules[day];
-        UIView.transition(with: self.tableView, duration: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {() -> Void in
+        UIView.transition(with: self.tableView, duration: 0.5, options: .transitionCrossDissolve, animations: {() -> Void in
             self.tableView.reloadData()
             self.tableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
-            }, completion: nil)
+        }, completion: nil)
         UIView.transition(with: self.timeTableView, duration: 0.5, options: .transitionCrossDissolve, animations: {() -> Void in
             self.loadTimeTable()
-            }, completion: nil)
+        }, completion: nil)
         UIView.transition(with: self.dateLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {() -> Void in
             self.setDateLabel(self.dailySchedule.date! as Date)
             self.setPageState(day)
-            }, completion: nil)
+        }, completion: nil)
         
         let order = (Calendar.current as NSCalendar).compare(Date(), to: self.dailySchedule.date as Date, toUnitGranularity: .day)
         if order == ComparisonResult.orderedSame {
@@ -85,24 +87,11 @@ class FavoritesViewController : TimeSlotRootViewController {
         }
     }
     
-    // MARK: Page Data
-    
-    fileprivate func checkUserStatus()
-    {
-        //Show login screen if not logged in
-        if (!Authentication.isLoggedIn()) {
-            setData(true)
-            self.performSegue(withIdentifier: "show_login", sender: self)
-        } else {
-            self.view.addSubview(self.activityIndicator)
-            loadData()
-        }
-    }
-    
     func refresh(_ sender:AnyObject) {
         loadData()
     }
     
+    // MARK: Data
     override func loadData() {
         if currentReachabilityStatus != .notReachable {
             if StateData.instance.offlineFavoriteSessions.sessions.count > 0 {
@@ -118,57 +107,84 @@ class FavoritesViewController : TimeSlotRootViewController {
                 self.refreshControl.endRefreshing()
             }
             
-            sessionStore.getFavoriteSessions(completion: {(sessionResult) -> Void in
-                switch sessionResult {
-                case .success(let sessions):
+            sessionStore.getDailySchedules(true) {
+                (results) -> Void in
+                
+                switch results {
+                case .success(let schedules):
                     self.setData(false)
-                    self.dailySchedules = sessions
-                    PersistenceManager.saveDailySchedule(self.dailySchedules, path: Path.Favorites)
+                    self.dailySchedules = self.filterEvents(schedules)
                     self.displayData()
                     break
                 case .failure(let error):
-                    print("Error: \(error)")
-                    self.setData(true)
-                    let values = PersistenceManager.loadDailySchedule(Path.Favorites)
-                    if values != nil && Authentication.isLoggedIn() {
-                        self.dailySchedules = values!
+                    print("ERROR:\(error)")
+                    if let values = PersistenceManager.loadDailySchedule(Path.FamilyEvents) {
+                        self.setData(true)
+                        self.dailySchedules = values
                         self.displayData()
                     } else {
-                        if (self.isViewLoaded && self.view.window != nil) {
-                            self.alert = UIAlertController(title: "Log In Needed", message: "Log in to view favorites.", preferredStyle: UIAlertControllerStyle.alert)
-                            self.alert.addAction(UIAlertAction(title: "Log In", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
-                                self.parent!.parent!.performSegue(withIdentifier: "show_login", sender: self)
-                            }))
-                            self.alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
-                                if (self.dailySchedules != nil) {
-                                    self.dailySchedules.removeAll()
-                                }
-                                
-                                self.tableView.delegate = self
-                                self.tableView.dataSource = self
-                                self.tableView.reloadData()
-                                self.activityIndicator.stopAnimating()
-                                
-                                self.navigateToSchedule()
-                            }))
-                            self.present(self.alert, animated: true, completion: nil)
-                        }
+                        let alert = UIAlertController(title: "Error", message: "Could not retrieve schedule data. Please try again later.", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        self.activityIndicator.stopAnimating()
+                        return
                     }
                     break
                 }
-            })
+            }
         }
+    }
+    
+    func filterEvents(_ dict: Dictionary<String, DailySchedule>) -> Dictionary<String, DailySchedule> {
+        var convertDict: Dictionary<String, DailySchedule> = dict
+        
+        if PersistenceManager.loadDailySchedule(.FamilyEvents) == nil {
+            
+            for event in dict {
+                // Key is 08-07-2017
+                
+                print(event.value.timeSlots.count)
+                for i in (0..<event.value.timeSlots.count).reversed() {
+                    if let timeSlot = event.value.timeSlots[i] {
+                        print(timeSlot)
+                        let sessions = timeSlot.sessions
+                        if sessions.first??.primaryCategory != "Open Spaces" {
+                            let array: [Session] = sessions.filter { $0!.isFamilyApproved == true
+                                } as! [Session]
+                            var dateString = String()
+                            if let session = sessions[0] {
+                                if let date = session.scheduledDateTime {
+                                    dateString = self.getDate(date)
+                                }
+                            }
+                            if array.isEmpty {
+                                convertDict[dateString]?.timeSlots.remove(at: i)
+                            } else {
+                                convertDict[dateString]?.timeSlots[i]?.sessions = array
+                            }
+                        }
+                    }
+                }
+            }
+            PersistenceManager.saveDailySchedule(convertDict, path: Path.FamilyEvents)
+
+        } else {
+
+            if let data = PersistenceManager.loadDailySchedule(Path.FamilyEvents) {
+                convertDict = data
+            }
+        }
+        return convertDict
     }
     
     func displayData() {
         OperationQueue.main.addOperation() {
-            self.tableView.isHidden = false
             self.activityIndicator.stopAnimating()
             
             self.setCurrentDay(self.dailySchedules)
             self.jumpToTimeOfDay()
             
-            if (self.currentDay != nil) {
+            if self.dailySchedules.count > 0 {
                 if let schedule = self.dailySchedules[self.currentDay] {
                     self.dailySchedule = schedule
                 }
@@ -190,20 +206,21 @@ class FavoritesViewController : TimeSlotRootViewController {
     
     override func setData(_ isDirty: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.dirtyDataFavorites = isDirty;
+        appDelegate.dirtyDataSchedule = isDirty;
     }
     
     override func getDirtyData() -> Bool {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.dirtyDataFavorites;
+        return appDelegate.dirtyDataSchedule;
     }
     
     // MARK: Page State
+    
     fileprivate func setCurrentDay(_ schedules: Dictionary<String, DailySchedule>) {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy"
         let today = formatter.string(from: Date())
-    
+        
         // set the date to today, unless we're outside the conference
         if schedules.index(forKey: today) != nil {
             self.setPageState(today)
@@ -215,46 +232,31 @@ class FavoritesViewController : TimeSlotRootViewController {
     
     fileprivate func setPageState(_ currentDay: String!) {
         let sortedDates = Array(self.dailySchedules.keys).sorted()
-        
-        if sortedDates.count == 0 {
-            let alert = UIAlertController(title: "No Favorites", message: "No favorites found. Please select some favorites to view this page", preferredStyle: UIAlertControllerStyle.alert)
-            let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
-                self.navigateToSchedule()
-            }
-            alert.addAction(OKAction)
-            self.present(alert, animated: true, completion: nil)
-            self.dateLabel.text = ""
-            return
-        }
-        
-        if currentDay == nil || sortedDates[0] == currentDay {
-            self.currentDay = sortedDates[0]
-            self.nextDay = nil
-            self.previousDay = nil
-            
-            if (sortedDates.count > 1) {
+        if sortedDates.count > 0 {
+            if currentDay == nil || sortedDates[0] == currentDay {
+                self.currentDay = sortedDates[0]
                 self.nextDay = sortedDates[1]
+                self.previousDay = nil
+            }
+            else {
+                let indexes = sortedDates.count - 1
+                var index = 0
+                repeat {
+                    self.previousDay = sortedDates[index]
+                    if index + 1 <= indexes {
+                        self.currentDay = sortedDates[index + 1]
+                    }
+                    if index + 2 <= indexes {
+                        self.nextDay = sortedDates[index + 2]
+                    }
+                    else {
+                        self.nextDay = nil
+                    }
+                    
+                    index += 1
+                } while sortedDates[index] != currentDay
             }
         }
-        else {
-            let indexes = sortedDates.count - 1
-            var index = 0
-            repeat {
-                self.previousDay = sortedDates[index]
-                if index + 1 <= indexes {
-                    self.currentDay = sortedDates[index + 1]
-                }
-                if index + 2 <= indexes {
-                    self.nextDay = sortedDates[index + 2]
-                }
-                else {
-                    self.nextDay = nil
-                }
-    
-                index += 1
-            } while sortedDates[index] != currentDay
-        }
-    
         setButtonValues(self.dailySchedules)
     }
     
@@ -267,10 +269,10 @@ class FavoritesViewController : TimeSlotRootViewController {
     fileprivate func setButtonValues(_ schedules: Dictionary<String, DailySchedule>) {
         let buttonLabelFormatter = DateFormatter()
         buttonLabelFormatter.dateFormat = "MMM dd"
-    
+        
         let getDateFormatter = DateFormatter()
         getDateFormatter.dateFormat = "MM-dd-yyyy"
-    
+        
         if let previous = self.previousDay {
             self.previousDayButton.isHidden = false
             let date = getDateFormatter.date(from: previous)
@@ -279,7 +281,7 @@ class FavoritesViewController : TimeSlotRootViewController {
         else {
             self.previousDayButton.isHidden = true
         }
-    
+        
         if let next = self.nextDay {
             self.nextDayButton.isHidden = false
             let date = getDateFormatter.date(from: next)
@@ -291,6 +293,7 @@ class FavoritesViewController : TimeSlotRootViewController {
     }
     
     // MARK: Time Table Methods
+    
     fileprivate func loadTimeTable() {
         for subview in self.timeTableView.arrangedSubviews {
             self.timeTableView.removeArrangedSubview(subview)
@@ -302,31 +305,34 @@ class FavoritesViewController : TimeSlotRootViewController {
         var hours: [Int] = []
         for timeSlot in self.dailySchedule.timeSlots {
             var alreadyAdded: Bool = false
-            var hour = (Calendar.current as NSCalendar).component(.hour, from: (timeSlot?.time)!)
-            let minutes = (Calendar.current as NSCalendar).component(.minute, from: (timeSlot?.time)!)
             
-            for trackedHours in hours {
-                if trackedHours == hour {
-                    alreadyAdded = true
-                    break
-                }
-            }
-            
-            if !alreadyAdded {
-                if hour > 12 {
-                    hour = hour - 12
+            if (timeSlot?.time != nil) {
+                var hour = (Calendar.current as NSCalendar).component(.hour, from: (timeSlot?.time)!)
+                let minutes = (Calendar.current as NSCalendar).component(.minute, from: (timeSlot?.time)!)
+                
+                for trackedHours in hours {
+                    if trackedHours == hour {
+                        alreadyAdded = true
+                        break
+                    }
                 }
                 
-                var padding = ""
-                if (minutes == 0) {
-                    padding = "0"
+                if !alreadyAdded {
+                    if hour > 12 {
+                        hour = hour - 12
+                    }
+                    
+                    var padding = ""
+                    if (minutes == 0) {
+                        padding = "0"
+                    }
+                    
+                    let timeLabel = "\(hour):\(minutes)\(padding)"
+                    let label = createClickableTimeLabel(timeLabel)
+                    label.timeSlot = timeSlot?.time
+                    self.timeTableView.addArrangedSubview(label)
+                    hours.append(hour)
                 }
-                
-                let timeLabel = "\(hour):\(minutes)\(padding)"
-                let label = createClickableTimeLabel(timeLabel)
-                label.timeSlot = timeSlot?.time
-                self.timeTableView.addArrangedSubview(label)
-                hours.append(hour)
             }
         }
         
@@ -350,7 +356,7 @@ class FavoritesViewController : TimeSlotRootViewController {
     
     fileprivate func jumpToTimeOfDay() {
         let nowHour = (Calendar.current as NSCalendar).component(.hour, from: Date())
-    
+        
         var locationSet: Bool = false
         var lastTimeVew: CircleLabel?
         for timeView in self.timeTableView.subviews {
@@ -366,12 +372,12 @@ class FavoritesViewController : TimeSlotRootViewController {
                 }
             }
         }
-    
+        
         if !locationSet {
             // didn't find a next/current time - go to the end
             if let view = lastTimeVew {
                 self.scrollToSection(view.timeSlot as Date)
-    
+                
                 if let currentSelected = self.currentlySelectedTimeLabel {
                     currentSelected.toggleCircle()
                 }
@@ -415,9 +421,21 @@ class FavoritesViewController : TimeSlotRootViewController {
         }
     }
     
-    // MARK: DataSource
+    // MARK: UINavigationContollerDelegate
+    func navigationController(_ navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        if viewController.isEqual(self) {
+            self.tableView.reloadData()
+        }
+    }
+    
+    override func setDirtyData() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.dirtyDataFavorites = true;
+    }
+    
+    // MARK: Data Source
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesTableViewCell") as! FavoritesTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FamilyEventsTableViewCell") as! FamilyEventsTableViewCell
         
         if let schedule = dailySchedule {
             let timeSlots = schedule.timeSlots[(indexPath as NSIndexPath).section]
@@ -432,7 +450,7 @@ class FavoritesViewController : TimeSlotRootViewController {
             }
             
             cell.favoriteIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.SessionFavorited(_:))))
-            removeFavoriteIcon(cell, animated: false)
+            setFamilyFavoriteIcon(cell, animated: false)
             
             //set up speaker text
             var speakerString: String = ""
@@ -456,10 +474,23 @@ class FavoritesViewController : TimeSlotRootViewController {
         return cell
     }
     
+    func saveOfflineFavorites(currentSession: Session, completed: @escaping DownloadComplete) {
+        guard let sessionId = currentSession.id else {return}
+        
+        let sessions = Sessions()
+        sessions.sessions[String(describing: sessionId)] = currentSession
+        
+        StateData.instance.offlineFavoriteSessions.sessions[String(describing: sessionId)] = currentSession
+        
+        PersistenceManager.saveOfflineFavorites(sessions, path: Path.OfflineFavorites)
+        
+        completed()
+    }
+    
     func SessionFavorited(_ sender: UITapGestureRecognizer) {
         if Authentication.isLoggedIn() {
             if let sessionStore = StateData.instance.sessionStore {
-                if let cell = sender.view as? FavoritesTableViewCell {
+                if let cell = sender.view?.superview?.superview as? FamilyEventsTableViewCell {
                     self.startIndicator()
                     if cell.session.isUserFavorite {
                         sessionStore.removeFavorite(cell.session, completion:{(sessionsResult) -> Void in
@@ -467,15 +498,26 @@ class FavoritesViewController : TimeSlotRootViewController {
                             case .success(let sessions):
                                 self.stopIndicator()
                                 self.setDirtyData()
-                                cell.session = sessions.first
-                                self.removeFavoriteIcon(cell, animated: true)
+                                let currentSession = sessions.first
+                                currentSession?.isUserFavorite = false
+                                cell.session = currentSession
+                                self.setFamilyFavoriteIcon(cell, animated: true)
                                 Answers.logCustomEvent(withName: "Removed Favorite", customAttributes: [:])
                                 break
                             case .failure(_):
                                 self.stopIndicator()
-                                let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
-                                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                                self.present(alert, animated: true, completion: nil)
+                                guard let currentSession = cell.session else {return}
+                                currentSession.isUserFavorite = false
+                                self.saveOfflineFavorites(currentSession: currentSession) {
+                                    self.setFamilyFavoriteIcon(cell, animated: true)
+                                    Answers.logCustomEvent(withName: "Removed Favorite", customAttributes: [:])
+                                    if let _ = PersistenceManager.loadOfflineFavorites(.OfflineFavorites) {
+                                        print("Something in here, but what?")
+                                    } else {
+                                        print("Nothing in here")
+                                    }
+                                    
+                                }
                                 break
                             }
                         })
@@ -486,44 +528,45 @@ class FavoritesViewController : TimeSlotRootViewController {
                             case .success(let sessions):
                                 self.stopIndicator()
                                 self.setDirtyData()
-                                cell.session = sessions.first
-                                self.removeFavoriteIcon(cell, animated: true)
+                                let currentSession = sessions.first
+                                currentSession?.isUserFavorite = true
+                                cell.session = currentSession
+                                self.setFamilyFavoriteIcon(cell, animated: true)
                                 Answers.logCustomEvent(withName: "Added Favorite", customAttributes: [:])
                                 break
                             case .failure(_):
                                 self.stopIndicator()
-                                let alert = UIAlertController(title: "Error", message: "Could not add favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
-                                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                                self.present(alert, animated: true, completion: nil)
+                                guard let currentSession = cell.session else {return}
+                                currentSession.isUserFavorite = true
+                                self.saveOfflineFavorites(currentSession: currentSession) {
+                                    self.setFamilyFavoriteIcon(cell, animated: true)
+                                    Answers.logCustomEvent(withName: "Added Favorite", customAttributes: [:])
+                                }
                                 break
                             }
                         })
                     }
                 }
             }
-        }
-        else
-        {
-            self.parent!.parent!.performSegue(withIdentifier: "show_login", sender: self)
+            else
+            {
+                self.parent!.parent!.performSegue(withIdentifier: "show_login", sender: self)
+            }
         }
     }
     
-    func removeFavoriteIcon(_ cell: FavoritesTableViewCell, animated: Bool) {
-        DispatchQueue.main.async(execute: {
-            if animated {
-                CATransaction.begin()
-                CATransaction.setAnimationDuration(1.5)
-                let transition = CATransition()
-                transition.type = kCATransitionFade
-                cell.favoriteIcon!.layer.add(transition, forKey: kCATransitionFade)
-                CATransaction.commit()
-            }
-            if cell.session.isUserFavorite {
-                cell.favoriteIcon!.image = UIImage(named:"like-remove")
-            }
-            else {
-                cell.favoriteIcon!.image = UIImage(named:"like-1")
-            }
-        })
+    private func getDate(_ dateTime: Date?) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-YYYY"
+        
+        return dateFormatter.string(from: dateTime!)
+    }
+    
+    class func getFormattedTime(_ dateTime: Date?) -> String {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "h:mm a"
+        
+        return timeFormatter.string(from: dateTime!)
     }
 }
+

@@ -176,4 +176,23 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
             }
         })
     }
+    
+    func setFamilyFavoriteIcon(_ cell: FamilyEventsTableViewCell, animated: Bool) {
+        DispatchQueue.main.async(execute: {
+            if animated {
+                CATransaction.begin()
+                CATransaction.setAnimationDuration(1.5)
+                let transition = CATransition()
+                transition.type = kCATransitionFade
+                cell.favoriteIcon!.layer.add(transition, forKey: kCATransitionFade)
+                CATransaction.commit()
+            }
+            if cell.session.isUserFavorite {
+                cell.favoriteIcon!.image = UIImage(named:"like-remove")
+            }
+            else {
+                cell.favoriteIcon!.image = UIImage(named:"like-1")
+            }
+        })
+    }
 }
