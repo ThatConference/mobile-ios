@@ -26,11 +26,14 @@ class FavoritesViewController : TimeSlotRootViewController {
         self.previousDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5)
         self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), for: .touchUpInside)
         
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: #selector(FavoritesViewController.refresh(_:)), for: UIControlEvents.valueChanged)
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl.addTarget(self, action: #selector(FavoritesViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(self.refreshControl)
         self.revealViewControllerFunc(barButton: menuButton)
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 170
         
         if currentReachabilityStatus != .notReachable {
             if StateData.instance.offlineFavoriteSessions.sessions.count > 0 {
@@ -41,21 +44,19 @@ class FavoritesViewController : TimeSlotRootViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-                
-        if (getDirtyData()) {
-            if (self.dailySchedules != nil) {
-                OperationQueue.main.addOperation() {
-                    self.dailySchedules.removeAll()
-                    self.tableView.isHidden = true
+        
+        if (!Authentication.isLoggedIn()) {
+            if (getDirtyData()) {
+                if (self.dailySchedules != nil) {
+                    OperationQueue.main.addOperation() {
+                        self.dailySchedules.removeAll()
+                        self.tableView.isHidden = true
+                    }
                 }
-            }
-            
-            if (!Authentication.isLoggedIn()) {
-                loadData()
             }
         }
         
-        Answers.logContentView(withName: "Open Spaces",
+        Answers.logContentView(withName: "Favorites",
                                        contentType: "Page",
                                        contentId: "",
                                        customAttributes: [:])
@@ -92,6 +93,7 @@ class FavoritesViewController : TimeSlotRootViewController {
         //Show login screen if not logged in
         if (!Authentication.isLoggedIn()) {
             setData(true)
+            self.dateLabel.text = "Must Sign In"
             self.performSegue(withIdentifier: "show_login", sender: self)
         } else {
             self.view.addSubview(self.activityIndicator)
@@ -104,59 +106,61 @@ class FavoritesViewController : TimeSlotRootViewController {
     }
     
     override func loadData() {
-        if currentReachabilityStatus != .notReachable {
-            if StateData.instance.offlineFavoriteSessions.sessions.count > 0 {
-                ThatConferenceAPI.saveOfflineFavorites(offlineFavorites: StateData.instance.offlineFavoriteSessions.sessions)
-            }
-        }
-        
-        if let sessionStore = StateData.instance.sessionStore {
-            self.dateLabel.text = "Loading"
-            self.activityIndicator.startAnimating()
-            
-            if (self.refreshControl != nil) {
-                self.refreshControl.endRefreshing()
-            }
-            
-            sessionStore.getFavoriteSessions(completion: {(sessionResult) -> Void in
-                switch sessionResult {
-                case .success(let sessions):
-                    self.setData(false)
-                    self.dailySchedules = sessions
-                    PersistenceManager.saveDailySchedule(self.dailySchedules, path: Path.Favorites)
-                    self.displayData()
-                    break
-                case .failure(let error):
-                    print("Error: \(error)")
-                    self.setData(true)
-                    let values = PersistenceManager.loadDailySchedule(Path.Favorites)
-                    if values != nil && Authentication.isLoggedIn() {
-                        self.dailySchedules = values!
-                        self.displayData()
-                    } else {
-                        if (self.isViewLoaded && self.view.window != nil) {
-                            self.alert = UIAlertController(title: "Log In Needed", message: "Log in to view favorites.", preferredStyle: UIAlertControllerStyle.alert)
-                            self.alert.addAction(UIAlertAction(title: "Log In", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
-                                self.parent!.parent!.performSegue(withIdentifier: "show_login", sender: self)
-                            }))
-                            self.alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
-                                if (self.dailySchedules != nil) {
-                                    self.dailySchedules.removeAll()
-                                }
-                                
-                                self.tableView.delegate = self
-                                self.tableView.dataSource = self
-                                self.tableView.reloadData()
-                                self.activityIndicator.stopAnimating()
-                                
-                                self.navigateToSchedule()
-                            }))
-                            self.present(self.alert, animated: true, completion: nil)
-                        }
-                    }
-                    break
+        if (Authentication.isLoggedIn()) {
+            if currentReachabilityStatus != .notReachable {
+                if StateData.instance.offlineFavoriteSessions.sessions.count > 0 {
+                    ThatConferenceAPI.saveOfflineFavorites(offlineFavorites: StateData.instance.offlineFavoriteSessions.sessions)
                 }
-            })
+            }
+            
+            if let sessionStore = StateData.instance.sessionStore {
+                self.dateLabel.text = "Loading"
+                self.activityIndicator.startAnimating()
+                
+                if (self.refreshControl != nil) {
+                    self.refreshControl.endRefreshing()
+                }
+                
+                sessionStore.getFavoriteSessions(completion: {(sessionResult) -> Void in
+                    switch sessionResult {
+                    case .success(let sessions):
+                        self.setData(false)
+                        self.dailySchedules = sessions
+                        PersistenceManager.saveDailySchedule(self.dailySchedules, path: Path.Favorites)
+                        self.displayData()
+                        break
+                    case .failure(let error):
+                        print("Error: \(error)")
+                        self.setData(true)
+                        let values = PersistenceManager.loadDailySchedule(Path.Favorites)
+                        if values != nil && Authentication.isLoggedIn() {
+                            self.dailySchedules = values!
+                            self.displayData()
+                        } else {
+                            if (self.isViewLoaded && self.view.window != nil) {
+                                self.alert = UIAlertController(title: "Log In Needed", message: "Log in to view favorites.", preferredStyle: UIAlertControllerStyle.alert)
+                                self.alert.addAction(UIAlertAction(title: "Log In", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
+                                    self.parent!.parent!.performSegue(withIdentifier: "show_login", sender: self)
+                                }))
+                                self.alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
+                                    if (self.dailySchedules != nil) {
+                                        self.dailySchedules.removeAll()
+                                    }
+                                    
+                                    self.tableView.delegate = self
+                                    self.tableView.dataSource = self
+                                    self.tableView.reloadData()
+                                    self.activityIndicator.stopAnimating()
+                                    
+                                    self.navigateToSchedule()
+                                }))
+                                self.present(self.alert, animated: true, completion: nil)
+                            }
+                        }
+                        break
+                    }
+                })
+            }
         }
     }
     

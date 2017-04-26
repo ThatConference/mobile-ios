@@ -27,12 +27,15 @@ class OpenSpacesViewController : TimeSlotRootViewController {
         self.previousDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5)
         self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), for: .touchUpInside)
         
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: #selector(OpenSpacesViewController.refresh(_:)), for: UIControlEvents.valueChanged)
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl.addTarget(self, action: #selector(OpenSpacesViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(self.refreshControl)
         
         self.revealViewControllerFunc(barButton: menuButton)
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 170
     }
     
     override func viewDidAppear(_ animated: Bool) {
