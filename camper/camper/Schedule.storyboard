@@ -41,20 +41,20 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
                                 <subviews>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIT-yN-a1Y">
-                                        <rect key="frame" x="10" y="11.5" width="61" height="18"/>
+                                        <rect key="frame" x="10" y="13" width="59" height="15"/>
                                         <fontDescription key="fontDescription" name="NeutrafaceText-Bold" family="Neutraface Text" pointSize="15"/>
                                         <state key="normal" title="Button" image="subheader-arrow-left">
                                             <color key="titleColor" red="0.37647058820000001" green="0.51372549020000002" blue="0.47058823529999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6T-en-xLe">
-                                        <rect key="frame" x="81" y="9" width="158" height="23.5"/>
+                                        <rect key="frame" x="79" y="10.5" width="162" height="20"/>
                                         <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a6s-Ew-tGT">
-                                        <rect key="frame" x="249" y="11.5" width="61" height="18"/>
+                                        <rect key="frame" x="251" y="13" width="59" height="15"/>
                                         <fontDescription key="fontDescription" name="NeutrafaceText-Bold" family="Neutraface Text" pointSize="15"/>
                                         <state key="normal" title="Button" image="subheader-arrow-right">
                                             <color key="titleColor" red="0.37647058823529411" green="0.51372549019607838" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -88,7 +88,7 @@
                                         <rect key="frame" x="0.0" y="28" width="280" height="170"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5lJ-0d-qQY" id="Dqm-OI-W0y">
-                                            <rect key="frame" x="0.0" y="0.0" width="280" height="170"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="169.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like-1" translatesAutoresizingMaskIntoConstraints="NO" id="DMP-70-Xzg">
@@ -168,8 +168,8 @@
                                                     <color key="textColor" red="0.4358128309" green="0.4401977956" blue="0.43185979130000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="forward" translatesAutoresizingMaskIntoConstraints="NO" id="GRh-ak-geu">
-                                                    <rect key="frame" x="250" y="74" width="22" height="22"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="details_icon" translatesAutoresizingMaskIntoConstraints="NO" id="GRh-ak-geu">
+                                                    <rect key="frame" x="250" y="139.5" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="1yT-0Z-umG"/>
                                                         <constraint firstAttribute="width" constant="22" id="Koh-2q-vig"/>
@@ -205,7 +205,6 @@
                                                 <constraint firstItem="DMP-70-Xzg" firstAttribute="centerY" secondItem="Dqm-OI-W0y" secondAttribute="centerY" id="2f9-vv-jtN"/>
                                                 <constraint firstAttribute="trailing" secondItem="Kia-zx-uXw" secondAttribute="trailing" id="3Ts-QQ-wEl"/>
                                                 <constraint firstItem="fOe-jO-Eo3" firstAttribute="leading" secondItem="v1D-UJ-9X5" secondAttribute="trailing" constant="8" id="3XK-pc-k7H"/>
-                                                <constraint firstItem="GRh-ak-geu" firstAttribute="centerY" secondItem="Dqm-OI-W0y" secondAttribute="centerY" id="9dr-qU-vGC"/>
                                                 <constraint firstItem="RRG-Dj-eMx" firstAttribute="leading" secondItem="DMP-70-Xzg" secondAttribute="trailing" constant="8" id="Bio-WD-xVB"/>
                                                 <constraint firstItem="AIi-rS-hC7" firstAttribute="trailing" secondItem="ZCd-NM-RmI" secondAttribute="trailing" id="Doh-L2-Vu4"/>
                                                 <constraint firstItem="GRh-ak-geu" firstAttribute="trailing" secondItem="Dqm-OI-W0y" secondAttribute="trailingMargin" id="JXm-by-gzW"/>
@@ -230,6 +229,7 @@
                                                 <constraint firstItem="DMP-70-Xzg" firstAttribute="top" secondItem="Dqm-OI-W0y" secondAttribute="topMargin" id="oKO-lJ-ay6"/>
                                                 <constraint firstItem="AIi-rS-hC7" firstAttribute="leading" secondItem="yMW-cN-zKi" secondAttribute="trailing" constant="8" id="pss-1z-bbb"/>
                                                 <constraint firstItem="GRh-ak-geu" firstAttribute="leading" secondItem="ZCd-NM-RmI" secondAttribute="trailing" constant="8" id="qX2-5S-wGA"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="GRh-ak-geu" secondAttribute="bottom" id="sop-b9-7Nx"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="ZCd-NM-RmI" secondAttribute="trailing" constant="30" id="tJU-AT-Eny"/>
                                                 <constraint firstItem="RRG-Dj-eMx" firstAttribute="top" secondItem="ZCd-NM-RmI" secondAttribute="bottom" constant="8" id="uoj-pC-HZw"/>
                                                 <constraint firstItem="fOe-jO-Eo3" firstAttribute="trailing" secondItem="ZCd-NM-RmI" secondAttribute="trailing" id="wRH-nE-VIQ"/>
@@ -349,8 +349,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="details_icon" width="44" height="44"/>
         <image name="flag" width="80" height="99"/>
-        <image name="forward" width="25" height="25"/>
         <image name="hamburger" width="24" height="20"/>
         <image name="like-1" width="95" height="95"/>
         <image name="room" width="89" height="77"/>

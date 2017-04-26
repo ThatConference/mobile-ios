@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "FINALDRAFT_Postcard_3264x2448_CAMPERLAND-1.png",
+      "filename" : "FINALDRAFT_Postcard_3264x2448_Landscape_CAMPERLAND.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "FINALDRAFT_Postcard_3264x2448_CAMPERLAND-2.png",
+      "filename" : "FINALDRAFT_Postcard_3264x2448_Landscape_CAMPERLAND-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "FINALDRAFT_Postcard_3264x2448_CAMPERLAND-3.png",
+      "filename" : "FINALDRAFT_Postcard_3264x2448_Landscape_CAMPERLAND-2.png",
       "scale" : "3x"
     }
   ],

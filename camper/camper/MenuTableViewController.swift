@@ -9,7 +9,7 @@
 import UIKit
 
 class MenuTableViewController: UITableViewController {
-
+    @IBOutlet weak var logOffImage: UIImageView!
     @IBOutlet weak var logOffLabel: UILabel!
     @IBOutlet weak var logOffCell: UITableViewCell!
     var loggedIn = false
@@ -33,8 +33,10 @@ class MenuTableViewController: UITableViewController {
     func setSignInButton() {
         if (Authentication.isLoggedIn()) {
             logOffLabel.text = "Sign Out"
+            logOffImage.image = UIImage(named: "logout_icon")
         } else {
             logOffLabel.text = "Sign In"
+            logOffImage.image = UIImage(named: "login_icon")
         }
     }
     

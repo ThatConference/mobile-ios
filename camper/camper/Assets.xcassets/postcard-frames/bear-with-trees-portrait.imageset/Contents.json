@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "FINALDRAFT_Postcard_3264x2448_Portrait_BEAR-1.png",
+      "filename" : "FINALDRAFT_Postcard_3264x2448_Portrait_BEAR.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "FINALDRAFT_Postcard_3264x2448_Portrait_BEAR-2.png",
+      "filename" : "FINALDRAFT_Postcard_3264x2448_Portrait_BEAR-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "FINALDRAFT_Postcard_3264x2448_Portrait_BEAR-3.png",
+      "filename" : "FINALDRAFT_Postcard_3264x2448_Portrait_BEAR-2.png",
       "scale" : "3x"
     }
   ],

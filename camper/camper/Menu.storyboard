@@ -152,9 +152,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Family Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVy-eo-gCi">
-                                                    <rect key="frame" x="54" y="11" width="101" height="21.5"/>
+                                                    <rect key="frame" x="54" y="11" width="150" height="21.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="101" id="QWj-ne-yvp"/>
+                                                        <constraint firstAttribute="width" constant="150" id="QWj-ne-yvp"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="NeutrafaceText-Book" family="Neutraface Text" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -369,7 +369,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6AF-hc-YwG">
-                                                    <rect key="frame" x="23" y="11" width="101" height="21"/>
+                                                    <rect key="frame" x="54" y="11" width="101" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="101" id="wmE-Ls-cqY"/>
                                                     </constraints>
@@ -377,11 +377,23 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_icon" translatesAutoresizingMaskIntoConstraints="NO" id="5TG-1h-ydJ">
+                                                    <rect key="frame" x="23" y="11" width="21" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="21" id="MS4-Cw-XZ8"/>
+                                                        <constraint firstAttribute="height" constant="21" id="lYf-sy-ZSw"/>
+                                                        <constraint firstAttribute="width" constant="21" id="o1X-R9-P3f"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="wsf-YS-R5a"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="6AF-hc-YwG" secondAttribute="bottom" constant="3" id="2Zf-a4-L6W"/>
-                                                <constraint firstItem="6AF-hc-YwG" firstAttribute="leading" secondItem="Oun-jz-TxR" secondAttribute="leadingMargin" constant="15" id="5np-Fw-iFd"/>
+                                                <constraint firstItem="6AF-hc-YwG" firstAttribute="centerY" secondItem="Oun-jz-TxR" secondAttribute="centerY" id="cIP-iG-YM2"/>
+                                                <constraint firstItem="6AF-hc-YwG" firstAttribute="leading" secondItem="5TG-1h-ydJ" secondAttribute="trailing" constant="10" id="lmh-Ip-ScJ"/>
                                                 <constraint firstItem="6AF-hc-YwG" firstAttribute="top" secondItem="Oun-jz-TxR" secondAttribute="topMargin" constant="3" id="oFQ-nw-9Er"/>
+                                                <constraint firstItem="5TG-1h-ydJ" firstAttribute="leading" secondItem="Oun-jz-TxR" secondAttribute="leadingMargin" constant="15" id="rd6-Hz-Gwe"/>
+                                                <constraint firstItem="5TG-1h-ydJ" firstAttribute="centerY" secondItem="Oun-jz-TxR" secondAttribute="centerY" id="uwM-oG-PgB"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -395,6 +407,7 @@
                     </tableView>
                     <connections>
                         <outlet property="logOffCell" destination="kyV-sm-KlQ" id="ZXV-4O-YGC"/>
+                        <outlet property="logOffImage" destination="5TG-1h-ydJ" id="Ds8-wH-kgw"/>
                         <outlet property="logOffLabel" destination="6AF-hc-YwG" id="who-lv-S0X"/>
                         <segue destination="6ao-Ez-XVK" kind="presentation" identifier="show_login" id="9YY-oe-mVd"/>
                     </connections>
@@ -480,6 +493,7 @@
         <image name="family_icon" width="38" height="38"/>
         <image name="favorites" width="28" height="28"/>
         <image name="header-logo" width="140" height="62"/>
+        <image name="login_icon" width="38" height="38"/>
         <image name="map" width="28" height="28"/>
         <image name="open-spaces" width="28" height="29"/>
         <image name="schedule" width="27" height="28"/>
