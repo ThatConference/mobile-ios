@@ -105,6 +105,9 @@
 		7BD3625F1E942E79009C3A5E /* Sponsor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BD3625D1E942E79009C3A5E /* Sponsor.storyboard */; };
 		7BD362621E943065009C3A5E /* OpenSpaces.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BD362601E943065009C3A5E /* OpenSpaces.storyboard */; };
 		7BD362641E943097009C3A5E /* Schedule.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BD362631E943097009C3A5E /* Schedule.storyboard */; };
+		7BE1B5411EAA696E0071B3D2 /* FamilyEventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1B5401EAA696E0071B3D2 /* FamilyEventsTableViewCell.swift */; };
+		7BE1B5441EAA698F0071B3D2 /* FamilyEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1B5431EAA698F0071B3D2 /* FamilyEventsViewController.swift */; };
+		7BE1B5461EAA6D1C0071B3D2 /* FamilyEvents.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BE1B5451EAA6D1C0071B3D2 /* FamilyEvents.storyboard */; };
 		8100BB730DD7BD782BE97450 /* Pods_That_Conference.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0B5257ACD92AA9CC1AFA77 /* Pods_That_Conference.framework */; };
 /* End PBXBuildFile section */
 
@@ -213,6 +216,9 @@
 		7BD3625E1E942E79009C3A5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Sponsor.storyboard; sourceTree = "<group>"; };
 		7BD362611E943065009C3A5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/OpenSpaces.storyboard; sourceTree = "<group>"; };
 		7BD362631E943097009C3A5E /* Schedule.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Schedule.storyboard; sourceTree = "<group>"; };
+		7BE1B5401EAA696E0071B3D2 /* FamilyEventsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyEventsTableViewCell.swift; sourceTree = "<group>"; };
+		7BE1B5431EAA698F0071B3D2 /* FamilyEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyEventsViewController.swift; sourceTree = "<group>"; };
+		7BE1B5451EAA6D1C0071B3D2 /* FamilyEvents.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FamilyEvents.storyboard; sourceTree = "<group>"; };
 		A815631E4D1E81BC22968403 /* Pods-That Conference.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-That Conference.release.xcconfig"; path = "Pods/Target Support Files/Pods-That Conference/Pods-That Conference.release.xcconfig"; sourceTree = "<group>"; };
 		E98E5B17ECF006FB52EFAA4B /* Pods-That Conference.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-That Conference.debug.xcconfig"; path = "Pods/Target Support Files/Pods-That Conference/Pods-That Conference.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -325,6 +331,7 @@
 		31373C9D1D02735B00430EC0 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				7BE1B5451EAA6D1C0071B3D2 /* FamilyEvents.storyboard */,
 				51A4D1CF1CF1532900F956BC /* Favorites.storyboard */,
 				312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */,
 				7BD3625B1E942E27009C3A5E /* Login.storyboard */,
@@ -393,6 +400,7 @@
 			children = (
 				5113D3871CAC521C00D6B974 /* CircleView.swift */,
 				5113D3891CAF58A100D6B974 /* CircleLabel.swift */,
+				7BE1B5401EAA696E0071B3D2 /* FamilyEventsTableViewCell.swift */,
 				51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */,
 				31D877F71D1864C10045E8DA /* FrameCell.swift */,
 				3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */,
@@ -409,6 +417,7 @@
 			children = (
 				317154231D1D8025004078E2 /* BaseViewController.swift */,
 				31CFD1321D09050C00F1AE23 /* TimeSlotRootViewController.swift */,
+				7BE1B5421EAA69750071B3D2 /* FamilyEvents */,
 				7BD362281E8ED62A009C3A5E /* Favorites */,
 				7BD362291E8ED63C009C3A5E /* Main */,
 				7BD3622A1E8ED649009C3A5E /* PostCards */,
@@ -509,6 +518,14 @@
 			name = SWRevealViewController;
 			sourceTree = "<group>";
 		};
+		7BE1B5421EAA69750071B3D2 /* FamilyEvents */ = {
+			isa = PBXGroup;
+			children = (
+				7BE1B5431EAA698F0071B3D2 /* FamilyEventsViewController.swift */,
+			);
+			name = FamilyEvents;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -545,7 +562,7 @@
 				TargetAttributes = {
 					312A94111C814B6B00AE938B = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 2VX3GW8TL8;
+						DevelopmentTeam = TP9E7CXU62;
 						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -584,6 +601,7 @@
 				312A94631C89325D00AE938B /* NeutraCond-BoldAlt.otf in Resources */,
 				312A94201C814B6B00AE938B /* LaunchScreen.storyboard in Resources */,
 				312A943B1C88DEC900AE938B /* Knockout-HTF31-JuniorMiddlewt.otf in Resources */,
+				7BE1B5461EAA6D1C0071B3D2 /* FamilyEvents.storyboard in Resources */,
 				312A94641C89325D00AE938B /* NeutraCond-Light.otf in Resources */,
 				31920B791D2B008F0035D14B /* Settings.storyboard in Resources */,
 				312A94701C89325D00AE938B /* NeutraDisplay-LightAlt.otf in Resources */,
@@ -711,6 +729,7 @@
 				317154241D1D8025004078E2 /* BaseViewController.swift in Sources */,
 				31D0D9451CC48DEE007C5999 /* AuthToken.swift in Sources */,
 				7BD3622E1E8ED885009C3A5E /* MenuViewController.swift in Sources */,
+				7BE1B5411EAA696E0071B3D2 /* FamilyEventsTableViewCell.swift in Sources */,
 				312A94341C85EE5E00AE938B /* SessionDetailViewController.swift in Sources */,
 				317154201D1B9784004078E2 /* PostCardSaveViewController.swift in Sources */,
 				5113D3881CAC521C00D6B974 /* CircleView.swift in Sources */,
@@ -734,6 +753,7 @@
 				3123AC291C90959D0097BF33 /* Session.swift in Sources */,
 				3116C4D11D3BEDB2002E2722 /* SponsorTableViewCell.swift in Sources */,
 				31D0D9411CC08282007C5999 /* AuthorizationWebViewController.swift in Sources */,
+				7BE1B5441EAA698F0071B3D2 /* FamilyEventsViewController.swift in Sources */,
 				311E0E6B1CB74D76004FA850 /* ExternalLogin.swift in Sources */,
 				317154221D1C340E004078E2 /* PassThroughImageView.swift in Sources */,
 				318F268C1CBC65F30065A76F /* Authentication.swift in Sources */,
@@ -910,7 +930,7 @@
 				CODE_SIGN_ENTITLEMENTS = "That Conference.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 2VX3GW8TL8;
+				DEVELOPMENT_TEAM = TP9E7CXU62;
 				INFOPLIST_FILE = camper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -931,7 +951,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "That Conference.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 2VX3GW8TL8;
+				DEVELOPMENT_TEAM = TP9E7CXU62;
 				INFOPLIST_FILE = camper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

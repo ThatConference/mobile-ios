@@ -2,6 +2,7 @@ import Foundation
 
 enum Path: String {
     case Schedule = "Schedule"
+    case FamilyEvents = "FamilyEvents"
     case Favorites = "Favorites"
     case OpenSpaces = "OpenSpaces"
     case OfflineFavorites = "OfflineFavorites"
