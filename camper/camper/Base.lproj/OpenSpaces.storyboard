@@ -123,31 +123,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="335" height="160"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gxq-Zq-BqV">
-                                                    <rect key="frame" x="8" y="0.0" width="327" height="159.5"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CANCELLED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDj-Ay-oE2">
-                                                            <rect key="frame" x="83" y="66.5" width="161.5" height="28"/>
-                                                            <fontDescription key="fontDescription" name="NeutrafaceText-Bold" family="Neutraface Text" pointSize="28"/>
-                                                            <color key="textColor" red="0.66666666669999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Session Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cS1-2w-E2m">
-                                                            <rect key="frame" x="48" y="18" width="259" height="17"/>
-                                                            <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="17"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstItem="cS1-2w-E2m" firstAttribute="leading" secondItem="Gxq-Zq-BqV" secondAttribute="leading" constant="48" id="3Hw-N2-Efn"/>
-                                                        <constraint firstItem="YDj-Ay-oE2" firstAttribute="centerY" secondItem="Gxq-Zq-BqV" secondAttribute="centerY" id="Dcc-vB-aBQ"/>
-                                                        <constraint firstItem="YDj-Ay-oE2" firstAttribute="centerX" secondItem="Gxq-Zq-BqV" secondAttribute="centerX" id="fyL-Ef-LLM"/>
-                                                        <constraint firstAttribute="trailing" secondItem="cS1-2w-E2m" secondAttribute="trailing" constant="20" id="gmB-Vn-CWT"/>
-                                                        <constraint firstItem="cS1-2w-E2m" firstAttribute="top" secondItem="Gxq-Zq-BqV" secondAttribute="top" constant="18" id="l13-32-aEY"/>
-                                                    </constraints>
-                                                </view>
                                                 <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like-1" translatesAutoresizingMaskIntoConstraints="NO" id="jju-Jq-19r">
                                                     <rect key="frame" x="8" y="18" width="40" height="45"/>
                                                     <constraints>
@@ -242,6 +217,31 @@
                                                         <constraint firstAttribute="width" constant="40" id="Fqo-h1-m8f"/>
                                                     </constraints>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gxq-Zq-BqV">
+                                                    <rect key="frame" x="8" y="0.0" width="327" height="159.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CANCELLED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDj-Ay-oE2">
+                                                            <rect key="frame" x="83" y="66.5" width="161.5" height="28"/>
+                                                            <fontDescription key="fontDescription" name="NeutrafaceText-Bold" family="Neutraface Text" pointSize="28"/>
+                                                            <color key="textColor" red="0.66666666669999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Session Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cS1-2w-E2m">
+                                                            <rect key="frame" x="48" y="18" width="259" height="17"/>
+                                                            <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="17"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="cS1-2w-E2m" firstAttribute="leading" secondItem="Gxq-Zq-BqV" secondAttribute="leading" constant="48" id="3Hw-N2-Efn"/>
+                                                        <constraint firstItem="YDj-Ay-oE2" firstAttribute="centerY" secondItem="Gxq-Zq-BqV" secondAttribute="centerY" id="Dcc-vB-aBQ"/>
+                                                        <constraint firstItem="YDj-Ay-oE2" firstAttribute="centerX" secondItem="Gxq-Zq-BqV" secondAttribute="centerX" id="fyL-Ef-LLM"/>
+                                                        <constraint firstAttribute="trailing" secondItem="cS1-2w-E2m" secondAttribute="trailing" constant="20" id="gmB-Vn-CWT"/>
+                                                        <constraint firstItem="cS1-2w-E2m" firstAttribute="top" secondItem="Gxq-Zq-BqV" secondAttribute="top" constant="18" id="l13-32-aEY"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Mmg-lH-8Fr" firstAttribute="trailing" secondItem="54j-nH-eyr" secondAttribute="trailing" id="4sd-1b-Gat"/>
