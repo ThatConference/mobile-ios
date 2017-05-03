@@ -109,36 +109,6 @@ class SessionStore {
         }
     }
     
-    private func testData(sessions: [Session]) {
-        // For getSchedules
-        
-//        let dateString1 = "2017-04-10 12:00:00 +0000"
-//        let dateString2 = "2017-04-10 13:30:00 +0000"
-//        let dateString3 = "2017-04-11 14:45:00 +0000"
-//        let dateString4 = "2017-04-11 15:00:00 +0000"
-//        let dateString5 = "2017-04-11 19:45:00 +0000"
-//        let dateString6 = "2017-04-11 20:00:00 +0000"
-//        
-//        let sessionOne = Session(cancelled: false, accepted: true, id: 190, title: "You Are Alive!", sessionDescription: "There is something coo;", scheduledDateTime: dateString1.stringToDate, scheduledRoom: "B", primaryCategory: "That Conference", level: "100", speakers: [], isFamilyApproved: true, isUserFavorite: false, updated: false)
-//
-//        let sessionTwo = Session(cancelled: false, accepted: true, id: 191, title: "You Are Alive!", sessionDescription: "There is something coo;", scheduledDateTime: dateString2.stringToDate, scheduledRoom: "B", primaryCategory: "Open Spaces", level: "100", speakers: [], isFamilyApproved: true, isUserFavorite: false, updated: false)
-//
-//        let sessionThree = Session(cancelled: false, accepted: true, id: 192, title: "You Are Alive!", sessionDescription: "There is something coo;", scheduledDateTime: dateString3.stringToDate, scheduledRoom: "B", primaryCategory: "That Conference", level: "100", speakers: [], isFamilyApproved: true, isUserFavorite: false, updated: false)
-//
-//        let sessionFour = Session(cancelled: false, accepted: true, id: 193, title: "You Are Alive!", sessionDescription: "There is something coo;", scheduledDateTime: dateString4.stringToDate, scheduledRoom: "B", primaryCategory: "That Conference", level: "100", speakers: [], isFamilyApproved: true, isUserFavorite: false, updated: false)
-//
-//        let sessionFive = Session(cancelled: false, accepted: true, id: 192, title: "You Are Alive!", sessionDescription: "There is something coo;", scheduledDateTime: dateString5.stringToDate, scheduledRoom: "B", primaryCategory: "That Conference", level: "100", speakers: [], isFamilyApproved: true, isUserFavorite: false, updated: false)
-//
-//        let sessionSix = Session(cancelled: false, accepted: true, id: 193, title: "You Are Alive!", sessionDescription: "There is something coo;", scheduledDateTime: dateString6.stringToDate, scheduledRoom: "B", primaryCategory: "That Conference", level: "100", speakers: [], isFamilyApproved: true, isUserFavorite: false, updated: false)
-//        
-//        sessions.append(sessionOne)
-//        sessions.append(sessionTwo)
-//        sessions.append(sessionThree)
-//        sessions.append(sessionFour)
-//        sessions.append(sessionFive)
-//        sessions.append(sessionSix)
-    }
-    
     func addFavorite(_ session: Session, completion: @escaping (SessionsResult) -> Void) {
         ThatConferenceAPI.saveFavorite(session.id, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {

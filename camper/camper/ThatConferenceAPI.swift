@@ -421,10 +421,21 @@ class ThatConferenceAPI {
     }
     
     class func saveOfflineFavorites(offlineFavorites: Dictionary<String, Session>) {
-        for session in offlineFavorites {
-            ThatConferenceAPI.saveFavorite(session.value.id, completionHandler: { (data, response, error) in
-                StateData.instance.offlineFavoriteSessions.sessions.removeValue(forKey: session.key)
-            })
+        var offlineSyncFavorites = offlineFavorites
+        for session in offlineSyncFavorites {
+            var sessionKey: String = "\(session.key)"
+            if session.value.isUserFavorite == true {
+                ThatConferenceAPI.saveFavorite(session.value.id, completionHandler: { (data, response, error) in
+                    offlineSyncFavorites[sessionKey] = nil
+                })
+            } else {
+                ThatConferenceAPI.deleteFavorite(session.value.id, completionHandler: { (data, response, error) in
+                    offlineSyncFavorites.removeValue(forKey: sessionKey)
+                })
+            }
         }
+        offlineSyncFavorites.removeAll()
+        StateData.instance.offlineFavoriteSessions.sessions = offlineSyncFavorites
+        PersistenceManager.saveOfflineFavorites(StateData.instance.offlineFavoriteSessions, path: Path.OfflineFavorites)
     }
 }

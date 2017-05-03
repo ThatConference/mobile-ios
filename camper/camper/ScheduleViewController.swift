@@ -12,7 +12,7 @@ class ScheduleViewController : TimeSlotRootViewController {
     
     var refreshControl: UIRefreshControl!
     var currentDateTime: Date!
-       
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,33 +27,26 @@ class ScheduleViewController : TimeSlotRootViewController {
         self.previousDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5)
         self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), for: .touchUpInside)
         
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.refreshControl.addTarget(self, action: #selector(ScheduleViewController.refresh(_:)), for: UIControlEvents.valueChanged)
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(ScheduleViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(self.refreshControl)
         
         self.revealViewControllerFunc(barButton: menuButton)
-        
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 170
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         Answers.logContentView(withName: "Open Spaces",
-                                       contentType: "Page",
-                                       contentId: "",
-                                       customAttributes: [:])
+                               contentType: "Page",
+                               contentId: "",
+                               customAttributes: [:])
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        if currentReachabilityStatus != .notReachable {
-            if StateData.instance.offlineFavoriteSessions.sessions.count > 0 {
-                ThatConferenceAPI.saveOfflineFavorites(offlineFavorites: StateData.instance.offlineFavoriteSessions.sessions)
-            }
-        }
+        self.syncOfflineFavorites()
     }
     
     internal override func moveToDay(_ day: String!) {
@@ -63,16 +56,16 @@ class ScheduleViewController : TimeSlotRootViewController {
         
         self.dailySchedule = self.dailySchedules[day];
         UIView.transition(with: self.tableView, duration: 0.5, options: .transitionCrossDissolve, animations: {() -> Void in
-                self.tableView.reloadData()
-                self.tableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
-            }, completion: nil)
+            self.tableView.reloadData()
+            self.tableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
+        }, completion: nil)
         UIView.transition(with: self.timeTableView, duration: 0.5, options: .transitionCrossDissolve, animations: {() -> Void in
-                self.loadTimeTable()
-            }, completion: nil)
+            self.loadTimeTable()
+        }, completion: nil)
         UIView.transition(with: self.dateLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {() -> Void in
-                self.setDateLabel(self.dailySchedule.date! as Date)
-                self.setPageState(day)
-            }, completion: nil)
+            self.setDateLabel(self.dailySchedule.date! as Date)
+            self.setPageState(day)
+        }, completion: nil)
         
         let order = (Calendar.current as NSCalendar).compare(Date(), to: self.dailySchedule.date as Date, toUnitGranularity: .day)
         if order == ComparisonResult.orderedSame {
@@ -86,11 +79,7 @@ class ScheduleViewController : TimeSlotRootViewController {
     
     // MARK: Data
     override func loadData() {
-        if currentReachabilityStatus != .notReachable {
-            if StateData.instance.offlineFavoriteSessions.sessions.count > 0 {
-                ThatConferenceAPI.saveOfflineFavorites(offlineFavorites: StateData.instance.offlineFavoriteSessions.sessions)
-            }
-        }
+        self.syncOfflineFavorites()
         
         if let sessionStore = StateData.instance.sessionStore {
             self.dateLabel.text = "Loading"
@@ -242,7 +231,7 @@ class ScheduleViewController : TimeSlotRootViewController {
             self.nextDayButton.isHidden = true
         }
     }
-   
+    
     // MARK: Time Table Methods
     
     fileprivate func loadTimeTable() {
@@ -337,7 +326,7 @@ class ScheduleViewController : TimeSlotRootViewController {
             }
         }
     }
-   
+    
     fileprivate func scrollToSection(_ timeSlot: Date) {
         let section = determineClosestTimeslotSection(timeSlot)
         let indexPath = IndexPath(row: 0, section: section)
@@ -423,20 +412,7 @@ class ScheduleViewController : TimeSlotRootViewController {
         }
         
         return cell
-    }
-    
-    func saveOfflineFavorites(currentSession: Session, completed: @escaping DownloadComplete) {
-        guard let sessionId = currentSession.id else {return}
-
-        let sessions = Sessions()
-        sessions.sessions[String(describing: sessionId)] = currentSession
-        
-        StateData.instance.offlineFavoriteSessions.sessions[String(describing: sessionId)] = currentSession
-        
-        PersistenceManager.saveOfflineFavorites(sessions, path: Path.OfflineFavorites)
-        
-        completed()
-    }
+    }    
     
     func SessionFavorited(_ sender: UITapGestureRecognizer) {
         if Authentication.isLoggedIn() {
@@ -459,15 +435,9 @@ class ScheduleViewController : TimeSlotRootViewController {
                                 self.stopIndicator()
                                 guard let currentSession = cell.session else {return}
                                 currentSession.isUserFavorite = false
-                                self.saveOfflineFavorites(currentSession: currentSession) {
+                                self.saveOfflineFavorites(currentSession: currentSession, isOffline: true) {
                                     self.setFavoriteIcon(cell, animated: true)
                                     Answers.logCustomEvent(withName: "Removed Favorite", customAttributes: [:])
-                                    if let _ = PersistenceManager.loadOfflineFavorites(.OfflineFavorites) {
-                                        print("Something in here, but what?")
-                                    } else {
-                                        print("Nothing in here")
-                                    }
-
                                 }
                                 break
                             }
@@ -489,7 +459,7 @@ class ScheduleViewController : TimeSlotRootViewController {
                                 self.stopIndicator()
                                 guard let currentSession = cell.session else {return}
                                 currentSession.isUserFavorite = true
-                                self.saveOfflineFavorites(currentSession: currentSession) {
+                                self.saveOfflineFavorites(currentSession: currentSession, isOffline: true) {
                                     self.setFavoriteIcon(cell, animated: true)
                                     Answers.logCustomEvent(withName: "Added Favorite", customAttributes: [:])
                                 }

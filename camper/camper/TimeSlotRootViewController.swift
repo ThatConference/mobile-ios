@@ -26,6 +26,8 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
         
         view.addGestureRecognizer(leftSwipe)
         view.addGestureRecognizer(rightSwipe)
+        
+        self.syncOfflineFavorites()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -159,6 +161,44 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
     }
     
     func setFavoriteIcon(_ cell: ScheduleTableViewCell, animated: Bool) {
+        DispatchQueue.main.async(execute: {
+            if animated {
+                CATransaction.begin()
+                CATransaction.setAnimationDuration(1.5)
+                let transition = CATransition()
+                transition.type = kCATransitionFade
+                cell.favoriteIcon!.layer.add(transition, forKey: kCATransitionFade)
+                CATransaction.commit()
+            }
+            if cell.session.isUserFavorite {
+                cell.favoriteIcon!.image = UIImage(named:"like-remove")
+            }
+            else {
+                cell.favoriteIcon!.image = UIImage(named:"like-1")
+            }
+        })
+    }
+    
+    func setFavoritesFavoriteIcon(_ cell: ScheduleTableViewCell, animated: Bool) {
+        DispatchQueue.main.async(execute: {
+            if animated {
+                CATransaction.begin()
+                CATransaction.setAnimationDuration(1.5)
+                let transition = CATransition()
+                transition.type = kCATransitionFade
+                cell.favoriteIcon!.layer.add(transition, forKey: kCATransitionFade)
+                CATransaction.commit()
+            }
+            if cell.session.isUserFavorite {
+                cell.favoriteIcon!.image = UIImage(named:"like-remove")
+            }
+            else {
+                cell.favoriteIcon!.image = UIImage(named:"like-1")
+            }
+        })
+    }
+    
+    func removeFavoriteIcon(_ cell: FavoritesTableViewCell, animated: Bool) {
         DispatchQueue.main.async(execute: {
             if animated {
                 CATransaction.begin()

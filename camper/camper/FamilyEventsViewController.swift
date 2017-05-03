@@ -20,11 +20,9 @@ class FamilyEventsViewController : TimeSlotRootViewController {
     
     var refreshControl: UIRefreshControl!
     var currentDateTime: Date!
-    var familyApprovedSessions: Dictionary<String, DailySchedule>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        familyApprovedSessions = Dictionary<String, DailySchedule>()
         
         loadData()
         
@@ -37,21 +35,18 @@ class FamilyEventsViewController : TimeSlotRootViewController {
         self.previousDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5)
         self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), for: .touchUpInside)
         
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.refreshControl.addTarget(self, action: #selector(FamilyEventsViewController.refresh(_:)), for: UIControlEvents.valueChanged)
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(FamilyEventsViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(self.refreshControl)
         
         self.revealViewControllerFunc(barButton: menuButton)
-        
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 170
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        Answers.logContentView(withName: "Family Events",
+        Answers.logContentView(withName: "Open Spaces",
                                contentType: "Page",
                                contentId: "",
                                customAttributes: [:])
@@ -59,11 +54,7 @@ class FamilyEventsViewController : TimeSlotRootViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        if currentReachabilityStatus != .notReachable {
-            if StateData.instance.offlineFavoriteSessions.sessions.count > 0 {
-                ThatConferenceAPI.saveOfflineFavorites(offlineFavorites: StateData.instance.offlineFavoriteSessions.sessions)
-            }
-        }
+        self.syncOfflineFavorites()
     }
     
     internal override func moveToDay(_ day: String!) {
@@ -96,12 +87,7 @@ class FamilyEventsViewController : TimeSlotRootViewController {
     
     // MARK: Data
     override func loadData() {
-        if currentReachabilityStatus != .notReachable {
-            if StateData.instance.offlineFavoriteSessions.sessions.count > 0 {
-                ThatConferenceAPI.saveOfflineFavorites(offlineFavorites: StateData.instance.offlineFavoriteSessions.sessions)
-            }
-        }
-        
+        self.syncOfflineFavorites()
         if let sessionStore = StateData.instance.sessionStore {
             self.dateLabel.text = "Loading"
             self.activityIndicator.startAnimating()
@@ -121,9 +107,9 @@ class FamilyEventsViewController : TimeSlotRootViewController {
                     break
                 case .failure(let error):
                     print("ERROR:\(error)")
-                    if let values = PersistenceManager.loadDailySchedule(Path.FamilyEvents) {
+                    if let values = PersistenceManager.loadDailySchedule(Path.Schedule) {
                         self.setData(true)
-                        self.dailySchedules = values
+                        self.dailySchedules = self.filterEvents(values)
                         self.displayData()
                     } else {
                         let alert = UIAlertController(title: "Error", message: "Could not retrieve schedule data. Please try again later.", preferredStyle: UIAlertControllerStyle.alert)
@@ -141,42 +127,30 @@ class FamilyEventsViewController : TimeSlotRootViewController {
     func filterEvents(_ dict: Dictionary<String, DailySchedule>) -> Dictionary<String, DailySchedule> {
         var convertDict: Dictionary<String, DailySchedule> = dict
         
-        if PersistenceManager.loadDailySchedule(.FamilyEvents) == nil {
+        for event in dict {
             
-            for event in dict {
-                // Key is 08-07-2017
-                
-                print(event.value.timeSlots.count)
-                for i in (0..<event.value.timeSlots.count).reversed() {
-                    if let timeSlot = event.value.timeSlots[i] {
-                        print(timeSlot)
-                        let sessions = timeSlot.sessions
-                        if sessions.first??.primaryCategory != "Open Spaces" {
-                            let array: [Session] = sessions.filter { $0!.isFamilyApproved == true
-                                } as! [Session]
-                            var dateString = String()
-                            if let session = sessions[0] {
-                                if let date = session.scheduledDateTime {
-                                    dateString = self.getDate(date)
-                                }
+            for i in (0..<event.value.timeSlots.count).reversed() {
+                if let timeSlot = event.value.timeSlots[i] {
+                    let sessions = timeSlot.sessions
+                    if sessions.first??.primaryCategory != "Open Spaces" {
+                        let array: [Session] = sessions.filter { $0!.isFamilyApproved == true
+                            } as! [Session]
+                        var dateString = String()
+                        if let session = sessions[0] {
+                            if let date = session.scheduledDateTime {
+                                dateString = self.getDate(date)
                             }
-                            if array.isEmpty {
-                                convertDict[dateString]?.timeSlots.remove(at: i)
-                            } else {
-                                convertDict[dateString]?.timeSlots[i]?.sessions = array
-                            }
+                        }
+                        if array.isEmpty {
+                            convertDict[dateString]?.timeSlots.remove(at: i)
+                        } else {
+                            convertDict[dateString]?.timeSlots[i]?.sessions = array
                         }
                     }
                 }
             }
-            PersistenceManager.saveDailySchedule(convertDict, path: Path.FamilyEvents)
-
-        } else {
-
-            if let data = PersistenceManager.loadDailySchedule(Path.FamilyEvents) {
-                convertDict = data
-            }
         }
+        
         return convertDict
     }
     
@@ -477,19 +451,6 @@ class FamilyEventsViewController : TimeSlotRootViewController {
         return cell
     }
     
-    func saveOfflineFavorites(currentSession: Session, completed: @escaping DownloadComplete) {
-        guard let sessionId = currentSession.id else {return}
-        
-        let sessions = Sessions()
-        sessions.sessions[String(describing: sessionId)] = currentSession
-        
-        StateData.instance.offlineFavoriteSessions.sessions[String(describing: sessionId)] = currentSession
-        
-        PersistenceManager.saveOfflineFavorites(sessions, path: Path.OfflineFavorites)
-        
-        completed()
-    }
-    
     func SessionFavorited(_ sender: UITapGestureRecognizer) {
         if Authentication.isLoggedIn() {
             if let sessionStore = StateData.instance.sessionStore {
@@ -511,15 +472,9 @@ class FamilyEventsViewController : TimeSlotRootViewController {
                                 self.stopIndicator()
                                 guard let currentSession = cell.session else {return}
                                 currentSession.isUserFavorite = false
-                                self.saveOfflineFavorites(currentSession: currentSession) {
+                                self.saveOfflineFavorites(currentSession: currentSession, isOffline: true) {
                                     self.setFamilyFavoriteIcon(cell, animated: true)
                                     Answers.logCustomEvent(withName: "Removed Favorite", customAttributes: [:])
-                                    if let _ = PersistenceManager.loadOfflineFavorites(.OfflineFavorites) {
-                                        print("Something in here, but what?")
-                                    } else {
-                                        print("Nothing in here")
-                                    }
-                                    
                                 }
                                 break
                             }
@@ -541,7 +496,7 @@ class FamilyEventsViewController : TimeSlotRootViewController {
                                 self.stopIndicator()
                                 guard let currentSession = cell.session else {return}
                                 currentSession.isUserFavorite = true
-                                self.saveOfflineFavorites(currentSession: currentSession) {
+                                self.saveOfflineFavorites(currentSession: currentSession, isOffline: true) {
                                     self.setFamilyFavoriteIcon(cell, animated: true)
                                     Answers.logCustomEvent(withName: "Added Favorite", customAttributes: [:])
                                 }
@@ -557,19 +512,4 @@ class FamilyEventsViewController : TimeSlotRootViewController {
             }
         }
     }
-    
-    private func getDate(_ dateTime: Date?) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM-dd-YYYY"
-        
-        return dateFormatter.string(from: dateTime!)
-    }
-    
-    class func getFormattedTime(_ dateTime: Date?) -> String {
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "h:mm a"
-        
-        return timeFormatter.string(from: dateTime!)
-    }
 }
-

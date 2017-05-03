@@ -50,9 +50,9 @@ class SessionDetailViewController : BaseViewController, UITableViewDataSource, U
         favoriteButton!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SessionDetailViewController.SessionFavorited(_:))))
         
         Answers.logContentView(withName: "Session Detail",
-                                       contentType: "Page",
-                                       contentId: session.title,
-                                       customAttributes: [:])
+                               contentType: "Page",
+                               contentId: session.title,
+                               customAttributes: [:])
         
         setFavoriteIcon(false)
     }
@@ -125,6 +125,7 @@ class SessionDetailViewController : BaseViewController, UITableViewDataSource, U
                 sessionStore.removeFavorite(self.session, completion:{(sessionsResult) -> Void in
                     switch sessionsResult {
                     case .success(let sessions):
+                        
                         CATransaction.begin()
                         CATransaction.setAnimationDuration(1.5)
                         let transition = CATransition()
@@ -135,12 +136,17 @@ class SessionDetailViewController : BaseViewController, UITableViewDataSource, U
                         
                         self.setDirtyData()
                         self.session = sessions.first
+                        self.session.isUserFavorite = false
+                        self.saveOfflineFavorites(currentSession: self.session, isOffline: false) {}
                         self.setFavoriteIcon(true)
                         break
                     case .failure(_):
-                        let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
+                        
+                        self.session.isUserFavorite = false
+                        
+                        self.saveOfflineFavorites(currentSession: self.session, isOffline: true) {}
+                        self.setFavoriteIcon(true)
+                        
                         break
                     }
                 })
@@ -160,12 +166,18 @@ class SessionDetailViewController : BaseViewController, UITableViewDataSource, U
                         
                         self.setDirtyData()
                         self.session = sessions.first
+                        self.session.isUserFavorite = true
+                        self.saveOfflineFavorites(currentSession: self.session, isOffline: false) {}
+
                         self.setFavoriteIcon(true)
                         break
                     case .failure(_):
-                        let alert = UIAlertController(title: "Error", message: "Could not add favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
+                        
+                        self.session.isUserFavorite = true
+                        
+                        self.saveOfflineFavorites(currentSession: self.session, isOffline: true) {}
+                        self.setFavoriteIcon(true)
+                        
                         break
                     }
                 })
@@ -183,7 +195,7 @@ class SessionDetailViewController : BaseViewController, UITableViewDataSource, U
     }
     
     fileprivate func setFavoriteIcon(_ animated: Bool) {
-        DispatchQueue.main.async(execute: { 
+        DispatchQueue.main.async(execute: {
             if animated {
                 CATransaction.begin()
                 CATransaction.setAnimationDuration(1.5)

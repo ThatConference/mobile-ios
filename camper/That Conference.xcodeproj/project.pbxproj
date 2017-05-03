@@ -378,6 +378,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7B063FF91EBA5A0900FEA2ED /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				312A94271C85383200AE938B /* AuthorizationViewController.swift */,
+				31D0D9401CC08282007C5999 /* AuthorizationWebViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
 		7BD362181E8D45FD009C3A5E /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,6 +428,7 @@
 				31CFD1321D09050C00F1AE23 /* TimeSlotRootViewController.swift */,
 				7BE1B5421EAA69750071B3D2 /* FamilyEvents */,
 				7BD362281E8ED62A009C3A5E /* Favorites */,
+				7B063FF91EBA5A0900FEA2ED /* Login */,
 				7BD362291E8ED63C009C3A5E /* Main */,
 				7BD3622A1E8ED649009C3A5E /* PostCards */,
 				7BD3622C1E8ED65B009C3A5E /* Settings */,
@@ -474,8 +484,6 @@
 		7BD362291E8ED63C009C3A5E /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				312A94271C85383200AE938B /* AuthorizationViewController.swift */,
-				31D0D9401CC08282007C5999 /* AuthorizationWebViewController.swift */,
 				31CFD1361D0E416E00F1AE23 /* OpenSpacesViewController.swift */,
 				312A94291C85390B00AE938B /* ScheduleViewController.swift */,
 				31DEA7631D2B08F40004C2D3 /* SponsorsViewController.swift */,
@@ -562,7 +570,7 @@
 				TargetAttributes = {
 					312A94111C814B6B00AE938B = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 2VX3GW8TL8;
+						DevelopmentTeam = TP9E7CXU62;
 						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -930,7 +938,7 @@
 				CODE_SIGN_ENTITLEMENTS = "That Conference.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 2VX3GW8TL8;
+				DEVELOPMENT_TEAM = TP9E7CXU62;
 				INFOPLIST_FILE = camper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -951,7 +959,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "That Conference.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 2VX3GW8TL8;
+				DEVELOPMENT_TEAM = TP9E7CXU62;
 				INFOPLIST_FILE = camper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
