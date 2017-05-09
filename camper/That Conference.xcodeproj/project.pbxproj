@@ -570,7 +570,7 @@
 				TargetAttributes = {
 					312A94111C814B6B00AE938B = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = TP9E7CXU62;
+						DevelopmentTeam = 2VX3GW8TL8;
 						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -938,7 +938,7 @@
 				CODE_SIGN_ENTITLEMENTS = "That Conference.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = TP9E7CXU62;
+				DEVELOPMENT_TEAM = 2VX3GW8TL8;
 				INFOPLIST_FILE = camper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -959,7 +959,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "That Conference.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = TP9E7CXU62;
+				DEVELOPMENT_TEAM = 2VX3GW8TL8;
 				INFOPLIST_FILE = camper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
