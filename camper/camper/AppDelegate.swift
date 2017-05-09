@@ -10,8 +10,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-//        StateData.instance.sessionStore = SessionStore()
-
         Fabric.with([Crashlytics.self])
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -23,11 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
         
-        
-//        let rootViewController = window!.rootViewController as! UITabBarController
-//        let navController = rootViewController.childViewControllers.first as! UINavigationController
-//        let favoritesViewController = navController.topViewController as! FavoritesViewController
-//        favoritesViewController.store = SessionStore()
         
         //Back Image
         let backArrowImage = UIImage(named: "back")

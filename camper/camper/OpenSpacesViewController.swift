@@ -27,24 +27,26 @@ class OpenSpacesViewController : TimeSlotRootViewController {
         self.previousDayButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5)
         self.previousDayButton.addTarget(self, action: #selector(self.moveToPrevious), for: .touchUpInside)
         
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.refreshControl.addTarget(self, action: #selector(OpenSpacesViewController.refresh(_:)), for: UIControlEvents.valueChanged)
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(OpenSpacesViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(self.refreshControl)
         
         self.revealViewControllerFunc(barButton: menuButton)
-        
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 170
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         Answers.logContentView(withName: "Open Spaces",
-                                       contentType: "Page",
-                                       contentId: "",
-                                       customAttributes: [:])
+                               contentType: "Page",
+                               contentId: "",
+                               customAttributes: [:])
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.syncOfflineFavorites()
     }
     
     internal override func moveToDay(_ day: String!) {
@@ -56,14 +58,14 @@ class OpenSpacesViewController : TimeSlotRootViewController {
         UIView.transition(with: self.tableView, duration: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {() -> Void in
             self.tableView.reloadData()
             self.tableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
-            }, completion: nil)
+        }, completion: nil)
         UIView.transition(with: self.timeTableView, duration: 0.5, options: .transitionCrossDissolve, animations: {() -> Void in
             self.loadTimeTable()
-            }, completion: nil)
+        }, completion: nil)
         UIView.transition(with: self.dateLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {() -> Void in
             self.setDateLabel(self.dailySchedule.date! as Date)
             self.setPageState(day)
-            }, completion: nil)
+        }, completion: nil)
         
         let order = (Calendar.current as NSCalendar).compare(Date(), to: self.dailySchedule.date as Date, toUnitGranularity: .day)
         if order == ComparisonResult.orderedSame {
@@ -77,12 +79,7 @@ class OpenSpacesViewController : TimeSlotRootViewController {
     }
     
     override func loadData() {
-        if currentReachabilityStatus != .notReachable {
-            if StateData.instance.offlineFavoriteSessions.sessions.count > 0 {
-                print(StateData.instance.offlineFavoriteSessions.sessions.count)
-                ThatConferenceAPI.saveOfflineFavorites(offlineFavorites: StateData.instance.offlineFavoriteSessions.sessions)
-            }
-        }
+        self.syncOfflineFavorites()
         
         let sessionStore = SessionStore()
         self.dateLabel.text = "Loading"
@@ -446,9 +443,12 @@ class OpenSpacesViewController : TimeSlotRootViewController {
                             break
                         case .failure(_):
                             self.stopIndicator()
-                            let alert = UIAlertController(title: "Error", message: "Could not remove favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                            self.present(alert, animated: true, completion: nil)
+                            guard let currentSession = cell.session else {return}
+                            currentSession.isUserFavorite = false
+                            self.saveOfflineFavorites(currentSession: currentSession, isOffline: true) {
+                                self.setFavoriteIcon(cell, animated: true)
+                                Answers.logCustomEvent(withName: "Removed Favorite", customAttributes: [:])
+                            }
                             break
                         }
                     })
@@ -465,9 +465,12 @@ class OpenSpacesViewController : TimeSlotRootViewController {
                             break
                         case .failure(_):
                             self.stopIndicator()
-                            let alert = UIAlertController(title: "Error", message: "Could not add favorite at this time. Check your connection.", preferredStyle: UIAlertControllerStyle.alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                            self.present(alert, animated: true, completion: nil)
+                            guard let currentSession = cell.session else {return}
+                            currentSession.isUserFavorite = true
+                            self.saveOfflineFavorites(currentSession: currentSession, isOffline: true) {
+                                self.setFavoriteIcon(cell, animated: true)
+                                Answers.logCustomEvent(withName: "Added Favorite", customAttributes: [:])
+                            }
                             break
                         }
                     })
@@ -480,4 +483,3 @@ class OpenSpacesViewController : TimeSlotRootViewController {
         }
     }
 }
-
