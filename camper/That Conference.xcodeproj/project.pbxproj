@@ -97,6 +97,11 @@
 		7B177E281EA1414500F52BC8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B177E271EA1414500F52BC8 /* Reachability.swift */; };
 		7B3C38391E955E8100FEA4A5 /* StateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3C38381E955E8100FEA4A5 /* StateData.swift */; };
 		7B3C383C1E95A27F00FEA4A5 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B3C383A1E95A27F00FEA4A5 /* Map.storyboard */; };
+		7B9AA2501EF4400800DC24E0 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B9AA24F1EF4400800DC24E0 /* Profile.storyboard */; };
+		7B9AA2521EF442E600DC24E0 /* ProfileTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9AA2511EF442E600DC24E0 /* ProfileTextField.swift */; };
+		7B9AA2541EF44F6300DC24E0 /* BiographyTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9AA2531EF44F6300DC24E0 /* BiographyTextView.swift */; };
+		7B9AA2561EF45A0600DC24E0 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9AA2551EF45A0600DC24E0 /* RoundedButton.swift */; };
+		7B9AA2581EF4607600DC24E0 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9AA2571EF4607600DC24E0 /* EditProfileViewController.swift */; };
 		7BB028A81EF18A870075197A /* SpeakerDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BB028A71EF18A870075197A /* SpeakerDetails.storyboard */; };
 		7BB028AA1EF18C860075197A /* SpeakerList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BB028A91EF18C860075197A /* SpeakerList.storyboard */; };
 		7BB028AC1EF191750075197A /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB028AB1EF191750075197A /* CircleImageView.swift */; };
@@ -215,6 +220,11 @@
 		7B177E271EA1414500F52BC8 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		7B3C38381E955E8100FEA4A5 /* StateData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateData.swift; sourceTree = "<group>"; };
 		7B3C383B1E95A27F00FEA4A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Map.storyboard; sourceTree = "<group>"; };
+		7B9AA24F1EF4400800DC24E0 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		7B9AA2511EF442E600DC24E0 /* ProfileTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTextField.swift; sourceTree = "<group>"; };
+		7B9AA2531EF44F6300DC24E0 /* BiographyTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiographyTextView.swift; sourceTree = "<group>"; };
+		7B9AA2551EF45A0600DC24E0 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		7B9AA2571EF4607600DC24E0 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		7BB028A71EF18A870075197A /* SpeakerDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SpeakerDetails.storyboard; sourceTree = "<group>"; };
 		7BB028A91EF18C860075197A /* SpeakerList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SpeakerList.storyboard; sourceTree = "<group>"; };
 		7BB028AB1EF191750075197A /* CircleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
@@ -357,6 +367,7 @@
 				7BD3621C1E8DB096009C3A5E /* Menu.storyboard */,
 				7BD362601E943065009C3A5E /* OpenSpaces.storyboard */,
 				31373CA01D027B2300430EC0 /* PostCards.storyboard */,
+				7B9AA24F1EF4400800DC24E0 /* Profile.storyboard */,
 				7BD362631E943097009C3A5E /* Schedule.storyboard */,
 				51713A911CF150290081549B /* SessionDetails.storyboard */,
 				7BB028A71EF18A870075197A /* SpeakerDetails.storyboard */,
@@ -410,6 +421,14 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
+		7B9AA2591EF4608500DC24E0 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7B9AA2571EF4607600DC24E0 /* EditProfileViewController.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
 		7BB028AF1EF195B70075197A /* SpeakerList */ = {
 			isa = PBXGroup;
 			children = (
@@ -439,6 +458,7 @@
 		7BD362191E8D4605009C3A5E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7B9AA2531EF44F6300DC24E0 /* BiographyTextView.swift */,
 				7BB028B01EF196E60075197A /* CircleButton.swift */,
 				7BB028AB1EF191750075197A /* CircleImageView.swift */,
 				5113D3891CAF58A100D6B974 /* CircleLabel.swift */,
@@ -448,6 +468,8 @@
 				31D877F71D1864C10045E8DA /* FrameCell.swift */,
 				3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */,
 				317154211D1C340E004078E2 /* PassThroughImageView.swift */,
+				7B9AA2511EF442E600DC24E0 /* ProfileTextField.swift */,
+				7B9AA2551EF45A0600DC24E0 /* RoundedButton.swift */,
 				5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */,
 				7BB028B41EF1A1B80075197A /* SpeakerTableViewCell.swift */,
 				3116C4D01D3BEDB2002E2722 /* SponsorTableViewCell.swift */,
@@ -467,6 +489,7 @@
 				7BD362291E8ED63C009C3A5E /* Main */,
 				7BD362271E8ED614009C3A5E /* Menu */,
 				7BD3622A1E8ED649009C3A5E /* PostCards */,
+				7B9AA2591EF4608500DC24E0 /* Profile */,
 				7BD3622C1E8ED65B009C3A5E /* Settings */,
 				7BD3622B1E8ED652009C3A5E /* SessionDetails */,
 				7BB028AF1EF195B70075197A /* SpeakerList */,
@@ -664,6 +687,7 @@
 				312A94811C89325D00AE938B /* NeutraText-DemiAlt.otf in Resources */,
 				312A947B1C89325D00AE938B /* NeutraText-BoldItalicAlt.otf in Resources */,
 				312A94681C89325D00AE938B /* NeutraCond-Thin.otf in Resources */,
+				7B9AA2501EF4400800DC24E0 /* Profile.storyboard in Resources */,
 				7B3C383C1E95A27F00FEA4A5 /* Map.storyboard in Resources */,
 				312A94781C89325D00AE938B /* NeutraText-Bold.otf in Resources */,
 				312A94861C89325D00AE938B /* NeutraText-LightIA.otf in Resources */,
@@ -765,6 +789,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				512DA03D1CB758B9006CC1B3 /* TimeSlot.swift in Sources */,
+				7B9AA2541EF44F6300DC24E0 /* BiographyTextView.swift in Sources */,
 				3199C71C1CD6EFA5002F01CD /* PageDetailCell.swift in Sources */,
 				7B02FE981EA020E7001396B6 /* Constants.swift in Sources */,
 				7BD362361E929FD4009C3A5E /* SWRevealViewController.m in Sources */,
@@ -774,6 +799,7 @@
 				317154241D1D8025004078E2 /* BaseViewController.swift in Sources */,
 				31D0D9451CC48DEE007C5999 /* AuthToken.swift in Sources */,
 				7BD3622E1E8ED885009C3A5E /* MenuViewController.swift in Sources */,
+				7B9AA2581EF4607600DC24E0 /* EditProfileViewController.swift in Sources */,
 				7BE1B5411EAA696E0071B3D2 /* FamilyEventsTableViewCell.swift in Sources */,
 				312A94341C85EE5E00AE938B /* SessionDetailViewController.swift in Sources */,
 				317154201D1B9784004078E2 /* PostCardSaveViewController.swift in Sources */,
@@ -791,6 +817,7 @@
 				512DA03F1CBBE03C006CC1B3 /* Speaker.swift in Sources */,
 				5113D3851CAA20CB00D6B974 /* ScheduleTableViewCell.swift in Sources */,
 				7BB028BA1EF1C6490075197A /* SpeakerAPI.swift in Sources */,
+				7B9AA2521EF442E600DC24E0 /* ProfileTextField.swift in Sources */,
 				312A942C1C85396E00AE938B /* FavoritesViewController.swift in Sources */,
 				7BB028B51EF1A1B80075197A /* SpeakerTableViewCell.swift in Sources */,
 				3199C7191CD1B968002F01CD /* SpeakerProfileViewController.swift in Sources */,
@@ -817,6 +844,7 @@
 				312A94161C814B6B00AE938B /* AppDelegate.swift in Sources */,
 				5113D38A1CAF58A100D6B974 /* CircleLabel.swift in Sources */,
 				31D0D9481CC5DB6A007C5999 /* Date+Extension.swift in Sources */,
+				7B9AA2561EF45A0600DC24E0 /* RoundedButton.swift in Sources */,
 				31CFD1351D0E3AAB00F1AE23 /* TimeSlotRootTableViewCell.swift in Sources */,
 				312A94301C8539B600AE938B /* SettingsViewController.swift in Sources */,
 			);
