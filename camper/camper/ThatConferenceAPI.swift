@@ -333,7 +333,7 @@ class ThatConferenceAPI {
         dataTask.resume()
     }
     
-    class func getFavoriteSessions(completionHandler:@escaping (SessionsResult) -> Void) {
+    class func getFavoriteSessions(completionHandler: @escaping (SessionsResult) -> Void) {
         let url = thatConferenceURL(.UserFavorites, parameters: [:])
         var request = URLRequest(url: url,
                                           cachePolicy: .useProtocolCachePolicy,

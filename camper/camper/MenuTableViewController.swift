@@ -41,7 +41,7 @@ class MenuTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 7 {
+        if indexPath.row == 9 {
             if (Authentication.isLoggedIn()) {
                 Authentication.removeAuthToken()
                 setDirtyData()

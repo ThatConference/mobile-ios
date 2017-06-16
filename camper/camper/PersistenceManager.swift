@@ -6,6 +6,7 @@ enum Path: String {
     case Favorites = "Favorites"
     case OpenSpaces = "OpenSpaces"
     case OfflineFavorites = "OfflineFavorites"
+    case Speakers = "Speakers"
 }
 
 class PersistenceManager {
@@ -48,5 +49,16 @@ class PersistenceManager {
         let file = documentsDirectory().appendingPathComponent(path.rawValue)
         let result = NSKeyedUnarchiver.unarchiveObject(withFile: file)
         return result as? Sessions
+    }
+    
+    class func saveSpeakers(_ saveObject: [Speaker], path: Path) {
+        let file = documentsDirectory().appendingPathComponent(path.rawValue)
+        NSKeyedArchiver.archiveRootObject(saveObject, toFile: file)
+    }
+    
+    class func loadSpeakers(_ path: Path) -> [Speaker]? {
+        let file = documentsDirectory().appendingPathComponent(path.rawValue)
+        let result = NSKeyedUnarchiver.unarchiveObject(withFile: file)
+        return result as? [Speaker]
     }
 }

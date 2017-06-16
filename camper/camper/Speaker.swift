@@ -95,4 +95,8 @@ class Speaker: NSObject, NSCoding {
         self.gitHub = gitHub
         self.lastUpdated = lastUpdated
     }
+    
+    var fullName: String {
+        return "\(firstName!) \(lastName!)"
+    }
 }

@@ -38,7 +38,7 @@ class ScheduleViewController : TimeSlotRootViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        Answers.logContentView(withName: "Open Spaces",
+        Answers.logContentView(withName: "Schedule",
                                contentType: "Page",
                                contentId: "",
                                customAttributes: [:])
