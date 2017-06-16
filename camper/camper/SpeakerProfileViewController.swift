@@ -67,20 +67,9 @@ class SpeakerProfileViewController : BaseViewController {
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         
-        if let headshot = speaker.headShotURL
-        {
-            let url = ThatConferenceAPI.resourceURL(headshot.absoluteString)
-            DispatchQueue.global().async {
-                if let data = try? Data(contentsOf: url) {
-                    DispatchQueue.main.async(execute: {
-                        self.profileImage.image = UIImage(data: data)
-                    });
-                }
-            }
-        }
+        self.profileImage.loadImageURL(url: speaker.headShotURL, cache: IMAGE_CACHE)
 
-        let speakerFullName = "\(speaker.firstName!) \(speaker.lastName!)"
-        speakerName.text = speakerFullName
+        speakerName.text = speaker.fullName
         jobTitle.text = speaker.title
         company.text = speaker.company
         
@@ -99,7 +88,7 @@ class SpeakerProfileViewController : BaseViewController {
         
         Answers.logContentView(withName: "Session Detail",
                                        contentType: "Page",
-                                       contentId: speakerFullName,
+                                       contentId: speaker.fullName,
                                        customAttributes: [:])
     }
     

@@ -40,13 +40,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="383" height="40"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ob4-UU-u8i">
-                                                <rect key="frame" x="20" y="11" width="40.5" height="20"/>
+                                                <rect key="frame" x="20" y="10.5" width="40.5" height="20"/>
                                                 <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="20"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppl-ki-QKI">
-                                                <rect key="frame" x="321" y="11" width="42" height="20"/>
+                                                <rect key="frame" x="321" y="10.5" width="42" height="20"/>
                                                 <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="20"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -252,7 +252,7 @@
                         <outlet property="labelTitle" destination="oQw-7I-qvZ" id="bRY-uG-sxE"/>
                         <outlet property="levelLabel" destination="qQd-3Y-Jug" id="TfE-xe-Ohi"/>
                         <outlet property="roomName" destination="89a-bD-8aF" id="Qz2-dx-ks3"/>
-                        <segue destination="cyM-I3-E6N" kind="show" identifier="Speaker Detail" id="cay-Hh-HJt"/>
+                        <segue destination="cyM-I3-E6N" kind="show" identifier="SpeakerDetail" id="cay-Hh-HJt"/>
                         <segue destination="xyV-3x-0vN" kind="show" identifier="OpenMap" id="ctA-RQ-73X"/>
                         <segue destination="kfo-aD-Cbo" kind="show" identifier="ShowPostcards" id="iOy-UL-LBL"/>
                     </connections>
@@ -283,7 +283,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="SpeakerProfileViewController" storyboardName="SpeakerDetails" referencedIdentifier="SpeakerProfileViewController" id="cyM-I3-E6N" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OMo-w2-zzQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3196" y="922"/>
+            <point key="canvasLocation" x="3343" y="731"/>
         </scene>
     </scenes>
     <resources>

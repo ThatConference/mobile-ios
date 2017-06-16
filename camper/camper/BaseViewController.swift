@@ -7,7 +7,6 @@ class BaseViewController: UIViewController, AuthorizationFormDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(StateData.instance.offlineFavoriteSessions.sessions)
         
         self.activityIndicator = UIActivityIndicatorView()
         self.activityIndicator.frame = CGRect(x: 0, y: 0, width: 80, height: 80)

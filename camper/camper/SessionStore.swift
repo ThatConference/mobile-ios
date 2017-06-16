@@ -187,7 +187,7 @@ class SessionStore {
             }
         })
     }
-    
+        
     fileprivate func fetchAll(requiresLogin: Bool, completion: @escaping (SessionsResult) -> Void) throws {
         let url = ThatConferenceAPI.sessionsGetAcceptedURL(nil)
         var request = URLRequest(url: url)

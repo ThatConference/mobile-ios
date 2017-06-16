@@ -103,6 +103,9 @@
 		7BB028AE1EF195AF0075197A /* SpeakerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB028AD1EF195AF0075197A /* SpeakerListViewController.swift */; };
 		7BB028B11EF196E60075197A /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB028B01EF196E60075197A /* CircleButton.swift */; };
 		7BB028B31EF1972A0075197A /* CGMake+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB028B21EF1972A0075197A /* CGMake+Extension.swift */; };
+		7BB028B51EF1A1B80075197A /* SpeakerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB028B41EF1A1B80075197A /* SpeakerTableViewCell.swift */; };
+		7BB028B71EF1B4720075197A /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB028B61EF1B4720075197A /* UIImage+Extension.swift */; };
+		7BB028BA1EF1C6490075197A /* SpeakerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB028B91EF1C6490075197A /* SpeakerAPI.swift */; };
 		7BD3621D1E8DB097009C3A5E /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BD3621C1E8DB096009C3A5E /* Menu.storyboard */; };
 		7BD3622E1E8ED885009C3A5E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD3622D1E8ED885009C3A5E /* MenuViewController.swift */; };
 		7BD362301E8ED8E5009C3A5E /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD3622F1E8ED8E5009C3A5E /* MenuTableViewController.swift */; };
@@ -218,6 +221,9 @@
 		7BB028AD1EF195AF0075197A /* SpeakerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerListViewController.swift; sourceTree = "<group>"; };
 		7BB028B01EF196E60075197A /* CircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		7BB028B21EF1972A0075197A /* CGMake+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGMake+Extension.swift"; sourceTree = "<group>"; };
+		7BB028B41EF1A1B80075197A /* SpeakerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerTableViewCell.swift; sourceTree = "<group>"; };
+		7BB028B61EF1B4720075197A /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		7BB028B91EF1C6490075197A /* SpeakerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerAPI.swift; sourceTree = "<group>"; };
 		7BD3621C1E8DB096009C3A5E /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		7BD3622D1E8ED885009C3A5E /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		7BD3622F1E8ED8E5009C3A5E /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
@@ -369,6 +375,7 @@
 				7B177E271EA1414500F52BC8 /* Reachability.swift */,
 				31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */,
 				7B3C38381E955E8100FEA4A5 /* StateData.swift */,
+				7BB028B91EF1C6490075197A /* SpeakerAPI.swift */,
 				31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */,
 			);
 			name = Data;
@@ -381,6 +388,7 @@
 				31D0D9471CC5DB6A007C5999 /* Date+Extension.swift */,
 				31D39F451DE3E5FD00EC7145 /* URL+Extension.swift */,
 				7B02FE931E9C0DDF001396B6 /* String+Extention.swift */,
+				7BB028B61EF1B4720075197A /* UIImage+Extension.swift */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -406,6 +414,7 @@
 			isa = PBXGroup;
 			children = (
 				7BB028AD1EF195AF0075197A /* SpeakerListViewController.swift */,
+				3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */,
 			);
 			name = SpeakerList;
 			sourceTree = "<group>";
@@ -440,6 +449,7 @@
 				3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */,
 				317154211D1C340E004078E2 /* PassThroughImageView.swift */,
 				5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */,
+				7BB028B41EF1A1B80075197A /* SpeakerTableViewCell.swift */,
 				3116C4D01D3BEDB2002E2722 /* SponsorTableViewCell.swift */,
 				31CFD1341D0E3AAB00F1AE23 /* TimeSlotRootTableViewCell.swift */,
 			);
@@ -538,7 +548,6 @@
 			isa = PBXGroup;
 			children = (
 				312A942F1C8539B600AE938B /* SettingsViewController.swift */,
-				3199C7181CD1B968002F01CD /* SpeakerProfileViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -776,11 +785,14 @@
 				51A4D1D41CF290BB00F956BC /* FavoritesTableViewCell.swift in Sources */,
 				313B19021D160B8C00E72562 /* PostCardFrame.swift in Sources */,
 				31D877FA1D19CBD30045E8DA /* PostCardChoosePhotoViewController.swift in Sources */,
+				7BB028B71EF1B4720075197A /* UIImage+Extension.swift in Sources */,
 				31DEA7641D2B08F40004C2D3 /* SponsorsViewController.swift in Sources */,
 				7BB028AE1EF195AF0075197A /* SpeakerListViewController.swift in Sources */,
 				512DA03F1CBBE03C006CC1B3 /* Speaker.swift in Sources */,
 				5113D3851CAA20CB00D6B974 /* ScheduleTableViewCell.swift in Sources */,
+				7BB028BA1EF1C6490075197A /* SpeakerAPI.swift in Sources */,
 				312A942C1C85396E00AE938B /* FavoritesViewController.swift in Sources */,
+				7BB028B51EF1A1B80075197A /* SpeakerTableViewCell.swift in Sources */,
 				3199C7191CD1B968002F01CD /* SpeakerProfileViewController.swift in Sources */,
 				7B3C38391E955E8100FEA4A5 /* StateData.swift in Sources */,
 				316269AE1D0117020089D777 /* PersistenceManager.swift in Sources */,
