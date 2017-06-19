@@ -10,7 +10,6 @@ import UIKit
 
 class MenuViewController: UIViewController {
     
-    @IBOutlet weak var profileImage: CircleImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     
@@ -19,12 +18,14 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction func editProfileButtonPressed(_ sender: Any) {
-        
+        performSegue(withIdentifier: "editProfile", sender: nil)
     }
     
     @IBAction func shareContactButtonPressed(_ sender: Any) {
         
     }
+    
+    @IBAction func unwindToMainVC(segue:UIStoryboardSegue) { }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? FavoritesViewController {
@@ -32,7 +33,6 @@ class MenuViewController: UIViewController {
                 print("Prepare for segue")
                 destination.store = StateData.instance.sessionStore
             }
-            
         }
     }
 

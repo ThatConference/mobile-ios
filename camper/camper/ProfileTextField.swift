@@ -23,11 +23,12 @@ class ProfileTextField: UITextField {
         self.layer.addSublayer(border)
         self.layer.masksToBounds = true
         
-//        self.font = GameForFonts.mediumRegular
+        let font: UIFont = UIFont(name: "Helvetica Neue", size: 16)!
+        
+        self.font = font
         self.textColor = UIColor.black
         
-        
-//        attributedPlaceholder = NSAttributedString(string:placeholder!, attributes: [NSFontAttributeName : GameForFonts.mediumRegular!, NSForegroundColorAttributeName : GameForColors.mainVeryDark.withAlphaComponent(0.6)])
+        attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
     }
 
 }

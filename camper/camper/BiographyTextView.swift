@@ -10,12 +10,14 @@ import UIKit
 
 class BiographyTextView: UITextView, UITextViewDelegate {
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         delegate = self
+        let font: UIFont = UIFont(name: "Helvetica Neue", size: 16)!
         textContainer.lineFragmentPadding = 2
         
-        attributedText = NSAttributedString(string:text ?? "", attributes: [NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.6)])
+        attributedText = NSAttributedString(string: text ?? "Biography", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -27,7 +29,9 @@ class BiographyTextView: UITextView, UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if text == "" {
-            attributedText = NSAttributedString(string: "Biography", attributes: [NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.6)])
+            let font: UIFont = UIFont(name: "Helvetica Neue", size: 16)!
+            
+            attributedText = NSAttributedString(string: text ?? "Biography", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
         }
     }
     

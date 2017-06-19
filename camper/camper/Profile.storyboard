@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="UWA-Wa-0Xj">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qM8-Zo-kn1">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Edit Profile View Controller-->
+        <!--Edit Profile-->
         <scene sceneID="VAJ-IG-dtE">
             <objects>
                 <viewController storyboardIdentifier="EditProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UWA-Wa-0Xj" customClass="EditProfileViewController" customModule="That_Conference" customModuleProvider="target" sceneMemberID="viewController">
@@ -16,27 +16,44 @@
                         <viewControllerLayoutGuide type="top" id="Gck-Pe-u27"/>
                         <viewControllerLayoutGuide type="bottom" id="xge-KJ-omi"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="HVP-B1-efe">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="HVP-B1-efe">
+                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v9I-a5-iYp">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RmN-3g-pxX">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="834"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="760"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Biography" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zJW-5r-S2r" customClass="BiographyTextView" customModule="That_Conference" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="665" width="335" height="30"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-5" translatesAutoresizingMaskIntoConstraints="NO" id="Swx-Ww-GN8">
+                                                <rect key="frame" x="20" y="655" width="374" height="35"/>
+                                                <subviews>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Biography" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zJW-5r-S2r" customClass="BiographyTextView" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="35"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="ZKz-sy-Uf1"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X3O-PR-SzO" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="30" width="374" height="5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="5" id="pTm-aQ-XD0"/>
+                                                        </constraints>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="ZKz-sy-Uf1"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="gJP-aA-PwS"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
+                                            </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hK-y1-6ae" customClass="RoundedButton" customModule="That_Conference" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="710" width="335" height="35"/>
+                                                <rect key="frame" x="20" y="705" width="374" height="35"/>
                                                 <color key="backgroundColor" red="0.37029466030000002" green="0.44048410650000003" blue="0.14786431189999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="slw-ow-ttR"/>
@@ -44,12 +61,15 @@
                                                 <state key="normal" title="Save">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="saveButtonPressed:" destination="UWA-Wa-0Xj" eventType="touchUpInside" id="SAC-gu-I2e"/>
+                                                </connections>
                                             </button>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Dkc-0o-Bwh">
-                                                <rect key="frame" x="20" y="25" width="335" height="630"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="Dkc-0o-Bwh">
+                                                <rect key="frame" x="20" y="25" width="374" height="615"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eQ1-Lv-GMh" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eQ1-Lv-GMh" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="BNN-Uh-UdB"/>
                                                         </constraints>
@@ -57,8 +77,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KVV-cs-T1t" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="40" width="335" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KVV-cs-T1t" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="39" width="374" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="3Y0-vr-8Px"/>
                                                         </constraints>
@@ -66,8 +86,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Public Email Address" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mst-EG-9xz" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="80" width="335" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Public Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mst-EG-9xz" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="78" width="374" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="UJh-Dr-ULu"/>
                                                         </constraints>
@@ -75,8 +95,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mobile Phone" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UGC-Mh-SfS" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="120" width="335" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Public Phone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UGC-Mh-SfS" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="117" width="374" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="5n3-24-iII"/>
                                                         </constraints>
@@ -84,8 +104,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hht-BI-5dZ" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="160" width="335" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hht-BI-5dZ" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="156" width="374" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="bLf-4A-onn"/>
                                                         </constraints>
@@ -93,8 +113,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QT6-CB-rax" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="200" width="335" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QT6-CB-rax" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="195" width="374" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="uFc-qS-Ef0"/>
                                                         </constraints>
@@ -102,8 +122,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zEI-xP-Fuk" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="240" width="335" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zEI-xP-Fuk" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="234" width="374" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="HBj-FX-IXl"/>
                                                         </constraints>
@@ -111,8 +131,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Plg-lx-I49" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="280" width="335" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Plg-lx-I49" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="273" width="374" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="WCf-X5-dke"/>
                                                         </constraints>
@@ -120,8 +140,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Blog or Website" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JIQ-Ir-tVT" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="320" width="335" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Blog or Website" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JIQ-Ir-tVT" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="312" width="374" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="znH-WP-PE4"/>
                                                         </constraints>
@@ -129,8 +149,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Twitter Handle" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZvE-fy-Jbh" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="360" width="335" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Twitter Handle" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZvE-fy-Jbh" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="351" width="374" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="wk0-Ko-g5U"/>
                                                         </constraints>
@@ -138,8 +158,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Facebook Profile URL" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cnl-5v-cJt" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="400" width="335" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Facebook Profile URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cnl-5v-cJt" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="390" width="374" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="cze-0w-toE"/>
                                                         </constraints>
@@ -147,8 +167,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="GooglePlus Profile URL" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="262-Bn-5ev" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="440" width="335" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="GooglePlus Profile URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="262-Bn-5ev" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="429" width="374" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="dLU-C5-TOl"/>
                                                         </constraints>
@@ -156,8 +176,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="GitHub Profile URL" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E5L-KY-Ybr" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="480" width="335" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="GitHub Profile URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E5L-KY-Ybr" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="468" width="374" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="q2G-OU-FO2"/>
                                                         </constraints>
@@ -165,8 +185,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pinterest Profile URL" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aup-ub-guF" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="520" width="335" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pinterest Profile URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aup-ub-guF" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="507" width="374" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="I09-ZI-pGh"/>
                                                         </constraints>
@@ -174,8 +194,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Instagram Profile URL" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J5v-XH-vBd" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="560" width="335" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Instagram Profile URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J5v-XH-vBd" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="546" width="374" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="NRb-du-AG3"/>
                                                         </constraints>
@@ -183,8 +203,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="LinkedIn Profile URL" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SqD-II-Nuo" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="600" width="335" height="30"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="LinkedIn Profile URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SqD-II-Nuo" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="585" width="374" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="gMi-By-7I8"/>
                                                         </constraints>
@@ -197,17 +217,17 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Swx-Ww-GN8" secondAttribute="trailing" constant="20" id="4GY-8Z-Cxv"/>
+                                            <constraint firstItem="7hK-y1-6ae" firstAttribute="top" secondItem="Swx-Ww-GN8" secondAttribute="bottom" constant="15" id="6yb-TJ-xtp"/>
                                             <constraint firstItem="Dkc-0o-Bwh" firstAttribute="leading" secondItem="RmN-3g-pxX" secondAttribute="leading" constant="20" id="AKc-af-fiY"/>
                                             <constraint firstAttribute="trailing" secondItem="Dkc-0o-Bwh" secondAttribute="trailing" constant="20" id="CkZ-eS-g4V"/>
                                             <constraint firstItem="7hK-y1-6ae" firstAttribute="leading" secondItem="Dkc-0o-Bwh" secondAttribute="leading" id="DlR-K9-Rif"/>
-                                            <constraint firstItem="zJW-5r-S2r" firstAttribute="trailing" secondItem="Dkc-0o-Bwh" secondAttribute="trailing" id="bia-or-deZ"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="736" id="htn-WX-qie"/>
-                                            <constraint firstItem="zJW-5r-S2r" firstAttribute="leading" secondItem="Dkc-0o-Bwh" secondAttribute="leading" id="n2r-33-TWs"/>
-                                            <constraint firstItem="zJW-5r-S2r" firstAttribute="top" secondItem="Dkc-0o-Bwh" secondAttribute="bottom" constant="10" id="nOH-az-wdn"/>
+                                            <constraint firstItem="Swx-Ww-GN8" firstAttribute="top" secondItem="Dkc-0o-Bwh" secondAttribute="bottom" constant="15" id="i8W-4A-9Hb"/>
                                             <constraint firstItem="7hK-y1-6ae" firstAttribute="trailing" secondItem="Dkc-0o-Bwh" secondAttribute="trailing" id="pSg-RU-RUs"/>
-                                            <constraint firstItem="7hK-y1-6ae" firstAttribute="top" secondItem="zJW-5r-S2r" secondAttribute="bottom" constant="15" id="rNC-q1-m0D"/>
-                                            <constraint firstAttribute="bottom" secondItem="7hK-y1-6ae" secondAttribute="bottom" constant="89" id="tUo-wP-a6j"/>
+                                            <constraint firstAttribute="bottom" secondItem="7hK-y1-6ae" secondAttribute="bottom" constant="20" id="tUo-wP-a6j"/>
                                             <constraint firstItem="Dkc-0o-Bwh" firstAttribute="top" secondItem="RmN-3g-pxX" secondAttribute="top" constant="25" id="w5U-hS-seN"/>
+                                            <constraint firstItem="Swx-Ww-GN8" firstAttribute="leading" secondItem="RmN-3g-pxX" secondAttribute="leading" constant="20" id="woe-XU-PXz"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -228,10 +248,75 @@
                             <constraint firstItem="v9I-a5-iYp" firstAttribute="leading" secondItem="HVP-B1-efe" secondAttribute="leading" id="flO-V5-cMk"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Edit Profile" id="pHZ-1J-DAR">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="xQo-aE-O2f">
+                            <connections>
+                                <segue destination="QK0-DU-DDH" kind="unwind" unwindAction="unwindToMainVCWithSegue:" id="U68-7d-nuz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="biographyTextView" destination="zJW-5r-S2r" id="i6n-4S-pYr"/>
+                        <outlet property="cityTextField" destination="hht-BI-5dZ" id="WI9-Yq-hp7"/>
+                        <outlet property="companyTextField" destination="zEI-xP-Fuk" id="szh-Lk-vwN"/>
+                        <outlet property="emailTextField" destination="Mst-EG-9xz" id="PKn-nC-FkM"/>
+                        <outlet property="facebookTextField" destination="Cnl-5v-cJt" id="pvu-aT-Qat"/>
+                        <outlet property="firstNameTextField" destination="eQ1-Lv-GMh" id="3em-Mt-kDr"/>
+                        <outlet property="githubTextField" destination="E5L-KY-Ybr" id="jVy-Rn-3Od"/>
+                        <outlet property="googleTextField" destination="262-Bn-5ev" id="8WN-cU-aWV"/>
+                        <outlet property="instagramTextField" destination="J5v-XH-vBd" id="bIV-AM-49Z"/>
+                        <outlet property="lastNameTextField" destination="KVV-cs-T1t" id="ODF-H2-vsK"/>
+                        <outlet property="linkedinTextField" destination="SqD-II-Nuo" id="0kr-xM-KVo"/>
+                        <outlet property="phoneTextField" destination="UGC-Mh-SfS" id="RSU-6C-2TG"/>
+                        <outlet property="pinterestTextField" destination="Aup-ub-guF" id="dxa-FL-IYh"/>
+                        <outlet property="stateTextField" destination="QT6-CB-rax" id="wWv-cs-ghd"/>
+                        <outlet property="titleTextField" destination="Plg-lx-I49" id="OW7-uk-0Fm"/>
+                        <outlet property="twitterTextField" destination="ZvE-fy-Jbh" id="pKF-Wc-rHM"/>
+                        <outlet property="websiteTextField" destination="JIQ-Ir-tVT" id="5ks-aZ-aXW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgS-Ot-xZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="QK0-DU-DDH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="256.52173913043481" y="81.521739130434796"/>
+            <point key="canvasLocation" x="1302" y="75"/>
+        </scene>
+        <!--Menu-->
+        <scene sceneID="mvl-47-jqZ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Menu" id="kiK-iC-L5i" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k1b-Ei-M7U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1846" y="-193"/>
+        </scene>
+        <!--Schedule-->
+        <scene sceneID="m4b-OL-hlw">
+            <objects>
+                <navigationController title="Schedule" automaticallyAdjustsScrollViewInsets="NO" id="qM8-Zo-kn1" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="schedule" image="schedule" id="48z-oD-G22"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleAspectFit" misplaced="YES" translucent="NO" id="uj1-dN-Sgv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <rect key="contentStretch" x="0.0" y="0.0" width="0.29999999999999999" height="0.29999999999999999"/>
+                        <color key="tintColor" red="0.63137254899999995" green="0.52549019610000003" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.035294117649999998" green="0.10980392160000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="22"/>
+                            <color key="textColor" red="0.84313725490000002" green="0.83137254900000002" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="UWA-Wa-0Xj" kind="relationship" relationship="rootViewController" id="UfH-JJ-7kX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xq1-Dz-UNo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="534" y="74"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="back" width="25" height="25"/>
+        <image name="schedule" width="25" height="25"/>
+    </resources>
 </document>
