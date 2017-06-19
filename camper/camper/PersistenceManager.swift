@@ -28,7 +28,7 @@ class PersistenceManager {
         return result as? Dictionary<String, DailySchedule>
     }
     
-    class func deleteDailySchedule(_ path: Path) -> Bool{
+    class func deleteDailySchedule(_ path: Path) -> Bool {
         let exists = FileManager.default.fileExists(atPath: path.rawValue)
         if exists {
             do {
