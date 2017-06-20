@@ -192,6 +192,8 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
         print("Sign in was successful")
         Answers.logLogin(withMethod: "InternalLogin", success: true, customAttributes: [:])
         DispatchQueue.main.async {
+            let userAPI = UserAPI()
+            userAPI.getMainUser()
             self.SignedIn()
         }
     }

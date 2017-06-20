@@ -35,7 +35,7 @@ class User: NSObject, NSCoding {
         static let PublicThatSlackHandle = "PublicThatSlackHandle"
     }
     
-    private var _id: Int?
+    private var _id: String!
     private var _headShot: String?
     private var _displayHeadshot: String?
     
@@ -71,7 +71,7 @@ class User: NSObject, NSCoding {
     }
     
     init(dictionary: [String: AnyObject]) {
-        _id = dictionary[Keys.Id] as? Int
+        _id = dictionary[Keys.Id] as! String
         _headShot = dictionary[Keys.HeadShot] as? String
         _displayHeadshot = dictionary[Keys.DisplayHeadShot] as? String
         _firstName = dictionary[Keys.FirstName] as! String
@@ -122,7 +122,7 @@ class User: NSObject, NSCoding {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        _id = aDecoder.decodeObject(forKey: Keys.Id) as? Int
+        _id = aDecoder.decodeObject(forKey: Keys.Id) as! String
         _headShot = aDecoder.decodeObject(forKey: Keys.Id) as? String
         _displayHeadshot = aDecoder.decodeObject(forKey: Keys.Id) as? String
 
@@ -146,6 +146,11 @@ class User: NSObject, NSCoding {
         instagram = aDecoder.decodeObject(forKey: Keys.Instagram) as? String
         linkedIn = aDecoder.decodeObject(forKey: Keys.LinkedIn) as? String
     }
+    
+    var fullName: String {
+        return "\(_firstName!) \(_lastName!)"
+    }
+    
     
     var parameter: [String: AnyObject?] {
         
