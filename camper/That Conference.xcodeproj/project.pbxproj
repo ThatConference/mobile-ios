@@ -92,6 +92,8 @@
 		51A4D1D01CF1532900F956BC /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51A4D1CF1CF1532900F956BC /* Favorites.storyboard */; };
 		51A4D1D41CF290BB00F956BC /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */; };
 		7B00F7021EF9639400E252DC /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B00F7011EF9639400E252DC /* UserAPI.swift */; };
+		7B00F7041EF9C88B00E252DC /* ProfileDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B00F7031EF9C88B00E252DC /* ProfileDetailsViewController.swift */; };
+		7B00F7081EFABB3700E252DC /* ProfileDetailUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B00F7071EFABB3700E252DC /* ProfileDetailUIView.swift */; };
 		7B02FE941E9C0DDF001396B6 /* String+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02FE931E9C0DDF001396B6 /* String+Extention.swift */; };
 		7B02FE961E9FE875001396B6 /* Sessions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02FE951E9FE875001396B6 /* Sessions.swift */; };
 		7B02FE981EA020E7001396B6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02FE971EA020E7001396B6 /* Constants.swift */; };
@@ -217,6 +219,8 @@
 		51A4D1CF1CF1532900F956BC /* Favorites.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Favorites.storyboard; sourceTree = "<group>"; };
 		51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		7B00F7011EF9639400E252DC /* UserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+		7B00F7031EF9C88B00E252DC /* ProfileDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDetailsViewController.swift; sourceTree = "<group>"; };
+		7B00F7071EFABB3700E252DC /* ProfileDetailUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDetailUIView.swift; sourceTree = "<group>"; };
 		7B02FE931E9C0DDF001396B6 /* String+Extention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extention.swift"; sourceTree = "<group>"; };
 		7B02FE951E9FE875001396B6 /* Sessions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sessions.swift; sourceTree = "<group>"; };
 		7B02FE971EA020E7001396B6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -430,6 +434,7 @@
 			isa = PBXGroup;
 			children = (
 				7B9AA2571EF4607600DC24E0 /* EditProfileViewController.swift */,
+				7B00F7031EF9C88B00E252DC /* ProfileDetailsViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -474,6 +479,7 @@
 				31D877F71D1864C10045E8DA /* FrameCell.swift */,
 				3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */,
 				317154211D1C340E004078E2 /* PassThroughImageView.swift */,
+				7B00F7071EFABB3700E252DC /* ProfileDetailUIView.swift */,
 				7B9AA2511EF442E600DC24E0 /* ProfileTextField.swift */,
 				7B9AA2551EF45A0600DC24E0 /* RoundedButton.swift */,
 				5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */,
@@ -826,6 +832,7 @@
 				5113D3851CAA20CB00D6B974 /* ScheduleTableViewCell.swift in Sources */,
 				7BB028BA1EF1C6490075197A /* SpeakerAPI.swift in Sources */,
 				7B9AA2521EF442E600DC24E0 /* ProfileTextField.swift in Sources */,
+				7B00F7081EFABB3700E252DC /* ProfileDetailUIView.swift in Sources */,
 				312A942C1C85396E00AE938B /* FavoritesViewController.swift in Sources */,
 				7BB028B51EF1A1B80075197A /* SpeakerTableViewCell.swift in Sources */,
 				3199C7191CD1B968002F01CD /* SpeakerProfileViewController.swift in Sources */,
@@ -837,6 +844,7 @@
 				3123AC291C90959D0097BF33 /* Session.swift in Sources */,
 				3116C4D11D3BEDB2002E2722 /* SponsorTableViewCell.swift in Sources */,
 				31D0D9411CC08282007C5999 /* AuthorizationWebViewController.swift in Sources */,
+				7B00F7041EF9C88B00E252DC /* ProfileDetailsViewController.swift in Sources */,
 				7BE1B5441EAA698F0071B3D2 /* FamilyEventsViewController.swift in Sources */,
 				7BB028B11EF196E60075197A /* CircleButton.swift in Sources */,
 				311E0E6B1CB74D76004FA850 /* ExternalLogin.swift in Sources */,

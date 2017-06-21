@@ -14,14 +14,25 @@ class BiographyTextView: UITextView, UITextViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         delegate = self
-        let font: UIFont = UIFont(name: "Helvetica Neue", size: 16)!
         textContainer.lineFragmentPadding = 2
         
-        attributedText = NSAttributedString(string: text ?? "Biography", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
+        checkText()
+        
+//        attributedText = NSAttributedString(string: text ?? "Biography", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
+    }
+    
+    private func checkText() {
+        if (text == "" || text == nil || text == "Biography") {
+            let font: UIFont = UIFont(name: "Helvetica Neue", size: 16)!
+            
+            attributedText = NSAttributedString(string: text ?? "Biography", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
+        } else {
+            self.textColor = UIColor.black
+        }
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if text == "Biography" {
+        if (text == "Biography") {
             self.textColor = UIColor.black
             text = ""
         }
@@ -31,7 +42,7 @@ class BiographyTextView: UITextView, UITextViewDelegate {
         if text == "" {
             let font: UIFont = UIFont(name: "Helvetica Neue", size: 16)!
             
-            attributedText = NSAttributedString(string: text ?? "Biography", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
+            attributedText = NSAttributedString(string: "Biography", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
         }
     }
     

@@ -38,6 +38,7 @@ class PersistenceManager {
                 return false
             }
         }
+        
         return exists
     }
     
@@ -75,10 +76,17 @@ class PersistenceManager {
         return result as? User
     }
     
-    class func deleteUser(_ path: Path) -> User? {
-        let file = documentsDirectory().appendingPathComponent(path.rawValue)
-        let result = NSKeyedUnarchiver.unarchiveObject(withFile: file)
-        return result as? User
+    class func deleteUser(_ path: Path) -> Bool {
+        let exists = FileManager.default.fileExists(atPath: path.rawValue)
+        if exists {
+            do {
+                try FileManager.default.removeItem(atPath: path.rawValue)
+            } catch let error as NSError {
+                print("error: \(error.localizedDescription)")
+                return false
+            }
+        }
+        return exists
     }
     
 }

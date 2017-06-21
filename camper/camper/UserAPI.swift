@@ -12,6 +12,11 @@ enum UserMethod: String {
     case GetUser = "/api3/Account/UserProfile"
 }
 
+enum PutUserResult {
+    case success()
+    case failure(Error)
+}
+
 class UserAPI {
     let baseURLString = "https://www.thatconference.com"
 
@@ -31,6 +36,7 @@ class UserAPI {
                 print(error!)
                 return
             }
+            
             guard let data = data else {
                 print("Data is empty")
                 return
@@ -48,6 +54,50 @@ class UserAPI {
     private func getMainUserURL() -> String {
         let url = self.baseURLString + UserMethod.GetUser.rawValue;
         
+        return url
+    }
+    
+    func postUser(params: [String: AnyObject], completionHandler: @escaping (PutUserResult) -> Void) {
+
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: params)
+        
+        let url: URL = URL(string: putUserURL())!
+        
+        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        request.httpMethod = "PUT"
+        
+        if let token = Authentication.loadAuthToken() {
+            let headers = [
+                "Authorization": "Bearer \(token.token!)",
+                "Content-Type": "application/json"
+            ]
+            request.allHTTPHeaderFields = headers
+        }
+        
+        request.httpBody = jsonData
+        
+//        do {
+//            request.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
+//        } catch let error {
+//            print(error.localizedDescription)
+//        }
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { (data, response, error) in
+            guard error == nil else {
+                print(error!)
+                return completionHandler(PutUserResult.failure(error!))
+            }
+            
+            completionHandler(PutUserResult.success())
+        }
+        
+        task.resume()
+    }
+    
+    private func putUserURL() -> String {
+        let url = self.baseURLString + UserMethod.GetUser.rawValue
         return url
     }
     

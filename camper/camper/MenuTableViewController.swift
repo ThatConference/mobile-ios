@@ -47,6 +47,7 @@ class MenuTableViewController: UITableViewController {
                 setDirtyData()
                 _ = PersistenceManager.deleteDailySchedule(Path.Favorites)
                 _ = PersistenceManager.deleteUser(Path.User)
+                
                 StateData.instance.currentUser = User()
                 let alert = UIAlertController(title: "Signed Out", message: "Sign out was successful. You can now sign in with a different account or continue as a guest.", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))

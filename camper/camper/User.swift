@@ -95,10 +95,35 @@ class User: NSObject, NSCoding {
         linkedIn = dictionary[Keys.LinkedIn] as? String
     }
     
+    init(id: String, headShot: String?, displayHeadShot: String?, firstName: String, lastName: String, email: String, publicEmail: String?, biography: String?, phone: String?, publicPhone: String?, publicThatSlackHandle: String?, city: String?, state: String?, company: String?, title: String?, website: String?, twitter: String?, facebook: String?, googlePlus: String?, pinterest: String?, instagram: String?, linkedIn: String?) {
+        self._id = id
+        self._headShot = headShot
+        self._displayHeadshot = displayHeadShot
+        self._firstName = firstName
+        self._lastName = lastName
+        self._email = email
+        self.publicEmail = publicEmail
+        self.biography = biography
+        self.phone = phone
+        self.publicPhone = publicPhone
+        self.publicThatSlackHandle = publicThatSlackHandle
+        self.city = city
+        self.state = state
+        self.company = company
+        self.title = title
+        self.website = website
+        self.twitter = twitter
+        self.facebook = facebook
+        self.googlePlus = googlePlus
+        self.pinterest = pinterest
+        self.instagram = instagram
+        self.linkedIn = linkedIn
+    }
+    
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self._id, forKey: Keys.Id)
-        aCoder.encode(self._headShot, forKey: Keys.Id)
-        aCoder.encode(self._displayHeadshot, forKey: Keys.Id)
+        aCoder.encode(self._headShot, forKey: Keys.HeadShot)
+        aCoder.encode(self._displayHeadshot, forKey: Keys.DisplayHeadShot)
         
         aCoder.encode(self._firstName, forKey: Keys.FirstName)
         aCoder.encode(self._lastName, forKey: Keys.LastName)
@@ -123,9 +148,9 @@ class User: NSObject, NSCoding {
     
     required init?(coder aDecoder: NSCoder) {
         _id = aDecoder.decodeObject(forKey: Keys.Id) as! String
-        _headShot = aDecoder.decodeObject(forKey: Keys.Id) as? String
-        _displayHeadshot = aDecoder.decodeObject(forKey: Keys.Id) as? String
-
+        _headShot = aDecoder.decodeObject(forKey: Keys.HeadShot) as? String
+        _displayHeadshot = aDecoder.decodeObject(forKey: Keys.DisplayHeadShot) as? String
+        
         _firstName = aDecoder.decodeObject(forKey: Keys.FirstName) as! String
         _lastName = aDecoder.decodeObject(forKey: Keys.LastName) as! String
         _email = aDecoder.decodeObject(forKey: Keys.Email) as! String
@@ -147,20 +172,51 @@ class User: NSObject, NSCoding {
         linkedIn = aDecoder.decodeObject(forKey: Keys.LinkedIn) as? String
     }
     
-    var fullName: String {
+    var id: String! {
+        return _id
+    }
+    
+    var firstName: String! {
+        return _firstName
+    }
+    
+    var lastName: String! {
+        return _lastName
+    }
+    
+    var email: String! {
+        return _email
+    }
+    
+    var fullName: String! {
         return "\(_firstName!) \(_lastName!)"
     }
     
-    
-    var parameter: [String: AnyObject?] {
+    var headShot: String? {
+        if (_headShot == nil) {
+            return nil
+        }
         
-        let params: [String: AnyObject?] = [
+        return _headShot
+    }
+    
+    var displayHeadShot: String? {
+        if (_displayHeadshot == nil) {
+            return nil
+        }
+        
+        return _displayHeadshot
+    }
+    
+    var parameter: [String: AnyObject] {
+        
+        let params: [String: AnyObject] = [
             Keys.Id : _id as AnyObject,
-            Keys.HeadShot : _headShot as AnyObject,
-            Keys.DisplayHeadShot : _displayHeadshot as AnyObject,
             Keys.FirstName : _firstName as AnyObject,
             Keys.LastName : _lastName as AnyObject,
             Keys.Email : _email as AnyObject,
+            Keys.HeadShot : headShot as AnyObject,
+            Keys.DisplayHeadShot : displayHeadShot as AnyObject,
             Keys.PublicEmail : publicEmail as AnyObject,
             Keys.Biography : biography as AnyObject,
             Keys.Phone : phone as AnyObject,

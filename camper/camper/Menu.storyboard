@@ -58,17 +58,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fcl-2c-olx">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="142"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFg-hS-DEw">
-                                        <rect key="frame" x="19" y="60" width="147" height="21"/>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFg-hS-DEw">
+                                        <rect key="frame" x="18" y="120" width="147" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <gestureRecognizers/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.63137254899999995" green="0.52549019610000003" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="7iA-1L-aF3" appends="YES" id="A2e-fe-BzV"/>
+                                        </connections>
                                     </label>
                                     <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AkM-hK-XDq">
-                                        <rect key="frame" x="202" y="67" width="35" height="35"/>
+                                        <rect key="frame" x="201" y="104" width="35" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
                                         <state key="normal" image="twitter"/>
@@ -77,30 +81,28 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Share Contact" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uRz-7u-1mG">
-                                        <rect key="frame" x="238" y="64" width="53" height="40"/>
+                                        <rect key="frame" x="237" y="101" width="53" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.63137254899999995" green="0.52549019610000003" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anh-Eo-q6l">
-                                        <rect key="frame" x="29" y="86" width="127" height="18"/>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="speaker" translatesAutoresizingMaskIntoConstraints="NO" id="0KZ-RQ-pUi" customClass="CircleImageView" customModule="That_Conference" customModuleProvider="target">
+                                        <rect key="frame" x="51" y="32" width="80" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="edit profile">
-                                            <color key="titleColor" red="0.63137254899999995" green="0.52549019610000003" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
+                                        <gestureRecognizers/>
                                         <connections>
-                                            <action selector="editProfileButtonPressed:" destination="6EQ-nZ-ev3" eventType="touchUpInside" id="7cZ-3I-Rqz"/>
+                                            <outletCollection property="gestureRecognizers" destination="lnh-5I-tRa" appends="YES" id="rxL-jX-Bu5"/>
                                         </connections>
-                                    </button>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.035241130739450455" green="0.11184763163328171" blue="0.19903132319450378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="142" id="Kfn-Cg-pjU"/>
+                                    <constraint firstAttribute="height" constant="160" id="Kfn-Cg-pjU"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOs-gK-lCF">
-                                <rect key="frame" x="0.0" y="142" width="375" height="525"/>
+                                <rect key="frame" x="0.0" y="160" width="375" height="507"/>
                                 <connections>
                                     <segue destination="mBG-KN-9wI" kind="embed" id="Urn-0p-FpY"/>
                                 </connections>
@@ -120,27 +122,38 @@
                     <connections>
                         <outlet property="containerView" destination="NOs-gK-lCF" id="yMJ-3J-qwK"/>
                         <outlet property="nameLabel" destination="vFg-hS-DEw" id="LrG-l3-pC0"/>
-                        <segue destination="qz4-9E-9RM" kind="show" identifier="editProfile" id="aAv-ai-jBg"/>
+                        <outlet property="profileImageView" destination="0KZ-RQ-pUi" id="UGO-hY-F3Z"/>
+                        <segue destination="0yA-Iu-vFn" kind="show" identifier="toProfileDetails" id="6u8-ZM-yq8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZ7-lF-c1y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="7iA-1L-aF3">
+                    <connections>
+                        <action selector="nameLabelPressed:" destination="6EQ-nZ-ev3" id="x01-hf-Roi"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="lnh-5I-tRa">
+                    <connections>
+                        <action selector="nameLabelPressed:" destination="6EQ-nZ-ev3" id="NPF-b1-6eE"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="413.60000000000002" y="-314.39280359820094"/>
         </scene>
-        <!--Profile-->
-        <scene sceneID="JFA-1J-sdX">
+        <!--ProfileDetailsViewController-->
+        <scene sceneID="5BO-qF-0l3">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="EditProfileViewController" storyboardName="Profile" id="qz4-9E-9RM" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aKn-cX-hC6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardIdentifier="ProfileDetailsViewController" storyboardName="Profile" referencedIdentifier="ProfileDetailsViewController" id="0yA-Iu-vFn" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="55L-6k-gJW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="965" y="-620"/>
+            <point key="canvasLocation" x="1058" y="-728"/>
         </scene>
         <!--Menu Table View Controller-->
         <scene sceneID="NJa-Jq-eOI">
             <objects>
                 <tableViewController id="mBG-KN-9wI" customClass="MenuTableViewController" customModule="That_Conference" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Oxa-JD-chx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="525"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="507"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -613,6 +626,7 @@
         <image name="open-spaces" width="28" height="29"/>
         <image name="schedule" width="27" height="28"/>
         <image name="settings" width="27" height="28"/>
+        <image name="speaker" width="66" height="75"/>
         <image name="sponsor" width="41" height="41"/>
         <image name="twitter" width="109" height="108"/>
     </resources>
