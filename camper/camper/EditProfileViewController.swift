@@ -37,6 +37,8 @@ class EditProfileViewController: UIViewController {
         loadCurrentData()
     }
 
+    // MARK: IBActions
+    
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
             dismiss(animated: true, completion: nil)
     }
@@ -108,6 +110,8 @@ class EditProfileViewController: UIViewController {
         }
         
     }
+    
+    // MARK: Functions
     
     func loadCurrentData() {
         firstNameTextField.text = currentUser.firstName

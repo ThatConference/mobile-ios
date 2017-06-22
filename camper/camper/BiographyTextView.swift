@@ -22,7 +22,7 @@ class BiographyTextView: UITextView, UITextViewDelegate {
     }
     
     private func checkText() {
-        if (text == "" || text == nil || text == "Biography") {
+        if (text == "" || text == nil) {
             let font: UIFont = UIFont(name: "Helvetica Neue", size: 16)!
             
             attributedText = NSAttributedString(string: text ?? "Biography", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])

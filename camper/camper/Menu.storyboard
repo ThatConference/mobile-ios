@@ -104,7 +104,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOs-gK-lCF">
                                 <rect key="frame" x="0.0" y="160" width="375" height="507"/>
                                 <connections>
-                                    <segue destination="mBG-KN-9wI" kind="embed" id="Urn-0p-FpY"/>
+                                    <segue destination="mBG-KN-9wI" kind="embed" identifier="toMenuTable" id="Urn-0p-FpY"/>
                                 </connections>
                             </containerView>
                         </subviews>

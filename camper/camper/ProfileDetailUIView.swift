@@ -8,10 +8,10 @@
 
 import Foundation
 
-class ProfileDetailUIView {
+class ProfileDetailUIView: UIView {
     
-//    self.layer.shadowColor = UIColor.darkGray.cgColor
-//    self.layer.shadowOffset = CGSize(0.0, 0.4)
-//    //        self.layer.shadowRadius = 3
-//    self.layer.shadowOpacity = 0.5
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
 }

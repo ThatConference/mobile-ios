@@ -65,6 +65,7 @@ class User: NSObject, NSCoding {
     var linkedIn: String?
     
     override init() {
+        _id = ""
         _firstName = "Guest"
         _lastName = ""
         _email = ""
@@ -206,6 +207,60 @@ class User: NSObject, NSCoding {
         }
         
         return _displayHeadshot
+    }
+    
+    var publicPhoneString: String {
+        if (publicPhone == nil) {
+            return ""
+        }
+        return publicPhone!
+    }
+    
+    var publicEmailString: String {
+        if (publicEmail == nil) {
+            return ""
+        }
+        return publicEmail!
+    }
+    
+    var websiteString: String {
+        if (website == nil) {
+            return ""
+        }
+        return website!
+    }
+    
+    var companyString: String {
+        if (company == nil) {
+            return ""
+        }
+        return company!
+    }
+    
+    var titleString: String {
+        if (title == nil) {
+            return ""
+        }
+        return title!
+    }
+    
+    var locationString: String {
+        if (state == nil && city == nil) {
+            return ""
+        } else if (state == nil) {
+            return city!
+        } else if (city == nil) {
+            return state!
+        } else {
+            return "\(city!), \(state!)"
+        }
+    }
+    
+    var biographyString: String {
+        if (biography == nil) {
+            return ""
+        }
+        return biography!
     }
     
     var parameter: [String: AnyObject] {

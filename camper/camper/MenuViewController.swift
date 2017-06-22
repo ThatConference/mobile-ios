@@ -16,7 +16,7 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         if let user = PersistenceManager.loadUser(Path.User) {
             StateData.instance.currentUser = user
             updateUI()
@@ -24,18 +24,9 @@ class MenuViewController: UIViewController {
         updateUI()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         updateUI()
-    }
-    
-    func updateUI() {
-        nameLabel.text = StateData.instance.currentUser.fullName
-        if let headshot = StateData.instance.currentUser.headShot {
-            profileImageView.loadImageURL(url: URL(string: headshot), cache: IMAGE_CACHE)
-        } else {
-            profileImageView.image = UIImage(named: "speaker")
-        }
     }
     
     @IBAction func nameLabelPressed(_ sender: UITapGestureRecognizer) {
@@ -46,12 +37,20 @@ class MenuViewController: UIViewController {
             }
     }
     
-    
     @IBAction func shareContactButtonPressed(_ sender: Any) {
         
     }
     
     @IBAction func unwindToMainVC(segue:UIStoryboardSegue) { }
+    
+    func updateUI() {
+        nameLabel.text = StateData.instance.currentUser.fullName
+        if let headshot = StateData.instance.currentUser.headShot {
+            profileImageView.loadImageURL(url: URL(string: headshot), cache: IMAGE_CACHE)
+        } else {
+            profileImageView.image = UIImage(named: "speaker")
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? FavoritesViewController {
@@ -61,6 +60,5 @@ class MenuViewController: UIViewController {
             }
         }
     }
-
 
 }
