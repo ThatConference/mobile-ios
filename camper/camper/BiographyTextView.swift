@@ -17,15 +17,13 @@ class BiographyTextView: UITextView, UITextViewDelegate {
         textContainer.lineFragmentPadding = 2
         
         checkText()
-        
-//        attributedText = NSAttributedString(string: text ?? "Biography", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
     }
     
     private func checkText() {
-        if (text == "" || text == nil) {
+        if (text == "" || text == nil || text == "Biography") {
             let font: UIFont = UIFont(name: "Helvetica Neue", size: 16)!
             
-            attributedText = NSAttributedString(string: text ?? "Biography", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
+            attributedText = NSAttributedString(string: "Biography", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
         } else {
             self.textColor = UIColor.black
         }

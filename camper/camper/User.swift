@@ -60,6 +60,7 @@ class User: NSObject, NSCoding {
     var twitter: String?
     var facebook: String?
     var googlePlus: String?
+    var github: String?
     var pinterest: String?
     var instagram: String?
     var linkedIn: String?
@@ -91,12 +92,13 @@ class User: NSObject, NSCoding {
         twitter = dictionary[Keys.Twitter] as? String
         facebook = dictionary[Keys.Facebook] as? String
         googlePlus = dictionary[Keys.GooglePlus] as? String
+        github = dictionary[Keys.Github] as? String
         pinterest = dictionary[Keys.Pinterest] as? String
         instagram = dictionary[Keys.Instagram] as? String
         linkedIn = dictionary[Keys.LinkedIn] as? String
     }
     
-    init(id: String, headShot: String?, displayHeadShot: String?, firstName: String, lastName: String, email: String, publicEmail: String?, biography: String?, phone: String?, publicPhone: String?, publicThatSlackHandle: String?, city: String?, state: String?, company: String?, title: String?, website: String?, twitter: String?, facebook: String?, googlePlus: String?, pinterest: String?, instagram: String?, linkedIn: String?) {
+    init(id: String, headShot: String?, displayHeadShot: String?, firstName: String, lastName: String, email: String, publicEmail: String?, biography: String?, phone: String?, publicPhone: String?, publicThatSlackHandle: String?, city: String?, state: String?, company: String?, title: String?, website: String?, twitter: String?, facebook: String?, googlePlus: String?, github: String?, pinterest: String?, instagram: String?, linkedIn: String?) {
         self._id = id
         self._headShot = headShot
         self._displayHeadshot = displayHeadShot
@@ -116,6 +118,7 @@ class User: NSObject, NSCoding {
         self.twitter = twitter
         self.facebook = facebook
         self.googlePlus = googlePlus
+        self.github = github
         self.pinterest = pinterest
         self.instagram = instagram
         self.linkedIn = linkedIn
@@ -142,6 +145,7 @@ class User: NSObject, NSCoding {
         aCoder.encode(self.twitter, forKey: Keys.Twitter)
         aCoder.encode(self.facebook, forKey: Keys.Facebook)
         aCoder.encode(self.googlePlus, forKey: Keys.GooglePlus)
+        aCoder.encode(self.github, forKey: Keys.Github)
         aCoder.encode(self.pinterest, forKey: Keys.Pinterest)
         aCoder.encode(self.instagram, forKey: Keys.Instagram)
         aCoder.encode(self.linkedIn, forKey: Keys.LinkedIn)
@@ -168,6 +172,7 @@ class User: NSObject, NSCoding {
         twitter = aDecoder.decodeObject(forKey: Keys.Twitter) as? String
         facebook = aDecoder.decodeObject(forKey: Keys.Facebook) as? String
         googlePlus = aDecoder.decodeObject(forKey: Keys.GooglePlus) as? String
+        github = aDecoder.decodeObject(forKey: Keys.Github) as? String
         pinterest = aDecoder.decodeObject(forKey: Keys.Pinterest) as? String
         instagram = aDecoder.decodeObject(forKey: Keys.Instagram) as? String
         linkedIn = aDecoder.decodeObject(forKey: Keys.LinkedIn) as? String
@@ -285,6 +290,7 @@ class User: NSObject, NSCoding {
             Keys.Twitter : twitter as AnyObject,
             Keys.Facebook : facebook as AnyObject,
             Keys.GooglePlus : googlePlus as AnyObject,
+            Keys.Github : github as AnyObject,
             Keys.Pinterest : pinterest as AnyObject,
             Keys.Instagram : instagram as AnyObject,
             Keys.LinkedIn : linkedIn as AnyObject

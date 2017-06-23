@@ -101,6 +101,8 @@
 		7B1EDD7D1EF867AD00722B9A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1EDD7C1EF867AD00722B9A /* User.swift */; };
 		7B3C38391E955E8100FEA4A5 /* StateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3C38381E955E8100FEA4A5 /* StateData.swift */; };
 		7B3C383C1E95A27F00FEA4A5 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B3C383A1E95A27F00FEA4A5 /* Map.storyboard */; };
+		7B9290BC1EFC616B00689B44 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9290BB1EFC616B00689B44 /* UIColor+Extension.swift */; };
+		7B9290BE1EFC636600689B44 /* BorderImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9290BD1EFC636600689B44 /* BorderImageView.swift */; };
 		7B9AA2501EF4400800DC24E0 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B9AA24F1EF4400800DC24E0 /* Profile.storyboard */; };
 		7B9AA2521EF442E600DC24E0 /* ProfileTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9AA2511EF442E600DC24E0 /* ProfileTextField.swift */; };
 		7B9AA2541EF44F6300DC24E0 /* BiographyTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9AA2531EF44F6300DC24E0 /* BiographyTextView.swift */; };
@@ -126,6 +128,7 @@
 		7BE1B5411EAA696E0071B3D2 /* FamilyEventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1B5401EAA696E0071B3D2 /* FamilyEventsTableViewCell.swift */; };
 		7BE1B5441EAA698F0071B3D2 /* FamilyEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1B5431EAA698F0071B3D2 /* FamilyEventsViewController.swift */; };
 		7BE1B5461EAA6D1C0071B3D2 /* FamilyEvents.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BE1B5451EAA6D1C0071B3D2 /* FamilyEvents.storyboard */; };
+		7BF626041EFD7FC000D75C50 /* SocialUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF626031EFD7FC000D75C50 /* SocialUIButton.swift */; };
 		8100BB730DD7BD782BE97450 /* Pods_That_Conference.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0B5257ACD92AA9CC1AFA77 /* Pods_That_Conference.framework */; };
 /* End PBXBuildFile section */
 
@@ -228,6 +231,8 @@
 		7B1EDD7C1EF867AD00722B9A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7B3C38381E955E8100FEA4A5 /* StateData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateData.swift; sourceTree = "<group>"; };
 		7B3C383B1E95A27F00FEA4A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Map.storyboard; sourceTree = "<group>"; };
+		7B9290BB1EFC616B00689B44 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		7B9290BD1EFC636600689B44 /* BorderImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderImageView.swift; sourceTree = "<group>"; };
 		7B9AA24F1EF4400800DC24E0 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		7B9AA2511EF442E600DC24E0 /* ProfileTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTextField.swift; sourceTree = "<group>"; };
 		7B9AA2531EF44F6300DC24E0 /* BiographyTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiographyTextView.swift; sourceTree = "<group>"; };
@@ -255,6 +260,7 @@
 		7BE1B5401EAA696E0071B3D2 /* FamilyEventsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyEventsTableViewCell.swift; sourceTree = "<group>"; };
 		7BE1B5431EAA698F0071B3D2 /* FamilyEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyEventsViewController.swift; sourceTree = "<group>"; };
 		7BE1B5451EAA6D1C0071B3D2 /* FamilyEvents.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FamilyEvents.storyboard; sourceTree = "<group>"; };
+		7BF626031EFD7FC000D75C50 /* SocialUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialUIButton.swift; sourceTree = "<group>"; };
 		A815631E4D1E81BC22968403 /* Pods-That Conference.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-That Conference.release.xcconfig"; path = "Pods/Target Support Files/Pods-That Conference/Pods-That Conference.release.xcconfig"; sourceTree = "<group>"; };
 		E98E5B17ECF006FB52EFAA4B /* Pods-That Conference.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-That Conference.debug.xcconfig"; path = "Pods/Target Support Files/Pods-That Conference/Pods-That Conference.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -404,6 +410,7 @@
 		31D0D9461CC5DB4D007C5999 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7B9290BB1EFC616B00689B44 /* UIColor+Extension.swift */,
 				7BB028B21EF1972A0075197A /* CGMake+Extension.swift */,
 				31D0D9471CC5DB6A007C5999 /* Date+Extension.swift */,
 				31D39F451DE3E5FD00EC7145 /* URL+Extension.swift */,
@@ -470,6 +477,7 @@
 			isa = PBXGroup;
 			children = (
 				7B9AA2531EF44F6300DC24E0 /* BiographyTextView.swift */,
+				7B9290BD1EFC636600689B44 /* BorderImageView.swift */,
 				7BB028B01EF196E60075197A /* CircleButton.swift */,
 				7BB028AB1EF191750075197A /* CircleImageView.swift */,
 				5113D3891CAF58A100D6B974 /* CircleLabel.swift */,
@@ -483,6 +491,7 @@
 				7B9AA2511EF442E600DC24E0 /* ProfileTextField.swift */,
 				7B9AA2551EF45A0600DC24E0 /* RoundedButton.swift */,
 				5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */,
+				7BF626031EFD7FC000D75C50 /* SocialUIButton.swift */,
 				7BB028B41EF1A1B80075197A /* SpeakerTableViewCell.swift */,
 				3116C4D01D3BEDB2002E2722 /* SponsorTableViewCell.swift */,
 				31CFD1341D0E3AAB00F1AE23 /* TimeSlotRootTableViewCell.swift */,
@@ -833,6 +842,7 @@
 				7BB028BA1EF1C6490075197A /* SpeakerAPI.swift in Sources */,
 				7B9AA2521EF442E600DC24E0 /* ProfileTextField.swift in Sources */,
 				7B00F7081EFABB3700E252DC /* ProfileDetailUIView.swift in Sources */,
+				7B9290BE1EFC636600689B44 /* BorderImageView.swift in Sources */,
 				312A942C1C85396E00AE938B /* FavoritesViewController.swift in Sources */,
 				7BB028B51EF1A1B80075197A /* SpeakerTableViewCell.swift in Sources */,
 				3199C7191CD1B968002F01CD /* SpeakerProfileViewController.swift in Sources */,
@@ -847,6 +857,7 @@
 				7B00F7041EF9C88B00E252DC /* ProfileDetailsViewController.swift in Sources */,
 				7BE1B5441EAA698F0071B3D2 /* FamilyEventsViewController.swift in Sources */,
 				7BB028B11EF196E60075197A /* CircleButton.swift in Sources */,
+				7BF626041EFD7FC000D75C50 /* SocialUIButton.swift in Sources */,
 				311E0E6B1CB74D76004FA850 /* ExternalLogin.swift in Sources */,
 				317154221D1C340E004078E2 /* PassThroughImageView.swift in Sources */,
 				318F268C1CBC65F30065A76F /* Authentication.swift in Sources */,
@@ -855,6 +866,7 @@
 				31D39F461DE3E5FD00EC7145 /* URL+Extension.swift in Sources */,
 				7B02FE961E9FE875001396B6 /* Sessions.swift in Sources */,
 				7B177E281EA1414500F52BC8 /* Reachability.swift in Sources */,
+				7B9290BC1EFC616B00689B44 /* UIColor+Extension.swift in Sources */,
 				31CFCD841C8B70ED00DB2AB2 /* SessionStore.swift in Sources */,
 				31D877F81D1864C10045E8DA /* FrameCell.swift in Sources */,
 				312A94161C814B6B00AE938B /* AppDelegate.swift in Sources */,

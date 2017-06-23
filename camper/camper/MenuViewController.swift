@@ -10,7 +10,7 @@ import UIKit
 
 class MenuViewController: UIViewController {
     
-    @IBOutlet weak var profileImageView: CircleImageView!
+    @IBOutlet weak var profileImageView: BorderImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     

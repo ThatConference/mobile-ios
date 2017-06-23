@@ -33,14 +33,14 @@ class EditProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         loadCurrentData()
     }
 
     // MARK: IBActions
     
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
-            dismiss(animated: true, completion: nil)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func saveButtonPressed(_ sender: UIButton) {
@@ -73,6 +73,7 @@ class EditProfileViewController: UIViewController {
                             twitter: checkTextfieldValue(twitterTextField),
                             facebook: checkTextfieldValue(facebookTextField),
                             googlePlus: checkTextfieldValue(googleTextField),
+                            github: checkTextfieldValue(githubTextField),
                             pinterest: checkTextfieldValue(pinterestTextField),
                             instagram: checkTextfieldValue(instagramTextField),
                             linkedIn: checkTextfieldValue(linkedinTextField)
@@ -87,7 +88,7 @@ class EditProfileViewController: UIViewController {
                     let alert = UIAlertController(title: "Sucessfully saved profile changes", message: "", preferredStyle: .alert)
                     let ok = UIAlertAction(title: "Ok", style: .default, handler: { (UIAlertAction) in
                         userAPI.getMainUser()
-                        self.dismiss(animated: true, completion: nil)
+                        _ = self.navigationController?.popViewController(animated: true)
                     })
                     
                     alert.addAction(ok)
@@ -127,6 +128,7 @@ class EditProfileViewController: UIViewController {
         twitterTextField.text = currentUser.twitter ?? ""
         facebookTextField.text = currentUser.facebook ?? ""
         googleTextField.text = currentUser.googlePlus ?? ""
+        githubTextField.text = currentUser.github ?? ""
         pinterestTextField.text = currentUser.pinterest ?? ""
         instagramTextField.text = currentUser.instagram ?? ""
         linkedinTextField.text = currentUser.linkedIn ?? ""
@@ -142,7 +144,7 @@ class EditProfileViewController: UIViewController {
     }
     
     private func checkTextView(_ textView: UITextView) -> String? {
-        if (textView.text == "") {
+        if (textView.text == "" || textView.text == "Biography") {
             return nil
         } else {
             return textView.text!
