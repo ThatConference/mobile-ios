@@ -24,6 +24,7 @@ class ProfileDetailsViewController: UIViewController {
     @IBOutlet weak var biographyLabel: UILabel!
     
     @IBOutlet weak var socialButtonsUIView: ProfileDetailUIView!
+    @IBOutlet weak var socialUIViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var twitterButtton: SocialUIButton!
     @IBOutlet weak var facebookButton: SocialUIButton!
     @IBOutlet weak var googleButton: SocialUIButton!
@@ -32,25 +33,35 @@ class ProfileDetailsViewController: UIViewController {
     @IBOutlet weak var instagramButton: SocialUIButton!
     @IBOutlet weak var linkedInButton: SocialUIButton!
     
-    // Heights = 79
+    // Comment Section
+    
+    @IBOutlet weak var editCommentButton: UIButton!
+    @IBOutlet weak var commentSectionUIView: UIView!
+    @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var commentTextView: CommentUITextView!
+    @IBOutlet weak var commentTextViewStackView: UIStackView!
+    @IBOutlet weak var addCommentButton: RoundedButton!
     
     var user = StateData.instance.currentUser
+    var covfefe = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         filterViews()
-//        loadUI()
+        loadUI()
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        // Fix This
         user = StateData.instance.currentUser
         self.navigationController?.title = "Your Profile"
 
         filterViews()
-//        loadUI()
+        loadUI()
     }
     
     // MARK: IBActions
@@ -84,9 +95,14 @@ class ProfileDetailsViewController: UIViewController {
     func filterViews() {
         
         if (user.twitter == nil && user.facebook == nil && user.googlePlus == nil && user.github == nil && user.pinterest == nil && user.instagram == nil && user.linkedIn == nil) {
+            
             socialButtonsUIView.isHidden = true
+            socialUIViewHeightConstraint.constant = 0
         } else {
+            
             socialButtonsUIView.isHidden = false
+            socialUIViewHeightConstraint.constant = 101
+            
             if (user.twitter == nil) {
                 self.twitterButtton.hideButton(true)
             } else {
@@ -130,8 +146,17 @@ class ProfileDetailsViewController: UIViewController {
             }
         }
         
-        
+        if (covfefe == "") {
+            commentLabel.isHidden = true
+            commentTextViewStackView.isHidden = true
+            editCommentButton.isHidden = true
+        } else {
+            commentLabel.isHidden = false
+            editCommentButton.isHidden = true
+        }
     }
+    
+    
     
     
 }

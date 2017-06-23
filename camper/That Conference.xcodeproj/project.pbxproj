@@ -129,6 +129,7 @@
 		7BE1B5441EAA698F0071B3D2 /* FamilyEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1B5431EAA698F0071B3D2 /* FamilyEventsViewController.swift */; };
 		7BE1B5461EAA6D1C0071B3D2 /* FamilyEvents.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BE1B5451EAA6D1C0071B3D2 /* FamilyEvents.storyboard */; };
 		7BF626041EFD7FC000D75C50 /* SocialUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF626031EFD7FC000D75C50 /* SocialUIButton.swift */; };
+		7BF626061EFD984800D75C50 /* CommentUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF626051EFD984800D75C50 /* CommentUITextView.swift */; };
 		8100BB730DD7BD782BE97450 /* Pods_That_Conference.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0B5257ACD92AA9CC1AFA77 /* Pods_That_Conference.framework */; };
 /* End PBXBuildFile section */
 
@@ -261,6 +262,7 @@
 		7BE1B5431EAA698F0071B3D2 /* FamilyEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyEventsViewController.swift; sourceTree = "<group>"; };
 		7BE1B5451EAA6D1C0071B3D2 /* FamilyEvents.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FamilyEvents.storyboard; sourceTree = "<group>"; };
 		7BF626031EFD7FC000D75C50 /* SocialUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialUIButton.swift; sourceTree = "<group>"; };
+		7BF626051EFD984800D75C50 /* CommentUITextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentUITextView.swift; sourceTree = "<group>"; };
 		A815631E4D1E81BC22968403 /* Pods-That Conference.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-That Conference.release.xcconfig"; path = "Pods/Target Support Files/Pods-That Conference/Pods-That Conference.release.xcconfig"; sourceTree = "<group>"; };
 		E98E5B17ECF006FB52EFAA4B /* Pods-That Conference.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-That Conference.debug.xcconfig"; path = "Pods/Target Support Files/Pods-That Conference/Pods-That Conference.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -482,6 +484,7 @@
 				7BB028AB1EF191750075197A /* CircleImageView.swift */,
 				5113D3891CAF58A100D6B974 /* CircleLabel.swift */,
 				5113D3871CAC521C00D6B974 /* CircleView.swift */,
+				7BF626051EFD984800D75C50 /* CommentUITextView.swift */,
 				7BE1B5401EAA696E0071B3D2 /* FamilyEventsTableViewCell.swift */,
 				51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */,
 				31D877F71D1864C10045E8DA /* FrameCell.swift */,
@@ -819,6 +822,7 @@
 				312A942A1C85390B00AE938B /* ScheduleViewController.swift in Sources */,
 				312A94281C85383200AE938B /* AuthorizationViewController.swift in Sources */,
 				7B1EDD7D1EF867AD00722B9A /* User.swift in Sources */,
+				7BF626061EFD984800D75C50 /* CommentUITextView.swift in Sources */,
 				317154241D1D8025004078E2 /* BaseViewController.swift in Sources */,
 				31D0D9451CC48DEE007C5999 /* AuthToken.swift in Sources */,
 				7BD3622E1E8ED885009C3A5E /* MenuViewController.swift in Sources */,

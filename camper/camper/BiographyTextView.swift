@@ -10,7 +10,6 @@ import UIKit
 
 class BiographyTextView: UITextView, UITextViewDelegate {
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         delegate = self
