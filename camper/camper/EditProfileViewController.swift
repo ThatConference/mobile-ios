@@ -132,14 +132,25 @@ class EditProfileViewController: UIViewController {
         pinterestTextField.text = currentUser.pinterest ?? ""
         instagramTextField.text = currentUser.instagram ?? ""
         linkedinTextField.text = currentUser.linkedIn ?? ""
-        biographyTextView.text = currentUser.biography ?? "Biography"
+        biographyTextView.text = currentUser.biography ?? ""
+        biographyTextView.checkText()
     }
     
     private func checkTextfieldValue(_ textfield: UITextField) -> String? {
         if (textfield.text == "") {
             return nil
         } else {
-            return textfield.text!
+            if (textfield == websiteTextField || textfield == facebookTextField || textfield == googleTextField || textfield == githubTextField || textfield == pinterestTextField || textfield == instagramTextField ||  textfield == linkedinTextField) {
+                if (textfield.text!.contains("http://") || textfield.text!.contains("https://")) {
+                    return textfield.text!
+                } else {
+                    let requestString = "https://"
+                    let urlString = requestString + textfield.text!
+                    return urlString
+                }
+            } else {
+                return textfield.text!
+            }
         }
     }
     

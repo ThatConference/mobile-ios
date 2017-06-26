@@ -21,6 +21,7 @@ class ProfileDetailsViewController: UIViewController {
     @IBOutlet weak var publicEmailLabel: UILabel!
     @IBOutlet weak var websiteLabel: UILabel!
     
+    @IBOutlet weak var biographyHeaderLabel: UILabel!
     @IBOutlet weak var biographyLabel: UILabel!
     
     @IBOutlet weak var socialButtonsUIView: ProfileDetailUIView!
@@ -37,18 +38,19 @@ class ProfileDetailsViewController: UIViewController {
     
     @IBOutlet weak var editCommentButton: UIButton!
     @IBOutlet weak var commentSectionUIView: UIView!
+    @IBOutlet weak var commentHeaderLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var commentTextView: CommentUITextView!
     @IBOutlet weak var commentTextViewStackView: UIStackView!
     @IBOutlet weak var addCommentButton: RoundedButton!
     
-    var user = StateData.instance.currentUser
+    var user: User!
     var covfefe = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        filterViews()
+        
+        currentUserSettings(isCurrentUser: ISCURRENTUSER)
         loadUI()
         // Do any additional setup after loading the view.
     }
@@ -56,12 +58,11 @@ class ProfileDetailsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // Fix This
-        user = StateData.instance.currentUser
         self.navigationController?.title = "Your Profile"
-
-        filterViews()
+        
+        currentUserSettings(isCurrentUser: ISCURRENTUSER)
         loadUI()
+        
     }
     
     // MARK: IBActions
@@ -69,6 +70,81 @@ class ProfileDetailsViewController: UIViewController {
     @IBAction func editProfileButtonPressed(_ sender: UIBarButtonItem) {
         
         performSegue(withIdentifier: "toEditProfile", sender: nil)
+    }
+    
+    @IBAction func addCommentButtonPressed(_ sender: RoundedButton) {
+            if (sender.currentTitle == "Save Personal Comment") {
+                if (commentTextView.text == "Comment") {
+                    self.covfefe = ""
+                } else {
+                    self.covfefe = self.commentTextView.text
+                }
+                
+                self.commentTextViewStackView.isHidden = true
+                self.checkComment()
+            } else {
+                self.commentLabel.isHidden = true
+                self.commentTextViewStackView.isHidden = false
+            }
+        
+        sender.setCommentTitle()
+    }
+    
+    @IBAction func editCommentButtonPressed(_ sender: UIButton) {
+        
+        editCommentButton.isHidden = true
+        commentLabel.isHidden = true
+        commentTextViewStackView.isHidden = false
+        addCommentButton.isHidden = false
+        addCommentButton.setCommentTitle()
+    }
+    
+    @IBAction func twitterButtonPressed(_ sender: SocialUIButton) {
+        if let url = user.twitter {
+            UIApplication.shared.openURL(URL(string: "https://twitter.com/" + url)!)
+        }
+    }
+    
+    @IBAction func facebookButtonPressed(_ sender: SocialUIButton) {
+        if let url = user.facebook {
+            UIApplication.shared.openURL(URL(string: url)!)
+        }
+    }
+    
+    @IBAction func googleButtonPressed(_ sender: SocialUIButton) {
+        if let url = user.googlePlus {
+            UIApplication.shared.openURL(URL(string: url)!)
+        }
+    }
+    
+    @IBAction func githubButtonPressed(_ sender: SocialUIButton) {
+        if let url = user.github {
+            UIApplication.shared.openURL(URL(string: url)!)
+        }
+    }
+    
+    @IBAction func pinterestButtonPressed(_ sender: SocialUIButton) {
+        if let url = user.pinterest {
+            UIApplication.shared.openURL(URL(string: url)!)
+        }
+    }
+    
+    @IBAction func instagramButtonPressed(_ sender: SocialUIButton) {
+        if let url = user.instagram {
+            UIApplication.shared.openURL(URL(string: url)!)
+        }
+    }
+    
+    @IBAction func linkedInButtonPressed(_ sender: SocialUIButton) {
+        if let url = user.linkedIn {
+            UIApplication.shared.openURL(URL(string: url)!)
+        }
+    }
+    
+    @IBAction func websiteLabelPressed(_ sender: UITapGestureRecognizer) {
+        if let url = user.website {
+            UIApplication.shared.openURL(URL(string: url)!)
+        }
     }
     
     // MARK: Functions
@@ -146,17 +222,50 @@ class ProfileDetailsViewController: UIViewController {
             }
         }
         
-        if (covfefe == "") {
-            commentLabel.isHidden = true
-            commentTextViewStackView.isHidden = true
-            editCommentButton.isHidden = true
+        if (user.biographyString == "") {
+            biographyLabel.isHidden = true
+            biographyHeaderLabel.isHidden = true
         } else {
-            commentLabel.isHidden = false
-            editCommentButton.isHidden = true
+            biographyLabel.isHidden = false
+            biographyHeaderLabel.isHidden = false
         }
     }
     
+    func checkComment() {
+        // User comment
+        if (covfefe == "") {
+            commentLabel.isHidden = true
+            editCommentButton.isHidden = true
+            addCommentButton.isHidden = false
+        } else {
+            commentLabel.text = commentTextView.text
+            commentLabel.isHidden = false
+            editCommentButton.isHidden = false
+            addCommentButton.isHidden = true
+            commentTextView.text = covfefe
+        }
+    }
     
-    
+    func currentUserSettings(isCurrentUser: Bool) {
+        if (isCurrentUser) {
+            user = StateData.instance.currentUser
+            commentHeaderLabel.isHidden = true
+            commentTextViewStackView.isHidden = true
+            editCommentButton.isHidden = true
+            commentLabel.isHidden = true
+            addCommentButton.isHidden = true
+            filterViews()
+        } else {
+            
+            // Erase
+            user = StateData.instance.currentUser
+            
+            commentTextViewStackView.isHidden = true
+            commentHeaderLabel.isHidden = false
+            addCommentButton.isHidden = false
+            filterViews()
+            checkComment()
+        }
+    }
     
 }

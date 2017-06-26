@@ -11,3 +11,5 @@ import Foundation
 typealias DownloadComplete = () -> ()
 
 var IMAGE_CACHE: NSCache<NSString, UIImage> = NSCache()
+
+var ISCURRENTUSER: Bool!

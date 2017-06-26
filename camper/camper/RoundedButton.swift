@@ -15,4 +15,12 @@ class RoundedButton: UIButton {
         self.layer.cornerRadius = 15
     }
 
+    func setCommentTitle() {
+        if (self.currentTitle == "Add a Personal Comment") {
+            self.setTitle("Save Personal Comment", for: .normal)
+        } else {
+            self.setTitle("Add a Personal Comment", for: .normal)
+        }
+    }
+    
 }

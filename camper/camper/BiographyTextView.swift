@@ -18,7 +18,7 @@ class BiographyTextView: UITextView, UITextViewDelegate {
         checkText()
     }
     
-    private func checkText() {
+    func checkText() {
         if (text == "" || text == nil || text == "Biography") {
             let font: UIFont = UIFont(name: "Helvetica Neue", size: 16)!
             

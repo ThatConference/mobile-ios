@@ -17,7 +17,7 @@
                         <viewControllerLayoutGuide type="top" id="Gck-Pe-u27"/>
                         <viewControllerLayoutGuide type="bottom" id="xge-KJ-omi"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="HVP-B1-efe">
+                    <view key="view" contentMode="scaleToFill" id="HVP-B1-efe">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -25,10 +25,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RmN-3g-pxX">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1119"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1118.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-5" translatesAutoresizingMaskIntoConstraints="NO" id="Swx-Ww-GN8">
-                                                <rect key="frame" x="20" y="983" width="335" height="56"/>
+                                                <rect key="frame" x="20" y="983" width="335" height="55.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Biography" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oS0-eZ-SgV">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="25"/>
@@ -39,8 +39,8 @@
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Biography" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zJW-5r-S2r" customClass="BiographyTextView" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="20" width="335" height="36"/>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zJW-5r-S2r" customClass="BiographyTextView" customModule="That_Conference" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="20" width="335" height="35.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="ZKz-sy-Uf1"/>
@@ -49,7 +49,7 @@
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X3O-PR-SzO" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="51" width="335" height="5"/>
+                                                        <rect key="frame" x="0.0" y="50.5" width="335" height="5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="5" id="pTm-aQ-XD0"/>
                                                         </constraints>
@@ -63,7 +63,7 @@
                                                 </constraints>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hK-y1-6ae" customClass="RoundedButton" customModule="That_Conference" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="1064" width="335" height="35"/>
+                                                <rect key="frame" x="20" y="1063.5" width="335" height="35"/>
                                                 <color key="backgroundColor" red="0.37029466030000002" green="0.44048410650000003" blue="0.14786431189999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="slw-ow-ttR"/>
@@ -477,7 +477,7 @@
                         <viewControllerLayoutGuide type="top" id="qSc-FT-NNr"/>
                         <viewControllerLayoutGuide type="bottom" id="M7t-Cu-n2z"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="cYZ-VG-o18">
+                    <view key="view" contentMode="scaleToFill" id="cYZ-VG-o18">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -485,7 +485,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mmr-c8-aXB">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="649"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="650"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ek-r8-CcD" customClass="ProfileDetailUIView" customModule="That_Conference" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
@@ -498,7 +498,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steven" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Vsa-qU-KFf">
-                                                        <rect key="frame" x="173" y="23" width="185" height="33"/>
+                                                        <rect key="frame" x="173" y="24" width="185" height="32.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="27"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -521,7 +521,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yang" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="f7T-Vo-mbr">
-                                                        <rect key="frame" x="173" y="62" width="185" height="33"/>
+                                                        <rect key="frame" x="173" y="62.5" width="185" height="32.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="27"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -564,6 +564,9 @@
                                                                                     <constraint firstAttribute="height" constant="65" id="fwk-CN-yWi"/>
                                                                                 </constraints>
                                                                                 <state key="normal" image="twitter"/>
+                                                                                <connections>
+                                                                                    <action selector="twitterButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="GEw-qF-0ta"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G0I-Du-50O" userLabel="Facebook" customClass="SocialUIButton" customModule="That_Conference" customModuleProvider="target">
                                                                                 <rect key="frame" x="80" y="0.0" width="65" height="65"/>
@@ -572,6 +575,9 @@
                                                                                     <constraint firstAttribute="height" constant="65" id="ajm-SS-hzh"/>
                                                                                 </constraints>
                                                                                 <state key="normal" image="facebook"/>
+                                                                                <connections>
+                                                                                    <action selector="facebookButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="4Rd-yL-Gqh"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tI-dM-4SB" userLabel="Google" customClass="SocialUIButton" customModule="That_Conference" customModuleProvider="target">
                                                                                 <rect key="frame" x="160" y="0.0" width="65" height="65"/>
@@ -580,6 +586,9 @@
                                                                                     <constraint firstAttribute="width" constant="65" id="sAp-ut-z09"/>
                                                                                 </constraints>
                                                                                 <state key="normal" image="google"/>
+                                                                                <connections>
+                                                                                    <action selector="googleButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="Iia-tC-XvZ"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zv0-xK-hJ4" userLabel="Github" customClass="SocialUIButton" customModule="That_Conference" customModuleProvider="target">
                                                                                 <rect key="frame" x="240" y="0.0" width="65" height="65"/>
@@ -588,6 +597,9 @@
                                                                                     <constraint firstAttribute="width" constant="65" id="roC-BV-KzW"/>
                                                                                 </constraints>
                                                                                 <state key="normal" image="github"/>
+                                                                                <connections>
+                                                                                    <action selector="githubButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="w6n-F7-jP6"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6T-G8-BXF" userLabel="Pinterest" customClass="SocialUIButton" customModule="That_Conference" customModuleProvider="target">
                                                                                 <rect key="frame" x="320" y="0.0" width="65" height="65"/>
@@ -596,6 +608,9 @@
                                                                                     <constraint firstAttribute="height" constant="65" id="LQC-Xv-cfr"/>
                                                                                 </constraints>
                                                                                 <state key="normal" image="twitter"/>
+                                                                                <connections>
+                                                                                    <action selector="pinterestButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="Rvg-k7-K4n"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sc-Ur-EcU" userLabel="Instagram" customClass="SocialUIButton" customModule="That_Conference" customModuleProvider="target">
                                                                                 <rect key="frame" x="400" y="0.0" width="65" height="65"/>
@@ -604,6 +619,9 @@
                                                                                     <constraint firstAttribute="height" constant="65" id="WMJ-hL-EMJ"/>
                                                                                 </constraints>
                                                                                 <state key="normal" image="twitter"/>
+                                                                                <connections>
+                                                                                    <action selector="instagramButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="kpb-ga-tu0"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bze-DE-NeO" userLabel="LinkedIn" customClass="SocialUIButton" customModule="That_Conference" customModuleProvider="target">
                                                                                 <rect key="frame" x="480" y="0.0" width="65" height="65"/>
@@ -612,6 +630,9 @@
                                                                                     <constraint firstAttribute="height" constant="65" id="tfu-P5-hvB"/>
                                                                                 </constraints>
                                                                                 <state key="normal" image="twitter"/>
+                                                                                <connections>
+                                                                                    <action selector="linkedInButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="SdW-Mz-ENt"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <constraints>
@@ -674,17 +695,21 @@
                                                             <constraint firstAttribute="height" constant="21" id="EDY-bU-DSj"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" red="0.68174123760000005" green="0.2207989991" blue="0.076259069139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MtT-qI-zoD">
+                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MtT-qI-zoD">
                                                         <rect key="frame" x="0.0" y="63" width="339" height="21"/>
+                                                        <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="Ylm-i3-qnR"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" red="0.68174123760000005" green="0.2207989991" blue="0.076259069139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="V7g-13-Y3W" appends="YES" id="ejI-hb-xKu"/>
+                                                        </connections>
                                                     </label>
                                                 </subviews>
                                             </stackView>
@@ -712,7 +737,7 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C8R-8L-6Tw">
-                                                <rect key="frame" x="18" y="472" width="339" height="149"/>
+                                                <rect key="frame" x="18" y="472" width="339" height="150"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="n4c-jV-lQc">
                                                         <rect key="frame" x="0.0" y="3" width="63" height="21"/>
@@ -724,7 +749,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="iV8-HT-x8N">
-                                                        <rect key="frame" x="0.0" y="37" width="339" height="112"/>
+                                                        <rect key="frame" x="0.0" y="37" width="339" height="113"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No comments" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dz4-3Z-cyf">
                                                                 <rect key="frame" x="0.0" y="0.0" width="339" height="21"/>
@@ -736,19 +761,19 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-5" translatesAutoresizingMaskIntoConstraints="NO" id="al0-xY-AtT">
-                                                                <rect key="frame" x="0.0" y="36" width="339" height="31"/>
+                                                                <rect key="frame" x="0.0" y="36" width="339" height="32"/>
                                                                 <subviews>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Biography" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bAZ-PV-tpH" customClass="CommentUITextView" customModule="That_Conference" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="339" height="31"/>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Comment" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bAZ-PV-tpH" customClass="CommentUITextView" customModule="That_Conference" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="339" height="32"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="Mxf-IN-t71"/>
                                                                         </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     </textView>
                                                                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dNb-hb-7yL" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="26" width="339" height="5"/>
+                                                                        <rect key="frame" x="0.0" y="27" width="339" height="5"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="5" id="r7P-Tr-ZlO"/>
                                                                         </constraints>
@@ -759,11 +784,14 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fs7-mI-77k" customClass="RoundedButton" customModule="That_Conference" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="82" width="339" height="30"/>
+                                                                <rect key="frame" x="0.0" y="83" width="339" height="30"/>
                                                                 <color key="backgroundColor" red="0.41931664940000002" green="0.49983900790000002" blue="0.16713508960000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <state key="normal" title="Add a Personal Comment">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="addCommentButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="ao2-nY-Q33"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -774,6 +802,9 @@
                                                             <constraint firstAttribute="width" constant="25" id="Zif-7J-v9M"/>
                                                         </constraints>
                                                         <state key="normal" title="Button" image="camera"/>
+                                                        <connections>
+                                                            <action selector="editCommentButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="LuB-WP-rqa"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -845,11 +876,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addCommentButton" destination="Fs7-mI-77k" id="itH-ft-ueC"/>
+                        <outlet property="biographyHeaderLabel" destination="Oku-YX-sm0" id="wg1-Ac-tu4"/>
                         <outlet property="biographyLabel" destination="vkb-bc-ghM" id="JxU-jM-O07"/>
+                        <outlet property="commentHeaderLabel" destination="n4c-jV-lQc" id="5cj-bB-63L"/>
                         <outlet property="commentLabel" destination="dz4-3Z-cyf" id="7Go-Re-vYM"/>
                         <outlet property="commentSectionUIView" destination="C8R-8L-6Tw" id="xEh-qo-u3y"/>
                         <outlet property="commentTextView" destination="bAZ-PV-tpH" id="W9T-Vw-Zxo"/>
-                        <outlet property="commentTextViewStackView" destination="al0-xY-AtT" id="9ae-rT-oZg"/>
+                        <outlet property="commentTextViewStackView" destination="al0-xY-AtT" id="qa5-vj-VgC"/>
                         <outlet property="companyLabel" destination="02D-eH-1m9" id="VoX-d8-OMX"/>
                         <outlet property="editCommentButton" destination="2EI-yZ-Hk9" id="68V-4N-dQC"/>
                         <outlet property="facebookButton" destination="G0I-Du-50O" id="C6f-d9-bgS"/>
@@ -874,6 +907,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IA3-cj-nVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="d2m-ZR-sip" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="V7g-13-Y3W">
+                    <connections>
+                        <action selector="websiteLabelPressed:" destination="tb5-Os-ct1" id="bZ5-CC-ldY"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="452" y="73.313343328335833"/>
         </scene>

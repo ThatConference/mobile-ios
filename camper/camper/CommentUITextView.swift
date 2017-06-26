@@ -8,20 +8,49 @@
 
 import UIKit
 
-class CommentUITextView: UITextView {
+class CommentUITextView: UITextView, UITextViewDelegate {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        textContainer.lineFragmentPadding = 2
-//        
-//        let border = CALayer()
-//        let width = CGFloat(1.0)
-//        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width, height: self.frame.size.height)
-//        border.borderColor = UIColor.darkGray.cgColor
-//        border.borderWidth = width
-//        self.layer.addSublayer(border)
-//        self.layer.masksToBounds = true
+        delegate = self
+        textContainer.lineFragmentPadding = 1
         
+        checkText()
     }
 
+    private func checkText() {
+        if (text == "" || text == nil || text == "Comment") {
+            let font: UIFont = UIFont(name: "Helvetica Neue", size: 13)!
+            
+            attributedText = NSAttributedString(string: "Comment", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
+        } else {
+            self.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if (text == "Comment") {
+            self.textColor = UIColor.black
+            text = ""
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if (text == "") {
+            let font: UIFont = UIFont(name: "Helvetica Neue", size: 13)!
+            
+            attributedText = NSAttributedString(string: "Comment", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text.isEqual("\n")) {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    
+    
 }

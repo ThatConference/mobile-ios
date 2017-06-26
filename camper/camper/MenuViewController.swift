@@ -30,11 +30,12 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction func nameLabelPressed(_ sender: UITapGestureRecognizer) {
-            if (Authentication.isLoggedIn()) {
-                performSegue(withIdentifier: "toProfileDetails", sender: nil)
-            } else {
-                performSegue(withIdentifier: "show_login", sender: self)
-            }
+        if (Authentication.isLoggedIn()) {
+            ISCURRENTUSER = true
+            performSegue(withIdentifier: "toProfileDetails", sender: self)
+        } else {
+            performSegue(withIdentifier: "show_login", sender: self)
+        }
     }
     
     @IBAction func shareContactButtonPressed(_ sender: Any) {
