@@ -34,6 +34,8 @@ class SpeakerListViewController: BaseViewController {
         self.revealViewControllerFunc(barButton: menuButton)
     }
     
+    // MARK: Functions
+    
     func refresh(_ sender: AnyObject) {
         DispatchQueue.main.async {
             self.tableView.reloadData()

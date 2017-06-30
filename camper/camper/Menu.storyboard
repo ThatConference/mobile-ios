@@ -48,7 +48,7 @@
         <!--Menu View Controller-->
         <scene sceneID="SBp-Ed-hfl">
             <objects>
-                <viewController storyboardIdentifier="MainMenuVC" id="6EQ-nZ-ev3" customClass="MenuViewController" customModule="That_Conference" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainMenuVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6EQ-nZ-ev3" customClass="MenuViewController" customModule="That_Conference" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5PF-aH-csH"/>
                         <viewControllerLayoutGuide type="bottom" id="dmY-ha-TfI"/>
@@ -58,25 +58,53 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fcl-2c-olx">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header-logo" translatesAutoresizingMaskIntoConstraints="NO" id="SJe-sA-9xg">
-                                        <rect key="frame" x="87.5" y="25" width="140" height="30"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Full Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vFg-hS-DEw">
+                                        <rect key="frame" x="83" y="53" width="131" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <gestureRecognizers/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <color key="textColor" red="0.90588235294117647" green="0.83137254901960778" blue="0.69411764705882351" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="7iA-1L-aF3" appends="YES" id="A2e-fe-BzV"/>
+                                        </connections>
+                                    </label>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="speaker" translatesAutoresizingMaskIntoConstraints="NO" id="0KZ-RQ-pUi" userLabel="Profile Image" customClass="BorderImageView" customModule="That_Conference" customModuleProvider="target">
+                                        <rect key="frame" x="17" y="35" width="60" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="lnh-5I-tRa" appends="YES" id="rxL-jX-Bu5"/>
+                                        </connections>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AkM-hK-XDq">
+                                        <rect key="frame" x="222" y="48" width="35" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                        <state key="normal" image="twitter"/>
+                                        <connections>
+                                            <action selector="shareContactButtonPressed:" destination="6EQ-nZ-ev3" eventType="touchUpInside" id="Znb-U3-o7u"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Share Contact" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uRz-7u-1mG">
+                                        <rect key="frame" x="258" y="45" width="53" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="0.90396612880000005" green="0.83328729869999996" blue="0.69475156069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.035241130739450455" green="0.11184763163328171" blue="0.19903132319450378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.37091678379999998" green="0.2713463008" blue="0.18597435949999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="65" id="Kfn-Cg-pjU"/>
-                                    <constraint firstAttribute="bottom" secondItem="SJe-sA-9xg" secondAttribute="bottom" constant="10" id="Kph-DN-UBE"/>
-                                    <constraint firstItem="SJe-sA-9xg" firstAttribute="centerX" secondItem="fcl-2c-olx" secondAttribute="centerX" constant="-30" id="obT-SX-LaH"/>
-                                    <constraint firstItem="SJe-sA-9xg" firstAttribute="top" secondItem="fcl-2c-olx" secondAttribute="top" constant="25" id="r2q-GA-3li"/>
+                                    <constraint firstAttribute="height" constant="120" id="Kfn-Cg-pjU"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOs-gK-lCF">
-                                <rect key="frame" x="0.0" y="65" width="375" height="602"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
                                 <connections>
-                                    <segue destination="mBG-KN-9wI" kind="embed" id="Urn-0p-FpY"/>
+                                    <segue destination="mBG-KN-9wI" kind="embed" identifier="toMenuTable" id="Urn-0p-FpY"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -91,17 +119,41 @@
                             <constraint firstItem="fcl-2c-olx" firstAttribute="leading" secondItem="SO9-XZ-fBz" secondAttribute="leading" id="gsp-05-0zC"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="containerView" destination="NOs-gK-lCF" id="yMJ-3J-qwK"/>
+                        <outlet property="nameLabel" destination="vFg-hS-DEw" id="LrG-l3-pC0"/>
+                        <outlet property="profileImageView" destination="0KZ-RQ-pUi" id="zlh-Dr-njY"/>
+                        <segue destination="0yA-Iu-vFn" kind="show" identifier="toProfileDetails" id="6u8-ZM-yq8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZ7-lF-c1y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="7iA-1L-aF3">
+                    <connections>
+                        <action selector="nameLabelPressed:" destination="6EQ-nZ-ev3" id="x01-hf-Roi"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="lnh-5I-tRa">
+                    <connections>
+                        <action selector="nameLabelPressed:" destination="6EQ-nZ-ev3" id="NPF-b1-6eE"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="413.60000000000002" y="-314.39280359820094"/>
+        </scene>
+        <!--ProfileNavigationControlelr-->
+        <scene sceneID="5BO-qF-0l3">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="ProfileNavigationControlelr" storyboardName="Profile" referencedIdentifier="ProfileNavigationControlelr" id="0yA-Iu-vFn" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="55L-6k-gJW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1058" y="-728"/>
         </scene>
         <!--Menu Table View Controller-->
         <scene sceneID="NJa-Jq-eOI">
             <objects>
                 <tableViewController id="mBG-KN-9wI" customClass="MenuTableViewController" customModule="That_Conference" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Oxa-JD-chx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="602"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="547"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -152,7 +204,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Family Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVy-eo-gCi">
-                                                    <rect key="frame" x="54" y="11" width="150" height="21.5"/>
+                                                    <rect key="frame" x="54" y="11" width="150" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="150" id="QWj-ne-yvp"/>
                                                     </constraints>
@@ -261,7 +313,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camper Contacts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bst-ic-6Nu">
-                                                    <rect key="frame" x="54" y="11" width="157" height="21"/>
+                                                    <rect key="frame" x="54" y="11" width="157" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="157" id="ATx-37-Mhe"/>
                                                     </constraints>
@@ -515,7 +567,7 @@
                 <viewControllerPlaceholder storyboardName="SpeakerList" id="jYF-5r-0tT" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kec-bT-j2X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1738" y="-374"/>
+            <point key="canvasLocation" x="1731" y="-330"/>
         </scene>
         <!--Map-->
         <scene sceneID="MAg-DC-gJQ">
@@ -569,12 +621,13 @@
     <resources>
         <image name="family_icon" width="38" height="38"/>
         <image name="favorites" width="28" height="28"/>
-        <image name="header-logo" width="140" height="62"/>
         <image name="login_icon" width="38" height="38"/>
         <image name="map" width="28" height="28"/>
         <image name="open-spaces" width="28" height="29"/>
         <image name="schedule" width="27" height="28"/>
         <image name="settings" width="27" height="28"/>
+        <image name="speaker" width="66" height="75"/>
         <image name="sponsor" width="41" height="41"/>
+        <image name="twitter" width="109" height="108"/>
     </resources>
 </document>

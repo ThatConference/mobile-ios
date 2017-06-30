@@ -12,6 +12,7 @@ class StateData {
     static let instance = StateData()
     public var sessionStore: SessionStore! = SessionStore()
     public var offlineFavoriteSessions: Sessions = Sessions()
+    public var currentUser: User = User()
     
     private init() {}
 }

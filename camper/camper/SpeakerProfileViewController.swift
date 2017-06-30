@@ -18,6 +18,8 @@ class SpeakerProfileViewController : BaseViewController {
     @IBOutlet var linkedInButton: UIButton!
     @IBOutlet var gitHubButton: UIButton!
     
+    // MARK: IBActions
+    
     @IBAction func websiteButton(_ sender: AnyObject) {
         if let url = speaker.website
         {
@@ -96,6 +98,8 @@ class SpeakerProfileViewController : BaseViewController {
         super.viewDidLayoutSubviews()
         biography.setContentOffset(CGPoint.zero, animated: false)
     }
+    
+    // MARK: Functions
     
     fileprivate func setSocialButtons() {
         if speaker.twitter == nil

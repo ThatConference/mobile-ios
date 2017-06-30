@@ -101,7 +101,8 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
     }
     
     fileprivate func DismissView() {
-        self.dismiss(animated: false, completion: nil)
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     func loginOAuth(_ provider: String) {
@@ -191,6 +192,10 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
         
         print("Sign in was successful")
         Answers.logLogin(withMethod: "InternalLogin", success: true, customAttributes: [:])
+        
+        let userAPI = UserAPI()
+        userAPI.getMainUser()
+        
         DispatchQueue.main.async {
             self.SignedIn()
         }

@@ -16,6 +16,10 @@ class ScheduleViewController : TimeSlotRootViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let user = PersistenceManager.loadUser(.User) {
+            print(user)
+        }
+        
         loadData()
         
         // set up controls

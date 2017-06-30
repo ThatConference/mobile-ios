@@ -7,6 +7,7 @@ enum Path: String {
     case OpenSpaces = "OpenSpaces"
     case OfflineFavorites = "OfflineFavorites"
     case Speakers = "Speakers"
+    case User = "User"
 }
 
 class PersistenceManager {
@@ -27,7 +28,7 @@ class PersistenceManager {
         return result as? Dictionary<String, DailySchedule>
     }
     
-    class func deleteDailySchedule(_ path: Path) -> Bool{
+    class func deleteDailySchedule(_ path: Path) -> Bool {
         let exists = FileManager.default.fileExists(atPath: path.rawValue)
         if exists {
             do {
@@ -37,6 +38,7 @@ class PersistenceManager {
                 return false
             }
         }
+        
         return exists
     }
     
@@ -61,4 +63,30 @@ class PersistenceManager {
         let result = NSKeyedUnarchiver.unarchiveObject(withFile: file)
         return result as? [Speaker]
     }
+    
+    
+    class func saveUser(_ saveObject: User, path: Path) {
+        let file = documentsDirectory().appendingPathComponent(path.rawValue)
+        NSKeyedArchiver.archiveRootObject(saveObject, toFile: file)
+    }
+    
+    class func loadUser(_ path: Path) -> User? {
+        let file = documentsDirectory().appendingPathComponent(path.rawValue)
+        let result = NSKeyedUnarchiver.unarchiveObject(withFile: file)
+        return result as? User
+    }
+    
+    class func deleteUser(_ path: Path) -> Bool {
+        let exists = FileManager.default.fileExists(atPath: path.rawValue)
+        if exists {
+            do {
+                try FileManager.default.removeItem(atPath: path.rawValue)
+            } catch let error as NSError {
+                print("error: \(error.localizedDescription)")
+                return false
+            }
+        }
+        return exists
+    }
+    
 }
