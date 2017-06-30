@@ -95,6 +95,9 @@
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="UWA-Wa-0Xj" id="UHd-hJ-FOj"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -115,6 +118,9 @@
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="UWA-Wa-0Xj" id="GsL-Lk-pDT"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -135,6 +141,9 @@
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="UWA-Wa-0Xj" id="aX9-H2-4hI"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -155,6 +164,9 @@
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="UWA-Wa-0Xj" id="uug-aI-Zj6"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -175,6 +187,9 @@
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="UWA-Wa-0Xj" id="CEK-NA-br5"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -195,6 +210,9 @@
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="UWA-Wa-0Xj" id="fAi-ka-Xkh"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -215,6 +233,9 @@
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="UWA-Wa-0Xj" id="hfW-HB-hVP"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -235,6 +256,9 @@
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="UWA-Wa-0Xj" id="AHZ-Jb-CU9"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -255,6 +279,9 @@
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="UWA-Wa-0Xj" id="aRE-ET-36e"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -275,6 +302,9 @@
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="UWA-Wa-0Xj" id="Cxq-2f-Rhz"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -295,6 +325,9 @@
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="UWA-Wa-0Xj" id="yfr-BL-wkK"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -306,6 +339,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="UWA-Wa-0Xj" id="CdF-as-gER"/>
+                                                        </connections>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="GitHub Profile URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E5L-KY-Ybr" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="716" width="335" height="30"/>
@@ -315,6 +351,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="UWA-Wa-0Xj" id="2gt-NL-t7S"/>
+                                                        </connections>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pinterest Profile URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aup-ub-guF" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="761" width="335" height="30"/>
@@ -324,6 +363,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="UWA-Wa-0Xj" id="YM8-S6-X01"/>
+                                                        </connections>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Instagram Profile URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J5v-XH-vBd" customClass="ProfileTextField" customModule="That_Conference" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="806" width="335" height="30"/>
@@ -333,6 +375,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="UWA-Wa-0Xj" id="vtc-9U-Zz8"/>
+                                                        </connections>
                                                     </textField>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Lbu-TJ-1Zd">
                                                         <rect key="frame" x="0.0" y="851" width="335" height="46"/>
@@ -351,6 +396,9 @@
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="UWA-Wa-0Xj" id="vfx-64-3Zc"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -371,6 +419,9 @@
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="UWA-Wa-0Xj" id="xTH-kY-4nQ"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -416,7 +467,6 @@
                                 <action selector="backButtonPressed:" destination="UWA-Wa-0Xj" id="vA6-8Z-f4I"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="eeE-On-l8p"/>
                     </navigationItem>
                     <connections>
                         <outlet property="biographyTextView" destination="zJW-5r-S2r" id="i6n-4S-pYr"/>
@@ -433,6 +483,7 @@
                         <outlet property="phoneTextField" destination="UGC-Mh-SfS" id="RSU-6C-2TG"/>
                         <outlet property="pinterestTextField" destination="Aup-ub-guF" id="dxa-FL-IYh"/>
                         <outlet property="publicSlackHandle" destination="SqD-II-Nuo" id="Hdp-gS-yIO"/>
+                        <outlet property="scrollView" destination="v9I-a5-iYp" id="0xM-Z0-ewm"/>
                         <outlet property="stateTextField" destination="QT6-CB-rax" id="wWv-cs-ghd"/>
                         <outlet property="titleTextField" destination="Plg-lx-I49" id="OW7-uk-0Fm"/>
                         <outlet property="twitterTextField" destination="ZvE-fy-Jbh" id="pKF-Wc-rHM"/>
@@ -485,7 +536,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mmr-c8-aXB">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="650"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="702"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ek-r8-CcD" customClass="ProfileDetailUIView" customModule="That_Conference" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
@@ -668,76 +719,105 @@
                                                     <constraint firstItem="SLM-HG-Y1h" firstAttribute="top" secondItem="Rca-w0-Eah" secondAttribute="top" id="vkW-a9-nOY"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2rZ-kT-W4E">
-                                                <rect key="frame" x="18" y="306" width="339" height="84"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="2rZ-kT-W4E">
+                                                <rect key="frame" x="18" y="306" width="339" height="203"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Wfh-aC-Qce">
-                                                        <rect key="frame" x="0.0" y="0.0" width="339" height="21"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="21" id="hrJ-0r-7TO"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ZoA-YM-wi6">
-                                                        <rect key="frame" x="0.0" y="21" width="339" height="21"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="21" id="Jhy-Xk-L7O"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sYW-aF-ge5">
-                                                        <rect key="frame" x="0.0" y="42" width="339" height="21"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="21" id="EDY-bU-DSj"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <color key="textColor" red="0.68174123760000005" green="0.2207989991" blue="0.076259069139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MtT-qI-zoD">
-                                                        <rect key="frame" x="0.0" y="63" width="339" height="21"/>
-                                                        <gestureRecognizers/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="21" id="Ylm-i3-qnR"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <color key="textColor" red="0.68174123760000005" green="0.2207989991" blue="0.076259069139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <connections>
-                                                            <outletCollection property="gestureRecognizers" destination="V7g-13-Y3W" appends="YES" id="ejI-hb-xKu"/>
-                                                        </connections>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ghV-L0-kW8">
-                                                <rect key="frame" x="18" y="410" width="339" height="52"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bio" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Oku-YX-sm0">
-                                                        <rect key="frame" x="0.0" y="0.0" width="339" height="21"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="21" id="2gB-Vf-sb8"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Biograpy" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vkb-bc-ghM">
-                                                        <rect key="frame" x="0.0" y="31" width="339" height="21"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="AOY-ri-jJm"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Qa2-hM-ax8">
+                                                        <rect key="frame" x="0.0" y="0.0" width="339" height="84"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Wfh-aC-Qce">
+                                                                <rect key="frame" x="0.0" y="0.0" width="339" height="21"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="21" id="hrJ-0r-7TO"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ZoA-YM-wi6">
+                                                                <rect key="frame" x="0.0" y="21" width="339" height="21"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="21" id="Jhy-Xk-L7O"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sYW-aF-ge5">
+                                                                <rect key="frame" x="0.0" y="42" width="339" height="21"/>
+                                                                <gestureRecognizers/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="21" id="EDY-bU-DSj"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                <color key="textColor" red="0.68174123760000005" green="0.2207989991" blue="0.076259069139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <connections>
+                                                                    <outletCollection property="gestureRecognizers" destination="wnR-H9-TQN" appends="YES" id="Zn1-YY-zZx"/>
+                                                                </connections>
+                                                            </label>
+                                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MtT-qI-zoD">
+                                                                <rect key="frame" x="0.0" y="63" width="339" height="21"/>
+                                                                <gestureRecognizers/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="21" id="Ylm-i3-qnR"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                <color key="textColor" red="0.68174123760000005" green="0.2207989991" blue="0.076259069139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <connections>
+                                                                    <outletCollection property="gestureRecognizers" destination="V7g-13-Y3W" appends="YES" id="ejI-hb-xKu"/>
+                                                                </connections>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="EHk-Iv-XlD">
+                                                        <rect key="frame" x="0.0" y="99" width="339" height="37"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slack Handle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0ZB-5c-kAA">
+                                                                <rect key="frame" x="0.0" y="0.0" width="339" height="16"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@slackHandle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1mr-qy-QZ9">
+                                                                <rect key="frame" x="0.0" y="16" width="339" height="21"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="21" id="qb7-1h-CzD"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ghV-L0-kW8">
+                                                        <rect key="frame" x="0.0" y="151" width="339" height="52"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bio" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Oku-YX-sm0">
+                                                                <rect key="frame" x="0.0" y="0.0" width="339" height="21"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="21" id="2gB-Vf-sb8"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Biograpy" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vkb-bc-ghM">
+                                                                <rect key="frame" x="0.0" y="31" width="339" height="21"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="AOY-ri-jJm"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C8R-8L-6Tw">
-                                                <rect key="frame" x="18" y="472" width="339" height="150"/>
+                                                <rect key="frame" x="18" y="524" width="339" height="150"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="n4c-jV-lQc">
                                                         <rect key="frame" x="0.0" y="3" width="63" height="21"/>
@@ -796,7 +876,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2EI-yZ-Hk9">
-                                                        <rect key="frame" x="63" y="0.0" width="25" height="27"/>
+                                                        <rect key="frame" x="68" y="0.0" width="25" height="27"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="27" id="6fC-N3-Yig"/>
                                                             <constraint firstAttribute="width" constant="25" id="Zif-7J-v9M"/>
@@ -813,7 +893,7 @@
                                                     <constraint firstItem="2EI-yZ-Hk9" firstAttribute="centerY" secondItem="n4c-jV-lQc" secondAttribute="centerY" id="7YN-OY-1RY"/>
                                                     <constraint firstItem="n4c-jV-lQc" firstAttribute="leading" secondItem="C8R-8L-6Tw" secondAttribute="leading" id="B1P-lK-m0d"/>
                                                     <constraint firstItem="n4c-jV-lQc" firstAttribute="top" secondItem="C8R-8L-6Tw" secondAttribute="top" constant="3" id="Xrl-2Q-ECi"/>
-                                                    <constraint firstItem="2EI-yZ-Hk9" firstAttribute="leading" secondItem="n4c-jV-lQc" secondAttribute="trailing" id="ao2-qF-Tpk"/>
+                                                    <constraint firstItem="2EI-yZ-Hk9" firstAttribute="leading" secondItem="n4c-jV-lQc" secondAttribute="trailing" constant="5" id="ao2-qF-Tpk"/>
                                                     <constraint firstItem="iV8-HT-x8N" firstAttribute="leading" secondItem="C8R-8L-6Tw" secondAttribute="leading" id="boZ-6y-rsm"/>
                                                     <constraint firstAttribute="bottom" secondItem="iV8-HT-x8N" secondAttribute="bottom" id="oKb-ae-Nl4"/>
                                                     <constraint firstItem="iV8-HT-x8N" firstAttribute="top" secondItem="2EI-yZ-Hk9" secondAttribute="bottom" constant="10" id="xBD-KG-xNa"/>
@@ -827,20 +907,17 @@
                                             <constraint firstItem="2rZ-kT-W4E" firstAttribute="leading" secondItem="mmr-c8-aXB" secondAttribute="leadingMargin" constant="10" id="EB3-O0-qCA"/>
                                             <constraint firstItem="Rca-w0-Eah" firstAttribute="top" secondItem="2ek-r8-CcD" secondAttribute="bottom" id="HHm-NC-ub9"/>
                                             <constraint firstItem="02D-eH-1m9" firstAttribute="trailing" secondItem="Vsa-qU-KFf" secondAttribute="trailing" id="NeO-MM-CLH"/>
-                                            <constraint firstItem="ghV-L0-kW8" firstAttribute="leading" secondItem="mmr-c8-aXB" secondAttribute="leadingMargin" constant="10" id="U0u-LH-Xfm"/>
                                             <constraint firstAttribute="trailing" secondItem="2ek-r8-CcD" secondAttribute="trailing" id="Ugs-PK-Pau"/>
                                             <constraint firstItem="02D-eH-1m9" firstAttribute="bottom" secondItem="Ps4-NY-db5" secondAttribute="bottom" id="UrI-qC-bIh"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="C8R-8L-6Tw" secondAttribute="trailing" constant="10" id="Vf5-ZD-lXH"/>
                                             <constraint firstItem="2rZ-kT-W4E" firstAttribute="top" secondItem="Rca-w0-Eah" secondAttribute="bottom" constant="15" id="Wtf-At-anr"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="ghV-L0-kW8" secondAttribute="trailing" constant="10" id="X0V-Bs-YB8"/>
                                             <constraint firstItem="2ek-r8-CcD" firstAttribute="top" secondItem="mmr-c8-aXB" secondAttribute="top" id="a3N-y7-rZS"/>
-                                            <constraint firstItem="ghV-L0-kW8" firstAttribute="top" secondItem="2rZ-kT-W4E" secondAttribute="bottom" constant="20" id="cIL-mn-ukH"/>
                                             <constraint firstItem="2ek-r8-CcD" firstAttribute="leading" secondItem="mmr-c8-aXB" secondAttribute="leading" id="edw-oe-wxo"/>
-                                            <constraint firstItem="C8R-8L-6Tw" firstAttribute="top" secondItem="ghV-L0-kW8" secondAttribute="bottom" constant="10" id="ffq-ib-aNR"/>
                                             <constraint firstItem="C8R-8L-6Tw" firstAttribute="leading" secondItem="mmr-c8-aXB" secondAttribute="leadingMargin" constant="10" id="kAj-96-ETG"/>
                                             <constraint firstItem="02D-eH-1m9" firstAttribute="leading" secondItem="Vsa-qU-KFf" secondAttribute="leading" id="myw-0P-Huo"/>
                                             <constraint firstAttribute="trailing" secondItem="Rca-w0-Eah" secondAttribute="trailing" id="n0W-eZ-Ehx"/>
                                             <constraint firstItem="Rca-w0-Eah" firstAttribute="leading" secondItem="mmr-c8-aXB" secondAttribute="leading" id="nYl-hv-ygG"/>
+                                            <constraint firstItem="C8R-8L-6Tw" firstAttribute="top" secondItem="2rZ-kT-W4E" secondAttribute="bottom" constant="15" id="vBK-lx-1g2"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="2rZ-kT-W4E" secondAttribute="trailing" constant="10" id="xJJ-5F-l80"/>
                                         </constraints>
                                     </view>
@@ -897,6 +974,8 @@
                         <outlet property="profileImageView" destination="Ps4-NY-db5" id="9YP-pZ-zWy"/>
                         <outlet property="publicEmailLabel" destination="sYW-aF-ge5" id="4R4-N6-L0l"/>
                         <outlet property="publicPhoneLabel" destination="ZoA-YM-wi6" id="bZU-Xt-gXw"/>
+                        <outlet property="slackHandleLabel" destination="1mr-qy-QZ9" id="C6x-Ua-uYa"/>
+                        <outlet property="slackHandleStackView" destination="EHk-Iv-XlD" id="vRA-MO-sBO"/>
                         <outlet property="socialButtonsUIView" destination="Rca-w0-Eah" id="Nfc-0W-PVE"/>
                         <outlet property="socialUIViewHeightConstraint" destination="OvA-kS-kVu" id="qF1-Kg-UQT"/>
                         <outlet property="titleLabel" destination="Mk8-1h-8z6" id="TqK-sX-NOS"/>
@@ -910,6 +989,11 @@
                 <tapGestureRecognizer id="V7g-13-Y3W">
                     <connections>
                         <action selector="websiteLabelPressed:" destination="tb5-Os-ct1" id="bZ5-CC-ldY"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="wnR-H9-TQN">
+                    <connections>
+                        <action selector="emailLabelPressed:" destination="tb5-Os-ct1" id="IJp-ek-Hff"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

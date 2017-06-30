@@ -261,6 +261,13 @@ class User: NSObject, NSCoding {
         }
     }
     
+    var slackHandleString: String {
+        if (publicThatSlackHandle == nil) {
+            return ""
+        }
+        return publicThatSlackHandle!
+    }
+    
     var biographyString: String {
         if (biography == nil) {
             return ""

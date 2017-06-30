@@ -567,7 +567,7 @@
                 <viewControllerPlaceholder storyboardName="SpeakerList" id="jYF-5r-0tT" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kec-bT-j2X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1738" y="-374"/>
+            <point key="canvasLocation" x="1731" y="-330"/>
         </scene>
         <!--Map-->
         <scene sceneID="MAg-DC-gJQ">

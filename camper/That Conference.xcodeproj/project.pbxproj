@@ -310,6 +310,8 @@
 		312A94141C814B6B00AE938B /* camper */ = {
 			isa = PBXGroup;
 			children = (
+				312A94211C814B6B00AE938B /* Info.plist */,
+				312A94151C814B6B00AE938B /* AppDelegate.swift */,
 				31CFCD821C8B6E1400DB2AB2 /* Data */,
 				7BD3621B1E8D4670009C3A5E /* Utilities */,
 				7BD362211E8DBADA009C3A5E /* Libraries */,
@@ -317,8 +319,6 @@
 				31373C9D1D02735B00430EC0 /* Storyboards */,
 				7BD3621A1E8D460A009C3A5E /* ViewControllers */,
 				7BD362191E8D4605009C3A5E /* View */,
-				312A94211C814B6B00AE938B /* Info.plist */,
-				312A94151C814B6B00AE938B /* AppDelegate.swift */,
 				312A941C1C814B6B00AE938B /* Assets.xcassets */,
 				312A94351C88DE1A00AE938B /* Resources */,
 			);

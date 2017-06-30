@@ -10,6 +10,8 @@ import UIKit
 
 class EditProfileViewController: UIViewController {
 
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     @IBOutlet weak var firstNameTextField: ProfileTextField!
     @IBOutlet weak var lastNameTextField: ProfileTextField!
     @IBOutlet weak var emailTextField: ProfileTextField!
@@ -30,9 +32,22 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var biographyTextView: BiographyTextView!
     
     let currentUser = StateData.instance.currentUser
+    var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.activityIndicator = UIActivityIndicatorView()
+        self.activityIndicator.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        self.activityIndicator.backgroundColor = UIColor(white: 0, alpha: 0.4)
+        self.activityIndicator.layer.cornerRadius = 10
+        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        self.activityIndicator.clipsToBounds = true
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.center = self.view.center
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         loadCurrentData()
     }
@@ -54,6 +69,7 @@ class EditProfileViewController: UIViewController {
             }
 
         } else {
+            startIndicator()
             let user = User(id: currentUser.id,
                             headShot: currentUser.headShot,
                             displayHeadShot: currentUser.displayHeadShot,
@@ -85,6 +101,7 @@ class EditProfileViewController: UIViewController {
             userAPI.postUser(params: user.parameter) { (result) in
                 switch (result) {
                 case .success():
+                    self.stopIndicator()
                     let alert = UIAlertController(title: "Sucessfully saved profile changes", message: "", preferredStyle: .alert)
                     let ok = UIAlertAction(title: "Ok", style: .default, handler: { (UIAlertAction) in
                         userAPI.getMainUser()
@@ -98,6 +115,8 @@ class EditProfileViewController: UIViewController {
                     break
                 case .failure(let error):
                     print(error)
+                    
+                    self.stopIndicator()
                     let alert = UIAlertController(title: "Unable to save profile changes", message: "Please try again", preferredStyle: .alert)
                     let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
                     
@@ -109,7 +128,6 @@ class EditProfileViewController: UIViewController {
                 }
             }
         }
-        
     }
     
     // MARK: Functions
@@ -148,6 +166,14 @@ class EditProfileViewController: UIViewController {
                     let urlString = requestString + textfield.text!
                     return urlString
                 }
+            } else if (textfield == publicSlackHandle) {
+                if (textfield.text!.contains("@")) {
+                    return textfield.text!
+                } else {
+                    let requestString = "@"
+                    let urlString = requestString + textfield.text!
+                    return urlString
+                }
             } else {
                 return textfield.text!
             }
@@ -161,5 +187,41 @@ class EditProfileViewController: UIViewController {
             return textView.text!
         }
     }
+    
+    
+    func keyboardWillShow(notification: NSNotification) {
+        //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        
+        var contentInset:UIEdgeInsets = self.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height
+        self.scrollView.contentInset = contentInset
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        self.scrollView.contentInset = contentInset
+    }
+    
+    func startIndicator() {
+        DispatchQueue.main.async(execute: {
+            self.activityIndicator.startAnimating()
+        })
+    }
+    
+    func stopIndicator() {
+        DispatchQueue.main.async(execute: {
+            self.activityIndicator.stopAnimating()
+        })
+    }
+}
 
+extension EditProfileViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

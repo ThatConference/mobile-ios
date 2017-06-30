@@ -10,6 +10,8 @@ import UIKit
 
 class ProfileDetailsViewController: UIViewController {
 
+    
+    
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var firstNameLabel: UILabel!
     @IBOutlet weak var lastNameLabel: UILabel!
@@ -20,6 +22,9 @@ class ProfileDetailsViewController: UIViewController {
     @IBOutlet weak var publicPhoneLabel: UILabel!
     @IBOutlet weak var publicEmailLabel: UILabel!
     @IBOutlet weak var websiteLabel: UILabel!
+    
+    @IBOutlet weak var slackHandleStackView: UIStackView!
+    @IBOutlet weak var slackHandleLabel: UILabel!
     
     @IBOutlet weak var biographyHeaderLabel: UILabel!
     @IBOutlet weak var biographyLabel: UILabel!
@@ -45,10 +50,20 @@ class ProfileDetailsViewController: UIViewController {
     @IBOutlet weak var addCommentButton: RoundedButton!
     
     var user: User!
+    var activityIndicator: UIActivityIndicatorView!
     var covfefe = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.activityIndicator = UIActivityIndicatorView()
+        self.activityIndicator.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        self.activityIndicator.backgroundColor = UIColor(white: 0, alpha: 0.4)
+        self.activityIndicator.layer.cornerRadius = 10
+        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        self.activityIndicator.clipsToBounds = true
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.center = self.view.center
         
         currentUserSettings(isCurrentUser: ISCURRENTUSER)
         loadUI()
@@ -73,6 +88,7 @@ class ProfileDetailsViewController: UIViewController {
     }
     
     @IBAction func addCommentButtonPressed(_ sender: RoundedButton) {
+        
             if (sender.currentTitle == "Save Personal Comment") {
                 if (commentTextView.text == "Comment") {
                     self.covfefe = ""
@@ -141,6 +157,13 @@ class ProfileDetailsViewController: UIViewController {
         }
     }
     
+    @IBAction func emailLabelPressed(_ sender: UITapGestureRecognizer) {
+        if let email = user.publicEmail {
+            let url = URL(string: "mailto:\(email)")
+            UIApplication.shared.openURL(url!)
+        }
+    }
+    
     @IBAction func websiteLabelPressed(_ sender: UITapGestureRecognizer) {
         if let url = user.website {
             UIApplication.shared.openURL(URL(string: url)!)
@@ -165,8 +188,8 @@ class ProfileDetailsViewController: UIViewController {
         titleLabel.text = user.titleString
         locationLabel.text = user.locationString
         biographyLabel.text = user.biography
+        slackHandleLabel.text = user.slackHandleString
     }
-    
     
     func filterViews() {
         
@@ -222,6 +245,36 @@ class ProfileDetailsViewController: UIViewController {
             }
         }
         
+        if (user.locationString == "") {
+            locationLabel.isHidden = true
+        } else {
+            locationLabel.isHidden = false
+        }
+        
+        if (user.publicPhoneString == "") {
+            publicPhoneLabel.isHidden = true
+        } else {
+            publicPhoneLabel.isHidden = false
+        }
+        
+        if (user.publicEmailString == "") {
+            publicEmailLabel.isHidden = true
+        } else {
+            publicEmailLabel.isHidden = false
+        }
+        
+        if (user.websiteString == "") {
+            websiteLabel.isHidden = true
+        } else {
+            websiteLabel.isHidden = false
+        }
+        
+        if (user.slackHandleString == "") {
+            slackHandleStackView.isHidden = true
+        } else {
+            slackHandleStackView.isHidden = false
+        }
+        
         if (user.biographyString == "") {
             biographyLabel.isHidden = true
             biographyHeaderLabel.isHidden = true
@@ -247,6 +300,7 @@ class ProfileDetailsViewController: UIViewController {
     }
     
     func currentUserSettings(isCurrentUser: Bool) {
+        startIndicator()
         if (isCurrentUser) {
             user = StateData.instance.currentUser
             commentHeaderLabel.isHidden = true
@@ -255,6 +309,7 @@ class ProfileDetailsViewController: UIViewController {
             commentLabel.isHidden = true
             addCommentButton.isHidden = true
             filterViews()
+            stopIndicator()
         } else {
             
             // Erase
@@ -265,7 +320,19 @@ class ProfileDetailsViewController: UIViewController {
             addCommentButton.isHidden = false
             filterViews()
             checkComment()
+            stopIndicator()
         }
     }
     
+    func startIndicator() {
+        DispatchQueue.main.async(execute: {
+            self.activityIndicator.startAnimating()
+        })
+    }
+    
+    func stopIndicator() {
+        DispatchQueue.main.async(execute: {
+            self.activityIndicator.stopAnimating()
+        })
+    }
 }
