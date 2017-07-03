@@ -81,7 +81,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Business" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2Vd-KX-Eyt">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2Vd-KX-Eyt">
                                                     <rect key="frame" x="102" y="63" width="256" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="253" id="3ly-Lp-pP1"/>
@@ -107,16 +107,11 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="RFj-US-JIn" secondAttribute="trailing" constant="9" id="pu8-hg-PoC"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="businessLabel" destination="2Vd-KX-Eyt" id="k4t-zp-ysB"/>
-                                            <outlet property="speakerImageView" destination="fDZ-dy-9dn" id="nN2-Tc-qMf"/>
-                                            <outlet property="speakerNameLabel" destination="RFj-US-JIn" id="UBF-7S-V9a"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="UE9-Z5-bDM" id="Ugc-i1-hLC"/>
-                                    <outlet property="delegate" destination="UE9-Z5-bDM" id="vvx-zW-2IU"/>
+                                    <outlet property="dataSource" destination="UE9-Z5-bDM" id="Gct-i2-Spj"/>
+                                    <outlet property="delegate" destination="UE9-Z5-bDM" id="gx1-tH-Bmd"/>
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rhv-b7-na3" customClass="CircleButton" customModule="That_Conference" customModuleProvider="target">
@@ -143,8 +138,9 @@
                         <barButtonItem key="leftBarButtonItem" image="hamburger" id="edM-jM-Pp8"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="menuButton" destination="edM-jM-Pp8" id="hef-XB-pSX"/>
-                        <outlet property="tableView" destination="hnV-Tj-itC" id="55y-Sq-xaN"/>
+                        <outlet property="companyLabel" destination="2Vd-KX-Eyt" id="2hm-aG-drp"/>
+                        <outlet property="contactImageView" destination="fDZ-dy-9dn" id="FF4-te-ynd"/>
+                        <outlet property="contactNameLabel" destination="RFj-US-JIn" id="Etk-OU-dnb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9JE-l1-m1O" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -10,6 +10,11 @@ import UIKit
 
 class CamperContactsViewController: UIViewController {
 
+    @IBOutlet weak var contactImageView: CircleImageView!
+    @IBOutlet weak var contactNameLabel: UILabel!
+    @IBOutlet weak var companyLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
