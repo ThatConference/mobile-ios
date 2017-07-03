@@ -99,6 +99,8 @@
 		7B02FE981EA020E7001396B6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02FE971EA020E7001396B6 /* Constants.swift */; };
 		7B177E281EA1414500F52BC8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B177E271EA1414500F52BC8 /* Reachability.swift */; };
 		7B1EDD7D1EF867AD00722B9A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1EDD7C1EF867AD00722B9A /* User.swift */; };
+		7B22CA381F06CFA20030E095 /* CamperContacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B22CA371F06CFA20030E095 /* CamperContacts.storyboard */; };
+		7B22CA3B1F06D0350030E095 /* CamperContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B22CA3A1F06D0350030E095 /* CamperContactsViewController.swift */; };
 		7B3C38391E955E8100FEA4A5 /* StateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3C38381E955E8100FEA4A5 /* StateData.swift */; };
 		7B3C383C1E95A27F00FEA4A5 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B3C383A1E95A27F00FEA4A5 /* Map.storyboard */; };
 		7B9290BC1EFC616B00689B44 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9290BB1EFC616B00689B44 /* UIColor+Extension.swift */; };
@@ -230,6 +232,8 @@
 		7B02FE971EA020E7001396B6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7B177E271EA1414500F52BC8 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		7B1EDD7C1EF867AD00722B9A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7B22CA371F06CFA20030E095 /* CamperContacts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CamperContacts.storyboard; sourceTree = "<group>"; };
+		7B22CA3A1F06D0350030E095 /* CamperContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CamperContactsViewController.swift; sourceTree = "<group>"; };
 		7B3C38381E955E8100FEA4A5 /* StateData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateData.swift; sourceTree = "<group>"; };
 		7B3C383B1E95A27F00FEA4A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Map.storyboard; sourceTree = "<group>"; };
 		7B9290BB1EFC616B00689B44 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -375,6 +379,7 @@
 		31373C9D1D02735B00430EC0 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				7B22CA371F06CFA20030E095 /* CamperContacts.storyboard */,
 				7BE1B5451EAA6D1C0071B3D2 /* FamilyEvents.storyboard */,
 				51A4D1CF1CF1532900F956BC /* Favorites.storyboard */,
 				312A941E1C814B6B00AE938B /* LaunchScreen.storyboard */,
@@ -437,6 +442,14 @@
 				31D0D9401CC08282007C5999 /* AuthorizationWebViewController.swift */,
 			);
 			name = Login;
+			sourceTree = "<group>";
+		};
+		7B22CA391F06CFF80030E095 /* CamperContacts */ = {
+			isa = PBXGroup;
+			children = (
+				7B22CA3A1F06D0350030E095 /* CamperContactsViewController.swift */,
+			);
+			name = CamperContacts;
 			sourceTree = "<group>";
 		};
 		7B9AA2591EF4608500DC24E0 /* Profile */ = {
@@ -507,6 +520,7 @@
 			children = (
 				317154231D1D8025004078E2 /* BaseViewController.swift */,
 				31CFD1321D09050C00F1AE23 /* TimeSlotRootViewController.swift */,
+				7B22CA391F06CFF80030E095 /* CamperContacts */,
 				7BE1B5421EAA69750071B3D2 /* FamilyEvents */,
 				7BD362281E8ED62A009C3A5E /* Favorites */,
 				7B063FF91EBA5A0900FEA2ED /* Login */,
@@ -738,6 +752,7 @@
 				312A947D1C89325D00AE938B /* NeutraText-BookAlt.otf in Resources */,
 				312A94651C89325D00AE938B /* NeutraCond-LightAlt.otf in Resources */,
 				312A94771C89325D00AE938B /* NeutraDisplay-Titling.otf in Resources */,
+				7B22CA381F06CFA20030E095 /* CamperContacts.storyboard in Resources */,
 				312A94751C89325D00AE938B /* NeutraDisplay-Thin.otf in Resources */,
 				7BD362621E943065009C3A5E /* OpenSpaces.storyboard in Resources */,
 				312A946D1C89325D00AE938B /* NeutraDisplay-Draft.otf in Resources */,
@@ -819,6 +834,7 @@
 				7B02FE981EA020E7001396B6 /* Constants.swift in Sources */,
 				7BD362361E929FD4009C3A5E /* SWRevealViewController.m in Sources */,
 				512DA03B1CB7585D006CC1B3 /* DailySchedule.swift in Sources */,
+				7B22CA3B1F06D0350030E095 /* CamperContactsViewController.swift in Sources */,
 				312A942A1C85390B00AE938B /* ScheduleViewController.swift in Sources */,
 				312A94281C85383200AE938B /* AuthorizationViewController.swift in Sources */,
 				7B1EDD7D1EF867AD00722B9A /* User.swift in Sources */,

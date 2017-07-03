@@ -17,13 +17,13 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Open Spaces-->
+        <!--Speaker List Nav-->
         <scene sceneID="Rcq-27-kSU">
             <objects>
-                <navigationController title="Open Spaces" automaticallyAdjustsScrollViewInsets="NO" id="IQy-tY-VeF" sceneMemberID="viewController">
+                <navigationController title="Speaker List Nav" automaticallyAdjustsScrollViewInsets="NO" id="IQy-tY-VeF" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="open spaces" image="open-spaces" selectedImage="open-spaces" id="bzs-w5-cmY"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="698-7R-hLb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="698-7R-hLb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.90396612880000005" green="0.83328729869999996" blue="0.69475156069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -82,7 +82,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Business" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dBQ-VN-kBV">
-                                                    <rect key="frame" x="102" y="63" width="256" height="17"/>
+                                                    <rect key="frame" x="102" y="63" width="256" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="253" id="wnP-e4-hlO"/>
                                                     </constraints>
