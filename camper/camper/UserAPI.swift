@@ -44,6 +44,7 @@ class UserAPI {
             
             let json = try! JSONSerialization.jsonObject(with: data, options: [])
             let user = User(dictionary: json as! [String: AnyObject])
+            print(user.id)
             PersistenceManager.saveUser(user, path: Path.User)
             StateData.instance.currentUser = user
         }

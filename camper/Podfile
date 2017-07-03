@@ -9,5 +9,6 @@ pod 'Locksmith'
 pod 'ImageScrollView'
 pod 'Fabric'
 pod 'Crashlytics'
+pod 'Firebase/Core'
 
 end

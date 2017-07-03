@@ -1,6 +1,7 @@
 import UIKit
 import Fabric
 import Crashlytics
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -9,7 +10,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var dirtyDataFavorites: Bool = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
+        
+        FirebaseApp.configure()
         Fabric.with([Crashlytics.self])
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
