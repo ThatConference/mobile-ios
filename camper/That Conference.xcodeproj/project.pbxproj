@@ -110,6 +110,8 @@
 		7B9AA2541EF44F6300DC24E0 /* BiographyTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9AA2531EF44F6300DC24E0 /* BiographyTextView.swift */; };
 		7B9AA2561EF45A0600DC24E0 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9AA2551EF45A0600DC24E0 /* RoundedButton.swift */; };
 		7B9AA2581EF4607600DC24E0 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9AA2571EF4607600DC24E0 /* EditProfileViewController.swift */; };
+		7BAF21EF1F0A9B1B00148A57 /* CamperContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAF21EE1F0A9B1B00148A57 /* CamperContactTableViewCell.swift */; };
+		7BAF21F11F0AA11B00148A57 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAF21F01F0AA11B00148A57 /* Contacts.swift */; };
 		7BB028A81EF18A870075197A /* SpeakerDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BB028A71EF18A870075197A /* SpeakerDetails.storyboard */; };
 		7BB028AA1EF18C860075197A /* SpeakerList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BB028A91EF18C860075197A /* SpeakerList.storyboard */; };
 		7BB028AC1EF191750075197A /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB028AB1EF191750075197A /* CircleImageView.swift */; };
@@ -243,6 +245,8 @@
 		7B9AA2531EF44F6300DC24E0 /* BiographyTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiographyTextView.swift; sourceTree = "<group>"; };
 		7B9AA2551EF45A0600DC24E0 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		7B9AA2571EF4607600DC24E0 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		7BAF21EE1F0A9B1B00148A57 /* CamperContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CamperContactTableViewCell.swift; sourceTree = "<group>"; };
+		7BAF21F01F0AA11B00148A57 /* Contacts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
 		7BB028A71EF18A870075197A /* SpeakerDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SpeakerDetails.storyboard; sourceTree = "<group>"; };
 		7BB028A91EF18C860075197A /* SpeakerList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SpeakerList.storyboard; sourceTree = "<group>"; };
 		7BB028AB1EF191750075197A /* CircleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
@@ -475,6 +479,7 @@
 			children = (
 				7BD362201E8DB720009C3A5E /* Data */,
 				7B02FE971EA020E7001396B6 /* Constants.swift */,
+				7BAF21F01F0AA11B00148A57 /* Contacts.swift */,
 				512DA03A1CB7585D006CC1B3 /* DailySchedule.swift */,
 				311E0E6A1CB74D76004FA850 /* ExternalLogin.swift */,
 				313B19011D160B8C00E72562 /* PostCardFrame.swift */,
@@ -493,6 +498,7 @@
 			children = (
 				7B9AA2531EF44F6300DC24E0 /* BiographyTextView.swift */,
 				7B9290BD1EFC636600689B44 /* BorderImageView.swift */,
+				7BAF21EE1F0A9B1B00148A57 /* CamperContactTableViewCell.swift */,
 				7BB028B01EF196E60075197A /* CircleButton.swift */,
 				7BB028AB1EF191750075197A /* CircleImageView.swift */,
 				5113D3891CAF58A100D6B974 /* CircleLabel.swift */,
@@ -841,6 +847,7 @@
 				7BF626061EFD984800D75C50 /* CommentUITextView.swift in Sources */,
 				317154241D1D8025004078E2 /* BaseViewController.swift in Sources */,
 				31D0D9451CC48DEE007C5999 /* AuthToken.swift in Sources */,
+				7BAF21EF1F0A9B1B00148A57 /* CamperContactTableViewCell.swift in Sources */,
 				7BD3622E1E8ED885009C3A5E /* MenuViewController.swift in Sources */,
 				7B9AA2581EF4607600DC24E0 /* EditProfileViewController.swift in Sources */,
 				7BE1B5411EAA696E0071B3D2 /* FamilyEventsTableViewCell.swift in Sources */,
@@ -860,6 +867,7 @@
 				512DA03F1CBBE03C006CC1B3 /* Speaker.swift in Sources */,
 				5113D3851CAA20CB00D6B974 /* ScheduleTableViewCell.swift in Sources */,
 				7BB028BA1EF1C6490075197A /* SpeakerAPI.swift in Sources */,
+				7BAF21F11F0AA11B00148A57 /* Contacts.swift in Sources */,
 				7B9AA2521EF442E600DC24E0 /* ProfileTextField.swift in Sources */,
 				7B00F7081EFABB3700E252DC /* ProfileDetailUIView.swift in Sources */,
 				7B9290BE1EFC636600689B44 /* BorderImageView.swift in Sources */,

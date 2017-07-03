@@ -23,7 +23,7 @@
                 <navigationController title="Camper Contacts Nav" automaticallyAdjustsScrollViewInsets="NO" id="5YS-G0-eeU" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="open spaces" image="open-spaces" selectedImage="open-spaces" id="PKM-F6-SoB"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="0Qy-NS-HYd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="0Qy-NS-HYd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.90396612880000005" green="0.83328729869999996" blue="0.69475156069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -40,7 +40,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="guG-6A-56g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1751" y="191"/>
+            <point key="canvasLocation" x="1836" y="189"/>
         </scene>
         <!--Camper Contacts-->
         <scene sceneID="IkE-d1-qRR">
@@ -58,7 +58,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SpeakerCell" rowHeight="125" id="CJV-Zp-0Tb" customClass="SpeakerTableViewCell" customModule="That_Conference" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SpeakerCell" rowHeight="125" id="CJV-Zp-0Tb" customClass="CamperContactTableViewCell" customModule="That_Conference" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="125"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CJV-Zp-0Tb" id="tfe-BT-CcN">
@@ -107,6 +107,11 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="RFj-US-JIn" secondAttribute="trailing" constant="9" id="pu8-hg-PoC"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="camperImageView" destination="fDZ-dy-9dn" id="yJt-dO-sWk"/>
+                                            <outlet property="camperNameLabel" destination="RFj-US-JIn" id="ZC6-pA-ftr"/>
+                                            <outlet property="companyLabel" destination="2Vd-KX-Eyt" id="h1M-B5-pDt"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -137,11 +142,6 @@
                     <navigationItem key="navigationItem" title="SPEAKER LIST" id="dTg-cj-RRL">
                         <barButtonItem key="leftBarButtonItem" image="hamburger" id="edM-jM-Pp8"/>
                     </navigationItem>
-                    <connections>
-                        <outlet property="companyLabel" destination="2Vd-KX-Eyt" id="2hm-aG-drp"/>
-                        <outlet property="contactImageView" destination="fDZ-dy-9dn" id="FF4-te-ynd"/>
-                        <outlet property="contactNameLabel" destination="RFj-US-JIn" id="Etk-OU-dnb"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9JE-l1-m1O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
