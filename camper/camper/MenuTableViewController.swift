@@ -41,6 +41,17 @@ class MenuTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Favorites
+        if indexPath.row == 3 {
+            checkIfSignedIn("toFavorites")
+        }
+        
+        if indexPath.row == 4 {
+            checkIfSignedIn("toCamperContacts")
+        }
+        
+        // Log in/Log Out
         if indexPath.row == 9 {
             if (Authentication.isLoggedIn()) {
                 Authentication.removeAuthToken()
@@ -61,6 +72,23 @@ class MenuTableViewController: UITableViewController {
             }
             
             setSignInButton()
+        }
+    }
+    
+    func checkIfSignedIn(_ segueIdentifier: String) {
+        if (Authentication.isLoggedIn()) {
+            
+            performSegue(withIdentifier: segueIdentifier, sender: self)
+        } else {
+            
+            let alert = UIAlertController(title: "Log In Needed", message: "", preferredStyle: UIAlertControllerStyle.alert)
+            let ok = UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
+                self.performSegue(withIdentifier: "show_login", sender: self)
+            })
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            present(alert, animated: true, completion: nil)
         }
     }
 }

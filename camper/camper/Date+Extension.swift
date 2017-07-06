@@ -63,4 +63,9 @@ extension Date {
         //Return Result
         return dateWithHoursAdded
     }
+    
+    func dateToInt() -> Int {
+        let timeInterval = self.timeIntervalSince1970
+        return Int(timeInterval)
+    }
 }

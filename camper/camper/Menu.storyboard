@@ -88,12 +88,16 @@
                                             <action selector="shareContactButtonPressed:" destination="6EQ-nZ-ev3" eventType="touchUpInside" id="Znb-U3-o7u"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Share Contact" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uRz-7u-1mG">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Share Contact" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uRz-7u-1mG">
                                         <rect key="frame" x="258" y="45" width="53" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <gestureRecognizers/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.90396612880000005" green="0.83328729869999996" blue="0.69475156069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="0Cz-FJ-scF" appends="YES" id="Ngr-FI-VD3"/>
+                                        </connections>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.37091678379999998" green="0.2713463008" blue="0.18597435949999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -124,6 +128,8 @@
                         <outlet property="nameLabel" destination="vFg-hS-DEw" id="LrG-l3-pC0"/>
                         <outlet property="profileImageView" destination="0KZ-RQ-pUi" id="zlh-Dr-njY"/>
                         <segue destination="0yA-Iu-vFn" kind="show" identifier="toProfileDetails" id="6u8-ZM-yq8"/>
+                        <segue destination="IVc-Hr-mb5" kind="show" identifier="toShareContact" id="AQ5-gM-JV8"/>
+                        <segue destination="6ao-Ez-XVK" kind="presentation" identifier="show_login" id="b1f-c1-CmD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZ7-lF-c1y" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -137,8 +143,21 @@
                         <action selector="nameLabelPressed:" destination="6EQ-nZ-ev3" id="NPF-b1-6eE"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="0Cz-FJ-scF">
+                    <connections>
+                        <action selector="shareContactButtonPressed:" destination="6EQ-nZ-ev3" id="CBl-i1-Xna"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="413.60000000000002" y="-314.39280359820094"/>
+        </scene>
+        <!--ShareContact-->
+        <scene sceneID="aeS-j3-gwl">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ShareContact" id="IVc-Hr-mb5" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mlf-OK-hcf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="992" y="-802"/>
         </scene>
         <!--ProfileNavigationControlelr-->
         <scene sceneID="5BO-qF-0l3">
@@ -301,9 +320,6 @@
                                                 <constraint firstItem="TgU-2I-bZc" firstAttribute="leading" secondItem="Lx9-rR-PmJ" secondAttribute="trailing" constant="10" id="qlA-6b-45J"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="4Y5-NE-yeV" kind="show" customClass="SWRevealViewControllerSeguePushController" id="XRG-KS-Ehr"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="F16-hX-eeV">
                                         <rect key="frame" x="0.0" y="176" width="375" height="44"/>
@@ -531,6 +547,8 @@
                         <outlet property="logOffImage" destination="5TG-1h-ydJ" id="Ds8-wH-kgw"/>
                         <outlet property="logOffLabel" destination="6AF-hc-YwG" id="who-lv-S0X"/>
                         <segue destination="6ao-Ez-XVK" kind="presentation" identifier="show_login" id="9YY-oe-mVd"/>
+                        <segue destination="4Y5-NE-yeV" kind="show" identifier="toFavorites" customClass="SWRevealViewControllerSeguePushController" id="RPa-i9-iRE"/>
+                        <segue destination="6O4-6Y-24i" kind="show" identifier="toCamperContacts" customClass="SWRevealViewControllerSeguePushController" id="9vl-4X-LXF"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Vb-zM-ULJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -561,10 +579,10 @@
             </objects>
             <point key="canvasLocation" x="1726" y="-417"/>
         </scene>
-        <!--Storyboard Reference-->
+        <!--CamperContacts-->
         <scene sceneID="53m-Xv-kGY">
             <objects>
-                <viewControllerPlaceholder id="6O4-6Y-24i" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="CamperContacts" id="6O4-6Y-24i" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="62h-cc-NoJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1763" y="-374"/>
@@ -607,7 +625,7 @@
                 <viewControllerPlaceholder storyboardName="Login" referencedIdentifier="AuthorizationViewController" id="6ao-Ez-XVK" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mTg-UF-27P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1822" y="-110"/>
+            <point key="canvasLocation" x="794" y="91"/>
         </scene>
         <!--OpenSpaces-->
         <scene sceneID="WD6-8s-eS9">
@@ -638,4 +656,7 @@
         <image name="sponsor" width="41" height="41"/>
         <image name="twitter" width="109" height="108"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="b1f-c1-CmD"/>
+    </inferredMetricsTieBreakers>
 </document>

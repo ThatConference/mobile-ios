@@ -58,7 +58,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SpeakerCell" rowHeight="125" id="CJV-Zp-0Tb" customClass="CamperContactTableViewCell" customModule="That_Conference" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CamperContactCell" rowHeight="125" id="CJV-Zp-0Tb" customClass="CamperContactTableViewCell" customModule="That_Conference" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="125"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CJV-Zp-0Tb" id="tfe-BT-CcN">
@@ -66,14 +66,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker" translatesAutoresizingMaskIntoConstraints="NO" id="fDZ-dy-9dn" customClass="CircleImageView" customModule="That_Conference" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="21" width="70" height="70"/>
+                                                    <rect key="frame" x="16" y="27" width="70" height="70"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="70" id="9sG-xk-oK5"/>
                                                         <constraint firstAttribute="width" constant="70" id="Lzz-Bl-GWn"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFj-US-JIn">
-                                                    <rect key="frame" x="102" y="33" width="256" height="20"/>
+                                                    <rect key="frame" x="101" y="39" width="257" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="04r-J8-oPt"/>
                                                     </constraints>
@@ -82,7 +82,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2Vd-KX-Eyt">
-                                                    <rect key="frame" x="102" y="63" width="256" height="17"/>
+                                                    <rect key="frame" x="101" y="69" width="257" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="253" id="3ly-Lp-pP1"/>
                                                     </constraints>
@@ -98,19 +98,19 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="2Vd-KX-Eyt" firstAttribute="trailing" secondItem="RFj-US-JIn" secondAttribute="trailing" id="3lD-sM-I5T"/>
-                                                <constraint firstItem="fDZ-dy-9dn" firstAttribute="top" secondItem="tfe-BT-CcN" secondAttribute="topMargin" constant="13" id="Bzv-L3-ASc"/>
+                                                <constraint firstItem="fDZ-dy-9dn" firstAttribute="top" secondItem="tfe-BT-CcN" secondAttribute="topMargin" constant="19" id="Bzv-L3-ASc"/>
                                                 <constraint firstItem="fDZ-dy-9dn" firstAttribute="leading" secondItem="tfe-BT-CcN" secondAttribute="leadingMargin" constant="8" id="eHQ-VL-Tyh"/>
-                                                <constraint firstItem="RFj-US-JIn" firstAttribute="leading" secondItem="fDZ-dy-9dn" secondAttribute="trailing" constant="16" id="eQ5-5t-HIE"/>
+                                                <constraint firstItem="RFj-US-JIn" firstAttribute="leading" secondItem="fDZ-dy-9dn" secondAttribute="trailing" constant="15" id="eQ5-5t-HIE"/>
                                                 <constraint firstItem="2Vd-KX-Eyt" firstAttribute="leading" secondItem="RFj-US-JIn" secondAttribute="leading" id="fEU-VZ-xDM"/>
-                                                <constraint firstItem="RFj-US-JIn" firstAttribute="top" secondItem="tfe-BT-CcN" secondAttribute="topMargin" constant="25" id="hqK-8q-L7J"/>
+                                                <constraint firstItem="RFj-US-JIn" firstAttribute="top" secondItem="tfe-BT-CcN" secondAttribute="topMargin" constant="31" id="hqK-8q-L7J"/>
                                                 <constraint firstItem="2Vd-KX-Eyt" firstAttribute="top" secondItem="RFj-US-JIn" secondAttribute="bottom" constant="10" id="mjo-mf-rmi"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="RFj-US-JIn" secondAttribute="trailing" constant="9" id="pu8-hg-PoC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="camperImageView" destination="fDZ-dy-9dn" id="yJt-dO-sWk"/>
-                                            <outlet property="camperNameLabel" destination="RFj-US-JIn" id="ZC6-pA-ftr"/>
-                                            <outlet property="companyLabel" destination="2Vd-KX-Eyt" id="h1M-B5-pDt"/>
+                                            <outlet property="camperImageView" destination="fDZ-dy-9dn" id="zyI-fv-Upe"/>
+                                            <outlet property="camperNameLabel" destination="RFj-US-JIn" id="oRN-Mx-KmA"/>
+                                            <outlet property="companyLabel" destination="2Vd-KX-Eyt" id="sKk-Y8-sMi"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -119,37 +119,44 @@
                                     <outlet property="delegate" destination="UE9-Z5-bDM" id="gx1-tH-Bmd"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rhv-b7-na3" customClass="CircleButton" customModule="That_Conference" customModuleProvider="target">
-                                <rect key="frame" x="294" y="523" width="65" height="65"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="65" id="3KQ-as-nkR"/>
-                                    <constraint firstAttribute="width" constant="65" id="UMg-Py-Oa2"/>
-                                </constraints>
-                                <state key="normal" image="google"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="MhB-ld-X5f" firstAttribute="top" secondItem="hnV-Tj-itC" secondAttribute="bottom" id="KSw-mE-uKW"/>
                             <constraint firstItem="hnV-Tj-itC" firstAttribute="leading" secondItem="zSE-p0-7Jo" secondAttribute="leading" id="MWb-LX-M3e"/>
-                            <constraint firstItem="MhB-ld-X5f" firstAttribute="top" secondItem="Rhv-b7-na3" secondAttribute="bottom" constant="15" id="SvY-TT-FhC"/>
                             <constraint firstAttribute="trailing" secondItem="hnV-Tj-itC" secondAttribute="trailing" id="e4E-Zg-bMn"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Rhv-b7-na3" secondAttribute="trailing" id="nzv-hz-MaX"/>
                             <constraint firstItem="hnV-Tj-itC" firstAttribute="top" secondItem="U0v-KV-HSK" secondAttribute="bottom" id="rLX-2n-3Sc"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="SPEAKER LIST" id="dTg-cj-RRL">
+                    <navigationItem key="navigationItem" title="Camper Contacts" id="dTg-cj-RRL">
                         <barButtonItem key="leftBarButtonItem" image="hamburger" id="edM-jM-Pp8"/>
+                        <barButtonItem key="rightBarButtonItem" title="Share" id="k1x-26-Kmt">
+                            <connections>
+                                <action selector="shareButtonPressed:" destination="UE9-Z5-bDM" id="vmd-lB-vtF"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="menuButton" destination="edM-jM-Pp8" id="Ddf-fd-tj9"/>
+                        <outlet property="tableView" destination="hnV-Tj-itC" id="N3P-Ma-ftr"/>
+                        <segue destination="buc-So-ZEL" kind="show" identifier="toShareContact" id="xUF-h6-XpQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9JE-l1-m1O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2533.5999999999999" y="189.3553223388306"/>
         </scene>
+        <!--ShareContact-->
+        <scene sceneID="o7W-8d-nXH">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ShareContact" id="buc-So-ZEL" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dv5-pR-fHO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3135" y="57"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="google" width="108" height="108"/>
         <image name="hamburger" width="24" height="20"/>
         <image name="open-spaces" width="28" height="29"/>
         <image name="speaker" width="66" height="75"/>

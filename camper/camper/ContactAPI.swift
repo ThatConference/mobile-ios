@@ -9,7 +9,7 @@
 import Foundation
 
 enum ContactMethod: String {
-    case GetContacts = "vendor/api/contacts?year={year}"
+    case GetContacts = "/api3/Account/Contacts"
     case ContactSharing = "/contact-sharing"
 }
 
@@ -25,12 +25,13 @@ class ContactAPI {
     let year = "2017"
     
     func getContacts() {
-        let url: URL = URL(string: getMainUserURL())!
+        let url: URL = URL(string: getContactsURL())!
         
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         
         request.httpMethod = "GET"
         if let token = Authentication.loadAuthToken() {
+            print(token.token)
             request.addValue("Bearer \(token.token!)", forHTTPHeaderField: "Authorization")
         }
         
@@ -47,18 +48,14 @@ class ContactAPI {
             }
             
             let json = try! JSONSerialization.jsonObject(with: data, options: [])
-            let user = User(dictionary: json as! [String: AnyObject])
-            print(user.id)
-            PersistenceManager.saveUser(user, path: Path.User)
-            StateData.instance.currentUser = user
+            print(json)
         }
         
         task.resume()
     }
     
-    private func getMainUserURL() -> String {
-        let url = self.tcBaseURLString + UserMethod.GetContacts.rawValue;
-//        let customUrl = 
+    private func getContactsURL() -> String {
+        let url = self.tcBaseURLString + ContactMethod.GetContacts.rawValue;
         
         return url
     }

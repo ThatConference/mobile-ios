@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ERb-bw-S4F">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="NeutraText-BookAlt.otf">
+            <string>NeutrafaceText-BookAlt</string>
+        </array>
+        <array key="NeutraText-Demi.otf">
+            <string>NeutrafaceText-Demi</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Share Contacts Nav-->
+        <scene sceneID="q2c-z8-xub">
+            <objects>
+                <navigationController title="Share Contacts Nav" automaticallyAdjustsScrollViewInsets="NO" id="ERb-bw-S4F" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" backIndicatorImage="back" backIndicatorTransitionMaskImage="back" id="Ftj-th-ux2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.90396612880000005" green="0.83328729869999996" blue="0.69475156069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.37091678379999998" green="0.2713463008" blue="0.18597435949999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="22"/>
+                            <color key="textColor" red="0.90396612880000005" green="0.83328729869999996" blue="0.69475156069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0Nz-1j-SyN" kind="relationship" relationship="rootViewController" id="Whg-QL-hTj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nq4-Dr-uZF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1836" y="189"/>
+        </scene>
+        <!--Share Contacts-->
+        <scene sceneID="tIy-w6-uXo">
+            <objects>
+                <viewController storyboardIdentifier="ShareContactViewController" title="Share Contacts" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Nz-1j-SyN" customClass="ShareContactViewController" customModule="That_Conference" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TTA-pd-G7V"/>
+                        <viewControllerLayoutGuide type="bottom" id="VM6-4W-SWl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ic1-k3-bPY">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k95-VG-Utg">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ShareContactCell" rowHeight="110" id="o8A-bf-7bE" customClass="ShareContactTableViewCell" customModule="That_Conference" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="110"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o8A-bf-7bE" id="KUf-IN-H1i">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="109.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker" translatesAutoresizingMaskIntoConstraints="NO" id="kMV-r2-rUf" customClass="CircleImageView" customModule="That_Conference" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="19" width="70" height="70"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="70" id="a5G-71-grO"/>
+                                                        <constraint firstAttribute="height" constant="70" id="vAD-qV-xKu"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DlO-cW-ekN">
+                                                    <rect key="frame" x="101" y="31" width="212" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="1sJ-P6-ngb"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xpD-zY-Ss2">
+                                                    <rect key="frame" x="101" y="61" width="212" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="253" id="g8t-NM-fXp"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="NeutrafaceText-BookAlt" family="Neutraface Text" pointSize="17"/>
+                                                    <color key="textColor" red="0.43529411759999997" green="0.43921568630000002" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="g8t-NM-fXp"/>
+                                                        </mask>
+                                                    </variation>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like-1" translatesAutoresizingMaskIntoConstraints="NO" id="eCd-GO-EME">
+                                                    <rect key="frame" x="323" y="37" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="35" id="60t-c5-K48"/>
+                                                        <constraint firstAttribute="height" constant="35" id="tm0-5e-Kyj"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="DlO-cW-ekN" firstAttribute="top" secondItem="KUf-IN-H1i" secondAttribute="topMargin" constant="23" id="7cW-Te-JJm"/>
+                                                <constraint firstItem="eCd-GO-EME" firstAttribute="leading" secondItem="DlO-cW-ekN" secondAttribute="trailing" constant="10" id="7nK-TM-FVC"/>
+                                                <constraint firstItem="xpD-zY-Ss2" firstAttribute="top" secondItem="DlO-cW-ekN" secondAttribute="bottom" constant="10" id="CGU-Z4-gou"/>
+                                                <constraint firstItem="xpD-zY-Ss2" firstAttribute="leading" secondItem="DlO-cW-ekN" secondAttribute="leading" id="NV7-Ue-Kbs"/>
+                                                <constraint firstItem="xpD-zY-Ss2" firstAttribute="trailing" secondItem="DlO-cW-ekN" secondAttribute="trailing" id="O3D-SB-xAC"/>
+                                                <constraint firstItem="kMV-r2-rUf" firstAttribute="leading" secondItem="KUf-IN-H1i" secondAttribute="leadingMargin" constant="8" id="TUl-09-VPh"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="eCd-GO-EME" secondAttribute="trailing" constant="9" id="g1c-UA-naJ"/>
+                                                <constraint firstItem="eCd-GO-EME" firstAttribute="top" secondItem="KUf-IN-H1i" secondAttribute="topMargin" constant="29" id="gaH-kC-C9X"/>
+                                                <constraint firstItem="kMV-r2-rUf" firstAttribute="top" secondItem="KUf-IN-H1i" secondAttribute="topMargin" constant="11" id="ifs-lv-kYD"/>
+                                                <constraint firstItem="DlO-cW-ekN" firstAttribute="leading" secondItem="kMV-r2-rUf" secondAttribute="trailing" constant="15" id="kWn-Q0-rz9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="companyLabel" destination="xpD-zY-Ss2" id="h2x-bG-OyB"/>
+                                            <outlet property="contactNameLabel" destination="DlO-cW-ekN" id="nt7-Ye-8C8"/>
+                                            <outlet property="profileImageView" destination="kMV-r2-rUf" id="FXM-xE-rGS"/>
+                                            <outlet property="selectIconImageView" destination="eCd-GO-EME" id="daR-ga-Qva"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="0Nz-1j-SyN" id="j0y-En-PTP"/>
+                                    <outlet property="delegate" destination="0Nz-1j-SyN" id="ali-aE-RH6"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="k95-VG-Utg" secondAttribute="trailing" id="M7c-7R-aRf"/>
+                            <constraint firstItem="k95-VG-Utg" firstAttribute="leading" secondItem="Ic1-k3-bPY" secondAttribute="leading" id="nr4-tl-HGX"/>
+                            <constraint firstItem="k95-VG-Utg" firstAttribute="top" secondItem="TTA-pd-G7V" secondAttribute="bottom" id="uTi-1b-Wua"/>
+                            <constraint firstItem="VM6-4W-SWl" firstAttribute="top" secondItem="k95-VG-Utg" secondAttribute="bottom" id="vCN-3J-TAs"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Share Contact" id="1eq-Nb-mZf">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="BlI-iT-0u9">
+                            <connections>
+                                <action selector="backButtonPressed:" destination="0Nz-1j-SyN" id="CrU-Nw-xAy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zF0-nA-1ck" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2533.5999999999999" y="189.3553223388306"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back" width="25" height="25"/>
+        <image name="like-1" width="95" height="95"/>
+        <image name="speaker" width="66" height="75"/>
+    </resources>
+</document>

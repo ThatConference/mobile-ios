@@ -123,6 +123,11 @@
 		7BB028B51EF1A1B80075197A /* SpeakerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB028B41EF1A1B80075197A /* SpeakerTableViewCell.swift */; };
 		7BB028B71EF1B4720075197A /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB028B61EF1B4720075197A /* UIImage+Extension.swift */; };
 		7BB028BA1EF1C6490075197A /* SpeakerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB028B91EF1C6490075197A /* SpeakerAPI.swift */; };
+		7BBB4B841F0D502700823159 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBB4B831F0D502700823159 /* Int+Extension.swift */; };
+		7BBB4B861F0D682500823159 /* ShareContact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BBB4B851F0D682500823159 /* ShareContact.storyboard */; };
+		7BBB4B881F0D699A00823159 /* ShareContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBB4B871F0D699A00823159 /* ShareContactTableViewCell.swift */; };
+		7BBB4B8B1F0D723A00823159 /* ShareContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBB4B8A1F0D723A00823159 /* ShareContactViewController.swift */; };
+		7BC8C8261F0ACB3D00E4FA69 /* BeaconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8C8251F0ACB3D00E4FA69 /* BeaconViewController.swift */; };
 		7BD3621D1E8DB097009C3A5E /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BD3621C1E8DB096009C3A5E /* Menu.storyboard */; };
 		7BD3622E1E8ED885009C3A5E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD3622D1E8ED885009C3A5E /* MenuViewController.swift */; };
 		7BD362301E8ED8E5009C3A5E /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD3622F1E8ED8E5009C3A5E /* MenuTableViewController.swift */; };
@@ -260,6 +265,11 @@
 		7BB028B41EF1A1B80075197A /* SpeakerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerTableViewCell.swift; sourceTree = "<group>"; };
 		7BB028B61EF1B4720075197A /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		7BB028B91EF1C6490075197A /* SpeakerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakerAPI.swift; sourceTree = "<group>"; };
+		7BBB4B831F0D502700823159 /* Int+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
+		7BBB4B851F0D682500823159 /* ShareContact.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ShareContact.storyboard; sourceTree = "<group>"; };
+		7BBB4B871F0D699A00823159 /* ShareContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareContactTableViewCell.swift; sourceTree = "<group>"; };
+		7BBB4B8A1F0D723A00823159 /* ShareContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareContactViewController.swift; sourceTree = "<group>"; };
+		7BC8C8251F0ACB3D00E4FA69 /* BeaconViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconViewController.swift; sourceTree = "<group>"; };
 		7BD3621C1E8DB096009C3A5E /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		7BD3622D1E8ED885009C3A5E /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		7BD3622F1E8ED8E5009C3A5E /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
@@ -400,9 +410,10 @@
 				7B9AA24F1EF4400800DC24E0 /* Profile.storyboard */,
 				7BD362631E943097009C3A5E /* Schedule.storyboard */,
 				51713A911CF150290081549B /* SessionDetails.storyboard */,
+				31920B771D2B008F0035D14B /* Settings.storyboard */,
+				7BBB4B851F0D682500823159 /* ShareContact.storyboard */,
 				7BB028A71EF18A870075197A /* SpeakerDetails.storyboard */,
 				7BB028A91EF18C860075197A /* SpeakerList.storyboard */,
-				31920B771D2B008F0035D14B /* Settings.storyboard */,
 				7BD3625D1E942E79009C3A5E /* Sponsor.storyboard */,
 			);
 			name = Storyboards;
@@ -430,9 +441,10 @@
 				7B9290BB1EFC616B00689B44 /* UIColor+Extension.swift */,
 				7BB028B21EF1972A0075197A /* CGMake+Extension.swift */,
 				31D0D9471CC5DB6A007C5999 /* Date+Extension.swift */,
-				31D39F451DE3E5FD00EC7145 /* URL+Extension.swift */,
+				7BBB4B831F0D502700823159 /* Int+Extension.swift */,
 				7B02FE931E9C0DDF001396B6 /* String+Extention.swift */,
 				7BB028B61EF1B4720075197A /* UIImage+Extension.swift */,
+				31D39F451DE3E5FD00EC7145 /* URL+Extension.swift */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -480,6 +492,14 @@
 			name = SpeakerList;
 			sourceTree = "<group>";
 		};
+		7BBB4B891F0D721C00823159 /* ShareContact */ = {
+			isa = PBXGroup;
+			children = (
+				7BBB4B8A1F0D723A00823159 /* ShareContactViewController.swift */,
+			);
+			name = ShareContact;
+			sourceTree = "<group>";
+		};
 		7BD362181E8D45FD009C3A5E /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -519,6 +539,7 @@
 				7B9AA2511EF442E600DC24E0 /* ProfileTextField.swift */,
 				7B9AA2551EF45A0600DC24E0 /* RoundedButton.swift */,
 				5113D3841CAA20CB00D6B974 /* ScheduleTableViewCell.swift */,
+				7BBB4B871F0D699A00823159 /* ShareContactTableViewCell.swift */,
 				7BF626031EFD7FC000D75C50 /* SocialUIButton.swift */,
 				7BB028B41EF1A1B80075197A /* SpeakerTableViewCell.swift */,
 				3116C4D01D3BEDB2002E2722 /* SponsorTableViewCell.swift */,
@@ -531,6 +552,7 @@
 			isa = PBXGroup;
 			children = (
 				317154231D1D8025004078E2 /* BaseViewController.swift */,
+				7BC8C8251F0ACB3D00E4FA69 /* BeaconViewController.swift */,
 				31CFD1321D09050C00F1AE23 /* TimeSlotRootViewController.swift */,
 				7B22CA391F06CFF80030E095 /* CamperContacts */,
 				7BE1B5421EAA69750071B3D2 /* FamilyEvents */,
@@ -542,6 +564,7 @@
 				7B9AA2591EF4608500DC24E0 /* Profile */,
 				7BD3622C1E8ED65B009C3A5E /* Settings */,
 				7BD3622B1E8ED652009C3A5E /* SessionDetails */,
+				7BBB4B891F0D721C00823159 /* ShareContact */,
 				7BB028AF1EF195B70075197A /* SpeakerList */,
 			);
 			name = ViewControllers;
@@ -759,6 +782,7 @@
 				312A947C1C89325D00AE938B /* NeutraText-Book.otf in Resources */,
 				312A94661C89325D00AE938B /* NeutraCond-Medium.otf in Resources */,
 				51713A931CF150290081549B /* SessionDetails.storyboard in Resources */,
+				7BBB4B861F0D682500823159 /* ShareContact.storyboard in Resources */,
 				312A94741C89325D00AE938B /* NeutraDisplay-NumAlt.otf in Resources */,
 				312A94621C89325D00AE938B /* NeutraCond-Bold.otf in Resources */,
 				312A943A1C88DEC900AE938B /* Chunk.ttf in Resources */,
@@ -844,6 +868,7 @@
 				7B9AA2541EF44F6300DC24E0 /* BiographyTextView.swift in Sources */,
 				3199C71C1CD6EFA5002F01CD /* PageDetailCell.swift in Sources */,
 				7B00F7021EF9639400E252DC /* UserAPI.swift in Sources */,
+				7BC8C8261F0ACB3D00E4FA69 /* BeaconViewController.swift in Sources */,
 				7B02FE981EA020E7001396B6 /* Constants.swift in Sources */,
 				7BD362361E929FD4009C3A5E /* SWRevealViewController.m in Sources */,
 				512DA03B1CB7585D006CC1B3 /* DailySchedule.swift in Sources */,
@@ -877,6 +902,7 @@
 				7BB028BA1EF1C6490075197A /* SpeakerAPI.swift in Sources */,
 				7BAF21F11F0AA11B00148A57 /* Contacts.swift in Sources */,
 				7B9AA2521EF442E600DC24E0 /* ProfileTextField.swift in Sources */,
+				7BBB4B881F0D699A00823159 /* ShareContactTableViewCell.swift in Sources */,
 				7B00F7081EFABB3700E252DC /* ProfileDetailUIView.swift in Sources */,
 				7B9290BE1EFC636600689B44 /* BorderImageView.swift in Sources */,
 				312A942C1C85396E00AE938B /* FavoritesViewController.swift in Sources */,
@@ -895,6 +921,7 @@
 				7BB028B11EF196E60075197A /* CircleButton.swift in Sources */,
 				7BF626041EFD7FC000D75C50 /* SocialUIButton.swift in Sources */,
 				311E0E6B1CB74D76004FA850 /* ExternalLogin.swift in Sources */,
+				7BBB4B841F0D502700823159 /* Int+Extension.swift in Sources */,
 				317154221D1C340E004078E2 /* PassThroughImageView.swift in Sources */,
 				318F268C1CBC65F30065A76F /* Authentication.swift in Sources */,
 				7BB028AC1EF191750075197A /* CircleImageView.swift in Sources */,
@@ -908,6 +935,7 @@
 				312A94161C814B6B00AE938B /* AppDelegate.swift in Sources */,
 				5113D38A1CAF58A100D6B974 /* CircleLabel.swift in Sources */,
 				31D0D9481CC5DB6A007C5999 /* Date+Extension.swift in Sources */,
+				7BBB4B8B1F0D723A00823159 /* ShareContactViewController.swift in Sources */,
 				7B9AA2561EF45A0600DC24E0 /* RoundedButton.swift in Sources */,
 				31CFD1351D0E3AAB00F1AE23 /* TimeSlotRootTableViewCell.swift in Sources */,
 				312A94301C8539B600AE938B /* SettingsViewController.swift in Sources */,

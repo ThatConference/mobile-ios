@@ -30,7 +30,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="PostCardChoosePhotoViewController" storyboardName="PostCards" referencedIdentifier="PostCardChoosePhotoViewController" id="kCv-mK-lxY" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="utX-J9-1t0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3543" y="-514"/>
+            <point key="canvasLocation" x="3337" y="189"/>
         </scene>
         <!--Open Spaces-->
         <scene sceneID="RPd-4u-6Oh">
@@ -38,7 +38,7 @@
                 <navigationController title="Open Spaces" automaticallyAdjustsScrollViewInsets="NO" id="eJx-Ex-Npc" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="open spaces" image="open-spaces" selectedImage="open-spaces" id="Kav-wO-0T4"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="wxK-0a-Jnw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="wxK-0a-Jnw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.90396612880000005" green="0.83328729869999996" blue="0.69475156069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -120,7 +120,7 @@
                                         <rect key="frame" x="0.0" y="28" width="335" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m7x-Fc-OlP" id="uZ1-ce-Vez">
-                                            <rect key="frame" x="0.0" y="0.0" width="335" height="159.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="160"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like-1" translatesAutoresizingMaskIntoConstraints="NO" id="jju-Jq-19r">

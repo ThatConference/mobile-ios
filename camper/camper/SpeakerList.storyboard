@@ -73,7 +73,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speaker Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9HP-kV-jkh">
-                                                    <rect key="frame" x="102" y="33" width="256" height="20"/>
+                                                    <rect key="frame" x="101" y="33" width="257" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="2Le-bK-0eT"/>
                                                     </constraints>
@@ -82,7 +82,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Business" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dBQ-VN-kBV">
-                                                    <rect key="frame" x="102" y="63" width="256" height="20"/>
+                                                    <rect key="frame" x="101" y="63" width="257" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="253" id="wnP-e4-hlO"/>
                                                     </constraints>
@@ -98,7 +98,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="qW4-Ps-hmE" firstAttribute="leading" secondItem="2HO-mI-P2e" secondAttribute="leadingMargin" constant="8" id="2C7-B2-gY0"/>
-                                                <constraint firstItem="9HP-kV-jkh" firstAttribute="leading" secondItem="qW4-Ps-hmE" secondAttribute="trailing" constant="16" id="7E8-iC-3GY"/>
+                                                <constraint firstItem="9HP-kV-jkh" firstAttribute="leading" secondItem="qW4-Ps-hmE" secondAttribute="trailing" constant="15" id="7E8-iC-3GY"/>
                                                 <constraint firstItem="qW4-Ps-hmE" firstAttribute="top" secondItem="2HO-mI-P2e" secondAttribute="topMargin" constant="13" id="BpS-0a-v4g"/>
                                                 <constraint firstItem="dBQ-VN-kBV" firstAttribute="top" secondItem="9HP-kV-jkh" secondAttribute="bottom" constant="10" id="H5S-H8-Oj8"/>
                                                 <constraint firstItem="dBQ-VN-kBV" firstAttribute="leading" secondItem="9HP-kV-jkh" secondAttribute="leading" id="LCc-ff-qcS"/>
