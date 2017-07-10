@@ -29,7 +29,7 @@
                         <color key="barTintColor" red="0.37091678379999998" green="0.2713463008" blue="0.18597435949999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="22"/>
-                            <color key="textColor" red="0.90396612880000005" green="0.83328729869999996" blue="0.69475156069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" red="0.97329586739999996" green="0.94589048620000005" blue="0.89556962250000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -138,7 +138,7 @@
                             <constraint firstItem="VM6-4W-SWl" firstAttribute="top" secondItem="k95-VG-Utg" secondAttribute="bottom" id="vCN-3J-TAs"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Share Contact" id="1eq-Nb-mZf">
+                    <navigationItem key="navigationItem" title="SHARE CONTACT" id="1eq-Nb-mZf">
                         <barButtonItem key="leftBarButtonItem" image="back" id="BlI-iT-0u9">
                             <connections>
                                 <action selector="backButtonPressed:" destination="0Nz-1j-SyN" id="CrU-Nw-xAy"/>

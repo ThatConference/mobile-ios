@@ -129,7 +129,7 @@
                             <constraint firstItem="hnV-Tj-itC" firstAttribute="top" secondItem="U0v-KV-HSK" secondAttribute="bottom" id="rLX-2n-3Sc"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Camper Contacts" id="dTg-cj-RRL">
+                    <navigationItem key="navigationItem" title="CAMPER CONTACTS" id="dTg-cj-RRL">
                         <barButtonItem key="leftBarButtonItem" image="hamburger" id="edM-jM-Pp8"/>
                         <barButtonItem key="rightBarButtonItem" title="Share" id="k1x-26-Kmt">
                             <connections>
@@ -158,7 +158,7 @@
     </scenes>
     <resources>
         <image name="hamburger" width="24" height="20"/>
-        <image name="open-spaces" width="28" height="29"/>
+        <image name="open-spaces" width="35" height="35"/>
         <image name="speaker" width="66" height="75"/>
     </resources>
 </document>

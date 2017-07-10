@@ -27,6 +27,7 @@ class UserAPI {
         
         request.httpMethod = "GET"
         if let token = Authentication.loadAuthToken() {
+            print(token.token)
             request.addValue("Bearer \(token.token!)", forHTTPHeaderField: "Authorization")
         }
         

@@ -10,17 +10,38 @@ import CoreBluetooth
 import CoreLocation
 import UIKit
 
+extension Data {
+    
+    public var hexString: String {
+        var str = ""
+        enumerateBytes { (buffer, index, stop) in
+            for byte in buffer {
+                str.append(String(format: "%02X", byte))
+            }
+        }
+        return str
+    }
+}
+
 class ShareContactViewController: UIViewController {
-    var localBeaconUUID = StateData.instance.currentUser.id!
-    let localBeaconMajor: CLBeaconMajorValue = 2
-    let localBeaconMinor: CLBeaconMinorValue = 2 //MAKE THIS THE USER ID!
+    
+    var localBeaconUUID = "1d44ddec-0ad8-4e1e-abab-1de93b948f88"
+    
+    let localBeaconMajor: CLBeaconMajorValue = 123
+    let localBeaconMinor: CLBeaconMinorValue = 456 //MAKE THIS THE USER ID!
     
     var localBeacon: CLBeaconRegion!
     var beaconPeripheralData: NSDictionary!
     var peripheralManager: CBPeripheralManager!
-    var locationManager: CLLocationManager!
+    var discoveredPeripheral: CBPeripheral?
+    var locationManager: CLLocationManager = CLLocationManager()
+    var centralManager: CBCentralManager!
     
     var isBroadcasting = false
+    
+    var detectedBeacons = [CLBeacon]()
+    
+    var contactsArray: [User] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,11 +52,12 @@ class ShareContactViewController: UIViewController {
     }
     
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
+        stopLocalBroadcast()
         self.dismiss(animated: true, completion: nil)
     }
     
     func setUpLocation() {
-        locationManager = CLLocationManager()
+        centralManager = CBCentralManager(delegate: self, queue: nil)
         locationManager.delegate = self
         
         let status = CLLocationManager.authorizationStatus()
@@ -51,7 +73,6 @@ class ShareContactViewController: UIViewController {
         }
         
         if status == .authorizedWhenInUse || status == .authorizedAlways {
-            print("Authorized")
             startLocalBroadcast()
         }
     }
@@ -78,10 +99,34 @@ extension ShareContactViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "ShareContactCell") as? ShareContactTableViewCell {
+            
+            // Call stop here
             return cell
         }
         
         return UITableViewCell()
+    }
+}
+
+extension ShareContactViewController: CBCentralManagerDelegate {
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        if central.state != .poweredOn {
+            return
+        }
+        
+        centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+    }
+    
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        if (RSSI.intValue > -15 || RSSI.intValue < -35) {
+            return // With those RSSI values, probably not an iBeacon.
+        }
+        
+        if peripheral != discoveredPeripheral {
+            discoveredPeripheral = peripheral // Need to retain a reference to connect to the beacon.
+            centralManager.connect(peripheral, options: nil)
+            central.stopScan() // No need to scan anymore, we found it.
+        }
     }
 }
 
@@ -93,7 +138,6 @@ extension ShareContactViewController: CBPeripheralManagerDelegate {
         
         let uuid = UUID(uuidString: localBeaconUUID)!
         localBeacon = CLBeaconRegion(proximityUUID: uuid, major: localBeaconMajor, minor: localBeaconMinor, identifier: "That App")
-        print(uuid.uuidString)
         
         beaconPeripheralData = localBeacon.peripheralData(withMeasuredPower: nil)
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: nil)
@@ -118,6 +162,58 @@ extension ShareContactViewController: CBPeripheralManagerDelegate {
             peripheralManager.stopAdvertising()
         }
     }
+    
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        
+        peripheral.discoverServices(nil)
+    }
+    
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        
+        discoveredPeripheral = nil
+    }
+
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        
+        guard error == nil else {
+            return
+        }
+        
+        if let services = peripheral.services {
+            for service in services {
+                print("PIE")
+                peripheral.discoverCharacteristics(nil, for: service)
+            }
+        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        
+        guard error == nil else {
+            return
+        }
+        
+        if let characteristics = service.characteristics {
+            for characteristic in characteristics {
+                if characteristic.uuid.uuidString == "1d44ddec-0ad8-4e1e-abab-1de93b948f88" { // UUID
+                    peripheral.readValue(for: characteristic)
+                }
+            }
+        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        
+        guard error == nil else {
+            return;
+        }
+        
+        if let value = characteristic.value {
+            // value will be a Data object with bits that represent the UUID you're looking for.
+            print("Found beacon UUID: \(value.hexString)")
+            // This is where you can start the CLBeaconRegion and start monitoring it, or just get the value you need.
+        }
+    }
 }
 
 extension ShareContactViewController: CLLocationManagerDelegate {
@@ -133,7 +229,7 @@ extension ShareContactViewController: CLLocationManagerDelegate {
     
     func startScanning() {
         let uuid = UUID(uuidString: localBeaconUUID)!
-        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: "That App")
+        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, major: localBeaconMajor, minor: localBeaconMinor, identifier: "That App")
         
         locationManager.startMonitoring(for: beaconRegion)
         locationManager.startRangingBeacons(in: beaconRegion)
@@ -142,7 +238,10 @@ extension ShareContactViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
         if beacons.count > 0 {
             for beacon in beacons {
-                updateDistance(distance: beacon.proximity, minor: beacon.minor)
+//                updateDistance(distance: beacon.proximity, minor: beacon.minor)
+                print("\(beacon.proximityUUID)")
+                print("\(beacon.major)")
+                print("\(beacon.minor)")
             }
         } else {
             updateDistance(distance: .unknown, minor: 0)
@@ -162,18 +261,5 @@ extension ShareContactViewController: CLLocationManagerDelegate {
                 print("IMMEDIATE (\(minor))")
             }
         }
-    }
-}
-
-extension Data {
-    
-    public var hexString: String {
-        var str = ""
-        enumerateBytes { (buffer, index, stop) in
-            for byte in buffer {
-                str.append(String(format: "%02X", byte))
-            }
-        }
-        return str
     }
 }

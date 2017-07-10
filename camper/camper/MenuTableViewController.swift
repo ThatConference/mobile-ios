@@ -12,8 +12,7 @@ class MenuTableViewController: UITableViewController {
     @IBOutlet weak var logOffImage: UIImageView!
     @IBOutlet weak var logOffLabel: UILabel!
     @IBOutlet weak var logOffCell: UITableViewCell!
-    var loggedIn = false
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)

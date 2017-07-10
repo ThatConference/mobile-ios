@@ -127,7 +127,6 @@
 		7BBB4B861F0D682500823159 /* ShareContact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BBB4B851F0D682500823159 /* ShareContact.storyboard */; };
 		7BBB4B881F0D699A00823159 /* ShareContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBB4B871F0D699A00823159 /* ShareContactTableViewCell.swift */; };
 		7BBB4B8B1F0D723A00823159 /* ShareContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBB4B8A1F0D723A00823159 /* ShareContactViewController.swift */; };
-		7BC8C8261F0ACB3D00E4FA69 /* BeaconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8C8251F0ACB3D00E4FA69 /* BeaconViewController.swift */; };
 		7BD3621D1E8DB097009C3A5E /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BD3621C1E8DB096009C3A5E /* Menu.storyboard */; };
 		7BD3622E1E8ED885009C3A5E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD3622D1E8ED885009C3A5E /* MenuViewController.swift */; };
 		7BD362301E8ED8E5009C3A5E /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD3622F1E8ED8E5009C3A5E /* MenuTableViewController.swift */; };
@@ -269,7 +268,6 @@
 		7BBB4B851F0D682500823159 /* ShareContact.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ShareContact.storyboard; sourceTree = "<group>"; };
 		7BBB4B871F0D699A00823159 /* ShareContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareContactTableViewCell.swift; sourceTree = "<group>"; };
 		7BBB4B8A1F0D723A00823159 /* ShareContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareContactViewController.swift; sourceTree = "<group>"; };
-		7BC8C8251F0ACB3D00E4FA69 /* BeaconViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconViewController.swift; sourceTree = "<group>"; };
 		7BD3621C1E8DB096009C3A5E /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		7BD3622D1E8ED885009C3A5E /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		7BD3622F1E8ED8E5009C3A5E /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
@@ -552,7 +550,6 @@
 			isa = PBXGroup;
 			children = (
 				317154231D1D8025004078E2 /* BaseViewController.swift */,
-				7BC8C8251F0ACB3D00E4FA69 /* BeaconViewController.swift */,
 				31CFD1321D09050C00F1AE23 /* TimeSlotRootViewController.swift */,
 				7B22CA391F06CFF80030E095 /* CamperContacts */,
 				7BE1B5421EAA69750071B3D2 /* FamilyEvents */,
@@ -868,7 +865,6 @@
 				7B9AA2541EF44F6300DC24E0 /* BiographyTextView.swift in Sources */,
 				3199C71C1CD6EFA5002F01CD /* PageDetailCell.swift in Sources */,
 				7B00F7021EF9639400E252DC /* UserAPI.swift in Sources */,
-				7BC8C8261F0ACB3D00E4FA69 /* BeaconViewController.swift in Sources */,
 				7B02FE981EA020E7001396B6 /* Constants.swift in Sources */,
 				7BD362361E929FD4009C3A5E /* SWRevealViewController.m in Sources */,
 				512DA03B1CB7585D006CC1B3 /* DailySchedule.swift in Sources */,

@@ -10,6 +10,7 @@ import Foundation
 
 enum ContactMethod: String {
     case GetContacts = "/api3/Account/Contacts"
+    case GetContact = "/api3/Account/UserProfile/{userID}"
     case ContactSharing = "/contact-sharing"
 }
 
@@ -23,6 +24,42 @@ class ContactAPI {
     let fbBaseURLString = "https://that-phone.firebaseio.com"
     
     let year = "2017"
+    
+    func getContact(userID: String) {
+        let url: URL = URL(string: getContactURL(userID))!
+        
+        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        
+        request.httpMethod = "GET"
+        if let token = Authentication.loadAuthToken() {
+            request.addValue("Bearer \(token.token!)", forHTTPHeaderField: "Authorization")
+        }
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { (data, response, error) in
+            guard error == nil else {
+                print(error!)
+                return
+            }
+            
+            guard let data = data else {
+                print("Data is empty")
+                return
+            }
+            
+            let json = try! JSONSerialization.jsonObject(with: data, options: [])
+            print(json)
+        }
+        
+        task.resume()
+    }
+    
+    private func getContactURL(_ userID: String) -> String {
+        let url = self.tcBaseURLString + ContactMethod.GetContact.rawValue;
+        let customURL = url.replacingOccurrences(of: "{userID}", with: userID)
+        
+        return customURL
+    }
     
     func getContacts() {
         let url: URL = URL(string: getContactsURL())!
