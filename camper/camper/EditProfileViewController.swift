@@ -219,8 +219,42 @@ class EditProfileViewController: UIViewController {
 
 extension EditProfileViewController: UITextFieldDelegate {
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == stateTextField {
+            return false
+        }
+        
+        return true
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        if textField == stateTextField {
+            var stateValues: [String] = []
+            var stateDisplayValues: [String] = []
+            
+            for stateProvinces in StateData.instance.statesProvinces() {
+                stateValues.append(stateProvinces.abbreviation)
+                stateDisplayValues.append(stateProvinces.abbreviation)
+            }
+            
+            let statePicker = TextFieldPickerView()
+            statePicker.valuesArray = stateValues
+            statePicker.displayArray = stateDisplayValues
+            statePicker.onValueSelected = { (valueSelected:String) in
+                self.stateTextField.text = valueSelected
+                statePicker.selectedValue = valueSelected
+            }
+            
+            statePicker.selectDefault()
+            
+            self.stateTextField.inputView = statePicker
+            self.stateTextField.inputAccessoryView = statePicker.getToolbar(textField: self.stateTextField)
+        }
     }
 }

@@ -53,8 +53,8 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k95-VG-Utg">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="110" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k95-VG-Utg">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="539"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ShareContactCell" rowHeight="110" id="o8A-bf-7bE" customClass="ShareContactTableViewCell" customModule="That_Conference" customModuleProvider="target">
@@ -69,6 +69,13 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="a5G-71-grO"/>
                                                         <constraint firstAttribute="height" constant="70" id="vAD-qV-xKu"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unselected" translatesAutoresizingMaskIntoConstraints="NO" id="eCd-GO-EME">
+                                                    <rect key="frame" x="323" y="37" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="35" id="60t-c5-K48"/>
+                                                        <constraint firstAttribute="height" constant="35" id="tm0-5e-Kyj"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DlO-cW-ekN">
@@ -94,13 +101,6 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like-1" translatesAutoresizingMaskIntoConstraints="NO" id="eCd-GO-EME">
-                                                    <rect key="frame" x="323" y="37" width="35" height="35"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="35" id="60t-c5-K48"/>
-                                                        <constraint firstAttribute="height" constant="35" id="tm0-5e-Kyj"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="DlO-cW-ekN" firstAttribute="top" secondItem="KUf-IN-H1i" secondAttribute="topMargin" constant="23" id="7cW-Te-JJm"/>
@@ -128,14 +128,37 @@
                                     <outlet property="delegate" destination="0Nz-1j-SyN" id="ali-aE-RH6"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7zf-QE-lYM">
+                                <rect key="frame" x="0.0" y="539" width="375" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KSo-6d-cZr" customClass="RoundedButton" customModule="That_Conference" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="10" width="359" height="44"/>
+                                        <color key="backgroundColor" red="0.41931664940000002" green="0.49983900790000002" blue="0.16713508960000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Share Contact">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="KSo-6d-cZr" firstAttribute="top" secondItem="7zf-QE-lYM" secondAttribute="top" constant="10" id="7am-j0-CTc"/>
+                                    <constraint firstAttribute="trailing" secondItem="KSo-6d-cZr" secondAttribute="trailing" constant="8" id="Ipw-sx-h3t"/>
+                                    <constraint firstAttribute="height" constant="64" id="gu9-yM-B2Q"/>
+                                    <constraint firstAttribute="bottom" secondItem="KSo-6d-cZr" secondAttribute="bottom" constant="10" id="h9p-OQ-z6x"/>
+                                    <constraint firstItem="KSo-6d-cZr" firstAttribute="leading" secondItem="7zf-QE-lYM" secondAttribute="leading" constant="8" id="oyH-h2-tWk"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="7zf-QE-lYM" firstAttribute="leading" secondItem="Ic1-k3-bPY" secondAttribute="leading" id="ACE-wD-hnf"/>
                             <constraint firstAttribute="trailing" secondItem="k95-VG-Utg" secondAttribute="trailing" id="M7c-7R-aRf"/>
+                            <constraint firstAttribute="trailing" secondItem="7zf-QE-lYM" secondAttribute="trailing" id="W0S-WC-9LW"/>
+                            <constraint firstItem="7zf-QE-lYM" firstAttribute="top" secondItem="k95-VG-Utg" secondAttribute="bottom" id="nib-gz-vo2"/>
                             <constraint firstItem="k95-VG-Utg" firstAttribute="leading" secondItem="Ic1-k3-bPY" secondAttribute="leading" id="nr4-tl-HGX"/>
+                            <constraint firstItem="VM6-4W-SWl" firstAttribute="top" secondItem="7zf-QE-lYM" secondAttribute="bottom" id="sdS-92-B9k"/>
                             <constraint firstItem="k95-VG-Utg" firstAttribute="top" secondItem="TTA-pd-G7V" secondAttribute="bottom" id="uTi-1b-Wua"/>
-                            <constraint firstItem="VM6-4W-SWl" firstAttribute="top" secondItem="k95-VG-Utg" secondAttribute="bottom" id="vCN-3J-TAs"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SHARE CONTACT" id="1eq-Nb-mZf">
@@ -153,7 +176,7 @@
     </scenes>
     <resources>
         <image name="back" width="25" height="25"/>
-        <image name="like-1" width="95" height="95"/>
         <image name="speaker" width="66" height="75"/>
+        <image name="unselected" width="24" height="24"/>
     </resources>
 </document>

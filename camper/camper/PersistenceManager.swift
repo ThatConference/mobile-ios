@@ -1,6 +1,7 @@
 import Foundation
 
 enum Path: String {
+    case CamperContacts = "CamperContacts"
     case Schedule = "Schedule"
     case FamilyEvents = "FamilyEvents"
     case Favorites = "Favorites"
@@ -77,6 +78,30 @@ class PersistenceManager {
     }
     
     class func deleteUser(_ path: Path) -> Bool {
+        let exists = FileManager.default.fileExists(atPath: path.rawValue)
+        if exists {
+            do {
+                try FileManager.default.removeItem(atPath: path.rawValue)
+            } catch let error as NSError {
+                print("error: \(error.localizedDescription)")
+                return false
+            }
+        }
+        return exists
+    }
+    
+    class func saveContacts(_ saveObject: [User], path: Path) {
+        let file = documentsDirectory().appendingPathComponent(path.rawValue)
+        NSKeyedArchiver.archiveRootObject(saveObject, toFile: file)
+    }
+    
+    class func loadContacts(_ path: Path) -> [User]? {
+        let file = documentsDirectory().appendingPathComponent(path.rawValue)
+        let result = NSKeyedUnarchiver.unarchiveObject(withFile: file)
+        return result as? [User]
+    }
+    
+    class func deleteContacts(_ path: Path) -> Bool {
         let exists = FileManager.default.fileExists(atPath: path.rawValue)
         if exists {
             do {

@@ -1,16 +1,17 @@
 //
-//  User.swift
+//  Contacts.swift
 //  That Conference
 //
-//  Created by Steven Yang on 6/19/17.
+//  Created by Steven Yang on 7/3/17.
 //  Copyright © 2017 That Conference. All rights reserved.
 //
 
 import Foundation
 
-class User: NSObject, NSCoding {
+class Contacts: NSObject, NSCoding {
     struct Keys {
-        static let Id = "Id"
+        static let Id = "UserId"
+        static let ShareContactId = "SharedContactId"
         static let HeadShot = "HeadShot"
         static let DisplayHeadShot = "DisplayHeadShot"
         static let FirstName = "FirstName"
@@ -36,6 +37,8 @@ class User: NSObject, NSCoding {
     }
     
     private var _id: String!
+    private var _shareContactId: Int?
+    
     private var _headShot: String?
     private var _displayHeadshot: String?
     
@@ -64,6 +67,8 @@ class User: NSObject, NSCoding {
     var pinterest: String?
     var instagram: String?
     var linkedIn: String?
+    
+    
     
     override init() {
         _id = ""

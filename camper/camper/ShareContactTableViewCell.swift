@@ -23,7 +23,11 @@ class ShareContactTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        selectIconImageView.image = UIImage(named: "like-remove")
+        if (selected) {
+            selectIconImageView.image = UIImage(named: "selected")
+        } else  {
+            selectIconImageView.image = UIImage(named: "unselected")
+        }
     }
 
 }

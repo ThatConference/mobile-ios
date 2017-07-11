@@ -21,7 +21,6 @@ enum GetContactResult {
 
 class ContactAPI {
     let tcBaseURLString = "https://www.thatconference.com"
-    let fbBaseURLString = "https://that-phone.firebaseio.com"
     
     let year = "2017"
     

@@ -26,7 +26,6 @@ extension Data {
 class ShareContactViewController: UIViewController {
     
     var localBeaconUUID = "1d44ddec-0ad8-4e1e-abab-1de93b948f88"
-    
     let localBeaconMajor: CLBeaconMajorValue = 123
     let localBeaconMinor: CLBeaconMinorValue = 456 //MAKE THIS THE USER ID!
     
@@ -99,12 +98,22 @@ extension ShareContactViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "ShareContactCell") as? ShareContactTableViewCell {
-            
+            cell.selectionStyle = .none
             // Call stop here
             return cell
         }
         
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
+            if (indexPathForSelectedRow == indexPath) {
+                tableView.deselectRow(at: indexPath, animated: false)
+                return nil
+            }
+        }
+        return indexPath
     }
 }
 

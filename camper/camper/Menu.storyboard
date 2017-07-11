@@ -60,7 +60,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fcl-2c-olx">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                 <subviews>
-                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="speaker" translatesAutoresizingMaskIntoConstraints="NO" id="0KZ-RQ-pUi" userLabel="Profile Image" customClass="BorderImageView" customModule="That_Conference" customModuleProvider="target">
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="0KZ-RQ-pUi" userLabel="Profile Image" customClass="BorderImageView" customModule="That_Conference" customModuleProvider="target">
                                         <rect key="frame" x="17" y="35" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <gestureRecognizers/>
@@ -649,10 +649,10 @@
         <image name="login_icon" width="35" height="35"/>
         <image name="map" width="35" height="35"/>
         <image name="open-spaces" width="35" height="35"/>
+        <image name="profile" width="1000" height="1000"/>
         <image name="schedule" width="27" height="28"/>
         <image name="settings" width="35" height="35"/>
         <image name="share" width="24" height="24"/>
-        <image name="speaker" width="66" height="75"/>
         <image name="speakers" width="35" height="35"/>
         <image name="sponsor" width="35" height="35"/>
     </resources>
