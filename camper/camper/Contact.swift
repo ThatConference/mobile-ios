@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Contacts: NSObject, NSCoding {
+class Contact: NSObject, NSCoding {
     struct Keys {
         static let Id = "UserId"
         static let ShareContactId = "SharedContactId"
@@ -34,10 +34,11 @@ class Contacts: NSObject, NSCoding {
         static let PublicEmail = "PublicEmail"
         static let PublicPhone = "PublicPhone"
         static let PublicThatSlackHandle = "PublicThatSlackHandle"
+        static let Memo = "Memo"
     }
     
     private var _id: String!
-    private var _shareContactId: Int?
+    private var _shareContactId: Int!
     
     private var _headShot: String?
     private var _displayHeadshot: String?
@@ -67,18 +68,13 @@ class Contacts: NSObject, NSCoding {
     var pinterest: String?
     var instagram: String?
     var linkedIn: String?
+    var memo: String?
     
-    
-    
-    override init() {
-        _id = ""
-        _firstName = "Guest"
-        _lastName = ""
-        _email = ""
-    }
+    override init() {}
     
     init(dictionary: [String: AnyObject]) {
         _id = dictionary[Keys.Id] as! String
+        _shareContactId = dictionary[Keys.ShareContactId] as! Int
         _headShot = dictionary[Keys.HeadShot] as? String
         _displayHeadshot = dictionary[Keys.DisplayHeadShot] as? String
         _firstName = dictionary[Keys.FirstName] as! String
@@ -101,10 +97,12 @@ class Contacts: NSObject, NSCoding {
         pinterest = dictionary[Keys.Pinterest] as? String
         instagram = dictionary[Keys.Instagram] as? String
         linkedIn = dictionary[Keys.LinkedIn] as? String
+        memo = dictionary[Keys.Memo] as? String
     }
     
-    init(id: String, headShot: String?, displayHeadShot: String?, firstName: String, lastName: String, email: String, publicEmail: String?, biography: String?, phone: String?, publicPhone: String?, publicThatSlackHandle: String?, city: String?, state: String?, company: String?, title: String?, website: String?, twitter: String?, facebook: String?, googlePlus: String?, github: String?, pinterest: String?, instagram: String?, linkedIn: String?) {
+    init(id: String, shareId: Int, headShot: String?, displayHeadShot: String?, firstName: String, lastName: String, email: String, publicEmail: String?, biography: String?, phone: String?, publicPhone: String?, publicThatSlackHandle: String?, city: String?, state: String?, company: String?, title: String?, website: String?, twitter: String?, facebook: String?, googlePlus: String?, github: String?, pinterest: String?, instagram: String?, linkedIn: String?, memo: String?) {
         self._id = id
+        self._shareContactId = shareId
         self._headShot = headShot
         self._displayHeadshot = displayHeadShot
         self._firstName = firstName
@@ -127,10 +125,13 @@ class Contacts: NSObject, NSCoding {
         self.pinterest = pinterest
         self.instagram = instagram
         self.linkedIn = linkedIn
+        self.memo = memo
     }
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self._id, forKey: Keys.Id)
+        aCoder.encode(self._shareContactId, forKey: Keys.ShareContactId)
+
         aCoder.encode(self._headShot, forKey: Keys.HeadShot)
         aCoder.encode(self._displayHeadshot, forKey: Keys.DisplayHeadShot)
         
@@ -154,10 +155,12 @@ class Contacts: NSObject, NSCoding {
         aCoder.encode(self.pinterest, forKey: Keys.Pinterest)
         aCoder.encode(self.instagram, forKey: Keys.Instagram)
         aCoder.encode(self.linkedIn, forKey: Keys.LinkedIn)
+        aCoder.encode(self.memo, forKey: Keys.Memo)
     }
     
     required init?(coder aDecoder: NSCoder) {
         _id = aDecoder.decodeObject(forKey: Keys.Id) as! String
+        _shareContactId =  aDecoder.decodeObject(forKey: Keys.ShareContactId) as! Int
         _headShot = aDecoder.decodeObject(forKey: Keys.HeadShot) as? String
         _displayHeadshot = aDecoder.decodeObject(forKey: Keys.DisplayHeadShot) as? String
         
@@ -181,6 +184,7 @@ class Contacts: NSObject, NSCoding {
         pinterest = aDecoder.decodeObject(forKey: Keys.Pinterest) as? String
         instagram = aDecoder.decodeObject(forKey: Keys.Instagram) as? String
         linkedIn = aDecoder.decodeObject(forKey: Keys.LinkedIn) as? String
+        memo = aDecoder.decodeObject(forKey: Keys.Memo) as? String
     }
     
     var id: String! {
@@ -266,6 +270,13 @@ class Contacts: NSObject, NSCoding {
         }
     }
     
+    var memoString: String {
+        if (memo == nil) {
+            return ""
+        }
+        return memo!
+    }
+    
     var slackHandleString: String {
         if (publicThatSlackHandle == nil) {
             return ""
@@ -284,6 +295,7 @@ class Contacts: NSObject, NSCoding {
         
         let params: [String: AnyObject] = [
             Keys.Id : _id as AnyObject,
+            Keys.ShareContactId : _shareContactId as AnyObject,
             Keys.FirstName : _firstName as AnyObject,
             Keys.LastName : _lastName as AnyObject,
             Keys.Email : _email as AnyObject,
@@ -305,7 +317,8 @@ class Contacts: NSObject, NSCoding {
             Keys.Github : github as AnyObject,
             Keys.Pinterest : pinterest as AnyObject,
             Keys.Instagram : instagram as AnyObject,
-            Keys.LinkedIn : linkedIn as AnyObject
+            Keys.LinkedIn : linkedIn as AnyObject,
+            Keys.Memo : memo as AnyObject
         ]
         
         return params

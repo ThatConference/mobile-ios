@@ -92,7 +92,8 @@ class EditProfileViewController: UIViewController {
                             github: checkTextfieldValue(githubTextField),
                             pinterest: checkTextfieldValue(pinterestTextField),
                             instagram: checkTextfieldValue(instagramTextField),
-                            linkedIn: checkTextfieldValue(linkedinTextField)
+                            linkedIn: checkTextfieldValue(linkedinTextField),
+                            auxiliaryId: currentUser.auxiliaryId
             )
             
             print(user.parameter)

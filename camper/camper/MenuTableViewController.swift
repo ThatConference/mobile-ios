@@ -56,6 +56,7 @@ class MenuTableViewController: UITableViewController {
                 Authentication.removeAuthToken()
                 setDirtyData()
                 _ = PersistenceManager.deleteDailySchedule(Path.Favorites)
+                _ = PersistenceManager.deleteContacts(Path.CamperContacts)
                 
                 PersistenceManager.saveUser(User(), path: Path.User)
                 StateData.instance.currentUser = User()

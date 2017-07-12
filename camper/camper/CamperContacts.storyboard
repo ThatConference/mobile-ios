@@ -40,7 +40,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="guG-6A-56g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1836" y="189"/>
+            <point key="canvasLocation" x="2534" y="-486"/>
         </scene>
         <!--Camper Contacts-->
         <scene sceneID="IkE-d1-qRR">
@@ -131,7 +131,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="CAMPER CONTACTS" id="dTg-cj-RRL">
                         <barButtonItem key="leftBarButtonItem" image="hamburger" id="edM-jM-Pp8"/>
-                        <barButtonItem key="rightBarButtonItem" title="Share" id="k1x-26-Kmt">
+                        <barButtonItem key="rightBarButtonItem" image="share" id="k1x-26-Kmt">
                             <connections>
                                 <action selector="shareButtonPressed:" destination="UE9-Z5-bDM" id="vmd-lB-vtF"/>
                             </connections>
@@ -141,11 +141,12 @@
                         <outlet property="menuButton" destination="edM-jM-Pp8" id="Ddf-fd-tj9"/>
                         <outlet property="tableView" destination="hnV-Tj-itC" id="N3P-Ma-ftr"/>
                         <segue destination="buc-So-ZEL" kind="show" identifier="toShareContact" id="xUF-h6-XpQ"/>
+                        <segue destination="kdz-jV-QAh" kind="show" identifier="toProfileDetails" id="yWD-CW-XWy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9JE-l1-m1O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2533.5999999999999" y="189.3553223388306"/>
+            <point key="canvasLocation" x="3303" y="-486"/>
         </scene>
         <!--ShareContact-->
         <scene sceneID="o7W-8d-nXH">
@@ -153,12 +154,21 @@
                 <viewControllerPlaceholder storyboardName="ShareContact" id="buc-So-ZEL" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dv5-pR-fHO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3135" y="57"/>
+            <point key="canvasLocation" x="4085" y="-601"/>
+        </scene>
+        <!--ProfileNavigationController-->
+        <scene sceneID="0pB-Jv-sPw">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="ProfileNavigationController" storyboardName="Profile" referencedIdentifier="ProfileNavigationController" id="kdz-jV-QAh" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mG8-iG-MlI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3443" y="-53"/>
         </scene>
     </scenes>
     <resources>
         <image name="hamburger" width="24" height="20"/>
         <image name="open-spaces" width="35" height="35"/>
+        <image name="share" width="24" height="24"/>
         <image name="speaker" width="66" height="75"/>
     </resources>
 </document>

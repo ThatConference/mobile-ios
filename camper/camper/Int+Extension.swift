@@ -14,4 +14,8 @@ extension Int {
         
         return Date(timeIntervalSince1970: timeInterval)
     }
+    
+    func uInt32ToUInt16() {
+        
+    }
 }

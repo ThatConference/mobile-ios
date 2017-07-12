@@ -85,6 +85,13 @@ class MenuViewController: UIViewController {
                 destination.store = StateData.instance.sessionStore
             }
         }
+        
+        if let destination = segue.destination as? UINavigationController {
+            if (segue.identifier == "toProfileDetails") {
+                let vc = destination.viewControllers.first as? ProfileDetailsViewController
+                vc?.mainUser = StateData.instance.currentUser
+            }
+        }
     }
 
 }

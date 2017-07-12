@@ -13,7 +13,7 @@ class StateData {
     public var sessionStore: SessionStore! = SessionStore()
     public var offlineFavoriteSessions: Sessions = Sessions()
     public var currentUser: User = User()
-    public var camperContacts: [User] = [User()]
+    public var camperContacts: [Contact] = []
     
     private init() {}
     

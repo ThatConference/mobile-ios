@@ -9,32 +9,19 @@
 import UIKit
 import Firebase
 
-class CamperContactsViewController: UIViewController {
+class CamperContactsViewController: BaseViewControllerNoCameraViewController {
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
-    
-    var refreshControl: UIRefreshControl!
-    var activityIndicator: UIActivityIndicatorView!
 
     let conditionRef = Database.database().reference().child("contact-sharing")
+    var contactArray: [Contact] = []
+    var selectedContact: Contact?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.activityIndicator = UIActivityIndicatorView()
-        self.activityIndicator.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
-        self.activityIndicator.backgroundColor = UIColor(white: 0, alpha: 0.4)
-        self.activityIndicator.layer.cornerRadius = 10
-        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        self.activityIndicator.clipsToBounds = true
-        self.activityIndicator.hidesWhenStopped = true
-        self.activityIndicator.center = self.view.center
-        
-        self.view.addSubview(self.activityIndicator)
 
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(CamperContactsViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         
         self.tableView.addSubview(self.refreshControl)
@@ -44,6 +31,10 @@ class CamperContactsViewController: UIViewController {
         loadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadData()
+    }
     
     @IBAction func shareButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "toShareContact", sender: self)
@@ -56,13 +47,64 @@ class CamperContactsViewController: UIViewController {
     }
     
     func loadData() {
-//        let contactAPI = ContactAPI()
-//        contactAPI.getContacts()
         
-//        conditionRef.observe(.value) { (snap: DataSnapshot) in
-//            print(snap.value.debugDescription)
-//        }
-
+        startIndicator()
+        
+        if (self.refreshControl != nil) {
+            self.refreshControl.endRefreshing()
+        }
+        
+        let contactAPI = ContactAPI()
+        
+        contactAPI.getContacts { (result) in
+            switch (result) {
+            case .success(let contacts):
+                self.contactArray = contacts
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.stopIndicator()
+                }
+                break
+            case .failure(let error):
+                print(error)
+                self.contactArray = []
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.stopIndicator()
+                }
+                break
+            }
+        
+//        if let contacts = PersistenceManager.loadContacts(Path.CamperContacts) {
+//            StateData.instance.camperContacts = contacts
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//                self.activityIndicator.stopAnimating()
+//            }
+//        } else {
+//            let contactAPI = ContactAPI()
+//
+//            contactAPI.getContacts { (result) in
+//                switch (result) {
+//                case .success(let contacts):
+//                    self.contactArray = contacts
+//                    DispatchQueue.main.async {
+//                        self.tableView.reloadData()
+//                        self.activityIndicator.stopAnimating()
+//                    }
+//                    break
+//                case .failure(let error):
+//                    print(error)
+//                    self.contactArray = []
+//                    DispatchQueue.main.async {
+//                        self.tableView.reloadData()
+//                        self.activityIndicator.stopAnimating()
+//                    }
+//                    break
+//                }
+//            }
+            
+        }
         //Saving data
 //        
 //        let params: [String: Dictionary<String, Int>] = ["requests": ["asfe-sdfgre-vdfv": Date().dateToInt()], "blocks": ["asfe-sdfgre-vdfv": Date().dateToInt()]]
@@ -70,27 +112,44 @@ class CamperContactsViewController: UIViewController {
 //        conditionRef.child(StateData.instance.currentUser.id).setValue(params)
     }
     
-    func revealViewControllerFunc(barButton: UIBarButtonItem) {
-        if revealViewController() != nil {
-            barButton.target = revealViewController()
-            barButton.action = #selector(SWRevealViewController.revealToggle(_:))
-            revealViewController().panGestureRecognizer().isEnabled = false
-            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? UINavigationController {
+            if (segue.identifier == "toProfileDetails") {
+                let vc = destination.viewControllers.first as? ProfileDetailsViewController
+                ISCURRENTUSER = false
+                vc?.selectedContact = selectedContact
+            }
         }
+//        
+//        if let destination = segue.destination as? ProfileDetailsViewController {
+//            if (segue.identifier == "toProfileDetails") {
+//                ISCURRENTUSER = false
+//                destination.selectedContact = selectedContact
+//            }
+//        }
     }
 }
 
 extension CamperContactsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return contactArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CamperContactCell") as? CamperContactTableViewCell {
+            let contact = contactArray[indexPath.row]
+            cell.setUpCell(contact: contact)
             return cell
         }
         
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? CamperContactTableViewCell {
+            selectedContact = cell.contact
+            performSegue(withIdentifier: "toProfileDetails", sender: self)
+        }
     }
 }

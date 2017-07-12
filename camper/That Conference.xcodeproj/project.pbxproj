@@ -105,6 +105,8 @@
 		7B3C383C1E95A27F00FEA4A5 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B3C383A1E95A27F00FEA4A5 /* Map.storyboard */; };
 		7B7F816E1F15168100460B98 /* TextFieldPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F816D1F15168100460B98 /* TextFieldPickerView.swift */; };
 		7B7F81701F1519BB00460B98 /* StatesProvincesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F816F1F1519BB00460B98 /* StatesProvincesModel.swift */; };
+		7B7F81721F16CB9100460B98 /* UserAuxiliaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F81711F16CB9100460B98 /* UserAuxiliaryModel.swift */; };
+		7B7F81741F16DAC200460B98 /* BaseViewControllerNoCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F81731F16DAC200460B98 /* BaseViewControllerNoCameraViewController.swift */; };
 		7B9290BC1EFC616B00689B44 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9290BB1EFC616B00689B44 /* UIColor+Extension.swift */; };
 		7B9290BE1EFC636600689B44 /* BorderImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9290BD1EFC636600689B44 /* BorderImageView.swift */; };
 		7B9AA2501EF4400800DC24E0 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B9AA24F1EF4400800DC24E0 /* Profile.storyboard */; };
@@ -248,6 +250,8 @@
 		7B3C383B1E95A27F00FEA4A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Map.storyboard; sourceTree = "<group>"; };
 		7B7F816D1F15168100460B98 /* TextFieldPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldPickerView.swift; sourceTree = "<group>"; };
 		7B7F816F1F1519BB00460B98 /* StatesProvincesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatesProvincesModel.swift; sourceTree = "<group>"; };
+		7B7F81711F16CB9100460B98 /* UserAuxiliaryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuxiliaryModel.swift; sourceTree = "<group>"; };
+		7B7F81731F16DAC200460B98 /* BaseViewControllerNoCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewControllerNoCameraViewController.swift; sourceTree = "<group>"; };
 		7B9290BB1EFC616B00689B44 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		7B9290BD1EFC636600689B44 /* BorderImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderImageView.swift; sourceTree = "<group>"; };
 		7B9AA24F1EF4400800DC24E0 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -518,6 +522,7 @@
 				7B7F816F1F1519BB00460B98 /* StatesProvincesModel.swift */,
 				512DA03C1CB758B9006CC1B3 /* TimeSlot.swift */,
 				7B1EDD7C1EF867AD00722B9A /* User.swift */,
+				7B7F81711F16CB9100460B98 /* UserAuxiliaryModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -556,6 +561,7 @@
 			isa = PBXGroup;
 			children = (
 				317154231D1D8025004078E2 /* BaseViewController.swift */,
+				7B7F81731F16DAC200460B98 /* BaseViewControllerNoCameraViewController.swift */,
 				31CFD1321D09050C00F1AE23 /* TimeSlotRootViewController.swift */,
 				7B22CA391F06CFF80030E095 /* CamperContacts */,
 				7BE1B5421EAA69750071B3D2 /* FamilyEvents */,
@@ -897,6 +903,7 @@
 				51A4D1D41CF290BB00F956BC /* FavoritesTableViewCell.swift in Sources */,
 				313B19021D160B8C00E72562 /* PostCardFrame.swift in Sources */,
 				7BAF21F91F0AB06500148A57 /* ContactAPI.swift in Sources */,
+				7B7F81721F16CB9100460B98 /* UserAuxiliaryModel.swift in Sources */,
 				31D877FA1D19CBD30045E8DA /* PostCardChoosePhotoViewController.swift in Sources */,
 				7BB028B71EF1B4720075197A /* UIImage+Extension.swift in Sources */,
 				31DEA7641D2B08F40004C2D3 /* SponsorsViewController.swift in Sources */,
@@ -908,6 +915,7 @@
 				7B9AA2521EF442E600DC24E0 /* ProfileTextField.swift in Sources */,
 				7BBB4B881F0D699A00823159 /* ShareContactTableViewCell.swift in Sources */,
 				7B00F7081EFABB3700E252DC /* ProfileDetailUIView.swift in Sources */,
+				7B7F81741F16DAC200460B98 /* BaseViewControllerNoCameraViewController.swift in Sources */,
 				7B9290BE1EFC636600689B44 /* BorderImageView.swift in Sources */,
 				312A942C1C85396E00AE938B /* FavoritesViewController.swift in Sources */,
 				7BB028B51EF1A1B80075197A /* SpeakerTableViewCell.swift in Sources */,

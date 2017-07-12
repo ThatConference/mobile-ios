@@ -9,41 +9,33 @@
 import CoreBluetooth
 import CoreLocation
 import UIKit
+import Firebase
 
-extension Data {
+class ShareContactViewController: BaseViewControllerNoCameraViewController {
     
-    public var hexString: String {
-        var str = ""
-        enumerateBytes { (buffer, index, stop) in
-            for byte in buffer {
-                str.append(String(format: "%02X", byte))
-            }
-        }
-        return str
-    }
-}
-
-class ShareContactViewController: UIViewController {
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var shareButton: RoundedButton!
     
     var localBeaconUUID = "1d44ddec-0ad8-4e1e-abab-1de93b948f88"
-    let localBeaconMajor: CLBeaconMajorValue = 123
-    let localBeaconMinor: CLBeaconMinorValue = 456 //MAKE THIS THE USER ID!
+    
+    var localBeaconMajor: CLBeaconMajorValue = StateData.instance.currentUser.int16BAuxId
     
     var localBeacon: CLBeaconRegion!
     var beaconPeripheralData: NSDictionary!
     var peripheralManager: CBPeripheralManager!
-    var discoveredPeripheral: CBPeripheral?
+
     var locationManager: CLLocationManager = CLLocationManager()
-    var centralManager: CBCentralManager!
-    
     var isBroadcasting = false
     
-    var detectedBeacons = [CLBeacon]()
-    
-    var contactsArray: [User] = []
+    let conditionRef = Database.database().reference().child("contact-sharing")
+
+    var userAuxArray: [UserAuxiliaryModel] = []
+    var contactsDict: [String: Any] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         print("[NOT STARTED]")
         
@@ -55,8 +47,16 @@ class ShareContactViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    
+    @IBAction func shareContactButtonPressed(_ sender: RoundedButton) {
+        //
+        //        let params: [String: Dictionary<String, Int>] = ["requests": ["asfe-sdfgre-vdfv": Date().dateToInt()], "blocks": ["asfe-sdfgre-vdfv": Date().dateToInt()]]
+        //
+        //        conditionRef.child(StateData.instance.currentUser.id).setValue(params)
+    }
+    
     func setUpLocation() {
-        centralManager = CBCentralManager(delegate: self, queue: nil)
+        
         locationManager.delegate = self
         
         let status = CLLocationManager.authorizationStatus()
@@ -87,17 +87,19 @@ class ShareContactViewController: UIViewController {
             self.stopLocalBeacon()
         }
     }
-
+    
 }
 
 extension ShareContactViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return userAuxArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "ShareContactCell") as? ShareContactTableViewCell {
+            let user = userAuxArray[indexPath.row]
+            cell.setUpCell(userAux: user)
             cell.selectionStyle = .none
             // Call stop here
             return cell
@@ -117,28 +119,6 @@ extension ShareContactViewController: UITableViewDelegate, UITableViewDataSource
     }
 }
 
-extension ShareContactViewController: CBCentralManagerDelegate {
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        if central.state != .poweredOn {
-            return
-        }
-        
-        centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
-    }
-    
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        if (RSSI.intValue > -15 || RSSI.intValue < -35) {
-            return // With those RSSI values, probably not an iBeacon.
-        }
-        
-        if peripheral != discoveredPeripheral {
-            discoveredPeripheral = peripheral // Need to retain a reference to connect to the beacon.
-            centralManager.connect(peripheral, options: nil)
-            central.stopScan() // No need to scan anymore, we found it.
-        }
-    }
-}
-
 extension ShareContactViewController: CBPeripheralManagerDelegate {
     func initLocalBeacon() {
         if localBeacon != nil {
@@ -146,7 +126,7 @@ extension ShareContactViewController: CBPeripheralManagerDelegate {
         }
         
         let uuid = UUID(uuidString: localBeaconUUID)!
-        localBeacon = CLBeaconRegion(proximityUUID: uuid, major: localBeaconMajor, minor: localBeaconMinor, identifier: "That App")
+        localBeacon = CLBeaconRegion(proximityUUID: uuid, major: localBeaconMajor, identifier: "That App")
         
         beaconPeripheralData = localBeacon.peripheralData(withMeasuredPower: nil)
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: nil)
@@ -171,58 +151,6 @@ extension ShareContactViewController: CBPeripheralManagerDelegate {
             peripheralManager.stopAdvertising()
         }
     }
-    
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        
-        peripheral.discoverServices(nil)
-    }
-    
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        
-        discoveredPeripheral = nil
-    }
-
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        
-        guard error == nil else {
-            return
-        }
-        
-        if let services = peripheral.services {
-            for service in services {
-                print("PIE")
-                peripheral.discoverCharacteristics(nil, for: service)
-            }
-        }
-    }
-    
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        
-        guard error == nil else {
-            return
-        }
-        
-        if let characteristics = service.characteristics {
-            for characteristic in characteristics {
-                if characteristic.uuid.uuidString == "1d44ddec-0ad8-4e1e-abab-1de93b948f88" { // UUID
-                    peripheral.readValue(for: characteristic)
-                }
-            }
-        }
-    }
-    
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        
-        guard error == nil else {
-            return;
-        }
-        
-        if let value = characteristic.value {
-            // value will be a Data object with bits that represent the UUID you're looking for.
-            print("Found beacon UUID: \(value.hexString)")
-            // This is where you can start the CLBeaconRegion and start monitoring it, or just get the value you need.
-        }
-    }
 }
 
 extension ShareContactViewController: CLLocationManagerDelegate {
@@ -231,6 +159,7 @@ extension ShareContactViewController: CLLocationManagerDelegate {
             if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
                 if CLLocationManager.isRangingAvailable() {
                     startScanning()
+                    startIndicator()
                 }
             }
         }
@@ -238,36 +167,84 @@ extension ShareContactViewController: CLLocationManagerDelegate {
     
     func startScanning() {
         let uuid = UUID(uuidString: localBeaconUUID)!
-        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, major: localBeaconMajor, minor: localBeaconMinor, identifier: "That App")
+        
+        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: "That App")
         
         locationManager.startMonitoring(for: beaconRegion)
         locationManager.startRangingBeacons(in: beaconRegion)
     }
     
+    func stopScanning() {
+        let uuid = UUID(uuidString: localBeaconUUID)!
+        
+        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: "That App")
+        
+        locationManager.stopMonitoring(for: beaconRegion)
+        locationManager.stopRangingBeacons(in: beaconRegion)
+    }
+    
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
         if beacons.count > 0 {
+            var beaconArray: [Int] = []
+            var count = 0
+            
             for beacon in beacons {
-//                updateDistance(distance: beacon.proximity, minor: beacon.minor)
-                print("\(beacon.proximityUUID)")
-                print("\(beacon.major)")
-                print("\(beacon.minor)")
+                if beacon.major != NSNumber(value: StateData.instance.currentUser.int16BAuxId) {
+                    if (!beaconArray.contains(Int(beacon.major))) {
+                        beaconArray.append(Int(beacon.major))
+                    } else {
+                        count += 1
+                    }
+                    
+                    if (count == 10) {
+                        break
+                    }
+                }
+            }
+            
+            stopScanning()
+            loadContacts(auxIdArray: beaconArray) {
+                self.stopIndicator()
             }
         } else {
-            updateDistance(distance: .unknown, minor: 0)
+            self.simpleAlert(title: "Unable to find local contacts", body: "Please try again.")
         }
     }
     
-    func updateDistance(distance: CLProximity, minor: NSNumber) {
+    func loadContacts(auxIdArray: [Int], completed: @escaping () -> ()) {
+        let contactAPI = ContactAPI()
+        contactAPI.getAuxUsers(auxIdArray: auxIdArray) { (result) in
+            switch (result) {
+            case .success(let result):
+                self.userAuxArray = result
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                break
+            case .failure(let error):
+                self.userAuxArray = []
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                print(error)
+                break
+            }
+        }
+        
+        completed()
+    }
+    
+    func updateDistance(distance: CLProximity, major: NSNumber) {
         UIView.animate(withDuration: 0.8) {
             switch distance {
             case .unknown:
                 print("UNKNOWN")
             case .far:
-                print("FAR (\(minor))")
+                print("FAR (\(major))")
             case .near:
-                print("NEAR (\(minor))")
+                print("NEAR (\(major))")
             case .immediate:
-                print("IMMEDIATE (\(minor))")
+                print("IMMEDIATE (\(major))")
             }
         }
     }

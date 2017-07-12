@@ -159,10 +159,10 @@
             </objects>
             <point key="canvasLocation" x="992" y="-802"/>
         </scene>
-        <!--ProfileNavigationControlelr-->
+        <!--ProfileNavigationController-->
         <scene sceneID="5BO-qF-0l3">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="ProfileNavigationControlelr" storyboardName="Profile" referencedIdentifier="ProfileNavigationControlelr" id="0yA-Iu-vFn" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="ProfileNavigationController" storyboardName="Profile" referencedIdentifier="ProfileNavigationController" id="0yA-Iu-vFn" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="55L-6k-gJW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1058" y="-728"/>

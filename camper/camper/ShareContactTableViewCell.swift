@@ -15,6 +15,8 @@ class ShareContactTableViewCell: UITableViewCell {
     @IBOutlet weak var companyLabel: UILabel!
     @IBOutlet weak var selectIconImageView: UIImageView!
     
+    var userAux: UserAuxiliaryModel?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,6 +30,13 @@ class ShareContactTableViewCell: UITableViewCell {
         } else  {
             selectIconImageView.image = UIImage(named: "unselected")
         }
+    }
+    
+    func setUpCell(userAux: UserAuxiliaryModel) {
+        self.userAux = userAux
+        profileImageView.loadImageURL(url: URL(string: userAux.displayHeadShotString), cache: IMAGE_CACHE)
+        contactNameLabel.text = userAux.fullName
+        companyLabel.text = userAux.companyString
     }
 
 }

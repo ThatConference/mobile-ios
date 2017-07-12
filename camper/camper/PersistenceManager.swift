@@ -90,15 +90,15 @@ class PersistenceManager {
         return exists
     }
     
-    class func saveContacts(_ saveObject: [User], path: Path) {
+    class func saveContacts(_ saveObject: [Contact], path: Path) {
         let file = documentsDirectory().appendingPathComponent(path.rawValue)
         NSKeyedArchiver.archiveRootObject(saveObject, toFile: file)
     }
     
-    class func loadContacts(_ path: Path) -> [User]? {
+    class func loadContacts(_ path: Path) -> [Contact]? {
         let file = documentsDirectory().appendingPathComponent(path.rawValue)
         let result = NSKeyedUnarchiver.unarchiveObject(withFile: file)
-        return result as? [User]
+        return result as? [Contact]
     }
     
     class func deleteContacts(_ path: Path) -> Bool {
