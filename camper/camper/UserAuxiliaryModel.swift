@@ -55,4 +55,14 @@ class UserAuxiliaryModel {
         }
         return company!
     }
+    
+    var int16AAuxId: UInt16! {
+        let a = UInt16(auxiliaryID >> 16)
+        return a
+    }
+    
+    var int16BAuxId: UInt16! {
+        let b = UInt16(auxiliaryID & 0x00ffff)
+        return b
+    }
 }

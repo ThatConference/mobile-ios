@@ -12,6 +12,7 @@ class BaseViewControllerNoCameraViewController: UIViewController {
 
     var refreshControl: UIRefreshControl!
     var activityIndicator: UIActivityIndicatorView!
+    var loadingView: LoadingUIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,5 +59,19 @@ class BaseViewControllerNoCameraViewController: UIViewController {
             view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
     }
+    
+    func loadingScreen() {
+        loadingView = LoadingUIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        
+        loadingView.startIndicator()
 
+        self.view.addSubview(loadingView)
+    }
+    
+    func hideLoadingScreen() {
+        self.loadingView.hide() {
+            self.loadingView.stopIndicator()
+            self.loadingView.removeFromSuperview()
+        }
+    }
 }

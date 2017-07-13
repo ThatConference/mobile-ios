@@ -15,7 +15,15 @@ extension Int {
         return Date(timeIntervalSince1970: timeInterval)
     }
     
-    func uInt32ToUInt16() {
-        
+    func intToString() -> String {
+        return String(self)
+    }
+    
+}
+
+extension UInt16 {
+    func uInt16ToInt() -> Int {
+        let nsNumber = NSNumber(value: self)
+        return Int(nsNumber)
     }
 }

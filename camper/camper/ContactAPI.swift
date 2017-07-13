@@ -115,7 +115,7 @@ class ContactAPI {
         return url
     }
     
-    func postContact(userID: String) {
+    func postContacts(userID: String) {
         let url: URL = URL(string: getContactURL(userID))!
         
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
@@ -142,6 +142,12 @@ class ContactAPI {
         }
         
         task.resume()
+    }
+    
+    private func postContactsURL() -> String {
+        let url = self.tcBaseURLString + ContactMethod.GetContacts.rawValue;
+        
+        return url
     }
     
     // GET USER AUX ID HERE
@@ -195,9 +201,7 @@ class ContactAPI {
                 url.append(string)
             }
         }
-        
-        print(url)
-        
+
         return url
     }
     

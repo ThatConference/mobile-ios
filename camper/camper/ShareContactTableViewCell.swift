@@ -27,7 +27,7 @@ class ShareContactTableViewCell: UITableViewCell {
 
         if (selected) {
             selectIconImageView.image = UIImage(named: "selected")
-        } else  {
+        } else {
             selectIconImageView.image = UIImage(named: "unselected")
         }
     }
