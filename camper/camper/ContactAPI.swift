@@ -129,16 +129,15 @@ class ContactAPI {
     }
     
     func postContact(contactID: String) {
-        
-        let params: [String: AnyObject] = ["UserId": contactID as AnyObject,
-                                        "Memo": "" as AnyObject
-        ]
 
-        let jsonData = try? JSONSerialization.data(withJSONObject: params)
+        let postData = NSData(data: "UserId=\(contactID)".data(using: String.Encoding.utf8)!) as Data
         
         let url: URL = URL(string: postContactURL())!
         
-        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        var request = URLRequest(url: url,
+                                 cachePolicy: .useProtocolCachePolicy,
+                                 timeoutInterval: 10.0)
+        
         request.httpMethod = "POST"
         
         if let token = Authentication.loadAuthToken() {
@@ -149,7 +148,8 @@ class ContactAPI {
             request.allHTTPHeaderFields = headers
         }
         
-        request.httpBody = jsonData
+        request.httpBody = postData
+        print(request)
         
         let session = URLSession.shared
         let task = session.dataTask(with: request) { (data, response, error) in
@@ -157,6 +157,7 @@ class ContactAPI {
                 print(error!)
                 return
             }
+            
         }
         
         task.resume()
@@ -164,6 +165,7 @@ class ContactAPI {
     
     private func postContactURL() -> String {
         let url = self.tcBaseURLString + ContactMethod.PostContact.rawValue;
+        print(url)
         
         return url
     }

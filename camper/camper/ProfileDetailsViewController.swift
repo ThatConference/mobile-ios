@@ -261,11 +261,11 @@ class ProfileDetailsViewController: UIViewController {
     
     func settingsButtonTapped(_ sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
-        let add = UIAlertAction(title: "Add Contact", style: .default) { (UIAlertAction) in
+        let block = UIAlertAction(title: " Contact", style: .default) { (UIAlertAction) in
             print("add")
         }
         
-        actionSheet.addAction(add)
+        actionSheet.addAction(block)
         present(actionSheet, animated: true, completion: nil)
     }
     

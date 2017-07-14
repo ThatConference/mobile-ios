@@ -38,7 +38,7 @@ class ShareContactViewController: BaseViewControllerNoCameraViewController {
     var userAuxArray: [UserAuxiliaryModel] = []
     
     // Used for Posting in FireBase
-    var selectedAuxDict: Dictionary<String, [String: Int]> = [:]
+    var selectedAuxDict: Dictionary<String, Int> = [:]
     
     // Used for Posting in TC API
     var selectedIdDict: Dictionary<String, Int> = [:]
@@ -112,7 +112,6 @@ class ShareContactViewController: BaseViewControllerNoCameraViewController {
     func saveContactsToFirebase(completed: @escaping () -> ()) {
         for selectedID in selectedAuxDict {
             requestRef.child(selectedID.key).setValue(selectedID.value)
-            
         }
         completed()
     }
@@ -146,7 +145,7 @@ extension ShareContactViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? ShareContactTableViewCell {
             if let userAux = cell.userAux {
-                selectedAuxDict[userAux.int16BAuxId.uInt16ToInt().intToString()] = [userAux.id: Date().dateToInt()]
+                selectedAuxDict[userAux.int16BAuxId.uInt16ToInt().intToString()] = Date().dateToInt()
                 selectedIdDict[userAux.id] = Date().dateToInt()
             }
         }

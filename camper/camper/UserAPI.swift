@@ -60,7 +60,6 @@ class UserAPI {
     }
     
     func postUser(params: [String: AnyObject], completionHandler: @escaping (PutUserResult) -> Void) {
-
         
         let jsonData = try? JSONSerialization.data(withJSONObject: params)
         
