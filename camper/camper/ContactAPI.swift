@@ -10,9 +10,11 @@ import Foundation
 import Firebase
 
 enum ContactMethod: String {
+    case DeleteContact = "/api3/Accout/Contact/{shareContactId}"
     case GetContacts = "/api3/Account/Contacts"
     case GetContact = "/api3/Account/UserProfile/{userID}"
     case ContactSharing = "/contact-sharing"
+    case PostContact = "/api3/Account/Contact"
     case UserAuxiliaryInfo = "/api3/Account/UserInfosAuxiliary?"
 }
 
@@ -23,6 +25,11 @@ enum GetContactResult {
 
 enum GetUserAuxInfo {
     case success([UserAuxiliaryModel])
+    case failure(Error)
+}
+
+enum DeleteContactResult {
+    case success()
     case failure(Error)
 }
 
@@ -115,15 +122,34 @@ class ContactAPI {
         return url
     }
     
-    func postContacts(userID: String) {
-        let url: URL = URL(string: getContactURL(userID))!
+    func postContacts(contactIDs: Dictionary<String, Int>) {
+        for contactId in contactIDs {
+            postContact(contactID: contactId.key)
+        }
+    }
+    
+    func postContact(contactID: String) {
+        
+        let params: [String: AnyObject] = ["UserId": contactID as AnyObject,
+                                        "Memo": "" as AnyObject
+        ]
+
+        let jsonData = try? JSONSerialization.data(withJSONObject: params)
+        
+        let url: URL = URL(string: postContactURL())!
         
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        request.httpMethod = "POST"
         
-        request.httpMethod = "GET"
         if let token = Authentication.loadAuthToken() {
-            request.addValue("Bearer \(token.token!)", forHTTPHeaderField: "Authorization")
+            let headers = [
+                "Authorization": "Bearer \(token.token!)",
+                "Content-Type": "application/x-www-form-urlencoded"
+            ]
+            request.allHTTPHeaderFields = headers
         }
+        
+        request.httpBody = jsonData
         
         let session = URLSession.shared
         let task = session.dataTask(with: request) { (data, response, error) in
@@ -131,23 +157,51 @@ class ContactAPI {
                 print(error!)
                 return
             }
-            
-            guard let data = data else {
-                print("Data is empty")
-                return
-            }
-            
-            let json = try! JSONSerialization.jsonObject(with: data, options: [])
-            print(json)
         }
         
         task.resume()
     }
     
-    private func postContactsURL() -> String {
-        let url = self.tcBaseURLString + ContactMethod.GetContacts.rawValue;
+    private func postContactURL() -> String {
+        let url = self.tcBaseURLString + ContactMethod.PostContact.rawValue;
         
         return url
+    }
+    
+    
+    func deleteContact(shareContactId: Int, completionHandler: @escaping (DeleteContactResult) -> Void) {
+        
+        let url: URL = URL(string: deleteContactURL(shareContactId: shareContactId))!
+        
+        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        request.httpMethod = "DELETE"
+        
+        if let token = Authentication.loadAuthToken() {
+            let headers = [
+                "Authorization": "Bearer \(token.token!)",
+                "Content-Type": "application/x-www-form-urlencoded"
+            ]
+            request.allHTTPHeaderFields = headers
+        }
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { (data, response, error) in
+            guard error == nil else {
+                print(error!)
+                return completionHandler(DeleteContactResult.failure(error!))
+            }
+            
+            return completionHandler(DeleteContactResult.success())
+        }
+        
+        task.resume()
+    }
+    
+    private func deleteContactURL(shareContactId: Int) -> String {
+        let url = self.tcBaseURLString + ContactMethod.GetContact.rawValue;
+        let deleteURL = url.replacingOccurrences(of: "{shareContactId}", with: "\(shareContactId)")
+        
+        return deleteURL
     }
     
     // GET USER AUX ID HERE

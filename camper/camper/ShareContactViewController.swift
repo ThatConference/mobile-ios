@@ -33,10 +33,15 @@ class ShareContactViewController: BaseViewControllerNoCameraViewController {
     let blockRef = Database.database().reference().child("contact-sharing").child(StateData.instance.currentUser.id).child("blocks")
     let requestRef = Database.database().reference().child("contact-sharing").child(StateData.instance.currentUser.id).child("requests")
 
-    var userAuxArray: [UserAuxiliaryModel] = []
-    var requestDict: [String: Dictionary<Int, Int>] = [:]
-    var selectedAuxDict: Dictionary<String, Int> = [:]
     var beaconArray: [Int] = []
+    
+    var userAuxArray: [UserAuxiliaryModel] = []
+    
+    // Used for Posting in FireBase
+    var selectedAuxDict: Dictionary<String, [String: Int]> = [:]
+    
+    // Used for Posting in TC API
+    var selectedIdDict: Dictionary<String, Int> = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,12 +60,14 @@ class ShareContactViewController: BaseViewControllerNoCameraViewController {
         if (selectedAuxDict.isEmpty) {
             simpleAlert(title: "No contact has been selected", body: "Please try again")
         } else {
-            saveContacts {
+            saveContactsToFirebase {
                 self.requestRef.observeSingleEvent(of: .value, with: { (snapShot) in
-                    if let snapShotValue = snapShot.value as? Dictionary<String, Int> {
-                        
-                        print(snapShotValue)
-                    }
+                    self.postContacts(completed: {
+                        DispatchQueue.main.async {
+                            self.stopIndicator()
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    })
                 })
             }
         }
@@ -102,10 +109,18 @@ class ShareContactViewController: BaseViewControllerNoCameraViewController {
     }
     
     
-    func saveContacts(completed: @escaping () -> ()) {
+    func saveContactsToFirebase(completed: @escaping () -> ()) {
         for selectedID in selectedAuxDict {
             requestRef.child(selectedID.key).setValue(selectedID.value)
+            
         }
+        completed()
+    }
+    
+    func postContacts(completed: @escaping () -> ()) {
+        startIndicator()
+        let contactAPI = ContactAPI()
+        contactAPI.postContacts(contactIDs: self.selectedIdDict)
         completed()
     }
 }
@@ -131,7 +146,8 @@ extension ShareContactViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? ShareContactTableViewCell {
             if let userAux = cell.userAux {
-                selectedAuxDict[userAux.int16BAuxId.uInt16ToInt().intToString()] = Date().dateToInt()
+                selectedAuxDict[userAux.int16BAuxId.uInt16ToInt().intToString()] = [userAux.id: Date().dateToInt()]
+                selectedIdDict[userAux.id] = Date().dateToInt()
             }
         }
     }
@@ -150,6 +166,7 @@ extension ShareContactViewController: UITableViewDelegate, UITableViewDataSource
         if let cell = tableView.cellForRow(at: indexPath) as? ShareContactTableViewCell {
             if let userAux = cell.userAux {
                 self.selectedAuxDict.removeValue(forKey: userAux.int16BAuxId.uInt16ToInt().intToString())
+                self.selectedIdDict.removeValue(forKey: userAux.id)
             }
         }
     }
