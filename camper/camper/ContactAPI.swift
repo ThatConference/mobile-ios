@@ -10,11 +10,12 @@ import Foundation
 import Firebase
 
 enum ContactMethod: String {
-    case DeleteContact = "/api3/Accout/Contact/{shareContactId}"
+    case DeleteContact = "/api3/Account/Contact/{shareContactId}"
     case GetContacts = "/api3/Account/Contacts"
     case GetContact = "/api3/Account/UserProfile/{userID}"
     case ContactSharing = "/contact-sharing"
     case PostContact = "/api3/Account/Contact"
+    case UserInfo = "/api3/Account/UserInfos?"
     case UserAuxiliaryInfo = "/api3/Account/UserInfosAuxiliary?"
 }
 
@@ -37,6 +38,8 @@ class ContactAPI {
     let tcBaseURLString = "https://www.thatconference.com"
     let conditionRef = Database.database().reference().child("contact-sharing")
 
+    let blockRef = Database.database().reference().child("contact-sharing").child(StateData.instance.currentUser.auxIdString!).child("blocks")
+    
     let year = "2017"
     
     func getContact(userID: String) {
@@ -102,12 +105,9 @@ class ContactAPI {
             
             for jsonContact in json {
                 let contact = Contact(dictionary: jsonContact)
-//                if let blockedContact = self.conditionRef. ) {
-//                    
-//                }
                 contactArray.append(contact)
             }
-                        
+         
             PersistenceManager.saveContacts(contactArray, path: Path.CamperContacts)
             StateData.instance.camperContacts = contactArray
             return completionHandler(GetContactResult.success(contactArray))
@@ -182,7 +182,6 @@ class ContactAPI {
         if let token = Authentication.loadAuthToken() {
             let headers = [
                 "Authorization": "Bearer \(token.token!)",
-                "Content-Type": "application/x-www-form-urlencoded"
             ]
             request.allHTTPHeaderFields = headers
         }
@@ -201,8 +200,10 @@ class ContactAPI {
     }
     
     private func deleteContactURL(shareContactId: Int) -> String {
-        let url = self.tcBaseURLString + ContactMethod.GetContact.rawValue;
+        let url = self.tcBaseURLString + ContactMethod.DeleteContact.rawValue;
         let deleteURL = url.replacingOccurrences(of: "{shareContactId}", with: "\(shareContactId)")
+        
+        print(deleteURL)
         
         return deleteURL
     }
@@ -258,7 +259,7 @@ class ContactAPI {
                 url.append(string)
             }
         }
-
+        
         return url
     }
     
@@ -301,7 +302,7 @@ class ContactAPI {
     }
     
     private func getUserInfoURL(contactIdArray: [String]) -> String {
-        var url = self.tcBaseURLString + ContactMethod.UserAuxiliaryInfo.rawValue;
+        var url = self.tcBaseURLString + ContactMethod.UserInfo.rawValue;
         
         for x in 0..<contactIdArray.count {
             let userId = contactIdArray[x]

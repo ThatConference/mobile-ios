@@ -9,6 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="NeutraText-Book.otf">
+            <string>NeutrafaceText-Book</string>
+        </array>
         <array key="NeutraText-BookAlt.otf">
             <string>NeutrafaceText-BookAlt</string>
         </array>
@@ -73,7 +76,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFj-US-JIn">
-                                                    <rect key="frame" x="101" y="39" width="257" height="20"/>
+                                                    <rect key="frame" x="101" y="39" width="225" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="04r-J8-oPt"/>
                                                     </constraints>
@@ -82,12 +85,12 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2Vd-KX-Eyt">
-                                                    <rect key="frame" x="101" y="69" width="257" height="17"/>
+                                                    <rect key="frame" x="101" y="69" width="225" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="253" id="3ly-Lp-pP1"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="NeutrafaceText-BookAlt" family="Neutraface Text" pointSize="17"/>
-                                                    <color key="textColor" red="0.43529411759999997" green="0.43921568630000002" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" red="0.43581283092498779" green="0.44019779562950134" blue="0.43185979127883911" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -95,16 +98,29 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N5R-Hg-Yah">
+                                                    <rect key="frame" x="346" y="47" width="21" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="U9d-IM-PNz"/>
+                                                        <constraint firstAttribute="width" constant="21" id="uIC-km-pLE"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="NeutrafaceText-Book" family="Neutraface Text" pointSize="35"/>
+                                                    <state key="normal" title="&gt;">
+                                                        <color key="titleColor" red="0.4358128309" green="0.4401977956" blue="0.43185979130000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="2Vd-KX-Eyt" firstAttribute="trailing" secondItem="RFj-US-JIn" secondAttribute="trailing" id="3lD-sM-I5T"/>
                                                 <constraint firstItem="fDZ-dy-9dn" firstAttribute="top" secondItem="tfe-BT-CcN" secondAttribute="topMargin" constant="19" id="Bzv-L3-ASc"/>
+                                                <constraint firstItem="N5R-Hg-Yah" firstAttribute="leading" secondItem="2Vd-KX-Eyt" secondAttribute="trailing" constant="20" id="Zpe-w1-0RJ"/>
                                                 <constraint firstItem="fDZ-dy-9dn" firstAttribute="leading" secondItem="tfe-BT-CcN" secondAttribute="leadingMargin" constant="8" id="eHQ-VL-Tyh"/>
                                                 <constraint firstItem="RFj-US-JIn" firstAttribute="leading" secondItem="fDZ-dy-9dn" secondAttribute="trailing" constant="15" id="eQ5-5t-HIE"/>
                                                 <constraint firstItem="2Vd-KX-Eyt" firstAttribute="leading" secondItem="RFj-US-JIn" secondAttribute="leading" id="fEU-VZ-xDM"/>
+                                                <constraint firstItem="N5R-Hg-Yah" firstAttribute="centerY" secondItem="fDZ-dy-9dn" secondAttribute="centerY" id="geb-wq-8KP"/>
                                                 <constraint firstItem="RFj-US-JIn" firstAttribute="top" secondItem="tfe-BT-CcN" secondAttribute="topMargin" constant="31" id="hqK-8q-L7J"/>
                                                 <constraint firstItem="2Vd-KX-Eyt" firstAttribute="top" secondItem="RFj-US-JIn" secondAttribute="bottom" constant="10" id="mjo-mf-rmi"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="RFj-US-JIn" secondAttribute="trailing" constant="9" id="pu8-hg-PoC"/>
+                                                <constraint firstItem="N5R-Hg-Yah" firstAttribute="trailing" secondItem="tfe-BT-CcN" secondAttribute="trailingMargin" id="tEL-JH-Ilh"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -146,7 +162,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9JE-l1-m1O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3303" y="-486"/>
+            <point key="canvasLocation" x="3301.5999999999999" y="-486.20689655172418"/>
         </scene>
         <!--ShareContact-->
         <scene sceneID="o7W-8d-nXH">

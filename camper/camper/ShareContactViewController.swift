@@ -30,8 +30,8 @@ class ShareContactViewController: BaseViewControllerNoCameraViewController {
     var isBroadcasting = false
     
     let conditionRef = Database.database().reference().child("contact-sharing")
-    let blockRef = Database.database().reference().child("contact-sharing").child(StateData.instance.currentUser.id).child("blocks")
-    let requestRef = Database.database().reference().child("contact-sharing").child(StateData.instance.currentUser.id).child("requests")
+    let blockRef = Database.database().reference().child("contact-sharing").child(StateData.instance.currentUser.auxIdString!).child("blocks")
+    let requestRef = Database.database().reference().child("contact-sharing").child(StateData.instance.currentUser.auxIdString!).child("requests")
 
     var beaconArray: [Int] = []
     
@@ -43,11 +43,15 @@ class ShareContactViewController: BaseViewControllerNoCameraViewController {
     // Used for Posting in TC API
     var selectedIdDict: Dictionary<String, Int> = [:]
     
+    let contactAPI = ContactAPI()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpLocation()
+        firebaseQuery()
     }
+    
     
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
         stopLocalBroadcast()
@@ -61,13 +65,11 @@ class ShareContactViewController: BaseViewControllerNoCameraViewController {
             simpleAlert(title: "No contact has been selected", body: "Please try again")
         } else {
             saveContactsToFirebase {
-                self.requestRef.observeSingleEvent(of: .value, with: { (snapShot) in
-                    self.postContacts(completed: {
-                        DispatchQueue.main.async {
-                            self.stopIndicator()
-                            self.dismiss(animated: true, completion: nil)
-                        }
-                    })
+                self.postContacts(completed: {
+                    DispatchQueue.main.async {
+                        self.stopIndicator()
+                        self.dismiss(animated: true, completion: nil)
+                    }
                 })
             }
         }
@@ -95,6 +97,51 @@ class ShareContactViewController: BaseViewControllerNoCameraViewController {
         }
     }
     
+    func firebaseQuery() {
+        // Firebase Query
+        requestRef.queryOrderedByPriority().observe(.childAdded, with: { (snapShot) in
+            let auxId = snapShot.key
+            
+            self.contactAPI.getAuxUsers(auxIdArray: [auxId.stringToInt], completionHandler: { (result) in
+                switch (result) {
+                case .success(let contacts):
+                    if let contact = contacts.first {
+                        let fullName = contact.fullName
+                        
+                        let alert = UIAlertController(title: "Allow \(fullName) to share their That Conference Camper contact information with you?", message: nil, preferredStyle: .alert)
+                        let allow = UIAlertAction(title: "Allow", style: .default, handler: { (UIAlertAction) in
+                            self.contactAPI.postContact(contactID: contact.id!)
+                            self.requestRef.child(auxId).removeValue()
+                        })
+                        
+                        let dontAllow = UIAlertAction(title: "Don't Allow", style: .default, handler: { (UIAlertAction) in
+                            self.requestRef.child(auxId).removeValue()
+                            self.blockRef.child(auxId).setValue(Date().dateToInt())
+                            
+                            // This Puts The Main User In Blocks of Requester
+                            self.conditionRef.child(auxId)
+                                .child("blocks")
+                                .child(StateData.instance.currentUser.auxIdString!)
+                                .setValue(Date().dateToInt())
+                        })
+                        
+                        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                        
+                        alert.addAction(allow)
+                        alert.addAction(dontAllow)
+                        alert.addAction(cancel)
+                        
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    break
+                case .failure(let error):
+                    print("Error: \(error)")
+                    break
+                }
+            })
+        })
+    }
+    
     func startLocalBroadcast() {
         if !self.isBroadcasting {
             self.initLocalBeacon()
@@ -111,14 +158,13 @@ class ShareContactViewController: BaseViewControllerNoCameraViewController {
     
     func saveContactsToFirebase(completed: @escaping () -> ()) {
         for selectedID in selectedAuxDict {
-            requestRef.child(selectedID.key).setValue(selectedID.value)
+            conditionRef.child(selectedID.key).child("requests").child(StateData.instance.currentUser.auxIdString!).setValue(selectedID.value)
         }
         completed()
     }
     
     func postContacts(completed: @escaping () -> ()) {
         startIndicator()
-        let contactAPI = ContactAPI()
         contactAPI.postContacts(contactIDs: self.selectedIdDict)
         completed()
     }
@@ -217,8 +263,6 @@ extension ShareContactViewController: CLLocationManagerDelegate {
         }
     }
     
-    // Fix Scanning
-    
     func startScanning() {
         let uuid = UUID(uuidString: localBeaconUUID)!
         
@@ -242,18 +286,20 @@ extension ShareContactViewController: CLLocationManagerDelegate {
         if beacons.count > 0 {
             for beacon in beacons {
                 if beacon.major != NSNumber(value: StateData.instance.currentUser.int16BAuxId) {
-                    conditionRef.child(StateData.instance.currentUser.id).observeSingleEvent(of: .value, with: { (snapShot) in
-                        if !(snapShot.hasChild(String(describing: beacon.major))) {
+                    conditionRef.child(StateData.instance.currentUser.auxIdString).observeSingleEvent(of: .value, with: { (snapShot) in
+                        
+                        if (snapShot.childSnapshot(forPath: "requests").hasChild(String(describing: beacon.major)) || snapShot.childSnapshot(forPath: "blocks").hasChild(String(describing: beacon.major))) {
+                            
+                        } else {
+                            
                             if !(self.beaconArray.contains(Int(beacon.major))) {
-                                self.beaconArray.append(Int(beacon.major))
-                                self.loadContacts(auxIdArray: [(Int(beacon.major))])
+                                self.checkDistance(distance: beacon.proximity, major: beacon.major)
                                 if (self.loadingView.isHidden == false) {
                                     self.hideLoadingScreen()
                                 }
                             }
                         }
                     })
-//                    checkDistance(distance: beacon.proximity, major: beacon.major)
                 }
             }
             
@@ -291,31 +337,36 @@ extension ShareContactViewController: CLLocationManagerDelegate {
             case .unknown:
                 print("UNKNOWN")
             case .far:
-                if (self.beaconArray.contains(Int(major))) {
-                    
-                    for x in 0..<self.beaconArray.count {
-                        if self.beaconArray[x] == Int(major) {
-                            
-                            self.beaconArray.remove(at: x)
+                print("Far")
+                if (self.beaconArray.count > 0 && self.userAuxArray.count > 0) {
+                    if (self.beaconArray.contains(Int(major))) {
+                        
+                        for x in 0..<self.beaconArray.count {
+                            if self.beaconArray[x] == Int(major) {
+                                
+                                self.beaconArray.remove(at: x)
+                            }
                         }
-                    }
-                    
-                    for x in 0..<self.userAuxArray.count {
-                        if (major == NSNumber(value: self.userAuxArray[x].int16BAuxId)) {
-                            
-                            self.userAuxArray.remove(at: x)
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
+                        
+                        for x in 0..<self.userAuxArray.count {
+                            if (major == NSNumber(value: self.userAuxArray[x].int16BAuxId)) {
+                                
+                                self.userAuxArray.remove(at: x)
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                }
                             }
                         }
                     }
                 }
             case .near:
+                print("Near")
                 if !(self.beaconArray.contains(Int(major))) {
                     self.beaconArray.append(Int(major))
                     self.loadContacts(auxIdArray: [(Int(major))])
                 }
             case .immediate:
+                print("Immediate")
                 if !(self.beaconArray.contains(Int(major))) {
                     self.beaconArray.append(Int(major))
                     self.loadContacts(auxIdArray: [(Int(major))])

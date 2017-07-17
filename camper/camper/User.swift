@@ -296,6 +296,10 @@ class User: NSObject, NSCoding {
         return b
     }
     
+    var auxIdString: String! {
+        return "\(int16BAuxId!)"
+    }
+    
     var parameter: [String: AnyObject] {
         
         let params: [String: AnyObject] = [

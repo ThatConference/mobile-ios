@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ProfileDetailsViewController: UIViewController {
     
@@ -52,8 +53,9 @@ class ProfileDetailsViewController: UIViewController {
     
     var mainUser: User?
     var selectedContact: Contact?
-    var contactInfo: UserAuxiliaryModel?
     var activityIndicator: UIActivityIndicatorView!
+    
+    let requestRef = Database.database().reference().child("contact-sharing").child(StateData.instance.currentUser.id).child("requests")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,8 +78,8 @@ class ProfileDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         self.navigationController?.title = "YOUR PROFILE"
         
@@ -253,17 +255,6 @@ class ProfileDetailsViewController: UIViewController {
             locationLabel.text = contact.locationString
             biographyLabel.text = contact.biography
             slackHandleLabel.text = contact.slackHandleString
-            
-            let contactAPI = ContactAPI()
-            contactAPI.getUserInfo(contactIdArray: [contact.id], completionHandler: { (result) in
-                switch (result) {
-                case .success(let result):
-                    self.contactInfo = result.first
-                    break
-                case .failure(let error):
-                    print("Error: \(error)")
-                }
-            })
         }
     }
     
@@ -279,17 +270,24 @@ class ProfileDetailsViewController: UIViewController {
         
         let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
         
+        let exitOK = UIAlertAction(title: "OK", style: .default) { (UIAlertAction) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        
         let deleteOK = UIAlertAction(title: "Ok", style: .default) { (UIAlertAction) in
-            if let shareId = self.selectedContact?.sharecontactId {
+            self.startIndicator()
+            if let contact = self.selectedContact {
                 let contactAPI = ContactAPI()
-                contactAPI.deleteContact(shareContactId: shareId, completionHandler: { (result) in
+                contactAPI.deleteContact(shareContactId: contact.sharecontactId, completionHandler: { (result) in
                     switch (result) {
                     case .success():
+                        self.stopIndicator()
                         let alert = UIAlertController(title: "Contact has been deleted", message: nil, preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(ok)
+                        alert.addAction(exitOK)
                         self.present(alert, animated: true, completion: nil)
                         break
                     case .failure(let error):
+                        self.stopIndicator()
                         print("Error: \(error)")
                     }
                 })

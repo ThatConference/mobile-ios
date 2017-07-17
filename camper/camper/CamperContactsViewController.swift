@@ -42,7 +42,7 @@ class CamperContactsViewController: BaseViewControllerNoCameraViewController {
     
     func refresh(_ sender: AnyObject) {
         DispatchQueue.main.async {
-            self.tableView.reloadData()
+            self.loadData()
         }
     }
     
@@ -59,51 +59,40 @@ class CamperContactsViewController: BaseViewControllerNoCameraViewController {
         contactAPI.getContacts { (result) in
             switch (result) {
             case .success(let contacts):
-                self.contactArray = contacts
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    self.stopIndicator()
+                if (contacts.count <= 0) {
+                    self.contactArray = []
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        self.stopIndicator()
+                    }
+                    break
+                } else {
+                    self.contactArray = contacts
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        self.stopIndicator()
+                    }
+                    break
                 }
-                break
+
             case .failure(let error):
                 print(error)
-                self.contactArray = []
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    self.stopIndicator()
+                if let contacts = PersistenceManager.loadContacts(Path.CamperContacts) {
+                    StateData.instance.camperContacts = contacts
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        self.activityIndicator.stopAnimating()
+                    }
+                    break
+                } else {
+                    self.contactArray = []
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        self.stopIndicator()
+                    }
+                    break
                 }
-                break
             }
-        
-//        if let contacts = PersistenceManager.loadContacts(Path.CamperContacts) {
-//            StateData.instance.camperContacts = contacts
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//                self.activityIndicator.stopAnimating()
-//            }
-//        } else {
-//            let contactAPI = ContactAPI()
-//
-//            contactAPI.getContacts { (result) in
-//                switch (result) {
-//                case .success(let contacts):
-//                    self.contactArray = contacts
-//                    DispatchQueue.main.async {
-//                        self.tableView.reloadData()
-//                        self.activityIndicator.stopAnimating()
-//                    }
-//                    break
-//                case .failure(let error):
-//                    print(error)
-//                    self.contactArray = []
-//                    DispatchQueue.main.async {
-//                        self.tableView.reloadData()
-//                        self.activityIndicator.stopAnimating()
-//                    }
-//                    break
-//                }
-//            }
-            
         }
     }
     
@@ -115,13 +104,6 @@ class CamperContactsViewController: BaseViewControllerNoCameraViewController {
                 vc?.selectedContact = selectedContact
             }
         }
-//        
-//        if let destination = segue.destination as? ProfileDetailsViewController {
-//            if (segue.identifier == "toProfileDetails") {
-//                ISCURRENTUSER = false
-//                destination.selectedContact = selectedContact
-//            }
-//        }
     }
 }
 
