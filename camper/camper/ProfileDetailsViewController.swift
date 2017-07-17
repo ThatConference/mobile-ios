@@ -51,6 +51,7 @@ class ProfileDetailsViewController: UIViewController {
     
     var mainUser: User?
     var selectedContact: Contact?
+    var contactInfo: UserAuxiliaryModel?
     var activityIndicator: UIActivityIndicatorView!
     
     var covfefe = ""
@@ -90,15 +91,25 @@ class ProfileDetailsViewController: UIViewController {
     }
     
     @IBAction func addCommentButtonPressed(_ sender: RoundedButton) {
+        let contactAPI = ContactAPI()
         
+        if let contact = selectedContact {
             if (sender.currentTitle == "Save Personal Comment") {
                 if (commentTextView.text == "Comment" || commentTextView.text == "") {
                     
                     // Save Comment here
-                    self.covfefe = ""
+                    contactAPI.postContact(contactID: contact.id!, contact.memoString)
+                    DispatchQueue.main.async {
+                        self.covfefe = ""
+                    }
                 } else {
                     
                     // Save Comment here
+                    contactAPI.postContact(contactID: contact.id!, self.commentTextView.text)
+
+                    DispatchQueue.main.async {
+
+                    }
                     self.covfefe = self.commentTextView.text
                 }
                 
@@ -108,8 +119,10 @@ class ProfileDetailsViewController: UIViewController {
                 self.commentLabel.isHidden = true
                 self.commentTextViewStackView.isHidden = false
             }
-        
-        sender.setCommentTitle()
+            
+            sender.setCommentTitle()
+        }
+
     }
     
     @IBAction func editCommentButtonPressed(_ sender: UIButton) {
@@ -255,14 +268,24 @@ class ProfileDetailsViewController: UIViewController {
             locationLabel.text = contact.locationString
             biographyLabel.text = contact.biography
             slackHandleLabel.text = contact.slackHandleString
+            
+            let contactAPI = ContactAPI()
+            contactAPI.getUserInfo(contactIdArray: [contact.id], completionHandler: { (result) in
+                switch (result) {
+                case .success(let result):
+                    self.contactInfo = result.first
+                    break
+                case .failure(let error):
+                    print("Error: \(error)")
+                }
+            })
         }
-
     }
     
     func settingsButtonTapped(_ sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
-        let block = UIAlertAction(title: " Contact", style: .default) { (UIAlertAction) in
-            print("add")
+        let block = UIAlertAction(title: "Block", style: .default) { (UIAlertAction) in
+            print("Block")
         }
         
         actionSheet.addAction(block)

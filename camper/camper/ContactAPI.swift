@@ -128,9 +128,10 @@ class ContactAPI {
         }
     }
     
-    func postContact(contactID: String) {
+    func postContact(contactID: String, _ memo: String? = nil) {
 
-        let postData = NSData(data: "UserId=\(contactID)".data(using: String.Encoding.utf8)!) as Data
+        var postData = NSData(data: "UserId=\(contactID)".data(using: String.Encoding.utf8)!) as Data
+        postData.append("&Memo=\(memo ?? "")".data(using: String.Encoding.utf8)!)
         
         let url: URL = URL(string: postContactURL())!
         
@@ -261,4 +262,58 @@ class ContactAPI {
         return url
     }
     
+    // Get User Info
+    
+    func getUserInfo(contactIdArray: [String], completionHandler: @escaping (GetUserAuxInfo) -> Void) {
+        let url: URL = URL(string: getUserInfoURL(array: contactIdArray))!
+        
+        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        
+        request.httpMethod = "GET"
+        if let token = Authentication.loadAuthToken() {
+            request.addValue("Bearer \(token.token!)", forHTTPHeaderField: "Authorization")
+        }
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { (data, response, error) in
+            guard error == nil else {
+                print(error!)
+                return completionHandler(GetUserAuxInfo.failure(error!))
+            }
+            
+            var contactArray: [UserAuxiliaryModel] = []
+            
+            let jsonObject: Any = try! JSONSerialization.jsonObject(with: data!, options: [])
+            
+            guard let json = jsonObject as? [Dictionary<String, AnyObject>] else {
+                return completionHandler(GetUserAuxInfo.success([]))
+            }
+            
+            for object in json {
+                let contactId = UserAuxiliaryModel(dictionary: object)
+                contactArray.append(contactId)
+            }
+            
+            return completionHandler(GetUserAuxInfo.success(contactArray))
+        }
+        
+        task.resume()
+    }
+    
+    private func getUserInfoURL(contactIdArray: [String]) -> String {
+        var url = self.tcBaseURLString + ContactMethod.UserAuxiliaryInfo.rawValue;
+        
+        for x in 0..<contactIdArray.count {
+            let userId = contactIdArray[x]
+            if (x == 0) {
+                let string = "userIds[\(x)]=\(userId)"
+                url.append(string)
+            } else {
+                let string = "&userIds[\(x)]=\(userId)"
+                url.append(string)
+            }
+        }
+        
+        return url
+    }
 }
