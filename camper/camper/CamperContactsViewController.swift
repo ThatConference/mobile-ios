@@ -105,11 +105,6 @@ class CamperContactsViewController: BaseViewControllerNoCameraViewController {
 //            }
             
         }
-        //Saving data
-//        
-//        let params: [String: Dictionary<String, Int>] = ["requests": ["asfe-sdfgre-vdfv": Date().dateToInt()], "blocks": ["asfe-sdfgre-vdfv": Date().dateToInt()]]
-//        
-//        conditionRef.child(StateData.instance.currentUser.id).setValue(params)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

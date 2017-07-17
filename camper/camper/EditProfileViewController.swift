@@ -103,7 +103,7 @@ class EditProfileViewController: UIViewController {
                 switch (result) {
                 case .success():
                     self.stopIndicator()
-                    let alert = UIAlertController(title: "Sucessfully saved profile changes", message: "", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Successfully saved profile changes", message: "", preferredStyle: .alert)
                     let ok = UIAlertAction(title: "Ok", style: .default, handler: { (UIAlertAction) in
                         userAPI.getMainUser()
                         _ = self.navigationController?.popViewController(animated: true)
@@ -164,14 +164,6 @@ class EditProfileViewController: UIViewController {
                     return textfield.text!
                 } else {
                     let requestString = "https://"
-                    let urlString = requestString + textfield.text!
-                    return urlString
-                }
-            } else if (textfield == publicSlackHandle) {
-                if (textfield.text!.contains("@")) {
-                    return textfield.text!
-                } else {
-                    let requestString = "@"
                     let urlString = requestString + textfield.text!
                     return urlString
                 }

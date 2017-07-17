@@ -11,6 +11,7 @@ import UIKit
 class ProfileDetailsViewController: UIViewController {
     
     @IBOutlet weak var editAccountBarButton: UIBarButtonItem!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var firstNameLabel: UILabel!
@@ -54,8 +55,6 @@ class ProfileDetailsViewController: UIViewController {
     var contactInfo: UserAuxiliaryModel?
     var activityIndicator: UIActivityIndicatorView!
     
-    var covfefe = ""
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,6 +68,10 @@ class ProfileDetailsViewController: UIViewController {
         self.activityIndicator.center = self.view.center
         
         currentUserSettings(isCurrentUser: ISCURRENTUSER)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
         loadUI()
         // Do any additional setup after loading the view.
     }
@@ -76,11 +79,10 @@ class ProfileDetailsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.navigationController?.title = "Your Profile"
+        self.navigationController?.title = "YOUR PROFILE"
         
         currentUserSettings(isCurrentUser: ISCURRENTUSER)
         loadUI()
-        
     }
     
     // MARK: IBActions
@@ -94,27 +96,22 @@ class ProfileDetailsViewController: UIViewController {
         let contactAPI = ContactAPI()
         
         if let contact = selectedContact {
+            var commentText = ""
             if (sender.currentTitle == "Save Personal Comment") {
                 if (commentTextView.text == "Comment" || commentTextView.text == "") {
                     
                     // Save Comment here
-                    contactAPI.postContact(contactID: contact.id!, contact.memoString)
-                    DispatchQueue.main.async {
-                        self.covfefe = ""
-                    }
+                    commentText = ""
+                    contactAPI.postContact(contactID: contact.id!, commentText)
                 } else {
                     
                     // Save Comment here
-                    contactAPI.postContact(contactID: contact.id!, self.commentTextView.text)
-
-                    DispatchQueue.main.async {
-
-                    }
-                    self.covfefe = self.commentTextView.text
+                    commentText = self.commentTextView.text
+                    contactAPI.postContact(contactID: contact.id!, commentText)
                 }
                 
                 self.commentTextViewStackView.isHidden = true
-                self.checkComment()
+                self.checkComment(commentText)
             } else {
                 self.commentLabel.isHidden = true
                 self.commentTextViewStackView.isHidden = false
@@ -204,18 +201,6 @@ class ProfileDetailsViewController: UIViewController {
         }
     }
     
-    @IBAction func emailLabelPressed(_ sender: UITapGestureRecognizer) {
-        if let email = mainUser?.publicEmail {
-            let url = URL(string: "mailto:\(email)")
-            UIApplication.shared.openURL(url!)
-        }
-        
-        if let email = selectedContact?.publicEmail {
-            let url = URL(string: "mailto:\(email)")
-            UIApplication.shared.openURL(url!)
-        }
-    }
-    
     @IBAction func websiteLabelPressed(_ sender: UITapGestureRecognizer) {
         if let url = mainUser?.website {
             UIApplication.shared.openURL(URL(string: url)!)
@@ -283,13 +268,80 @@ class ProfileDetailsViewController: UIViewController {
     }
     
     func settingsButtonTapped(_ sender: UIBarButtonItem) {
-        let actionSheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
-        let block = UIAlertAction(title: "Block", style: .default) { (UIAlertAction) in
-            print("Block")
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let call = UIAlertAction(title: "Call Contact", style: .default) { (UIAlertAction) in
+            if let phone = self.selectedContact?.publicPhone {
+                if let url = URL(string: "tel://\(phone)") {
+                    UIApplication.shared.openURL(url)
+                }
+            }
         }
         
-        actionSheet.addAction(block)
-        present(actionSheet, animated: true, completion: nil)
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
+        
+        let deleteOK = UIAlertAction(title: "Ok", style: .default) { (UIAlertAction) in
+            if let shareId = self.selectedContact?.sharecontactId {
+                let contactAPI = ContactAPI()
+                contactAPI.deleteContact(shareContactId: shareId, completionHandler: { (result) in
+                    switch (result) {
+                    case .success():
+                        let alert = UIAlertController(title: "Contact has been deleted", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(ok)
+                        self.present(alert, animated: true, completion: nil)
+                        break
+                    case .failure(let error):
+                        print("Error: \(error)")
+                    }
+                })
+            }
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        let email = UIAlertAction(title: "Email Contact", style: .default) { (UIAlertAction) in
+            if let email = self.selectedContact?.publicEmail {
+                let url = URL(string: "mailto:\(email)")
+                UIApplication.shared.openURL(url!)
+            } else {
+                let alert = UIAlertController(title: "Contact has not set a public email yet", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(ok)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        
+        let delete = UIAlertAction(title: "Delete Contact", style: .default) { (UIAlertAction) in
+            let alert = UIAlertController(title: "Delete Contact?", message: "Are you sure you want to delete this contact?", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(deleteOK)
+            alert.addAction(cancel)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        
+        actionSheet.addAction(call)
+        actionSheet.addAction(email)
+        actionSheet.addAction(delete)
+        actionSheet.addAction(cancel)
+        
+        if let popoverController = actionSheet.popoverPresentationController {
+            popoverController.barButtonItem = sender
+        }
+        
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        
+        var contentInset:UIEdgeInsets = self.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height
+        self.scrollView.contentInset = contentInset
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        self.scrollView.contentInset = contentInset
     }
     
     func filterViews() {
@@ -478,23 +530,10 @@ class ProfileDetailsViewController: UIViewController {
         }
     }
     
-    func checkComment() {
+    func checkComment(_ commentText: String? = nil) {
         // User comment
-//        if let contact = selectedContact {
-//            if (contact.memo == "") {
-//                commentLabel.isHidden = true
-//                editCommentButton.isHidden = true
-//                addCommentButton.isHidden = false
-//            } else {
-//                commentLabel.text = commentTextView.text
-//                commentLabel.isHidden = false
-//                editCommentButton.isHidden = false
-//                addCommentButton.isHidden = true
-//                commentTextView.text = contact.memo
-//            }
-//        }
-        
-            if (covfefe == "") {
+        if let contact = selectedContact {
+            if (contact.memo == "" || contact.memo == nil) {
                 commentLabel.isHidden = true
                 editCommentButton.isHidden = true
                 addCommentButton.isHidden = false
@@ -503,8 +542,13 @@ class ProfileDetailsViewController: UIViewController {
                 commentLabel.isHidden = false
                 editCommentButton.isHidden = false
                 addCommentButton.isHidden = true
-                commentTextView.text = covfefe
+                if (commentText == nil) {
+                    commentTextView.text = contact.memo
+                } else {
+                    commentTextView.text = commentText
+                }
             }
+        }
     }
     
     func currentUserSettings(isCurrentUser: Bool) {
@@ -519,7 +563,6 @@ class ProfileDetailsViewController: UIViewController {
             stopIndicator()
         } else {
             
-            // Erase
             commentTextViewStackView.isHidden = true
             commentHeaderLabel.isHidden = false
             addCommentButton.isHidden = false

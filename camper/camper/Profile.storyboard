@@ -500,7 +500,7 @@
                 <navigationController storyboardIdentifier="ProfileNavigationController" title="EditProfile" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qM8-Zo-kn1" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="schedule" image="schedule" id="48z-oD-G22"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleAspectFit" translucent="NO" backIndicatorImage="back" id="uj1-dN-Sgv">
+                    <navigationBar key="navigationBar" contentMode="scaleAspectFit" misplaced="YES" translucent="NO" backIndicatorImage="back" id="uj1-dN-Sgv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <rect key="contentStretch" x="0.0" y="0.0" width="0.29999999999999999" height="0.29999999999999999"/>
@@ -875,13 +875,12 @@
                                                             </button>
                                                         </subviews>
                                                     </stackView>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2EI-yZ-Hk9">
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2EI-yZ-Hk9">
                                                         <rect key="frame" x="68" y="0.0" width="25" height="27"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="27" id="6fC-N3-Yig"/>
                                                             <constraint firstAttribute="width" constant="25" id="Zif-7J-v9M"/>
                                                         </constraints>
-                                                        <state key="normal" title="Button" image="camera"/>
                                                         <connections>
                                                             <action selector="editCommentButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="LuB-WP-rqa"/>
                                                         </connections>
@@ -975,6 +974,7 @@
                         <outlet property="profileImageView" destination="Ps4-NY-db5" id="9YP-pZ-zWy"/>
                         <outlet property="publicEmailLabel" destination="sYW-aF-ge5" id="4R4-N6-L0l"/>
                         <outlet property="publicPhoneLabel" destination="ZoA-YM-wi6" id="bZU-Xt-gXw"/>
+                        <outlet property="scrollView" destination="xza-OB-6ge" id="pAf-mc-hQd"/>
                         <outlet property="slackHandleLabel" destination="1mr-qy-QZ9" id="C6x-Ua-uYa"/>
                         <outlet property="slackHandleStackView" destination="EHk-Iv-XlD" id="vRA-MO-sBO"/>
                         <outlet property="socialButtonsUIView" destination="Rca-w0-Eah" id="Nfc-0W-PVE"/>
@@ -1003,7 +1003,6 @@
     </scenes>
     <resources>
         <image name="back" width="25" height="25"/>
-        <image name="camera" width="350" height="375"/>
         <image name="icon-facebook" width="40" height="40"/>
         <image name="icon-github" width="40" height="40"/>
         <image name="icon-google" width="40" height="40"/>

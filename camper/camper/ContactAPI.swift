@@ -265,7 +265,7 @@ class ContactAPI {
     // Get User Info
     
     func getUserInfo(contactIdArray: [String], completionHandler: @escaping (GetUserAuxInfo) -> Void) {
-        let url: URL = URL(string: getUserInfoURL(array: contactIdArray))!
+        let url: URL = URL(string: getUserInfoURL(contactIdArray: contactIdArray))!
         
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         

@@ -191,6 +191,10 @@ class Contact: NSObject, NSCoding {
         return _id
     }
     
+    var sharecontactId: Int! {
+        return _shareContactId
+    }
+    
     var firstName: String! {
         return _firstName
     }
