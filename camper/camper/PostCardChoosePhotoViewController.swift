@@ -243,35 +243,61 @@ class PostCardChoosePhotoViewController: UIViewController,
                                    filenamePortrait: "magicland-portrait")
         frames.append(frame4)
         
-        let frame9 = PostCardFrame(title: "Bear with Trees",
-                                   filenameLandscape: "bear-with-trees",
-                                   filenamePortrait: "bear-with-trees-portrait")
-        frames.append(frame9)
-        
-        let frame10 = PostCardFrame(title: "Bear Friend",
-                                   filenameLandscape: "bear",
-                                   filenamePortrait: "bear-portrait")
-        frames.append(frame10)
-        
-        let frame5 = PostCardFrame(title: "TC Bottom Dark",
-                                   filenameLandscape: "tc-bottom-dark",
-                                   filenamePortrait: "tc-bottom-dark-portrait")
+        let frame5 = PostCardFrame(title: "Branch",
+                                   filenameLandscape: "branch-landscape",
+                                   filenamePortrait: "branch-portrait")
         frames.append(frame5)
         
-        let frame6 = PostCardFrame(title: "TC Bottom Light",
-                                  filenameLandscape: "tc-bottom-light",
-                                  filenamePortrait: "tc-bottom-light-portrait")
+        let frame6 = PostCardFrame(title: "Drone",
+                                   filenameLandscape: "drone-landscape",
+                                   filenamePortrait: "drone-portrait")
         frames.append(frame6)
         
-        let frame7 = PostCardFrame(title: "TC Top Dark",
-                                  filenameLandscape: "tc-top-dark",
-                                  filenamePortrait: "tc-top-dark-portrait")
+        let frame7 = PostCardFrame(title: "Rabbit",
+                                   filenameLandscape: "rabbit-landscape",
+                                   filenamePortrait: "rabbit-portrait")
         frames.append(frame7)
         
-        let frame8 = PostCardFrame(title: "TC Top Light",
-                                  filenameLandscape: "tc-top-light",
-                                  filenamePortrait: "tc-top-light-portrait")
+        let frame8 = PostCardFrame(title: "Stream",
+                                   filenameLandscape: "stream-landscape",
+                                   filenamePortrait: "stream-portrait")
         frames.append(frame8)
+        
+        let frame9 = PostCardFrame(title: "TC Bottom Dark",
+                                   filenameLandscape: "tc-bottom-dark",
+                                   filenamePortrait: "tc-bottom-dark-portrait")
+        frames.append(frame9)
+        
+        let frame10 = PostCardFrame(title: "TC Bottom Light",
+                                   filenameLandscape: "tc-bottom-light",
+                                   filenamePortrait: "tc-bottom-light-portrait")
+        frames.append(frame10)
+        
+        let frame11 = PostCardFrame(title: "TC Top Dark",
+                                   filenameLandscape: "tc-top-dark",
+                                   filenamePortrait: "tc-top-dark-portrait")
+        frames.append(frame11)
+        
+        let frame12 = PostCardFrame(title: "TC Top Light",
+                                   filenameLandscape: "tc-top-light",
+                                   filenamePortrait: "tc-top-light-portrait")
+        frames.append(frame12)
+        
+        let frame13 = PostCardFrame(title: "Bear with Trees",
+                                   filenameLandscape: "bear-with-trees",
+                                   filenamePortrait: "bear-with-trees-portrait")
+        frames.append(frame13)
+        
+        let frame14 = PostCardFrame(title: "Bear Friend",
+                                   filenameLandscape: "bear-landscape",
+                                   filenamePortrait: "bear-portrait")
+        frames.append(frame14)
+        
+        let frame15 = PostCardFrame(title: "Big Bear Friend",
+                                    filenameLandscape: "big-bear-landscape",
+                                    filenamePortrait: "big-bear-portrait")
+        frames.append(frame15)
+
     }
     
     func setCamera() {

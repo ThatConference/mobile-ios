@@ -1,9 +1,11 @@
+import CoreLocation
 import UIKit
 
 class BaseViewController: UIViewController, AuthorizationFormDelegate {
     
     var activityIndicator: UIActivityIndicatorView!
     var alert: UIAlertController!
+    var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,8 @@ class BaseViewController: UIViewController, AuthorizationFormDelegate {
         cameraBtn.addTarget(self, action: #selector(self.moveToCamera), for:  UIControlEvents.touchUpInside)
         let item = UIBarButtonItem(customView: cameraBtn)
         self.navigationItem.rightBarButtonItem = item
+        
+        setUpSettings()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -36,6 +40,32 @@ class BaseViewController: UIViewController, AuthorizationFormDelegate {
     func dismissViewController(_ controller: UIViewController) {
         controller.dismiss(animated: true) { () -> Void in
             self.navigateToSchedule()
+        }
+    }
+    
+    func setUpSettings() {
+        locationManager = CLLocationManager()
+        
+        let status = CLLocationManager.authorizationStatus()
+        
+        if status == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        }
+        
+        if let user = PersistenceManager.loadUser(Path.User) {
+            if user.fullName == "Guest" {
+                Authentication.removeAuthToken()
+                
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.dirtyDataSchedule = true;
+                appDelegate.dirtyDataFavorites = true;
+            }
+        } else {
+            Authentication.removeAuthToken()
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.dirtyDataSchedule = true;
+            appDelegate.dirtyDataFavorites = true;
         }
     }
     

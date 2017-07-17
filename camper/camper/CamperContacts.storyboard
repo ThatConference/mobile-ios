@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5YS-G0-eeU">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="NeutraText-Book.otf">
+            <string>NeutrafaceText-Book</string>
+        </array>
+        <array key="NeutraText-BookAlt.otf">
+            <string>NeutrafaceText-BookAlt</string>
+        </array>
+        <array key="NeutraText-Demi.otf">
+            <string>NeutrafaceText-Demi</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Camper Contacts Nav-->
+        <scene sceneID="alz-Iu-BME">
+            <objects>
+                <navigationController title="Camper Contacts Nav" automaticallyAdjustsScrollViewInsets="NO" id="5YS-G0-eeU" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="open spaces" image="open-spaces" selectedImage="open-spaces" id="PKM-F6-SoB"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="0Qy-NS-HYd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.90396612880000005" green="0.83328729869999996" blue="0.69475156069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.37091678379999998" green="0.2713463008" blue="0.18597435949999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="22"/>
+                            <color key="textColor" red="0.90396612880000005" green="0.83328729869999996" blue="0.69475156069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="UE9-Z5-bDM" kind="relationship" relationship="rootViewController" id="bpO-KD-ylN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="guG-6A-56g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2534" y="-486"/>
+        </scene>
+        <!--Camper Contacts-->
+        <scene sceneID="IkE-d1-qRR">
+            <objects>
+                <viewController storyboardIdentifier="CamperContactsViewController" title="Camper Contacts" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UE9-Z5-bDM" customClass="CamperContactsViewController" customModule="That_Conference" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="U0v-KV-HSK"/>
+                        <viewControllerLayoutGuide type="bottom" id="MhB-ld-X5f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zSE-p0-7Jo">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hnV-Tj-itC">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CamperContactCell" rowHeight="125" id="CJV-Zp-0Tb" customClass="CamperContactTableViewCell" customModule="That_Conference" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="125"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CJV-Zp-0Tb" id="tfe-BT-CcN">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="124.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker" translatesAutoresizingMaskIntoConstraints="NO" id="fDZ-dy-9dn" customClass="CircleImageView" customModule="That_Conference" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="27" width="70" height="70"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="70" id="9sG-xk-oK5"/>
+                                                        <constraint firstAttribute="width" constant="70" id="Lzz-Bl-GWn"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFj-US-JIn">
+                                                    <rect key="frame" x="101" y="39" width="225" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="04r-J8-oPt"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2Vd-KX-Eyt">
+                                                    <rect key="frame" x="101" y="69" width="225" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="253" id="3ly-Lp-pP1"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="NeutrafaceText-BookAlt" family="Neutraface Text" pointSize="17"/>
+                                                    <color key="textColor" red="0.43581283092498779" green="0.44019779562950134" blue="0.43185979127883911" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="3ly-Lp-pP1"/>
+                                                        </mask>
+                                                    </variation>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N5R-Hg-Yah">
+                                                    <rect key="frame" x="346" y="47" width="21" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="U9d-IM-PNz"/>
+                                                        <constraint firstAttribute="width" constant="21" id="uIC-km-pLE"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="NeutrafaceText-Book" family="Neutraface Text" pointSize="35"/>
+                                                    <state key="normal" title="&gt;">
+                                                        <color key="titleColor" red="0.4358128309" green="0.4401977956" blue="0.43185979130000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2Vd-KX-Eyt" firstAttribute="trailing" secondItem="RFj-US-JIn" secondAttribute="trailing" id="3lD-sM-I5T"/>
+                                                <constraint firstItem="fDZ-dy-9dn" firstAttribute="top" secondItem="tfe-BT-CcN" secondAttribute="topMargin" constant="19" id="Bzv-L3-ASc"/>
+                                                <constraint firstItem="N5R-Hg-Yah" firstAttribute="leading" secondItem="2Vd-KX-Eyt" secondAttribute="trailing" constant="20" id="Zpe-w1-0RJ"/>
+                                                <constraint firstItem="fDZ-dy-9dn" firstAttribute="leading" secondItem="tfe-BT-CcN" secondAttribute="leadingMargin" constant="8" id="eHQ-VL-Tyh"/>
+                                                <constraint firstItem="RFj-US-JIn" firstAttribute="leading" secondItem="fDZ-dy-9dn" secondAttribute="trailing" constant="15" id="eQ5-5t-HIE"/>
+                                                <constraint firstItem="2Vd-KX-Eyt" firstAttribute="leading" secondItem="RFj-US-JIn" secondAttribute="leading" id="fEU-VZ-xDM"/>
+                                                <constraint firstItem="N5R-Hg-Yah" firstAttribute="centerY" secondItem="fDZ-dy-9dn" secondAttribute="centerY" id="geb-wq-8KP"/>
+                                                <constraint firstItem="RFj-US-JIn" firstAttribute="top" secondItem="tfe-BT-CcN" secondAttribute="topMargin" constant="31" id="hqK-8q-L7J"/>
+                                                <constraint firstItem="2Vd-KX-Eyt" firstAttribute="top" secondItem="RFj-US-JIn" secondAttribute="bottom" constant="10" id="mjo-mf-rmi"/>
+                                                <constraint firstItem="N5R-Hg-Yah" firstAttribute="trailing" secondItem="tfe-BT-CcN" secondAttribute="trailingMargin" id="tEL-JH-Ilh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="camperImageView" destination="fDZ-dy-9dn" id="zyI-fv-Upe"/>
+                                            <outlet property="camperNameLabel" destination="RFj-US-JIn" id="oRN-Mx-KmA"/>
+                                            <outlet property="companyLabel" destination="2Vd-KX-Eyt" id="sKk-Y8-sMi"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="UE9-Z5-bDM" id="Gct-i2-Spj"/>
+                                    <outlet property="delegate" destination="UE9-Z5-bDM" id="gx1-tH-Bmd"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="MhB-ld-X5f" firstAttribute="top" secondItem="hnV-Tj-itC" secondAttribute="bottom" id="KSw-mE-uKW"/>
+                            <constraint firstItem="hnV-Tj-itC" firstAttribute="leading" secondItem="zSE-p0-7Jo" secondAttribute="leading" id="MWb-LX-M3e"/>
+                            <constraint firstAttribute="trailing" secondItem="hnV-Tj-itC" secondAttribute="trailing" id="e4E-Zg-bMn"/>
+                            <constraint firstItem="hnV-Tj-itC" firstAttribute="top" secondItem="U0v-KV-HSK" secondAttribute="bottom" id="rLX-2n-3Sc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="CAMPER CONTACTS" id="dTg-cj-RRL">
+                        <barButtonItem key="leftBarButtonItem" image="hamburger" id="edM-jM-Pp8"/>
+                        <barButtonItem key="rightBarButtonItem" image="share" id="k1x-26-Kmt">
+                            <connections>
+                                <action selector="shareButtonPressed:" destination="UE9-Z5-bDM" id="vmd-lB-vtF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="menuButton" destination="edM-jM-Pp8" id="Ddf-fd-tj9"/>
+                        <outlet property="tableView" destination="hnV-Tj-itC" id="N3P-Ma-ftr"/>
+                        <segue destination="buc-So-ZEL" kind="show" identifier="toShareContact" id="xUF-h6-XpQ"/>
+                        <segue destination="kdz-jV-QAh" kind="show" identifier="toProfileDetails" id="yWD-CW-XWy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9JE-l1-m1O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3301.5999999999999" y="-486.20689655172418"/>
+        </scene>
+        <!--ShareContact-->
+        <scene sceneID="o7W-8d-nXH">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ShareContact" id="buc-So-ZEL" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dv5-pR-fHO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4085" y="-601"/>
+        </scene>
+        <!--ProfileNavigationController-->
+        <scene sceneID="0pB-Jv-sPw">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="ProfileNavigationController" storyboardName="Profile" referencedIdentifier="ProfileNavigationController" id="kdz-jV-QAh" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mG8-iG-MlI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3443" y="-53"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="hamburger" width="24" height="20"/>
+        <image name="open-spaces" width="35" height="35"/>
+        <image name="share" width="24" height="24"/>
+        <image name="speaker" width="66" height="75"/>
+    </resources>
+</document>

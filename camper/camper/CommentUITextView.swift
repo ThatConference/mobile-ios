@@ -29,7 +29,7 @@ class CommentUITextView: UITextView, UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if (text == "Comment") {
+        if (text == "Comment" || text == "") {
             self.textColor = UIColor.black
             text = ""
         }

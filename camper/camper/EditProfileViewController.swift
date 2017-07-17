@@ -92,7 +92,8 @@ class EditProfileViewController: UIViewController {
                             github: checkTextfieldValue(githubTextField),
                             pinterest: checkTextfieldValue(pinterestTextField),
                             instagram: checkTextfieldValue(instagramTextField),
-                            linkedIn: checkTextfieldValue(linkedinTextField)
+                            linkedIn: checkTextfieldValue(linkedinTextField),
+                            auxiliaryId: currentUser.auxiliaryId
             )
             
             print(user.parameter)
@@ -102,7 +103,7 @@ class EditProfileViewController: UIViewController {
                 switch (result) {
                 case .success():
                     self.stopIndicator()
-                    let alert = UIAlertController(title: "Sucessfully saved profile changes", message: "", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Successfully saved profile changes", message: "", preferredStyle: .alert)
                     let ok = UIAlertAction(title: "Ok", style: .default, handler: { (UIAlertAction) in
                         userAPI.getMainUser()
                         _ = self.navigationController?.popViewController(animated: true)
@@ -166,14 +167,6 @@ class EditProfileViewController: UIViewController {
                     let urlString = requestString + textfield.text!
                     return urlString
                 }
-            } else if (textfield == publicSlackHandle) {
-                if (textfield.text!.contains("@")) {
-                    return textfield.text!
-                } else {
-                    let requestString = "@"
-                    let urlString = requestString + textfield.text!
-                    return urlString
-                }
             } else {
                 return textfield.text!
             }
@@ -187,7 +180,6 @@ class EditProfileViewController: UIViewController {
             return textView.text!
         }
     }
-    
     
     func keyboardWillShow(notification: NSNotification) {
         //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
@@ -220,8 +212,42 @@ class EditProfileViewController: UIViewController {
 
 extension EditProfileViewController: UITextFieldDelegate {
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == stateTextField {
+            return false
+        }
+        
+        return true
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        if textField == stateTextField {
+            var stateValues: [String] = []
+            var stateDisplayValues: [String] = []
+            
+            for stateProvinces in StateData.instance.statesProvinces() {
+                stateValues.append(stateProvinces.abbreviation)
+                stateDisplayValues.append(stateProvinces.abbreviation)
+            }
+            
+            let statePicker = TextFieldPickerView()
+            statePicker.valuesArray = stateValues
+            statePicker.displayArray = stateDisplayValues
+            statePicker.onValueSelected = { (valueSelected:String) in
+                self.stateTextField.text = valueSelected
+                statePicker.selectedValue = valueSelected
+            }
+            
+            statePicker.selectDefault()
+            
+            self.stateTextField.inputView = statePicker
+            self.stateTextField.inputAccessoryView = statePicker.getToolbar(textField: self.stateTextField)
+        }
     }
 }

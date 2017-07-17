@@ -33,6 +33,7 @@ class User: NSObject, NSCoding {
         static let PublicEmail = "PublicEmail"
         static let PublicPhone = "PublicPhone"
         static let PublicThatSlackHandle = "PublicThatSlackHandle"
+        static let AuxiliaryId = "AuxiliaryId"
     }
     
     private var _id: String!
@@ -42,6 +43,7 @@ class User: NSObject, NSCoding {
     private var _firstName: String!
     private var _lastName: String!
     private var _email: String!
+    private var _auxiliaryId: UInt32!
     
     var publicEmail: String?
     
@@ -70,6 +72,7 @@ class User: NSObject, NSCoding {
         _firstName = "Guest"
         _lastName = ""
         _email = ""
+        _auxiliaryId = 0
     }
     
     init(dictionary: [String: AnyObject]) {
@@ -96,9 +99,10 @@ class User: NSObject, NSCoding {
         pinterest = dictionary[Keys.Pinterest] as? String
         instagram = dictionary[Keys.Instagram] as? String
         linkedIn = dictionary[Keys.LinkedIn] as? String
+        _auxiliaryId = dictionary[Keys.AuxiliaryId] as! UInt32
     }
     
-    init(id: String, headShot: String?, displayHeadShot: String?, firstName: String, lastName: String, email: String, publicEmail: String?, biography: String?, phone: String?, publicPhone: String?, publicThatSlackHandle: String?, city: String?, state: String?, company: String?, title: String?, website: String?, twitter: String?, facebook: String?, googlePlus: String?, github: String?, pinterest: String?, instagram: String?, linkedIn: String?) {
+    init(id: String, headShot: String?, displayHeadShot: String?, firstName: String, lastName: String, email: String, publicEmail: String?, biography: String?, phone: String?, publicPhone: String?, publicThatSlackHandle: String?, city: String?, state: String?, company: String?, title: String?, website: String?, twitter: String?, facebook: String?, googlePlus: String?, github: String?, pinterest: String?, instagram: String?, linkedIn: String?, auxiliaryId: UInt32) {
         self._id = id
         self._headShot = headShot
         self._displayHeadshot = displayHeadShot
@@ -122,6 +126,7 @@ class User: NSObject, NSCoding {
         self.pinterest = pinterest
         self.instagram = instagram
         self.linkedIn = linkedIn
+        self._auxiliaryId = auxiliaryId
     }
     
     func encode(with aCoder: NSCoder) {
@@ -149,6 +154,7 @@ class User: NSObject, NSCoding {
         aCoder.encode(self.pinterest, forKey: Keys.Pinterest)
         aCoder.encode(self.instagram, forKey: Keys.Instagram)
         aCoder.encode(self.linkedIn, forKey: Keys.LinkedIn)
+        aCoder.encode(self._auxiliaryId, forKey: Keys.AuxiliaryId)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -176,6 +182,7 @@ class User: NSObject, NSCoding {
         pinterest = aDecoder.decodeObject(forKey: Keys.Pinterest) as? String
         instagram = aDecoder.decodeObject(forKey: Keys.Instagram) as? String
         linkedIn = aDecoder.decodeObject(forKey: Keys.LinkedIn) as? String
+        _auxiliaryId = aDecoder.decodeObject(forKey: Keys.AuxiliaryId) as! UInt32
     }
     
     var id: String! {
@@ -275,6 +282,24 @@ class User: NSObject, NSCoding {
         return biography!
     }
     
+    var auxiliaryId: UInt32! {
+        return _auxiliaryId
+    }
+    
+    var int16AAuxId: UInt16! {
+        let a = UInt16(auxiliaryId >> 16)
+        return a
+    }
+    
+    var int16BAuxId: UInt16! {
+        let b = UInt16(auxiliaryId & 0x00ffff)
+        return b
+    }
+    
+    var auxIdString: String! {
+        return "\(int16BAuxId!)"
+    }
+    
     var parameter: [String: AnyObject] {
         
         let params: [String: AnyObject] = [
@@ -300,11 +325,10 @@ class User: NSObject, NSCoding {
             Keys.Github : github as AnyObject,
             Keys.Pinterest : pinterest as AnyObject,
             Keys.Instagram : instagram as AnyObject,
-            Keys.LinkedIn : linkedIn as AnyObject
+            Keys.LinkedIn : linkedIn as AnyObject,
+            Keys.AuxiliaryId : auxiliaryId as AnyObject
         ]
         
         return params
     }
-    
-    
 }

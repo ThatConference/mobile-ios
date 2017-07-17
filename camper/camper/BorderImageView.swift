@@ -13,7 +13,7 @@ class BorderImageView: UIImageView {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor(hex: 0xE7D4B1).cgColor
+        self.layer.borderColor = UIColor(hex: 0xF8F1E4).cgColor
     }
 
 }

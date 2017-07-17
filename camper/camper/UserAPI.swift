@@ -27,6 +27,7 @@ class UserAPI {
         
         request.httpMethod = "GET"
         if let token = Authentication.loadAuthToken() {
+            print(token.token)
             request.addValue("Bearer \(token.token!)", forHTTPHeaderField: "Authorization")
         }
         
@@ -44,6 +45,7 @@ class UserAPI {
             
             let json = try! JSONSerialization.jsonObject(with: data, options: [])
             let user = User(dictionary: json as! [String: AnyObject])
+            print(user.id)
             PersistenceManager.saveUser(user, path: Path.User)
             StateData.instance.currentUser = user
         }
@@ -58,7 +60,6 @@ class UserAPI {
     }
     
     func postUser(params: [String: AnyObject], completionHandler: @escaping (PutUserResult) -> Void) {
-
         
         let jsonData = try? JSONSerialization.data(withJSONObject: params)
         

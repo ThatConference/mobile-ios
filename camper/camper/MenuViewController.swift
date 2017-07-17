@@ -14,9 +14,10 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         if let user = PersistenceManager.loadUser(Path.User) {
             StateData.instance.currentUser = user
             updateUI()
@@ -34,12 +35,19 @@ class MenuViewController: UIViewController {
             ISCURRENTUSER = true
             performSegue(withIdentifier: "toProfileDetails", sender: self)
         } else {
-            performSegue(withIdentifier: "show_login", sender: self)
-        }
+            
+            let alert = UIAlertController(title: "Log In Needed", message: "", preferredStyle: UIAlertControllerStyle.alert)
+            let ok = UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
+                self.performSegue(withIdentifier: "show_login", sender: self)
+            })
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            present(alert, animated: true, completion: nil)        }
     }
     
     @IBAction func shareContactButtonPressed(_ sender: Any) {
-        
+        checkIfSignedIn("toShareContact")
     }
     
     @IBAction func unwindToMainVC(segue:UIStoryboardSegue) { }
@@ -53,11 +61,35 @@ class MenuViewController: UIViewController {
         }
     }
     
+    func checkIfSignedIn(_ segueIdentifier: String) {
+        if (Authentication.isLoggedIn()) {
+            
+            performSegue(withIdentifier: segueIdentifier, sender: self)
+        } else {
+            
+            let alert = UIAlertController(title: "Log In Needed", message: "", preferredStyle: UIAlertControllerStyle.alert)
+            let ok = UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
+                self.performSegue(withIdentifier: "show_login", sender: self)
+            })
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? FavoritesViewController {
             if segue.identifier == "favoriteSegue" {
                 print("Prepare for segue")
                 destination.store = StateData.instance.sessionStore
+            }
+        }
+        
+        if let destination = segue.destination as? UINavigationController {
+            if (segue.identifier == "toProfileDetails") {
+                let vc = destination.viewControllers.first as? ProfileDetailsViewController
+                vc?.mainUser = StateData.instance.currentUser
             }
         }
     }

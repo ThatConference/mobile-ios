@@ -12,8 +12,7 @@ class MenuTableViewController: UITableViewController {
     @IBOutlet weak var logOffImage: UIImageView!
     @IBOutlet weak var logOffLabel: UILabel!
     @IBOutlet weak var logOffCell: UITableViewCell!
-    var loggedIn = false
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
@@ -41,11 +40,23 @@ class MenuTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Favorites
+        if indexPath.row == 3 {
+            checkIfSignedIn("toFavorites")
+        }
+        
+        if indexPath.row == 4 {
+            checkIfSignedIn("toCamperContacts")
+        }
+        
+        // Log in/Log Out
         if indexPath.row == 9 {
             if (Authentication.isLoggedIn()) {
                 Authentication.removeAuthToken()
                 setDirtyData()
                 _ = PersistenceManager.deleteDailySchedule(Path.Favorites)
+                _ = PersistenceManager.deleteContacts(Path.CamperContacts)
                 
                 PersistenceManager.saveUser(User(), path: Path.User)
                 StateData.instance.currentUser = User()
@@ -61,6 +72,23 @@ class MenuTableViewController: UITableViewController {
             }
             
             setSignInButton()
+        }
+    }
+    
+    func checkIfSignedIn(_ segueIdentifier: String) {
+        if (Authentication.isLoggedIn()) {
+            
+            performSegue(withIdentifier: segueIdentifier, sender: self)
+        } else {
+            
+            let alert = UIAlertController(title: "Log In Needed", message: "", preferredStyle: UIAlertControllerStyle.alert)
+            let ok = UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
+                self.performSegue(withIdentifier: "show_login", sender: self)
+            })
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            present(alert, animated: true, completion: nil)
         }
     }
 }

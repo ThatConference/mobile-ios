@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Edit Profile-->
+        <!--EDIT PROFILE-->
         <scene sceneID="VAJ-IG-dtE">
             <objects>
                 <viewController storyboardIdentifier="EditProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UWA-Wa-0Xj" customClass="EditProfileViewController" customModule="That_Conference" customModuleProvider="target" sceneMemberID="viewController">
@@ -461,7 +461,7 @@
                             <constraint firstItem="v9I-a5-iYp" firstAttribute="leading" secondItem="HVP-B1-efe" secondAttribute="leading" id="flO-V5-cMk"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Edit Profile" id="pHZ-1J-DAR">
+                    <navigationItem key="navigationItem" title="EDIT PROFILE" id="pHZ-1J-DAR">
                         <barButtonItem key="leftBarButtonItem" image="back" id="cVR-bw-vsj">
                             <connections>
                                 <action selector="backButtonPressed:" destination="UWA-Wa-0Xj" id="vA6-8Z-f4I"/>
@@ -497,7 +497,7 @@
         <!--EditProfile-->
         <scene sceneID="m4b-OL-hlw">
             <objects>
-                <navigationController storyboardIdentifier="ProfileNavigationControlelr" title="EditProfile" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qM8-Zo-kn1" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ProfileNavigationController" title="EditProfile" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qM8-Zo-kn1" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="schedule" image="schedule" id="48z-oD-G22"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleAspectFit" misplaced="YES" translucent="NO" backIndicatorImage="back" id="uj1-dN-Sgv">
@@ -518,9 +518,9 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xq1-Dz-UNo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-398" y="73"/>
+            <point key="canvasLocation" x="-382" y="73"/>
         </scene>
-        <!--Your Profile-->
+        <!--YOUR PROFILE-->
         <scene sceneID="M0S-hq-v12">
             <objects>
                 <viewController storyboardIdentifier="ProfileDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tb5-Os-ct1" customClass="ProfileDetailsViewController" customModule="That_Conference" customModuleProvider="target" sceneMemberID="viewController">
@@ -541,7 +541,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ek-r8-CcD" customClass="ProfileDetailUIView" customModule="That_Conference" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker" translatesAutoresizingMaskIntoConstraints="NO" id="Ps4-NY-db5" customClass="CircleImageView" customModule="That_Conference" customModuleProvider="target">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="Ps4-NY-db5" customClass="CircleImageView" customModule="That_Conference" customModuleProvider="target">
                                                         <rect key="frame" x="18" y="25" width="140" height="140"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="140" id="1hs-4G-INv"/>
@@ -614,7 +614,7 @@
                                                                                     <constraint firstAttribute="width" constant="65" id="AcO-QI-JFC"/>
                                                                                     <constraint firstAttribute="height" constant="65" id="fwk-CN-yWi"/>
                                                                                 </constraints>
-                                                                                <state key="normal" image="twitter"/>
+                                                                                <state key="normal" image="icon-twitter"/>
                                                                                 <connections>
                                                                                     <action selector="twitterButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="GEw-qF-0ta"/>
                                                                                 </connections>
@@ -625,7 +625,7 @@
                                                                                     <constraint firstAttribute="width" constant="65" id="Xox-0S-BdY"/>
                                                                                     <constraint firstAttribute="height" constant="65" id="ajm-SS-hzh"/>
                                                                                 </constraints>
-                                                                                <state key="normal" image="facebook"/>
+                                                                                <state key="normal" image="icon-facebook"/>
                                                                                 <connections>
                                                                                     <action selector="facebookButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="4Rd-yL-Gqh"/>
                                                                                 </connections>
@@ -636,7 +636,7 @@
                                                                                     <constraint firstAttribute="height" constant="65" id="8ak-81-jbQ"/>
                                                                                     <constraint firstAttribute="width" constant="65" id="sAp-ut-z09"/>
                                                                                 </constraints>
-                                                                                <state key="normal" image="google"/>
+                                                                                <state key="normal" image="icon-google"/>
                                                                                 <connections>
                                                                                     <action selector="googleButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="Iia-tC-XvZ"/>
                                                                                 </connections>
@@ -647,7 +647,7 @@
                                                                                     <constraint firstAttribute="height" constant="65" id="liI-f7-Rrn"/>
                                                                                     <constraint firstAttribute="width" constant="65" id="roC-BV-KzW"/>
                                                                                 </constraints>
-                                                                                <state key="normal" image="github"/>
+                                                                                <state key="normal" image="icon-github"/>
                                                                                 <connections>
                                                                                     <action selector="githubButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="w6n-F7-jP6"/>
                                                                                 </connections>
@@ -658,7 +658,7 @@
                                                                                     <constraint firstAttribute="width" constant="65" id="Dib-XE-CG7"/>
                                                                                     <constraint firstAttribute="height" constant="65" id="LQC-Xv-cfr"/>
                                                                                 </constraints>
-                                                                                <state key="normal" image="twitter"/>
+                                                                                <state key="normal" image="icon-pinterest"/>
                                                                                 <connections>
                                                                                     <action selector="pinterestButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="Rvg-k7-K4n"/>
                                                                                 </connections>
@@ -669,7 +669,7 @@
                                                                                     <constraint firstAttribute="width" constant="65" id="SPC-t2-tO0"/>
                                                                                     <constraint firstAttribute="height" constant="65" id="WMJ-hL-EMJ"/>
                                                                                 </constraints>
-                                                                                <state key="normal" image="twitter"/>
+                                                                                <state key="normal" image="icon-instagram"/>
                                                                                 <connections>
                                                                                     <action selector="instagramButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="kpb-ga-tu0"/>
                                                                                 </connections>
@@ -680,7 +680,7 @@
                                                                                     <constraint firstAttribute="width" constant="65" id="t7W-pJ-jZN"/>
                                                                                     <constraint firstAttribute="height" constant="65" id="tfu-P5-hvB"/>
                                                                                 </constraints>
-                                                                                <state key="normal" image="twitter"/>
+                                                                                <state key="normal" image="icon-linkedin"/>
                                                                                 <connections>
                                                                                     <action selector="linkedInButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="SdW-Mz-ENt"/>
                                                                                 </connections>
@@ -875,13 +875,12 @@
                                                             </button>
                                                         </subviews>
                                                     </stackView>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2EI-yZ-Hk9">
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2EI-yZ-Hk9">
                                                         <rect key="frame" x="68" y="0.0" width="25" height="27"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="27" id="6fC-N3-Yig"/>
                                                             <constraint firstAttribute="width" constant="25" id="Zif-7J-v9M"/>
                                                         </constraints>
-                                                        <state key="normal" title="Button" image="camera"/>
                                                         <connections>
                                                             <action selector="editCommentButtonPressed:" destination="tb5-Os-ct1" eventType="touchUpInside" id="LuB-WP-rqa"/>
                                                         </connections>
@@ -939,7 +938,7 @@
                             <constraint firstAttribute="trailing" secondItem="xza-OB-6ge" secondAttribute="trailing" id="hh4-vZ-AmZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Your Profile" id="4oD-Fd-MhL">
+                    <navigationItem key="navigationItem" title="YOUR PROFILE" id="4oD-Fd-MhL">
                         <barButtonItem key="leftBarButtonItem" image="back" id="YhH-rs-Na9">
                             <connections>
                                 <segue destination="d2m-ZR-sip" kind="unwind" unwindAction="unwindToMainVCWithSegue:" id="hy0-NB-8OU"/>
@@ -961,6 +960,7 @@
                         <outlet property="commentTextView" destination="bAZ-PV-tpH" id="W9T-Vw-Zxo"/>
                         <outlet property="commentTextViewStackView" destination="al0-xY-AtT" id="qa5-vj-VgC"/>
                         <outlet property="companyLabel" destination="02D-eH-1m9" id="VoX-d8-OMX"/>
+                        <outlet property="editAccountBarButton" destination="mZz-sR-xv6" id="wAl-KM-uBB"/>
                         <outlet property="editCommentButton" destination="2EI-yZ-Hk9" id="68V-4N-dQC"/>
                         <outlet property="facebookButton" destination="G0I-Du-50O" id="C6f-d9-bgS"/>
                         <outlet property="firstNameLabel" destination="Vsa-qU-KFf" id="Qm0-hS-xVM"/>
@@ -974,6 +974,7 @@
                         <outlet property="profileImageView" destination="Ps4-NY-db5" id="9YP-pZ-zWy"/>
                         <outlet property="publicEmailLabel" destination="sYW-aF-ge5" id="4R4-N6-L0l"/>
                         <outlet property="publicPhoneLabel" destination="ZoA-YM-wi6" id="bZU-Xt-gXw"/>
+                        <outlet property="scrollView" destination="xza-OB-6ge" id="pAf-mc-hQd"/>
                         <outlet property="slackHandleLabel" destination="1mr-qy-QZ9" id="C6x-Ua-uYa"/>
                         <outlet property="slackHandleStackView" destination="EHk-Iv-XlD" id="vRA-MO-sBO"/>
                         <outlet property="socialButtonsUIView" destination="Rca-w0-Eah" id="Nfc-0W-PVE"/>
@@ -1002,12 +1003,14 @@
     </scenes>
     <resources>
         <image name="back" width="25" height="25"/>
-        <image name="camera" width="350" height="375"/>
-        <image name="facebook" width="108" height="108"/>
-        <image name="github" width="109" height="108"/>
-        <image name="google" width="108" height="108"/>
+        <image name="icon-facebook" width="40" height="40"/>
+        <image name="icon-github" width="40" height="40"/>
+        <image name="icon-google" width="40" height="40"/>
+        <image name="icon-instagram" width="40" height="40"/>
+        <image name="icon-linkedin" width="40" height="40"/>
+        <image name="icon-pinterest" width="40" height="40"/>
+        <image name="icon-twitter" width="40" height="40"/>
+        <image name="profile" width="1000" height="1000"/>
         <image name="schedule" width="27" height="28"/>
-        <image name="speaker" width="66" height="75"/>
-        <image name="twitter" width="109" height="108"/>
     </resources>
 </document>
