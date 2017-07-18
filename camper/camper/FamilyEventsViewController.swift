@@ -88,6 +88,7 @@ class FamilyEventsViewController : TimeSlotRootViewController {
     // MARK: Data
     override func loadData() {
         self.syncOfflineFavorites()
+        
         if let sessionStore = StateData.instance.sessionStore {
             self.dateLabel.text = "Loading"
             self.activityIndicator.startAnimating()
@@ -100,9 +101,9 @@ class FamilyEventsViewController : TimeSlotRootViewController {
                 (results) -> Void in
                 
                 switch results {
-                case .success(let schedules):
+                case .success(let values):
                     self.setData(false)
-                    self.dailySchedules = self.filterEvents(schedules)
+                    self.dailySchedules = self.filterEvents(values)
                     self.displayData()
                     break
                 case .failure(let error):
@@ -141,6 +142,7 @@ class FamilyEventsViewController : TimeSlotRootViewController {
                                 dateString = self.getDate(date)
                             }
                         }
+                        
                         if array.isEmpty {
                             convertDict[dateString]?.timeSlots.remove(at: i)
                         } else {
@@ -148,6 +150,12 @@ class FamilyEventsViewController : TimeSlotRootViewController {
                         }
                     }
                 }
+            }
+        }
+        
+        for data in convertDict.values {
+            if data.timeSlots.isEmpty {
+                convertDict[self.getDate(data.date)] = nil
             }
         }
         
@@ -209,6 +217,7 @@ class FamilyEventsViewController : TimeSlotRootViewController {
     
     fileprivate func setPageState(_ currentDay: String!) {
         let sortedDates = Array(self.dailySchedules.keys).sorted()
+        
         if sortedDates.count > 0 {
             if currentDay == nil || sortedDates[0] == currentDay {
                 self.currentDay = sortedDates[0]
