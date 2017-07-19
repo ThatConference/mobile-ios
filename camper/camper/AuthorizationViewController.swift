@@ -80,7 +80,7 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
     }
     
     @IBAction func googlePressed(_ sender: AnyObject) {
-        googleLoginOAuth("Google")
+        googleLoginOAuth()
     }
     
     @IBAction func microsoftPressed(_ sender: AnyObject) {
@@ -134,8 +134,12 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
         }
     }
     
-    func googleLoginOAuth(_ provider: String) {
-         print("Logging in with:" + provider)
+    func googleLoginOAuth() {
+        print("Logging in with: Google")
+        
+        UIApplication.shared.openURL(URL(string: "https://accounts.google.com/")!)
+        
+        
     }
 
     

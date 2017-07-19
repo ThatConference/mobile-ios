@@ -104,12 +104,12 @@ class ProfileDetailsViewController: UIViewController {
                     
                     // Save Comment here
                     commentText = ""
-                    contactAPI.postContact(contactID: contact.id!, commentText)
+                    contactAPI.putContact(sharedContactId: contact.sharecontactId!, commentText)
                 } else {
                     
                     // Save Comment here
                     commentText = self.commentTextView.text
-                    contactAPI.postContact(contactID: contact.id!, commentText)
+                    contactAPI.putContact(sharedContactId: contact.sharecontactId!, commentText)
                 }
                 
                 self.commentTextViewStackView.isHidden = true
