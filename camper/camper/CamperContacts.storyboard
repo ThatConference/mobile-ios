@@ -26,7 +26,7 @@
                 <navigationController title="Camper Contacts Nav" automaticallyAdjustsScrollViewInsets="NO" id="5YS-G0-eeU" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="open spaces" image="open-spaces" selectedImage="open-spaces" id="PKM-F6-SoB"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="0Qy-NS-HYd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="0Qy-NS-HYd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.90396612880000005" green="0.83328729869999996" blue="0.69475156069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -65,7 +65,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="125"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CJV-Zp-0Tb" id="tfe-BT-CcN">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="124.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker" translatesAutoresizingMaskIntoConstraints="NO" id="fDZ-dy-9dn" customClass="CircleImageView" customModule="That_Conference" customModuleProvider="target">

@@ -219,7 +219,7 @@ class ProfileDetailsViewController: UIViewController {
         if let user = mainUser {
             self.navigationController?.title = "YOUR PROFILE"
             if let headshot = user.headShot {
-                profileImageView.loadImageURL(url: URL(string: headshot), cache: IMAGE_CACHE)
+                profileImageView.loadImageURL(url: URL(string: headshot))
             } else {
                 profileImageView.image = UIImage(named: "speaker")
             }
@@ -240,7 +240,7 @@ class ProfileDetailsViewController: UIViewController {
             self.navigationController?.title = "CAMPER PROFILE"
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "details_icon"), style: .plain, target: self, action: #selector(settingsButtonTapped(_:)))
             if let headshot = contact.headShot {
-                profileImageView.loadImageURL(url: URL(string: headshot), cache: IMAGE_CACHE)
+                profileImageView.loadImageURL(url: URL(string: headshot))
             } else {
                 profileImageView.image = UIImage(named: "speaker")
             }
@@ -288,11 +288,15 @@ class ProfileDetailsViewController: UIViewController {
                         break
                     case .failure(let error):
                         self.stopIndicator()
+                        let alert = UIAlertController(title: "Unable to Delete Contact", message: "Please try again", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(exitOK)
+                        self.present(alert, animated: true, completion: nil)
                         print("Error: \(error)")
                     }
                 })
             }
         }
+        
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         let email = UIAlertAction(title: "Email Contact", style: .default) { (UIAlertAction) in
@@ -312,7 +316,6 @@ class ProfileDetailsViewController: UIViewController {
             alert.addAction(cancel)
             self.present(alert, animated: true, completion: nil)
         }
-        
         
         actionSheet.addAction(call)
         actionSheet.addAction(email)

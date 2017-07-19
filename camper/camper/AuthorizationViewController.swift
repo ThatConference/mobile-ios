@@ -80,7 +80,7 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
     }
     
     @IBAction func googlePressed(_ sender: AnyObject) {
-        loginOAuth("Google")
+        googleLoginOAuth("Google")
     }
     
     @IBAction func microsoftPressed(_ sender: AnyObject) {
@@ -133,6 +133,11 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
             }
         }
     }
+    
+    func googleLoginOAuth(_ provider: String) {
+         print("Logging in with:" + provider)
+    }
+
     
     func setDirtyData() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate

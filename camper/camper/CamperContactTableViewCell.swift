@@ -23,7 +23,7 @@ class CamperContactTableViewCell: UITableViewCell {
     
     func setUpCell(contact: Contact) {
         self.contact = contact
-        camperImageView.loadImageURL(url: URL(string: contact.headShot ?? ""), cache: IMAGE_CACHE)
+        camperImageView.loadImageURL(url: URL(string: contact.headShot ?? ""))
         camperNameLabel.text = contact.fullName
         companyLabel.text = contact.companyString
     }

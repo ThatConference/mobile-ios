@@ -135,6 +135,8 @@ class ShareContactViewController: BaseViewControllerNoCameraViewController {
                     }
                     break
                 case .failure(let error):
+                    
+                    self.simpleAlert(title: "Unable to Send Request(s)", body: "Please try again")
                     print("Error: \(error)")
                     break
                 }
@@ -332,6 +334,7 @@ extension ShareContactViewController: CLLocationManagerDelegate {
     }
     
     func checkDistance(distance: CLProximity, major: NSNumber) {
+        
         UIView.animate(withDuration: 0.8) {
             switch distance {
             case .unknown:
