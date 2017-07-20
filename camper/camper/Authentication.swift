@@ -29,6 +29,27 @@ class Authentication {
         return ThatConferenceAPI.externalLoginsFromJSONData(jsonData)
     }
     
+    func fetchGoogleLogins(completion: @escaping (ExternalLoginResult) -> Void) {
+        let url = ThatConferenceAPI.googleLoginsURL()
+        let request = URLRequest(url: url as URL)
+        let task = ThatConferenceAPI.nsurlSession.dataTask(with: request, completionHandler: {
+            (data, response, error) -> Void in
+            
+            let result = self.processGoogleLoginsRequest(data: data, error: error as NSError?)
+            completion(result)
+        })
+        task.resume()
+    }
+    
+    func processGoogleLoginsRequest(data: Data?, error: NSError?) -> ExternalLoginResult {
+        guard let jsonData = data
+            else {
+                return .failure(error!)
+        }
+        
+        return ThatConferenceAPI.externalLoginsFromJSONData(jsonData)
+    }
+    
     static let AuthTokenLocation = "TCAuthToken"
     static let key_Token = "token"
     static let key_Expiration = "expires"

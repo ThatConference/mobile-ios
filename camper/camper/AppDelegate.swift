@@ -35,4 +35,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        print("url \(url)")
+        print("url host :\(url.host!)")
+        print("url path :\(url.path)")
+        
+        let urlPath : String = url.path as String!
+    
+        if(urlPath == "*/mobileloginredirect") {
+            print("aloha")
+        }
+        
+        if let sourceApplication = options[.sourceApplication] {
+            if (String(describing: sourceApplication) == "com.thatconference.mobile.ios") {
+                print("Aloha")
+//                NotificationCenter.default.post(name: Notification.Name("CallbackNotification"), object: url)
+                return true
+            }
+        }
+        
+        return false
+    }
 }

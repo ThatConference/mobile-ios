@@ -1,6 +1,7 @@
 import UIKit
 import Fabric
 import Crashlytics
+import SafariServices
 
 protocol AuthorizationFormDelegate: class {
     func dismissViewController(_ controller: UIViewController)
@@ -80,7 +81,8 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
     }
     
     @IBAction func googlePressed(_ sender: AnyObject) {
-        googleLoginOAuth()
+        googleLoginOAuth("Google")
+//        NotificationCenter.default.addObserver(self, selector: #selector(safariLogin(_:)), name: Notification.Name("CallbackNotification"), object: nil)
     }
     
     @IBAction func microsoftPressed(_ sender: AnyObject) {
@@ -124,7 +126,6 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
                             self.webContainer.isHidden = false
                             self.embeddedViewController!.openOAuthDestination(url, provider: provider)
                         }
-                        
                         break
                     }
                 }
@@ -134,10 +135,35 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
         }
     }
     
-    func googleLoginOAuth() {
+    func googleLoginOAuth(_ provider: String) {
         print("Logging in with: Google")
         
-        UIApplication.shared.openURL(URL(string: "https://accounts.google.com/")!)
+        let authentication = Authentication()
+        authentication.fetchGoogleLogins() {
+            (externalLoginResult) -> Void in
+            
+            switch externalLoginResult {
+            case .success(let externalLogins):
+                print("External Logins Retrieved. \(externalLogins.count)")
+                var url: URL!
+                for externalLogin in externalLogins {
+                    if (externalLogin.name == provider) {
+                        url = URL(string: ThatConferenceAPI.baseURLString + externalLogin.url!)
+                        print("URL: \(url)")
+                        
+                        DispatchQueue.main.async {
+                            let vc = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+                            vc.delegate = self
+                            self.present(vc, animated: true)
+                        }
+                        
+                        break
+                    }
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
         
         
     }
@@ -214,5 +240,21 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
         DispatchQueue.main.async {
             self.generalError.text = errorMessage
         }
+    }
+}
+
+
+extension AuthorizationViewController: SFSafariViewControllerDelegate {
+    func safariViewController(_ controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
+        print(didLoadSuccessfully)
+    }
+    
+    func safariViewController(_ controller: SFSafariViewController, activityItemsFor URL: URL, title: String?) -> [UIActivity] {
+        
+        return []
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("CallbackNotification"), object: nil)
     }
 }

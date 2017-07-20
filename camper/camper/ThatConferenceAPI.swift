@@ -44,6 +44,7 @@ class ThatConferenceAPI {
     
     static let baseURLString = "https://www.thatconference.com"
     static let baseResourceURLString = "https://thatconference.blob.core.windows.net"
+    static let stagingURLString = "https://thatconference2014-staging.azurewebsites.net"
     
     fileprivate static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -75,6 +76,10 @@ class ThatConferenceAPI {
     }
     
     class func externalLoginsURL() -> URL {
+        return thatConferenceURL(.ExternalLogins, parameters: ["returnUrl":"/", "generateState": "true"])
+    }
+    
+    class func googleLoginsURL() -> URL {
         return thatConferenceURL(.ExternalLogins, parameters: ["returnUrl":"/", "generateState": "true"])
     }
     
