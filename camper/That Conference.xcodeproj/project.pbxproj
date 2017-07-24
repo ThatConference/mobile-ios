@@ -145,6 +145,7 @@
 		7BE1B5461EAA6D1C0071B3D2 /* FamilyEvents.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BE1B5451EAA6D1C0071B3D2 /* FamilyEvents.storyboard */; };
 		7BF626041EFD7FC000D75C50 /* SocialUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF626031EFD7FC000D75C50 /* SocialUIButton.swift */; };
 		7BF626061EFD984800D75C50 /* CommentUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF626051EFD984800D75C50 /* CommentUITextView.swift */; };
+		7BF951941F26390800410A3D /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF951931F26390800410A3D /* LoginAPI.swift */; };
 		8100BB730DD7BD782BE97450 /* Pods_That_Conference.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0B5257ACD92AA9CC1AFA77 /* Pods_That_Conference.framework */; };
 /* End PBXBuildFile section */
 
@@ -293,6 +294,7 @@
 		7BE1B5451EAA6D1C0071B3D2 /* FamilyEvents.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FamilyEvents.storyboard; sourceTree = "<group>"; };
 		7BF626031EFD7FC000D75C50 /* SocialUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialUIButton.swift; sourceTree = "<group>"; };
 		7BF626051EFD984800D75C50 /* CommentUITextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentUITextView.swift; sourceTree = "<group>"; };
+		7BF951931F26390800410A3D /* LoginAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAPI.swift; sourceTree = "<group>"; };
 		A815631E4D1E81BC22968403 /* Pods-That Conference.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-That Conference.release.xcconfig"; path = "Pods/Target Support Files/Pods-That Conference/Pods-That Conference.release.xcconfig"; sourceTree = "<group>"; };
 		E98E5B17ECF006FB52EFAA4B /* Pods-That Conference.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-That Conference.debug.xcconfig"; path = "Pods/Target Support Files/Pods-That Conference/Pods-That Conference.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -436,6 +438,7 @@
 				31CFCD831C8B70ED00DB2AB2 /* SessionStore.swift */,
 				7B3C38381E955E8100FEA4A5 /* StateData.swift */,
 				7BAF21F81F0AB06500148A57 /* ContactAPI.swift */,
+				7BF951931F26390800410A3D /* LoginAPI.swift */,
 				7BB028B91EF1C6490075197A /* SpeakerAPI.swift */,
 				31CFCD7B1C8A6C7200DB2AB2 /* ThatConferenceAPI.swift */,
 				7B00F7011EF9639400E252DC /* UserAPI.swift */,
@@ -888,6 +891,7 @@
 				312A942A1C85390B00AE938B /* ScheduleViewController.swift in Sources */,
 				7B208D371F17CEC600CC92AD /* LoadingUIView.swift in Sources */,
 				7B7F81701F1519BB00460B98 /* StatesProvincesModel.swift in Sources */,
+				7BF951941F26390800410A3D /* LoginAPI.swift in Sources */,
 				312A94281C85383200AE938B /* AuthorizationViewController.swift in Sources */,
 				7B1EDD7D1EF867AD00722B9A /* User.swift in Sources */,
 				7BF626061EFD984800D75C50 /* CommentUITextView.swift in Sources */,

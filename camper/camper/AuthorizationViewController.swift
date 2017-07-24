@@ -111,7 +111,7 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
         print("Logging in with:" + provider)
         
         let authentication = Authentication()
-        authentication.fetchExternalLogins() {
+        authentication.fetchGoogleLogins() {
             (externalLoginResult) -> Void in
             
             switch externalLoginResult {
@@ -147,14 +147,21 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
                 print("External Logins Retrieved. \(externalLogins.count)")
                 var url: URL!
                 for externalLogin in externalLogins {
+                    
                     if (externalLogin.name == provider) {
-                        url = URL(string: ThatConferenceAPI.baseURLString + externalLogin.url!)
+                        let urlString = ThatConferenceAPI.stagingURLString + externalLogin.url!
+//                        let customUrlString = urlString.replacingOccurrences(of: "https", with: "thatconference%3A%2F%2Fhttps")
+                        
+                        url = URL(string: urlString)
                         print("URL: \(url)")
                         
                         DispatchQueue.main.async {
-                            let vc = SFSafariViewController(url: url, entersReaderIfAvailable: true)
-                            vc.delegate = self
-                            self.present(vc, animated: true)
+                         
+                            UIApplication.shared.openURL(url)
+                            
+//                            let vc = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+//                            vc.delegate = self
+//                            self.present(vc, animated: true)
                         }
                         
                         break
@@ -165,9 +172,7 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
             }
         }
         
-        
     }
-
     
     func setDirtyData() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -243,18 +248,19 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
     }
 }
 
-
 extension AuthorizationViewController: SFSafariViewControllerDelegate {
     func safariViewController(_ controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
+//        controller.dismiss(animated: true, completion: nil)
         print(didLoadSuccessfully)
     }
     
     func safariViewController(_ controller: SFSafariViewController, activityItemsFor URL: URL, title: String?) -> [UIActivity] {
-        
         return []
     }
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        print("okay")
         NotificationCenter.default.removeObserver(self, name: Notification.Name("CallbackNotification"), object: nil)
+        //  Check if save token is not nil, segue from here to main vc
     }
 }
