@@ -23,7 +23,7 @@ class SpeakerTableViewCell: UITableViewCell {
     
     func setUpCell(speaker: Speaker) {
         self.speaker = speaker
-        speakerImageView.loadImageURL(url: speaker.headShotURL, cache: IMAGE_CACHE)
+        speakerImageView.loadImageURL(url: speaker.headShotURL)
         speakerNameLabel.text = speaker.fullName
         businessLabel.text = speaker.company
     }

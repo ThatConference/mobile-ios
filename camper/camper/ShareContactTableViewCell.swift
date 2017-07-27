@@ -34,7 +34,7 @@ class ShareContactTableViewCell: UITableViewCell {
     
     func setUpCell(userAux: UserAuxiliaryModel) {
         self.userAux = userAux
-        profileImageView.loadImageURL(url: URL(string: userAux.displayHeadShotString), cache: IMAGE_CACHE)
+        profileImageView.loadImageURL(url: URL(string: userAux.displayHeadShotString))
         contactNameLabel.text = userAux.fullName
         companyLabel.text = userAux.companyString
     }

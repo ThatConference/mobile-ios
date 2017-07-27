@@ -9,6 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="NeutraText-Book.otf">
+            <string>NeutrafaceText-Book</string>
+        </array>
         <array key="NeutraText-BookAlt.otf">
             <string>NeutrafaceText-BookAlt</string>
         </array>
@@ -23,7 +26,7 @@
                 <navigationController title="Speaker List Nav" automaticallyAdjustsScrollViewInsets="NO" id="IQy-tY-VeF" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="open spaces" image="open-spaces" selectedImage="open-spaces" id="bzs-w5-cmY"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="698-7R-hLb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="698-7R-hLb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.90396612880000005" green="0.83328729869999996" blue="0.69475156069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -73,7 +76,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speaker Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9HP-kV-jkh">
-                                                    <rect key="frame" x="101" y="33" width="257" height="20"/>
+                                                    <rect key="frame" x="101" y="33" width="225" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="2Le-bK-0eT"/>
                                                     </constraints>
@@ -82,7 +85,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Business" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dBQ-VN-kBV">
-                                                    <rect key="frame" x="101" y="63" width="257" height="17"/>
+                                                    <rect key="frame" x="101" y="63" width="225" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="253" id="wnP-e4-hlO"/>
                                                     </constraints>
@@ -95,6 +98,17 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3z-qr-O64">
+                                                    <rect key="frame" x="346" y="41" width="21" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="QkE-9a-Aw0"/>
+                                                        <constraint firstAttribute="width" constant="21" id="aH0-KT-bZW"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="NeutrafaceText-Book" family="Neutraface Text" pointSize="35"/>
+                                                    <state key="normal" title="&gt;">
+                                                        <color key="titleColor" red="0.4358128309" green="0.4401977956" blue="0.43185979130000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="qW4-Ps-hmE" firstAttribute="leading" secondItem="2HO-mI-P2e" secondAttribute="leadingMargin" constant="8" id="2C7-B2-gY0"/>
@@ -102,9 +116,11 @@
                                                 <constraint firstItem="qW4-Ps-hmE" firstAttribute="top" secondItem="2HO-mI-P2e" secondAttribute="topMargin" constant="13" id="BpS-0a-v4g"/>
                                                 <constraint firstItem="dBQ-VN-kBV" firstAttribute="top" secondItem="9HP-kV-jkh" secondAttribute="bottom" constant="10" id="H5S-H8-Oj8"/>
                                                 <constraint firstItem="dBQ-VN-kBV" firstAttribute="leading" secondItem="9HP-kV-jkh" secondAttribute="leading" id="LCc-ff-qcS"/>
+                                                <constraint firstItem="f3z-qr-O64" firstAttribute="leading" secondItem="9HP-kV-jkh" secondAttribute="trailing" constant="20" id="UqB-eb-DMm"/>
+                                                <constraint firstItem="f3z-qr-O64" firstAttribute="centerY" secondItem="qW4-Ps-hmE" secondAttribute="centerY" id="YHJ-rx-BX8"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="f3z-qr-O64" secondAttribute="trailing" id="fOu-cP-lud"/>
                                                 <constraint firstItem="9HP-kV-jkh" firstAttribute="top" secondItem="2HO-mI-P2e" secondAttribute="topMargin" constant="25" id="iiD-Qe-hcI"/>
                                                 <constraint firstItem="dBQ-VN-kBV" firstAttribute="trailing" secondItem="9HP-kV-jkh" secondAttribute="trailing" id="ndm-qC-aPO"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="9HP-kV-jkh" secondAttribute="trailing" constant="9" id="pUm-pn-3MM"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -119,14 +135,6 @@
                                     <outlet property="delegate" destination="wjW-cm-Sou" id="QX1-r3-Lqg"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jli-Ez-GBt" customClass="CircleButton" customModule="That_Conference" customModuleProvider="target">
-                                <rect key="frame" x="294" y="523" width="65" height="65"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="65" id="Kwf-c2-s7M"/>
-                                    <constraint firstAttribute="height" constant="65" id="WhC-8L-jCL"/>
-                                </constraints>
-                                <state key="normal" image="google"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.69019607839999997" green="0.59999999999999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -134,8 +142,6 @@
                             <constraint firstItem="1Am-fZ-IRQ" firstAttribute="top" secondItem="NIH-dD-EaV" secondAttribute="bottom" id="5Lo-2V-Frh"/>
                             <constraint firstAttribute="trailing" secondItem="1Am-fZ-IRQ" secondAttribute="trailing" id="PvL-zz-cdw"/>
                             <constraint firstItem="3pk-0L-VJf" firstAttribute="top" secondItem="1Am-fZ-IRQ" secondAttribute="bottom" id="lJy-YG-VrT"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="jli-Ez-GBt" secondAttribute="trailing" id="q8b-1x-O1n"/>
-                            <constraint firstItem="3pk-0L-VJf" firstAttribute="top" secondItem="jli-Ez-GBt" secondAttribute="bottom" constant="15" id="swZ-38-W3C"/>
                             <constraint firstItem="1Am-fZ-IRQ" firstAttribute="leading" secondItem="9R1-dp-x3y" secondAttribute="leading" id="xfH-eo-yQN"/>
                         </constraints>
                     </view>
@@ -171,7 +177,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="google" width="108" height="108"/>
         <image name="hamburger" width="24" height="20"/>
         <image name="open-spaces" width="35" height="35"/>
         <image name="speaker" width="66" height="75"/>

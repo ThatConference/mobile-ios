@@ -73,6 +73,7 @@ class Contact: NSObject, NSCoding {
     override init() {}
     
     init(dictionary: [String: AnyObject]) {
+        
         _id = dictionary[Keys.Id] as! String
         _shareContactId = dictionary[Keys.ShareContactId] as! Int
         _headShot = dictionary[Keys.HeadShot] as? String
@@ -101,6 +102,7 @@ class Contact: NSObject, NSCoding {
     }
     
     init(id: String, shareId: Int, headShot: String?, displayHeadShot: String?, firstName: String, lastName: String, email: String, publicEmail: String?, biography: String?, phone: String?, publicPhone: String?, publicThatSlackHandle: String?, city: String?, state: String?, company: String?, title: String?, website: String?, twitter: String?, facebook: String?, googlePlus: String?, github: String?, pinterest: String?, instagram: String?, linkedIn: String?, memo: String?) {
+        
         self._id = id
         self._shareContactId = shareId
         self._headShot = headShot
@@ -129,6 +131,7 @@ class Contact: NSObject, NSCoding {
     }
     
     func encode(with aCoder: NSCoder) {
+        
         aCoder.encode(self._id, forKey: Keys.Id)
         aCoder.encode(self._shareContactId, forKey: Keys.ShareContactId)
 
@@ -159,6 +162,7 @@ class Contact: NSObject, NSCoding {
     }
     
     required init?(coder aDecoder: NSCoder) {
+        
         _id = aDecoder.decodeObject(forKey: Keys.Id) as! String
         _shareContactId =  aDecoder.decodeObject(forKey: Keys.ShareContactId) as! Int
         _headShot = aDecoder.decodeObject(forKey: Keys.HeadShot) as? String

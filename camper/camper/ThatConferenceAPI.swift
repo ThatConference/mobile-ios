@@ -43,7 +43,9 @@ class ThatConferenceAPI {
     }()
     
     static let baseURLString = "https://www.thatconference.com"
+    static let baseRedirectURLString = "thatconference://"
     static let baseResourceURLString = "https://thatconference.blob.core.windows.net"
+    static let stagingURLString = "https://thatconference2014-staging.azurewebsites.net"
     
     fileprivate static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -70,12 +72,42 @@ class ThatConferenceAPI {
         return components.url!
     }
     
+    fileprivate static func thatConferenceGoogleURL(_ method: Method, parameters: [String: String]?) -> URL {
+        let fullURL = stagingURLString + method.rawValue;
+        var components = URLComponents(string: fullURL)!
+        var queryItems = [URLQueryItem]()
+        
+        print(fullURL)
+        
+        if let additionalParams = parameters {
+            for (key, value) in additionalParams {
+                print("Key: \(key)")
+                print("Value: \(value)")
+
+                let item = URLQueryItem(name: key, value: value)
+                queryItems.append(item)
+            }
+        }
+        
+        if (queryItems.count > 0) {
+            components.queryItems = queryItems
+        }
+        
+        print(components.url!)
+        
+        return components.url!
+    }
+    
     class func authorizationExternalLogins() -> URL {
         return thatConferenceURL(.ExternalLogins, parameters: nil)
     }
     
     class func externalLoginsURL() -> URL {
         return thatConferenceURL(.ExternalLogins, parameters: ["returnUrl":"/", "generateState": "true"])
+    }
+    
+    class func googleLoginsURL() -> URL {
+        return thatConferenceGoogleURL(.ExternalLogins, parameters: ["returnUrl":"/api3/account/mobileloginredirect", "generateState": "true"])
     }
     
     class func sponsorsURL() -> URL {

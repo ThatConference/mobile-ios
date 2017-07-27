@@ -43,7 +43,8 @@ class MenuViewController: UIViewController {
             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             alert.addAction(ok)
             alert.addAction(cancel)
-            present(alert, animated: true, completion: nil)        }
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func shareContactButtonPressed(_ sender: Any) {
@@ -55,7 +56,7 @@ class MenuViewController: UIViewController {
     func updateUI() {
         nameLabel.text = StateData.instance.currentUser.fullName
         if let headshot = StateData.instance.currentUser.headShot {
-            profileImageView.loadImageURL(url: URL(string: headshot), cache: IMAGE_CACHE)
+            profileImageView.loadImageURL(url: URL(string: headshot))
         } else {
             profileImageView.image = UIImage(named: "speaker")
         }

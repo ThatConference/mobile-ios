@@ -69,7 +69,7 @@ class SpeakerProfileViewController : BaseViewController {
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         
-        self.profileImage.loadImageURL(url: speaker.headShotURL, cache: IMAGE_CACHE)
+        self.profileImage.loadImageURL(url: speaker.headShotURL)
 
         speakerName.text = speaker.fullName
         jobTitle.text = speaker.title

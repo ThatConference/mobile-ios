@@ -90,6 +90,7 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
                 }
             }
         }
+        
         return 0
     }
     

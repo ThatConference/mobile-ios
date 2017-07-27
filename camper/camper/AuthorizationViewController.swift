@@ -1,6 +1,7 @@
 import UIKit
 import Fabric
 import Crashlytics
+import SafariServices
 
 protocol AuthorizationFormDelegate: class {
     func dismissViewController(_ controller: UIViewController)
@@ -80,7 +81,8 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
     }
     
     @IBAction func googlePressed(_ sender: AnyObject) {
-        loginOAuth("Google")
+        googleLoginOAuth("Google")
+//        NotificationCenter.default.addObserver(self, selector: #selector(safariLogin(_:)), name: Notification.Name("CallbackNotification"), object: nil)
     }
     
     @IBAction func microsoftPressed(_ sender: AnyObject) {
@@ -109,7 +111,7 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
         print("Logging in with:" + provider)
         
         let authentication = Authentication()
-        authentication.fetchExternalLogins() {
+        authentication.fetchGoogleLogins() {
             (externalLoginResult) -> Void in
             
             switch externalLoginResult {
@@ -124,6 +126,43 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
                             self.webContainer.isHidden = false
                             self.embeddedViewController!.openOAuthDestination(url, provider: provider)
                         }
+                        break
+                    }
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
+    
+    func googleLoginOAuth(_ provider: String) {
+        print("Logging in with: Google")
+        
+        let authentication = Authentication()
+        authentication.fetchGoogleLogins() {
+            (externalLoginResult) -> Void in
+            
+            switch externalLoginResult {
+            case .success(let externalLogins):
+                print("External Logins Retrieved. \(externalLogins.count)")
+                var url: URL!
+                for externalLogin in externalLogins {
+                    
+                    if (externalLogin.name == provider) {
+                        let urlString = ThatConferenceAPI.stagingURLString + externalLogin.url!
+//                        let customUrlString = urlString.replacingOccurrences(of: "https", with: "thatconference%3A%2F%2Fhttps")
+                        
+                        url = URL(string: urlString)
+                        print("URL: \(url)")
+                        
+                        DispatchQueue.main.async {
+                         
+                            UIApplication.shared.openURL(url)
+                            
+//                            let vc = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+//                            vc.delegate = self
+//                            self.present(vc, animated: true)
+                        }
                         
                         break
                     }
@@ -132,6 +171,7 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
                 print("Error: \(error)")
             }
         }
+        
     }
     
     func setDirtyData() {
@@ -205,5 +245,20 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
         DispatchQueue.main.async {
             self.generalError.text = errorMessage
         }
+    }
+}
+
+extension AuthorizationViewController: SFSafariViewControllerDelegate {
+    func safariViewController(_ controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
+//        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func safariViewController(_ controller: SFSafariViewController, activityItemsFor URL: URL, title: String?) -> [UIActivity] {
+        return []
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("CallbackNotification"), object: nil)
+        //  Check if save token is not nil, segue from here to main vc
     }
 }

@@ -128,10 +128,9 @@ class ContactAPI {
         }
     }
     
-    func postContact(contactID: String, _ memo: String? = nil) {
+    func postContact(contactID: String) {
 
-        var postData = NSData(data: "UserId=\(contactID)".data(using: String.Encoding.utf8)!) as Data
-        postData.append("&Memo=\(memo ?? "")".data(using: String.Encoding.utf8)!)
+        let postData = NSData(data: "UserId=\(contactID)".data(using: String.Encoding.utf8)!) as Data
         
         let url: URL = URL(string: postContactURL())!
         
@@ -171,6 +170,47 @@ class ContactAPI {
         return url
     }
     
+    func putContact(sharedContactId: Int, _ memo: String) {
+        
+        var putData = NSData(data: "SharedContactId=\(sharedContactId)".data(using: String.Encoding.utf8)!) as Data
+        putData.append("&Memo=\(memo)".data(using: String.Encoding.utf8)!)
+        
+        let url: URL = URL(string: postContactURL())!
+        
+        var request = URLRequest(url: url,
+                                 cachePolicy: .useProtocolCachePolicy,
+                                 timeoutInterval: 10.0)
+        
+        request.httpMethod = "PUT"
+        
+        if let token = Authentication.loadAuthToken() {
+            let headers = [
+                "Authorization": "Bearer \(token.token!)",
+                "Content-Type": "application/x-www-form-urlencoded"
+            ]
+            request.allHTTPHeaderFields = headers
+        }
+        
+        request.httpBody = putData
+        print(request)
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { (data, response, error) in
+            guard error == nil else {
+                print(error!)
+                return
+            }
+        }
+        
+        task.resume()
+    }
+    
+    private func putContactURL() -> String {
+        let url = self.tcBaseURLString + ContactMethod.PostContact.rawValue;
+        print(url)
+        
+        return url
+    }
     
     func deleteContact(shareContactId: Int, completionHandler: @escaping (DeleteContactResult) -> Void) {
         

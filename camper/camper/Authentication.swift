@@ -29,6 +29,49 @@ class Authentication {
         return ThatConferenceAPI.externalLoginsFromJSONData(jsonData)
     }
     
+    
+    func fetchGoogleLogins(completion: @escaping (ExternalLoginResult) -> Void) {
+        let url = ThatConferenceAPI.googleLoginsURL()
+        let request = URLRequest(url: url as URL)
+        let task = ThatConferenceAPI.nsurlSession.dataTask(with: request, completionHandler: {
+            (data, response, error) -> Void in
+            
+            let result = self.processExternalLoginsRequest(data: data, error: error as NSError?)
+            completion(result)
+        })
+        task.resume()
+    }
+    
+//    func fetchGoogleLogins(completion: @escaping (ExternalLoginResult) -> Void) {
+//        
+//        var protocolClasses = [AnyClass]()
+//        protocolClasses.append(GoogleURLProtocol.self)
+//        
+//        let configuration = URLSessionConfiguration.default
+//        configuration.protocolClasses = protocolClasses
+//        
+//        let defaultSession = URLSession(configuration: configuration)
+//        
+//        let url = ThatConferenceAPI.googleLoginsURL()
+//        let request = URLRequest(url: url as URL)
+//        let task = defaultSession.dataTask(with: request, completionHandler: {
+//            (data, response, error) -> Void in
+//            
+//            let result = self.processGoogleLoginsRequest(data: data, error: error as NSError?)
+//            completion(result)
+//        })
+//        task.resume()
+//    }
+    
+    func processGoogleLoginsRequest(data: Data?, error: NSError?) -> ExternalLoginResult {
+        guard let jsonData = data
+            else {
+                return .failure(error!)
+        }
+        
+        return ThatConferenceAPI.externalLoginsFromJSONData(jsonData)
+    }
+    
     static let AuthTokenLocation = "TCAuthToken"
     static let key_Token = "token"
     static let key_Expiration = "expires"
@@ -71,5 +114,35 @@ class Authentication {
         }
         
         return loggedIn
+    }
+}
+
+class GoogleURLProtocol: URLProtocol {
+    
+    override class func canInit(with request: URLRequest) -> Bool {
+        if request.url?.scheme == "thatconference" {
+            print("El Nino")
+            return true
+        }
+        
+        return false
+    }
+    
+    class func canonicalRequestForRequest(request: URLRequest) -> URLRequest {
+        return request
+    }
+    
+    
+    class func requestIsCacheEquivalent(aRequest: URLRequest,
+                                                 toRequest bRequest: URLRequest) -> Bool {
+        return super.requestIsCacheEquivalent(aRequest, to:bRequest)
+    }
+    
+    override func startLoading() {
+        // Do your work here
+        print("Pie")
+    }
+    
+    override func stopLoading() {
     }
 }
