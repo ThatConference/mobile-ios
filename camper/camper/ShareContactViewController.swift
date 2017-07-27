@@ -105,33 +105,40 @@ class ShareContactViewController: BaseViewControllerNoCameraViewController {
             self.contactAPI.getAuxUsers(auxIdArray: [auxId.stringToInt], completionHandler: { (result) in
                 switch (result) {
                 case .success(let contacts):
-                    if let contact = contacts.first {
-                        let fullName = contact.fullName
-                        
-                        let alert = UIAlertController(title: "Allow \(fullName) to share their That Conference Camper contact information with you?", message: nil, preferredStyle: .alert)
-                        let allow = UIAlertAction(title: "Allow", style: .default, handler: { (UIAlertAction) in
-                            self.contactAPI.postContact(contactID: contact.id!)
-                            self.requestRef.child(auxId).removeValue()
-                        })
-                        
-                        let dontAllow = UIAlertAction(title: "Don't Allow", style: .default, handler: { (UIAlertAction) in
-                            self.requestRef.child(auxId).removeValue()
-                            self.blockRef.child(auxId).setValue(Date().dateToInt())
+                    if contacts.count > 0 {
+                        if let contact = contacts.first {
+                            let fullName = contact.fullName
                             
-                            // This Puts The Main User In Blocks of Requester
-                            self.conditionRef.child(auxId)
-                                .child("blocks")
-                                .child(StateData.instance.currentUser.auxIdString!)
-                                .setValue(Date().dateToInt())
-                        })
-                        
-                        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                        
-                        alert.addAction(allow)
-                        alert.addAction(dontAllow)
-                        alert.addAction(cancel)
-                        
-                        self.present(alert, animated: true, completion: nil)
+                            let alert = UIAlertController(title: "Allow \(fullName) to share their That Conference Camper contact information with you?", message: nil, preferredStyle: .alert)
+                            
+                            let allow = UIAlertAction(title: "Allow", style: .default, handler: { (UIAlertAction) in
+                                self.contactAPI.postContact(contactID: contact.id!)
+                                self.requestRef.child(auxId).removeValue()
+                                self.firebaseQuery()
+                            })
+                            
+                            let dontAllow = UIAlertAction(title: "Don't Allow", style: .default, handler: { (UIAlertAction) in
+                                self.requestRef.child(auxId).removeValue()
+                                self.blockRef.child(auxId).setValue(Date().dateToInt())
+                                
+                                // This Puts The Main User In Blocks of Requester
+                                self.conditionRef.child(auxId)
+                                    .child("blocks")
+                                    .child(StateData.instance.currentUser.auxIdString!)
+                                    .setValue(Date().dateToInt())
+
+                                self.firebaseQuery()
+                            })
+                            
+                            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                            
+                            alert.addAction(allow)
+                            alert.addAction(dontAllow)
+                            alert.addAction(cancel)
+                            
+                            self.present(alert, animated: true, completion: nil)
+                        }
+
                     }
                     break
                 case .failure(let error):
