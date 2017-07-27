@@ -106,12 +106,8 @@ class ThatConferenceAPI {
         return thatConferenceURL(.ExternalLogins, parameters: ["returnUrl":"/", "generateState": "true"])
     }
     
-//    class func googleLoginsURL() -> URL {
-//        return thatConferenceGoogleURL(.ExternalLogins, parameters: ["returnUrl":"/api3/account/mobileloginredirect", "generateState": "true"])
-//    }
-    
     class func googleLoginsURL() -> URL {
-        return thatConferenceGoogleURL(.ExternalLogins, parameters: ["returnUrl":"\(baseRedirectURLString)", "generateState": "true"])
+        return thatConferenceGoogleURL(.ExternalLogins, parameters: ["returnUrl":"/api3/account/mobileloginredirect", "generateState": "true"])
     }
     
     class func sponsorsURL() -> URL {

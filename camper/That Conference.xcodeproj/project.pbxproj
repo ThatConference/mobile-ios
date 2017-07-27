@@ -716,10 +716,17 @@
 				TargetAttributes = {
 					312A94111C814B6B00AE938B = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = TP9E7CXU62;
+						DevelopmentTeam = 2VX3GW8TL8;
 						LastSwiftMigration = 0830;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.SafariKeychain = {
 								enabled = 1;
 							};
 						};
@@ -1121,13 +1128,16 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "That Conference.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = TP9E7CXU62;
+				DEVELOPMENT_TEAM = 2VX3GW8TL8;
 				INFOPLIST_FILE = camper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thatconference.mobile.ios;
 				PRODUCT_NAME = "That Conference";
+				PROVISIONING_PROFILE = "c39dcbbe-74e2-4818-87e4-cf9eaa58fedf";
+				PROVISIONING_PROFILE_SPECIFIER = "That Conference 2017 Dev";
 				SWIFT_OBJC_BRIDGING_HEADER = "camper/That Conference-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1143,12 +1153,15 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "That Conference.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = TP9E7CXU62;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 2VX3GW8TL8;
 				INFOPLIST_FILE = camper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thatconference.mobile.ios;
 				PRODUCT_NAME = "That Conference";
+				PROVISIONING_PROFILE = "c39dcbbe-74e2-4818-87e4-cf9eaa58fedf";
+				PROVISIONING_PROFILE_SPECIFIER = "That Conference 2017 Dev";
 				SWIFT_OBJC_BRIDGING_HEADER = "camper/That Conference-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

@@ -251,7 +251,6 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
 extension AuthorizationViewController: SFSafariViewControllerDelegate {
     func safariViewController(_ controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
 //        controller.dismiss(animated: true, completion: nil)
-        print(didLoadSuccessfully)
     }
     
     func safariViewController(_ controller: SFSafariViewController, activityItemsFor URL: URL, title: String?) -> [UIActivity] {
@@ -259,7 +258,6 @@ extension AuthorizationViewController: SFSafariViewControllerDelegate {
     }
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        print("okay")
         NotificationCenter.default.removeObserver(self, name: Notification.Name("CallbackNotification"), object: nil)
         //  Check if save token is not nil, segue from here to main vc
     }
