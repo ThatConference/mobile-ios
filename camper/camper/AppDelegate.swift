@@ -129,13 +129,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print("aloha")
 //        }
 //        
-        if let sourceApplication = options[.sourceApplication] {
-            if (String(describing: sourceApplication) == ".com.thatconference.mobile.ios") {
-                print("Aloha")
-                NotificationCenter.default.post(name: Notification.Name("CallbackNotification"), object: url)
-                return true
-            }
-        }
+//        if let sourceApplication = options[.sourceApplication] {
+//            if (String(describing: sourceApplication) == ".com.thatconference.mobile.ios") {
+//                print("Aloha")
+//                NotificationCenter.default.post(name: Notification.Name("CallbackNotification"), object: url)
+//                return true
+//            }
+//        }
         
         return false
     }

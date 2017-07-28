@@ -6,6 +6,7 @@
 //  Copyright © 2017 That Conference. All rights reserved.
 //
 
+import CoreLocation
 import UIKit
 
 class BaseViewControllerNoCameraViewController: UIViewController {
@@ -13,6 +14,7 @@ class BaseViewControllerNoCameraViewController: UIViewController {
     var refreshControl: UIRefreshControl!
     var activityIndicator: UIActivityIndicatorView!
     var loadingView: LoadingUIView!
+    var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +30,15 @@ class BaseViewControllerNoCameraViewController: UIViewController {
         self.view.addSubview(self.activityIndicator)
         
         refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")        
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        
+        locationManager = CLLocationManager()
+        
+        let status = CLLocationManager.authorizationStatus()
+        
+        if status == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        }
     }
     
     func startIndicator() {
