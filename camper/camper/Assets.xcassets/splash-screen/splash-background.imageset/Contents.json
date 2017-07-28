@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "TC 2016 Splash BPage bkg.png",
+      "filename" : "splash-background2@1x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "TC 2016 Splash BPage bkg@2x.png",
+      "filename" : "splash-background2@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "TC 2016 Splash BPage bkg@3x.png",
+      "filename" : "splash-background2@3x.png",
       "scale" : "3x"
     }
   ],
