@@ -111,7 +111,7 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
         print("Logging in with:" + provider)
         
         let authentication = Authentication()
-        authentication.fetchGoogleLogins() {
+        authentication.fetchExternalLogins() {
             (externalLoginResult) -> Void in
             
             switch externalLoginResult {
@@ -150,7 +150,6 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
                     
                     if (externalLogin.name == provider) {
                         let urlString = ThatConferenceAPI.stagingURLString + externalLogin.url!
-//                        let customUrlString = urlString.replacingOccurrences(of: "https", with: "thatconference%3A%2F%2Fhttps")
                         
                         url = URL(string: urlString)
                         print("URL: \(url)")
@@ -245,6 +244,14 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
         DispatchQueue.main.async {
             self.generalError.text = errorMessage
         }
+    }
+}
+
+extension AuthorizationViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 

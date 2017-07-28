@@ -62,7 +62,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let url = userActivity.webpageURL {
                 print("MYURL: \(url)")
                 
+//                let baseURL = url.host!
+//                
+//                if baseURL.contains("thatconference") {
+//                    let fullURL = url.absoluteString
+//                    let result = fullURL.range(of: "access_token" )
+//                    if result != nil {
+//                        let authToken = AuthToken()
+//                        authToken.token = url.getQueryItemValueForKey(key: "access_token")
+//                        authToken.expiration = Date().addDays(7)
+//                        
+//                        let expireSeconds = url.getQueryItemValueForKey(key: "expires_in")
+//                        if (expireSeconds != nil) {
+//                            let numericValue = Double(expireSeconds!)!
+//                            authToken.expiration = Date().addingTimeInterval(numericValue)
+//                        }
+//                        
+//                        Authentication.saveAuthToken(authToken)
+//                        Answers.logLogin(withMethod: "oAuth Login", success: true, customAttributes: [:])
+//                        
+//                        
+////                        if self.window?.rootViewController?.presentedViewController != nil {
+////                            self.window?.rootViewController?.dismiss(animated: false, completion: nil)
+////                        }
+//                        
+//                        didHandle = true
+//                    }
+//                }
+
                 let urlString = "\(url)"
+
                 if let range = urlString.range(of: "access_token=") {
                     var tokenRange = urlString.substring(from: range.upperBound)
                     if let removeTokenType = tokenRange.range(of: "&token_type=") {
@@ -71,12 +100,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         // Token ready to be saved
                         print(token)
-                        
-//                        if self.window?.rootViewController?.presentedViewController != nil {
-//                            self.window?.rootViewController?.dismiss(animated: false, completion: nil)
-//                        }
                     }
-                    
+                
                     didHandle = true
                 }
             }
