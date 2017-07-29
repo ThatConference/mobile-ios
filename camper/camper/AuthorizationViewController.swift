@@ -81,8 +81,22 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
     }
     
     @IBAction func googlePressed(_ sender: AnyObject) {
-        googleLoginOAuth("Google")
-//        NotificationCenter.default.addObserver(self, selector: #selector(safariLogin(_:)), name: Notification.Name("CallbackNotification"), object: nil)
+        let loginAPI = LoginAPI()
+        loginAPI.googleLogin { (LoginResult) in
+            switch (LoginResult) {
+            case .success(let url):
+                
+                DispatchQueue.main.async {
+                    UIApplication.shared.openURL(url)
+                }
+                break
+            case .failure(let error):
+                
+                print("Error: \(error)")
+                break
+            }
+        }
+//        googleLoginOAuth("Google")
     }
     
     @IBAction func microsoftPressed(_ sender: AnyObject) {
@@ -157,10 +171,6 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
                         DispatchQueue.main.async {
                          
                             UIApplication.shared.openURL(url)
-                            
-//                            let vc = SFSafariViewController(url: url, entersReaderIfAvailable: true)
-//                            vc.delegate = self
-//                            self.present(vc, animated: true)
                         }
                         
                         break
@@ -261,11 +271,14 @@ extension AuthorizationViewController: SFSafariViewControllerDelegate {
     }
     
     func safariViewController(_ controller: SFSafariViewController, activityItemsFor URL: URL, title: String?) -> [UIActivity] {
+        print("\(URL)")
         return []
     }
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         NotificationCenter.default.removeObserver(self, name: Notification.Name("CallbackNotification"), object: nil)
         //  Check if save token is not nil, segue from here to main vc
+        
+        print("PIE")
     }
 }

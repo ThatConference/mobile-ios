@@ -54,8 +54,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         
-
+        // FOR SFSAFARIVC
+        
         var didHandle: Bool = false
+        
+        print(userActivity.webpageURL ?? "Pie")
         
         if (userActivity.activityType == NSUserActivityTypeBrowsingWeb) {
             
@@ -114,14 +117,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
 
         print("url \(url)")
-        
+
         if url.host == nil {
             return true
         }
+
         
-        print("url host :\(url.host!)")
-        
-        print("url path :\(url.path)")
+        let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        let items = (urlComponents?.queryItems)
+        if (url.scheme == "thatconference") {
+            var vcTitle = ""
+            if let _ = items?.first, let propertyName = items?.first?.name, let propertyValue = items?.first?.value {
+                vcTitle = url.query!  //"propertyName"
+                print(vcTitle)
+            }
+        }
+
+//
+//        print("url host :\(url.host!)")
+//        
+//        print("url path :\(url.path)")
 //
 //        let urlPath : String = url.path as String!
 //    
@@ -139,7 +154,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return false
     }
-    
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
 //        let dict = userInfo["aps"] as! Dictionary

@@ -48,6 +48,7 @@ class Authentication {
                 return .failure(error!)
         }
         
+        
         return ThatConferenceAPI.externalLoginsFromJSONData(jsonData)
     }
     
