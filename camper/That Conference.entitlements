@@ -8,7 +8,6 @@
 		<string>applinks:www.thatconference.com</string>
 		<string>applinks:www.thatconference2014-staging.azurewebsites.net</string>
 		<string>applinks:thatconference.com</string>
-		<string>applinks:thatconference2014-staging.azurewebsites.net</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>

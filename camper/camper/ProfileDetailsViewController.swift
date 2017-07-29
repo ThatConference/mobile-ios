@@ -68,6 +68,7 @@ class ProfileDetailsViewController: UIViewController {
         self.activityIndicator.clipsToBounds = true
         self.activityIndicator.hidesWhenStopped = true
         self.activityIndicator.center = self.view.center
+        self.view.addSubview(self.activityIndicator)
         
         currentUserSettings(isCurrentUser: ISCURRENTUSER)
         

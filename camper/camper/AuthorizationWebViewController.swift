@@ -30,7 +30,6 @@ fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
 protocol ContainerDelegateProtocol
 {
     func Close()

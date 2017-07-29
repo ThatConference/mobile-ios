@@ -9,27 +9,64 @@
 import Foundation
 
 enum LoginMethod: String {
-    case ExternalLogin = "api3/Account/ExternalLogins?returnUrl={returnUrl}&generateState={generateState}"
+    case ExternalLogin = "/api3/Account/ExternalLogins?returnUrl={returnUrl}&generateState={generateState}"
 }
 
 enum LoginResult {
-    case success([ExternalLoginResult])
+    case success(URL)
     case failure(Error)
 }
 
 class LoginAPI {
     
     let baseURLString = "https://www.thatconference.com"
+    let baseTestURLString = "https://thatconference2014-staging.azurewebsites.net"
+    let baseURLScheme = "thatconference://"
+    let baseExtension = "/api3/account/mobileloginredirect"
     let year = "2017"
     
-    func externaLogin(returnURL: String, generateState: Bool) {
-        let url = URL(string: self.getExternalURL(returnURL: returnURL, generateState: generateState))
+    func googleLogin(completion: @escaping (LoginResult) -> Void)  {
         
+        //CHANGE RETURN URL HERE
+        let url = URL(string: self.getGoogleURL(returnURL: baseTestURLString, generateState: true))!
+        print(url)
+        
+        let urlRequest = URLRequest(url: url)
+        
+        let task = ThatConferenceAPI.nsurlSession.dataTask(with: urlRequest, completionHandler: {
+            (data, response, error) -> Void in
+            
+            guard let jsonData = data else {
+                print(error!)
+                return
+            }
+            
+            let externalLogins: ExternalLoginResult = ThatConferenceAPI.externalLoginsFromJSONData(jsonData)
+            switch (externalLogins) {
+            case .success(let externalLogins):
+                for externalLogin in externalLogins {
+                    
+                    if (externalLogin.name == "Google") {
+                        let urlString = self.baseTestURLString + externalLogin.url!
+                        
+                        print("URL: \(urlString)")
+                        
+                        return completion(LoginResult.success((URL(string: urlString)!)))
+                    }
+                break
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+                return completion(LoginResult.failure(error))
+            }
+            
+        })
+        task.resume()
         
     }
     
-    func getExternalURL(returnURL: String, generateState: Bool) -> String {
-        let url = self.baseURLString + LoginMethod.ExternalLogin.rawValue;
+    func getGoogleURL(returnURL: String, generateState: Bool) -> String {
+        let url = self.baseTestURLString + LoginMethod.ExternalLogin.rawValue;
         let url2 = url.replacingOccurrences(of: "{returnUrl}", with: returnURL)
         let url3 = url2.replacingOccurrences(of: "{generateState}", with: String(generateState))
         

@@ -28,7 +28,7 @@ class BaseViewControllerNoCameraViewController: UIViewController {
         self.view.addSubview(self.activityIndicator)
         
         refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")        
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
     }
     
     func startIndicator() {
