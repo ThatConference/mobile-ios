@@ -22,13 +22,13 @@ class LoginAPI {
     let baseURLString = "https://www.thatconference.com"
     let baseTestURLString = "https://thatconference2014-staging.azurewebsites.net"
     let baseURLScheme = "thatconference://"
-    let baseExtension = "/api3/account/mobileloginredirect"
+    let loginRedirect = "/api3/account/mobileloginredirect"
     let year = "2017"
     
     func googleLogin(completion: @escaping (LoginResult) -> Void)  {
         
-        //CHANGE RETURN URL HERE
-        let url = URL(string: self.getGoogleURL(returnURL: baseTestURLString, generateState: true))!
+        let url = URL(string: self.getGoogleURL(returnURL: baseTestURLString + loginRedirect,  //CHANGE RETURN URL HERE
+                                                generateState: true))!
         print(url)
         
         let urlRequest = URLRequest(url: url)
