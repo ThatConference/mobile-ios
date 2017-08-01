@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Allow &quot;That Conference&quot; to use bluetooth?</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -34,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -51,10 +49,12 @@
 	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Allow "That Conference" to use bluetooth?</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Will be used for creating That PostCard</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Allow &quot;That Conference&quot; to access your current location while using the app?</string>
+	<string>Allow "That Conference" to access your current location while using the app?</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Will be used to store That PostCard to your local library</string>
 	<key>UIAppFonts</key>
