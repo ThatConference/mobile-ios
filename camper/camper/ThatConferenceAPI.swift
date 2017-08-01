@@ -43,7 +43,6 @@ class ThatConferenceAPI {
     }()
     
     static let baseURLString = "https://www.thatconference.com"
-    static let baseRedirectURLString = "thatconference://"
     static let baseResourceURLString = "https://thatconference.blob.core.windows.net"
     static let stagingURLString = "https://thatconference2014-staging.azurewebsites.net"
     
