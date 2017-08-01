@@ -167,8 +167,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("MESSAGEID: \(userInfo["that-news"]!)")
         
         print(userInfo)
-//        let dict = userInfo["aps"] as! Dictionary
-//        let message = dict["alert"]
-//        print("\(message)")
     }
 }

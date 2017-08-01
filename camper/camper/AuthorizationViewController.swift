@@ -87,11 +87,11 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
             case .success(let url):
                 
                 DispatchQueue.main.async {
-//                    UIApplication.shared.openURL(url)
-                    
-                    let delegate = UIApplication.shared.delegate as! AppDelegate
-                    delegate.safariVC = SFSafariViewController(url: url, entersReaderIfAvailable: true)
-                    self.present(delegate.safariVC!, animated: true)
+                    UIApplication.shared.openURL(url)
+//
+//                    let delegate = UIApplication.shared.delegate as! AppDelegate
+//                    delegate.safariVC = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+//                    self.present(delegate.safariVC!, animated: true)
                 }
                 break
             case .failure(let error):
