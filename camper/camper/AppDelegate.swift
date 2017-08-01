@@ -55,117 +55,117 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
-
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        
-        // FOR SFSAFARIVC
-        
-        var didHandle: Bool = false
-        
-        print(userActivity.webpageURL ?? "Pie")
-        
-        if (userActivity.activityType == NSUserActivityTypeBrowsingWeb) {
-            
-            if let url = userActivity.webpageURL {
-                print("MYURL: \(url)")
-                
-//                let baseURL = url.host!
+//
+//    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+//        
+//        // FOR SFSAFARIVC
+//        
+//        var didHandle: Bool = false
+//        
+//        print(userActivity.webpageURL ?? "Pie")
+//        
+//        if (userActivity.activityType == NSUserActivityTypeBrowsingWeb) {
+//            
+//            if let url = userActivity.webpageURL {
+//                print("MYURL: \(url)")
 //                
-//                if baseURL.contains("thatconference") {
-//                    let fullURL = url.absoluteString
-//                    let result = fullURL.range(of: "access_token" )
-//                    if result != nil {
-//                        let authToken = AuthToken()
-//                        authToken.token = url.getQueryItemValueForKey(key: "access_token")
-//                        authToken.expiration = Date().addDays(7)
-//                        
-//                        let expireSeconds = url.getQueryItemValueForKey(key: "expires_in")
-//                        if (expireSeconds != nil) {
-//                            let numericValue = Double(expireSeconds!)!
-//                            authToken.expiration = Date().addingTimeInterval(numericValue)
-//                        }
-//                        
-//                        Authentication.saveAuthToken(authToken)
-//                        Answers.logLogin(withMethod: "oAuth Login", success: true, customAttributes: [:])
-//                        
-//                        
-////                        if self.window?.rootViewController?.presentedViewController != nil {
-////                            self.window?.rootViewController?.dismiss(animated: false, completion: nil)
+////                let baseURL = url.host!
+////                
+////                if baseURL.contains("thatconference") {
+////                    let fullURL = url.absoluteString
+////                    let result = fullURL.range(of: "access_token" )
+////                    if result != nil {
+////                        let authToken = AuthToken()
+////                        authToken.token = url.getQueryItemValueForKey(key: "access_token")
+////                        authToken.expiration = Date().addDays(7)
+////                        
+////                        let expireSeconds = url.getQueryItemValueForKey(key: "expires_in")
+////                        if (expireSeconds != nil) {
+////                            let numericValue = Double(expireSeconds!)!
+////                            authToken.expiration = Date().addingTimeInterval(numericValue)
 ////                        }
+////                        
+////                        Authentication.saveAuthToken(authToken)
+////                        Answers.logLogin(withMethod: "oAuth Login", success: true, customAttributes: [:])
+////                        
+////                        
+//////                        if self.window?.rootViewController?.presentedViewController != nil {
+//////                            self.window?.rootViewController?.dismiss(animated: false, completion: nil)
+//////                        }
+////                        
+////                        didHandle = true
+////                    }
+////                }
+//
+//                let urlString = "\(url)"
+//
+//                if let range = urlString.range(of: "access_token=") {
+//                    var tokenRange = urlString.substring(from: range.upperBound)
+//                    if let removeTokenType = tokenRange.range(of: "&token_type=") {
+//                        tokenRange.removeSubrange(removeTokenType.lowerBound..<tokenRange.endIndex)
+//                        let token = tokenRange.replacingOccurrences(of: "&token_type=", with: "")
 //                        
-//                        didHandle = true
+//                        // Token ready to be saved
+//                        print(token)
 //                    }
+//                
+//                    didHandle = true
 //                }
-
-                let urlString = "\(url)"
-
-                if let range = urlString.range(of: "access_token=") {
-                    var tokenRange = urlString.substring(from: range.upperBound)
-                    if let removeTokenType = tokenRange.range(of: "&token_type=") {
-                        tokenRange.removeSubrange(removeTokenType.lowerBound..<tokenRange.endIndex)
-                        let token = tokenRange.replacingOccurrences(of: "&token_type=", with: "")
-                        
-                        // Token ready to be saved
-                        print(token)
-                    }
-                
-                    didHandle = true
-                }
-            }
-        }
-        
-        return didHandle
-    }
-    
-    
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-
-        if let sf = safariVC {
-            sf.dismiss(animated: true, completion: nil)
-        }
-        
-        print("url \(url)")
-
-        if url.host == nil {
-            return true
-        }
-
-        
-        let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        let items = (urlComponents?.queryItems)
-        if (url.scheme == "thatconference") {
-            var vcTitle = ""
-            if let _ = items?.first, let propertyName = items?.first?.name, let propertyValue = items?.first?.value {
-                vcTitle = url.query!  //"propertyName"
-                print(vcTitle)
-            }
-        }
-
-//
-//        print("url host :\(url.host!)")
-//        
-//        print("url path :\(url.path)")
-//
-//        let urlPath : String = url.path as String!
-//    
-//        if(urlPath == "*/mobileloginredirect") {
-//            print("aloha")
-//        }
-//        
-//        if let sourceApplication = options[.sourceApplication] {
-//            if (String(describing: sourceApplication) == ".com.thatconference.mobile.ios") {
-//                print("Aloha")
-//                NotificationCenter.default.post(name: Notification.Name("CallbackNotification"), object: url)
-//                return true
 //            }
 //        }
-        
-        return false
-    }
+//        
+//        return didHandle
+//    }
+//    
+//    
+//    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+//
+//        if let sf = safariVC {
+//            sf.dismiss(animated: true, completion: nil)
+//        }
+//        
+//        print("url \(url)")
+//
+//        if url.host == nil {
+//            return true
+//        }
+//
+//        
+//        let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+//        let items = (urlComponents?.queryItems)
+//        if (url.scheme == "thatconference") {
+//            var vcTitle = ""
+//            if let _ = items?.first, let propertyName = items?.first?.name, let propertyValue = items?.first?.value {
+//                vcTitle = url.query!  //"propertyName"
+//                print(vcTitle)
+//            }
+//        }
+//
+////
+////        print("url host :\(url.host!)")
+////        
+////        print("url path :\(url.path)")
+////
+////        let urlPath : String = url.path as String!
+////    
+////        if(urlPath == "*/mobileloginredirect") {
+////            print("aloha")
+////        }
+////        
+////        if let sourceApplication = options[.sourceApplication] {
+////            if (String(describing: sourceApplication) == ".com.thatconference.mobile.ios") {
+////                print("Aloha")
+////                NotificationCenter.default.post(name: Notification.Name("CallbackNotification"), object: url)
+////                return true
+////            }
+////        }
+//        
+//        return false
+//    }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-        print("MESSAGEID: \(userInfo["that-news"]!)")
-        
-        print(userInfo)
+//        print("MESSAGEID: \(userInfo["that-news"]!)")
+//        
+//        print(userInfo)
     }
 }

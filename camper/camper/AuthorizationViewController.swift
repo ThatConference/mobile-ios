@@ -116,8 +116,10 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
     }
     
     func SignedIn() {
-        setDirtyData()
-        self.DismissView()
+        setDirtyData() {
+            self.DismissView()
+        }
+
     }
     
     fileprivate func DismissView() {
@@ -187,10 +189,14 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
         
     }
     
-    func setDirtyData() {
+    func setDirtyData(completed: @escaping () -> ()) {
+        let userAPI = UserAPI()
+        userAPI.getMainUser()
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.dirtyDataSchedule = true;
         appDelegate.dirtyDataFavorites = true;
+        completed()
     }
     
     func DataReceived(data : Data?, response : URLResponse?, error : Error?) {
