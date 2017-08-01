@@ -32,3 +32,22 @@ pod install
 Dependencies:
 
 * [LockSmith](https://github.com/matthewpalmer/Locksmith)
+
+
+
+
+
+Test Account:
+user - tcdevtest
+pass - .HQ4PaAK2rTJ
+OAuth Accounts:
+Facebook Login - device@milkcan.io
+Facebook Password - Houd!n!Escape
+Twitter Login - devicemilkcan
+Twitter Password - Houd!n!Escape
+Github Login - device@milkcan.io
+Github Password - Houd1n1Escape
+Microsoft Login - device@milkcan.io
+Microsoft Pass - Houd!n!Escape
+Google Login - device@milkcan.io
+Google Pass - Houd!n!Escape
