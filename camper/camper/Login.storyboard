@@ -118,13 +118,14 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya3-E5-Wn5">
                                         <rect key="frame" x="0.0" y="0.0" width="85" height="58.5"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="facebook"/>
                                         <connections>
                                             <action selector="facebookPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wC5-aZ-jIV"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XhR-UP-01c" userLabel="twitterButton">
-                                        <rect key="frame" x="85" y="0.0" width="86" height="58.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="114.5" height="58.5"/>
                                         <state key="normal" image="twitter"/>
                                         <connections>
                                             <action selector="twitterPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DgW-Bb-3D1"/>
@@ -139,14 +140,14 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46K-rx-fyQ" userLabel="windowsButton">
-                                        <rect key="frame" x="171" y="0.0" width="86" height="58.5"/>
+                                        <rect key="frame" x="114.5" y="0.0" width="114" height="58.5"/>
                                         <state key="normal" image="windows"/>
                                         <connections>
                                             <action selector="microsoftPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TOj-iv-epq"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2p-3l-9Al">
-                                        <rect key="frame" x="257" y="0.0" width="86" height="58.5"/>
+                                        <rect key="frame" x="228.5" y="0.0" width="114.5" height="58.5"/>
                                         <state key="normal" image="github"/>
                                         <connections>
                                             <action selector="githubPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xIH-hn-ic7"/>
@@ -158,6 +159,7 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
+                                        <exclude reference="Ya3-E5-Wn5"/>
                                         <exclude reference="MrT-o3-ade"/>
                                     </mask>
                                 </variation>

@@ -80,6 +80,8 @@ class ShareContactViewController: BaseViewControllerNoCameraViewController {
 
         locationManager.delegate = self
         
+        peripheralManager.
+        
         let status = CLLocationManager.authorizationStatus()
         
         if status == .denied || status == .restricted {
@@ -312,8 +314,6 @@ extension ShareContactViewController: CLLocationManagerDelegate {
                 }
             }
             
-        } else {
-            self.simpleAlert(title: "Unable to find local contacts", body: "Please try again.")
         }
     }
     
