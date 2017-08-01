@@ -88,6 +88,10 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
                 
                 DispatchQueue.main.async {
                     UIApplication.shared.openURL(url)
+//
+//                    let delegate = UIApplication.shared.delegate as! AppDelegate
+//                    delegate.safariVC = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+//                    self.present(delegate.safariVC!, animated: true)
                 }
                 break
             case .failure(let error):
@@ -262,23 +266,5 @@ extension AuthorizationViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-}
-
-extension AuthorizationViewController: SFSafariViewControllerDelegate {
-    func safariViewController(_ controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
-//        controller.dismiss(animated: true, completion: nil)
-    }
-    
-    func safariViewController(_ controller: SFSafariViewController, activityItemsFor URL: URL, title: String?) -> [UIActivity] {
-        print("\(URL)")
-        return []
-    }
-    
-    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("CallbackNotification"), object: nil)
-        //  Check if save token is not nil, segue from here to main vc
-        
-        print("PIE")
     }
 }

@@ -8,6 +8,9 @@ Notes:
 * Currently using XCode 8.3
 * Swift 3.1
 
+*Pass for FB APN
+M1lkCan11C
+
 ## Installation ##
 
 ### Cocoa Pods ###

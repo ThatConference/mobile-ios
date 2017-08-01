@@ -3,10 +3,14 @@ import Fabric
 import Crashlytics
 import UserNotifications
 import Firebase
+import FirebaseMessaging
+import SafariServices
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    var safariVC: SFSafariViewController?
+
     var dirtyDataSchedule: Bool = false
     var dirtyDataFavorites: Bool = false
 
@@ -116,6 +120,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
 
+        if let sf = safariVC {
+            sf.dismiss(animated: true, completion: nil)
+        }
+        
         print("url \(url)")
 
         if url.host == nil {
@@ -156,8 +164,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-//        let dict = userInfo["aps"] as! Dictionary
-//        let message = dict["alert"]
-//        print("\(message)")
+        print("MESSAGEID: \(userInfo["that-news"]!)")
+        
+        print(userInfo)
     }
 }
