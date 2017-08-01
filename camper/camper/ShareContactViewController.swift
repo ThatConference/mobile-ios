@@ -80,8 +80,6 @@ class ShareContactViewController: BaseViewControllerNoCameraViewController {
 
         locationManager.delegate = self
         
-        peripheralManager.
-        
         let status = CLLocationManager.authorizationStatus()
         
         if status == .denied || status == .restricted {
