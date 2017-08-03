@@ -5,7 +5,7 @@ import Crashlytics
 class SpeakerProfileViewController : BaseViewController {
     var speaker: Speaker!
     
-    @IBOutlet var profileImage: UIImageView!
+    @IBOutlet var profileImage: LoadImageView!
     @IBOutlet var speakerName: UILabel!
     @IBOutlet var jobTitle: UILabel!
     @IBOutlet var company: UILabel!

@@ -8,39 +8,38 @@
 
 import Foundation
 
-extension UIImageView {
-    func loadImageURL(url: URL?) {
-        
-        self.image = UIImage(named: "profile")
+//extension UIImageView {
+//    func loadImageURL(url: URL?) {
+//        
+//        guard let url = url else {
+//            self.image = UIImage(named: "profile")
+//            return
+//        }
+//        
+//        let urlString = ThatConferenceAPI.resourceURL(url.absoluteString)
+//        
+//        self.image = UIImage(named: "profile")
+//        
+//        if let image = IMAGE_CACHE.object(forKey: String(describing: urlString) as NSString) {
+//            DispatchQueue.main.async {
+//                self.image = image
+//                return
+//            }
+//        }
+//
+//        let mainUrl = ThatConferenceAPI.resourceURL(url.absoluteString)
+//        if let data = try? Data(contentsOf: mainUrl) {
+//            DispatchQueue.main.async {
+//                let imageToCache = UIImage(data: data)
+//                IMAGE_CACHE.setObject(imageToCache!, forKey: String(describing: urlString) as NSString)
+//                self.image = imageToCache
+//            }
+//        } else {
+//            DispatchQueue.main.async {
+//                self.image = UIImage(named: "profile")
+//            }
+//        }
+//    }
+//}
 
-        DispatchQueue.global().async {
-            
-            if (url == nil) {
-                self.image = UIImage(named: "profile")
-            } else {
-                let urlString = ThatConferenceAPI.resourceURL(url!.absoluteString)
-                if let image = IMAGE_CACHE.object(forKey: String(describing: urlString) as NSString) {
-                    DispatchQueue.main.async {
-                        self.image = image
-                    }
-                } else {
-                    
-                    if let headshot = url {
-                        let url = ThatConferenceAPI.resourceURL(headshot.absoluteString)
-                        if let data = try? Data(contentsOf: url) {
-                            DispatchQueue.main.async {
-                                let imageToCache = UIImage(data: data)
-                                IMAGE_CACHE.setObject(imageToCache!, forKey: String(describing: urlString) as NSString)
-                                self.image = imageToCache
-                            }
-                        } else {
-                            DispatchQueue.main.async {
-                                self.image = UIImage(named: "profile")
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
+

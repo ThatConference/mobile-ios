@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qM8-Zo-kn1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qM8-Zo-kn1">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -972,7 +973,7 @@
                         <outlet property="linkedInButton" destination="Bze-DE-NeO" id="2Up-zn-dPM"/>
                         <outlet property="locationLabel" destination="Wfh-aC-Qce" id="bgc-z2-WSz"/>
                         <outlet property="pinterestButton" destination="s6T-G8-BXF" id="xL8-NN-D2B"/>
-                        <outlet property="profileImageView" destination="Ps4-NY-db5" id="9YP-pZ-zWy"/>
+                        <outlet property="profileImageView" destination="Ps4-NY-db5" id="dwe-Ux-U5N"/>
                         <outlet property="publicEmailLabel" destination="sYW-aF-ge5" id="4R4-N6-L0l"/>
                         <outlet property="publicPhoneLabel" destination="ZoA-YM-wi6" id="bZU-Xt-gXw"/>
                         <outlet property="scrollView" destination="xza-OB-6ge" id="pAf-mc-hQd"/>

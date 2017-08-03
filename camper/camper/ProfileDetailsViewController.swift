@@ -14,7 +14,7 @@ class ProfileDetailsViewController: UIViewController {
     @IBOutlet weak var editAccountBarButton: UIBarButtonItem!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var profileImageView: CircleImageView!
     @IBOutlet weak var firstNameLabel: UILabel!
     @IBOutlet weak var lastNameLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!

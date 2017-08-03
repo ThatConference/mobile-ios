@@ -105,6 +105,7 @@
 		7B22CA3B1F06D0350030E095 /* CamperContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B22CA3A1F06D0350030E095 /* CamperContactsViewController.swift */; };
 		7B3C38391E955E8100FEA4A5 /* StateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3C38381E955E8100FEA4A5 /* StateData.swift */; };
 		7B3C383C1E95A27F00FEA4A5 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B3C383A1E95A27F00FEA4A5 /* Map.storyboard */; };
+		7B58445B1F33881900B97601 /* LoadImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B58445A1F33881900B97601 /* LoadImageView.swift */; };
 		7B7F816E1F15168100460B98 /* TextFieldPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F816D1F15168100460B98 /* TextFieldPickerView.swift */; };
 		7B7F81701F1519BB00460B98 /* StatesProvincesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F816F1F1519BB00460B98 /* StatesProvincesModel.swift */; };
 		7B7F81721F16CB9100460B98 /* UserAuxiliaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7F81711F16CB9100460B98 /* UserAuxiliaryModel.swift */; };
@@ -252,6 +253,7 @@
 		7B22CA3A1F06D0350030E095 /* CamperContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CamperContactsViewController.swift; sourceTree = "<group>"; };
 		7B3C38381E955E8100FEA4A5 /* StateData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateData.swift; sourceTree = "<group>"; };
 		7B3C383B1E95A27F00FEA4A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Map.storyboard; sourceTree = "<group>"; };
+		7B58445A1F33881900B97601 /* LoadImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadImageView.swift; sourceTree = "<group>"; };
 		7B7F816D1F15168100460B98 /* TextFieldPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldPickerView.swift; sourceTree = "<group>"; };
 		7B7F816F1F1519BB00460B98 /* StatesProvincesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatesProvincesModel.swift; sourceTree = "<group>"; };
 		7B7F81711F16CB9100460B98 /* UserAuxiliaryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuxiliaryModel.swift; sourceTree = "<group>"; };
@@ -548,6 +550,7 @@
 				51A4D1D31CF290BB00F956BC /* FavoritesTableViewCell.swift */,
 				31D877F71D1864C10045E8DA /* FrameCell.swift */,
 				7B208D361F17CEC600CC92AD /* LoadingUIView.swift */,
+				7B58445A1F33881900B97601 /* LoadImageView.swift */,
 				3199C71B1CD6EFA5002F01CD /* PageDetailCell.swift */,
 				317154211D1C340E004078E2 /* PassThroughImageView.swift */,
 				7B00F7071EFABB3700E252DC /* ProfileDetailUIView.swift */,
@@ -931,6 +934,7 @@
 				512DA03F1CBBE03C006CC1B3 /* Speaker.swift in Sources */,
 				5113D3851CAA20CB00D6B974 /* ScheduleTableViewCell.swift in Sources */,
 				7BB028BA1EF1C6490075197A /* SpeakerAPI.swift in Sources */,
+				7B58445B1F33881900B97601 /* LoadImageView.swift in Sources */,
 				7BAF21F11F0AA11B00148A57 /* Contact.swift in Sources */,
 				7B9AA2521EF442E600DC24E0 /* ProfileTextField.swift in Sources */,
 				7BBB4B881F0D699A00823159 /* ShareContactTableViewCell.swift in Sources */,
