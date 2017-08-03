@@ -116,8 +116,37 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
     }
     
     func SignedIn() {
-        setDirtyData() {
-            self.DismissView()
+        let userAPI = UserAPI()
+        userAPI.getMainUser { (result) in
+            switch (result) {
+            case .success():
+                DispatchQueue.main.async {
+                    
+                    print("Sign in was successful")
+                    Answers.logLogin(withMethod: "InternalLogin", success: true, customAttributes: [:])
+                    self.setDirtyData() {
+                        self.DismissView()
+                    }
+                }
+            case .failure(let error):
+                Authentication.removeAuthToken()
+                print("Error \(error)")
+                let alert = UIAlertController(title: "Login Notice", message: "You must already be registered on the website and have your account linked in order to login", preferredStyle: .alert)
+                
+                let ok = UIAlertAction(title: "Ok", style: .default, handler: { (UIAlertAction) in
+                    self.webContainer.isHidden = true
+                })
+                
+                let goToSignIn = UIAlertAction(title: "Go to Website", style: .default, handler: { (UIAlertAction) in
+                    if let url = URL(string: "https://www.thatconference.com/Account/Login") {
+                        self.webContainer.isHidden = true
+                        UIApplication.shared.openURL(url)
+                    }
+                })
+                alert.addAction(ok)
+                alert.addAction(goToSignIn)
+                self.present(alert, animated: true, completion: nil)
+            }
         }
 
     }
@@ -190,9 +219,6 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
     }
     
     func setDirtyData(completed: @escaping () -> ()) {
-        let userAPI = UserAPI()
-        userAPI.getMainUser()
-        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.dirtyDataSchedule = true;
         appDelegate.dirtyDataFavorites = true;
@@ -249,13 +275,10 @@ class AuthorizationViewController : UIViewController, ContainerDelegateProtocol,
         token.expiration = Date().addingTimeInterval(Double(expiresIn))
         Authentication.saveAuthToken(token)
         
-        print("Sign in was successful")
-        Answers.logLogin(withMethod: "InternalLogin", success: true, customAttributes: [:])
-        
-        let userAPI = UserAPI()
-        userAPI.getMainUser()
-        
         DispatchQueue.main.async {
+            
+            print("Sign in was successful")
+            Answers.logLogin(withMethod: "InternalLogin", success: true, customAttributes: [:])
             self.SignedIn()
         }
     }
