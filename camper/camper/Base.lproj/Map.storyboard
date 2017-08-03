@@ -78,7 +78,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="PostCardChoosePhotoViewController" storyboardName="PostCards" referencedIdentifier="PostCardChoosePhotoViewController" id="Dwg-b0-OBa" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vg2-Ky-r4D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5484" y="1325"/>
+            <point key="canvasLocation" x="5385" y="1323"/>
         </scene>
     </scenes>
     <resources>

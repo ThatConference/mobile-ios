@@ -167,9 +167,19 @@ class EditProfileViewController: UIViewController {
                     let urlString = requestString + textfield.text!
                     return urlString
                 }
+            } else if (textfield == twitterTextField) {
+                if (textfield.text!.contains("@")) {
+                    return textfield.text!
+                } else {
+                    let requestString = "@"
+                    let urlString = requestString + textfield.text!
+                    return urlString
+                }
             } else {
                 return textfield.text!
+            
             }
+
         }
     }
     
