@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6eR-nB-bl9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6eR-nB-bl9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,6 +39,7 @@
                     <connections>
                         <outlet property="mapImage" destination="3aY-7S-uQV" id="SEX-Vv-G12"/>
                         <outlet property="menuButton" destination="tlS-KU-jLr" id="5Ps-PK-QgJ"/>
+                        <segue destination="Dwg-b0-OBa" kind="show" identifier="LoadPostcards" id="y3u-iw-qRU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Le0-Zv-Ep5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -69,6 +71,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cQd-7o-GjK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3884" y="1424"/>
+        </scene>
+        <!--PostCardChoosePhotoViewController-->
+        <scene sceneID="5fX-3M-pp1">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="PostCardChoosePhotoViewController" storyboardName="PostCards" referencedIdentifier="PostCardChoosePhotoViewController" id="Dwg-b0-OBa" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vg2-Ky-r4D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5385" y="1323"/>
         </scene>
     </scenes>
     <resources>

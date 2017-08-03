@@ -973,7 +973,7 @@
                         <outlet property="linkedInButton" destination="Bze-DE-NeO" id="2Up-zn-dPM"/>
                         <outlet property="locationLabel" destination="Wfh-aC-Qce" id="bgc-z2-WSz"/>
                         <outlet property="pinterestButton" destination="s6T-G8-BXF" id="xL8-NN-D2B"/>
-                        <outlet property="profileImageView" destination="Ps4-NY-db5" id="9YP-pZ-zWy"/>
+                        <outlet property="profileImageView" destination="Ps4-NY-db5" id="dwe-Ux-U5N"/>
                         <outlet property="publicEmailLabel" destination="sYW-aF-ge5" id="4R4-N6-L0l"/>
                         <outlet property="publicPhoneLabel" destination="ZoA-YM-wi6" id="bZU-Xt-gXw"/>
                         <outlet property="scrollView" destination="xza-OB-6ge" id="pAf-mc-hQd"/>

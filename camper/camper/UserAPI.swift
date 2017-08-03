@@ -12,15 +12,15 @@ enum UserMethod: String {
     case GetUser = "/api3/Account/UserProfile"
 }
 
-enum PutUserResult {
+enum UserResult {
     case success()
-    case failure(Error)
+    case failure(String)
 }
 
 class UserAPI {
     let baseURLString = "https://www.thatconference.com"
 
-    func getMainUser() {
+    func getMainUser(completionHandler: @escaping (UserResult) -> Void) {
         let url: URL = URL(string: getMainUserURL())!
         
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
@@ -35,19 +35,26 @@ class UserAPI {
         let task = session.dataTask(with: request) { (data, response, error) in
             guard error == nil else {
                 print(error!)
-                return
+                return completionHandler(UserResult.failure("Error"))
             }
             
             guard let data = data else {
                 print("Data is empty")
-                return
+                return completionHandler(UserResult.failure("Data Object is nil"))
             }
             
-            let json = try! JSONSerialization.jsonObject(with: data, options: [])
-            let user = User(dictionary: json as! [String: AnyObject])
-            print(user.id)
-            PersistenceManager.saveUser(user, path: Path.User)
-            StateData.instance.currentUser = user
+            let json = try? JSONSerialization.jsonObject(with: data, options: [])
+            
+            if (json == nil) {
+                return completionHandler(UserResult.failure("Json Object is nil"))
+            } else {
+                let user = User(dictionary: json as! [String: AnyObject])
+                print(user.id)
+                PersistenceManager.saveUser(user, path: Path.User)
+                StateData.instance.currentUser = user
+                return completionHandler(UserResult.success())
+            }
+
         }
         
         task.resume()
@@ -59,7 +66,7 @@ class UserAPI {
         return url
     }
     
-    func postUser(params: [String: AnyObject], completionHandler: @escaping (PutUserResult) -> Void) {
+    func putUser(params: [String: AnyObject], completionHandler: @escaping (UserResult) -> Void) {
         
         let jsonData = try? JSONSerialization.data(withJSONObject: params)
         
@@ -88,10 +95,10 @@ class UserAPI {
         let task = session.dataTask(with: request) { (data, response, error) in
             guard error == nil else {
                 print(error!)
-                return completionHandler(PutUserResult.failure(error!))
+                return completionHandler(UserResult.failure("Error, unable to putUser"))
             }
             
-            completionHandler(PutUserResult.success())
+            completionHandler(UserResult.success())
         }
         
         task.resume()

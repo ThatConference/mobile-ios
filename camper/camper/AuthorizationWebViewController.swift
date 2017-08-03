@@ -66,14 +66,11 @@ class AuthorizationWebViewController: UIViewController, UIWebViewDelegate {
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
         if var currentURL = webView.request?.url! {
-            print("CURRENT URL:\(currentURL)")
             
             let baseURL = currentURL.host!
             let stringURL = currentURL.absoluteString.replacingOccurrences(of: "/#access_token", with: "?access_token")
             currentURL = URL(string: stringURL)!
-            
-            print("UPDATED URL:\(currentURL)")
-            
+                        
             //Only handle when it comes back to That Conference
             if baseURL.contains("thatconference") {
                 let fullURL = currentURL.absoluteString

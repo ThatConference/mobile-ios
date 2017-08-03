@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CircleImageView: UIImageView {
+class CircleImageView: LoadImageView {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.cornerRadius = self.frame.size.width / 2

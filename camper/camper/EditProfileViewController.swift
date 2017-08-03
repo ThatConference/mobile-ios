@@ -99,14 +99,21 @@ class EditProfileViewController: UIViewController {
             print(user.parameter)
             
             let userAPI = UserAPI()
-            userAPI.postUser(params: user.parameter) { (result) in
+            userAPI.putUser(params: user.parameter) { (result) in
                 switch (result) {
                 case .success():
                     self.stopIndicator()
                     let alert = UIAlertController(title: "Successfully saved profile changes", message: "", preferredStyle: .alert)
                     let ok = UIAlertAction(title: "Ok", style: .default, handler: { (UIAlertAction) in
-                        userAPI.getMainUser()
-                        _ = self.navigationController?.popViewController(animated: true)
+                        userAPI.getMainUser(completionHandler: { (result) in
+                            switch (result) {
+                            case .success():
+                                _ = self.navigationController?.popViewController(animated: true)
+                            case .failure(let error):
+                                print("Error: \(error)")
+                                self.simpleAlert(title: "Unable to load user information", body: "Please try reloading it.")
+                            }
+                        })
                     })
                     
                     alert.addAction(ok)
@@ -167,9 +174,19 @@ class EditProfileViewController: UIViewController {
                     let urlString = requestString + textfield.text!
                     return urlString
                 }
+            } else if (textfield == twitterTextField) {
+                if (textfield.text!.contains("@")) {
+                    return textfield.text!
+                } else {
+                    let requestString = "@"
+                    let urlString = requestString + textfield.text!
+                    return urlString
+                }
             } else {
                 return textfield.text!
+            
             }
+
         }
     }
     
@@ -206,6 +223,14 @@ class EditProfileViewController: UIViewController {
     func stopIndicator() {
         DispatchQueue.main.async(execute: {
             self.activityIndicator.stopAnimating()
+        })
+    }
+    
+    func simpleAlert(title: String, body: String) {
+        DispatchQueue.main.async(execute: {
+            let alert = UIAlertController(title: title, message: body, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         })
     }
 }
