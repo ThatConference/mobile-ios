@@ -5,7 +5,7 @@ import Crashlytics
 class SpeakerProfileViewController : BaseViewController {
     var speaker: Speaker!
     
-    @IBOutlet var profileImage: LoadImageView!
+    @IBOutlet weak var profileImage: CircleImageView!
     @IBOutlet var speakerName: UILabel!
     @IBOutlet var jobTitle: UILabel!
     @IBOutlet var company: UILabel!
@@ -61,6 +61,8 @@ class SpeakerProfileViewController : BaseViewController {
             UIApplication.shared.openURL(URL(string: url)!)
         }
     }
+  
+    var imageLoader: ImageCacheLoader = ImageCacheLoader()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,8 +70,10 @@ class SpeakerProfileViewController : BaseViewController {
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
-        
-        self.profileImage.loadImageURL(url: speaker.headShotURL)
+      
+        imageLoader.loadImageURL(url: speaker.headShotURL) { (image) in
+          self.profileImage.image = image
+        }
 
         speakerName.text = speaker.fullName
         jobTitle.text = speaker.title

@@ -18,7 +18,6 @@ class SessionStore {
                     
                     var schedule = Dictionary<String, DailySchedule>()
                     var openspaces = Dictionary<String, DailySchedule>()
-                    var familyEvents = Dictionary<String, DailySchedule>()
 
                     var cancelled: Int = 0
                     

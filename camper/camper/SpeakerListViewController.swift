@@ -12,7 +12,8 @@ class SpeakerListViewController: BaseViewController {
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
-    
+  
+    var imageLoader: ImageCacheLoader = ImageCacheLoader()
     var refreshControl: UIRefreshControl!
     var speakerArray: [Speaker] = []
 
@@ -92,7 +93,17 @@ extension SpeakerListViewController: UITableViewDelegate, UITableViewDataSource 
         if let cell = tableView.dequeueReusableCell(withIdentifier: "SpeakerCell", for: indexPath) as? SpeakerTableViewCell {
             
             let speaker = speakerArray[indexPath.row]
-            cell.setUpCell(speaker: speaker)
+            cell.speaker = speaker
+            cell.speakerNameLabel.text = speaker.fullName
+            cell.businessLabel.text = speaker.company
+            cell.speakerImageView.image = UIImage(named: "profile")
+          
+            imageLoader.loadImageURL(url: speaker.headShotURL) { (image) in
+                if let updateCell = tableView.cellForRow(at: indexPath) as? SpeakerTableViewCell {
+                    updateCell.speakerImageView.image = image
+                }
+            }
+            
             return cell
         }
         

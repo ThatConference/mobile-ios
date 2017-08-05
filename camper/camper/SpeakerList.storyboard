@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="IQy-tY-VeF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="IQy-tY-VeF">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,7 +27,7 @@
                 <navigationController title="Speaker List Nav" automaticallyAdjustsScrollViewInsets="NO" id="IQy-tY-VeF" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="open spaces" image="open-spaces" selectedImage="open-spaces" id="bzs-w5-cmY"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="698-7R-hLb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="698-7R-hLb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.90396612880000005" green="0.83328729869999996" blue="0.69475156069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -57,35 +58,35 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1Am-fZ-IRQ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="95" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1Am-fZ-IRQ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SpeakerCell" rowHeight="125" id="B4w-Q1-DBb" customClass="SpeakerTableViewCell" customModule="That_Conference" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="125"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SpeakerCell" rowHeight="95" id="B4w-Q1-DBb" customClass="SpeakerTableViewCell" customModule="That_Conference" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B4w-Q1-DBb" id="2HO-mI-P2e">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="124.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="94.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker" translatesAutoresizingMaskIntoConstraints="NO" id="qW4-Ps-hmE" customClass="CircleImageView" customModule="That_Conference" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="21" width="70" height="70"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="qW4-Ps-hmE" customClass="CircleImageView" customModule="That_Conference" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="10" width="70" height="70"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="70" id="ZA9-CW-9Tf"/>
                                                         <constraint firstAttribute="width" constant="70" id="qMA-5Z-M5B"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speaker Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9HP-kV-jkh">
-                                                    <rect key="frame" x="101" y="33" width="225" height="20"/>
+                                                    <rect key="frame" x="101" y="20" width="225" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="2Le-bK-0eT"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="18"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Business" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dBQ-VN-kBV">
-                                                    <rect key="frame" x="101" y="63" width="225" height="17"/>
+                                                    <rect key="frame" x="101" y="50" width="225" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="253" id="wnP-e4-hlO"/>
                                                     </constraints>
@@ -99,7 +100,7 @@
                                                     </variation>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3z-qr-O64">
-                                                    <rect key="frame" x="346" y="41" width="21" height="30"/>
+                                                    <rect key="frame" x="346" y="30" width="21" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="QkE-9a-Aw0"/>
                                                         <constraint firstAttribute="width" constant="21" id="aH0-KT-bZW"/>
@@ -113,13 +114,13 @@
                                             <constraints>
                                                 <constraint firstItem="qW4-Ps-hmE" firstAttribute="leading" secondItem="2HO-mI-P2e" secondAttribute="leadingMargin" constant="8" id="2C7-B2-gY0"/>
                                                 <constraint firstItem="9HP-kV-jkh" firstAttribute="leading" secondItem="qW4-Ps-hmE" secondAttribute="trailing" constant="15" id="7E8-iC-3GY"/>
-                                                <constraint firstItem="qW4-Ps-hmE" firstAttribute="top" secondItem="2HO-mI-P2e" secondAttribute="topMargin" constant="13" id="BpS-0a-v4g"/>
+                                                <constraint firstItem="qW4-Ps-hmE" firstAttribute="top" secondItem="2HO-mI-P2e" secondAttribute="topMargin" constant="2" id="BpS-0a-v4g"/>
                                                 <constraint firstItem="dBQ-VN-kBV" firstAttribute="top" secondItem="9HP-kV-jkh" secondAttribute="bottom" constant="10" id="H5S-H8-Oj8"/>
                                                 <constraint firstItem="dBQ-VN-kBV" firstAttribute="leading" secondItem="9HP-kV-jkh" secondAttribute="leading" id="LCc-ff-qcS"/>
                                                 <constraint firstItem="f3z-qr-O64" firstAttribute="leading" secondItem="9HP-kV-jkh" secondAttribute="trailing" constant="20" id="UqB-eb-DMm"/>
                                                 <constraint firstItem="f3z-qr-O64" firstAttribute="centerY" secondItem="qW4-Ps-hmE" secondAttribute="centerY" id="YHJ-rx-BX8"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="f3z-qr-O64" secondAttribute="trailing" id="fOu-cP-lud"/>
-                                                <constraint firstItem="9HP-kV-jkh" firstAttribute="top" secondItem="2HO-mI-P2e" secondAttribute="topMargin" constant="25" id="iiD-Qe-hcI"/>
+                                                <constraint firstItem="9HP-kV-jkh" firstAttribute="top" secondItem="2HO-mI-P2e" secondAttribute="topMargin" constant="12" id="iiD-Qe-hcI"/>
                                                 <constraint firstItem="dBQ-VN-kBV" firstAttribute="trailing" secondItem="9HP-kV-jkh" secondAttribute="trailing" id="ndm-qC-aPO"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -179,6 +180,6 @@
     <resources>
         <image name="hamburger" width="24" height="20"/>
         <image name="open-spaces" width="35" height="35"/>
-        <image name="speaker" width="66" height="75"/>
+        <image name="profile" width="1000" height="1000"/>
     </resources>
 </document>

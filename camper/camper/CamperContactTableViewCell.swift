@@ -18,13 +18,5 @@ class CamperContactTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-    
-    func setUpCell(contact: Contact) {
-        self.contact = contact
-        camperImageView.loadImageURL(url: URL(string: contact.headShot ?? ""))
-        camperNameLabel.text = contact.fullName
-        companyLabel.text = contact.companyString
     }
 }

@@ -15,7 +15,8 @@ class ShareContactViewController: BaseViewControllerNoCameraViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var shareButton: RoundedButton!
-    
+    var imageLoader: ImageCacheLoader = ImageCacheLoader()
+  
     var loadinView: UIView!
     
     var localBeaconUUID = "1d44ddec-0ad8-4e1e-abab-1de93b948f88"
@@ -188,9 +189,19 @@ extension ShareContactViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "ShareContactCell") as? ShareContactTableViewCell {
             let user = userAuxArray[indexPath.row]
-            cell.setUpCell(userAux: user)
             cell.selectionStyle = .none
-            // Call stop here
+          
+            cell.userAux = user
+            cell.contactNameLabel.text = user.fullName
+            cell.companyLabel.text = user.companyString
+            cell.profileImageView.image = UIImage(named: "profile")
+          
+            imageLoader.loadImageURL(url: URL(string: user.displayHeadShotString)) { (image) in
+              if let updateCell = tableView.cellForRow(at: indexPath) as? ShareContactTableViewCell {
+                updateCell.profileImageView.image = image
+              }
+            }
+          
             return cell
         }
         

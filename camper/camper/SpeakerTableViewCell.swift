@@ -18,14 +18,5 @@ class SpeakerTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-    
-    func setUpCell(speaker: Speaker) {
-        self.speaker = speaker
-        speakerImageView.loadImageURL(url: speaker.headShotURL)
-        speakerNameLabel.text = speaker.fullName
-        businessLabel.text = speaker.company
-    }
-
 }

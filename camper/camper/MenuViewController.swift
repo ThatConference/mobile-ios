@@ -10,11 +10,12 @@ import UIKit
 
 class MenuViewController: UIViewController {
     
-    @IBOutlet weak var profileImageView: BorderImageView!
+    @IBOutlet weak var profileImageView: CircleImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     
-    
+    var imageLoader: ImageCacheLoader = ImageCacheLoader()
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,7 +57,9 @@ class MenuViewController: UIViewController {
     func updateUI() {
         nameLabel.text = StateData.instance.currentUser.fullName
         if let headshot = StateData.instance.currentUser.headShot {
-            profileImageView.loadImageURL(url: URL(string: headshot))
+            imageLoader.loadImageURL(url: URL(string: headshot)) { (image) in
+                self.profileImageView.image = image
+            }
         } else {
             profileImageView.image = UIImage(named: "speaker")
         }

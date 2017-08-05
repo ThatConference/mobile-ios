@@ -454,7 +454,7 @@ class ThatConferenceAPI {
     class func saveOfflineFavorites(offlineFavorites: Dictionary<String, Session>) {
         var offlineSyncFavorites = offlineFavorites
         for session in offlineSyncFavorites {
-            var sessionKey: String = "\(session.key)"
+            let sessionKey: String = "\(session.key)"
             if session.value.isUserFavorite == true {
                 ThatConferenceAPI.saveFavorite(session.value.id, completionHandler: { (data, response, error) in
                     offlineSyncFavorites[sessionKey] = nil

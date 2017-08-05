@@ -50,7 +50,9 @@ class ProfileDetailsViewController: UIViewController {
     @IBOutlet weak var commentTextView: CommentUITextView!
     @IBOutlet weak var commentTextViewStackView: UIStackView!
     @IBOutlet weak var addCommentButton: RoundedButton!
-    
+  
+    var imageLoader: ImageCacheLoader = ImageCacheLoader()
+  
     var mainUser: User?
     var selectedContact: Contact?
     var activityIndicator: UIActivityIndicatorView!
@@ -105,11 +107,13 @@ class ProfileDetailsViewController: UIViewController {
                     
                     // Save Comment here
                     commentText = ""
+                    contact.memo = commentText
                     contactAPI.putContact(sharedContactId: contact.sharecontactId!, commentText)
                 } else {
                     
                     // Save Comment here
                     commentText = self.commentTextView.text
+                    contact.memo = commentText
                     contactAPI.putContact(sharedContactId: contact.sharecontactId!, commentText)
                 }
                 
@@ -220,7 +224,9 @@ class ProfileDetailsViewController: UIViewController {
         if let user = mainUser {
             self.navigationController?.title = "YOUR PROFILE"
             if let headshot = user.headShot {
-                profileImageView.loadImageURL(url: URL(string: headshot))
+                imageLoader.loadImageURL(url: URL(string: headshot)) { (image) in
+                    self.profileImageView.image = image
+                }
             } else {
                 profileImageView.image = UIImage(named: "speaker")
             }
@@ -241,7 +247,9 @@ class ProfileDetailsViewController: UIViewController {
             self.navigationController?.title = "CAMPER PROFILE"
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "details_icon"), style: .plain, target: self, action: #selector(settingsButtonTapped(_:)))
             if let headshot = contact.headShot {
-                profileImageView.loadImageURL(url: URL(string: headshot))
+                imageLoader.loadImageURL(url: URL(string: headshot)) { (image) in
+                    self.profileImageView.image = image
+                }
             } else {
                 profileImageView.image = UIImage(named: "speaker")
             }

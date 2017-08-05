@@ -8,43 +8,49 @@
 
 import UIKit
 
-class LoadImageView: UIImageView {
-    
-    var imageURLString: String?
-    
-    
-    func loadImageURL(url: URL?) {
-        
+typealias ImageCacheLoaderCompletionHandler = ((UIImage) -> ())
+
+class ImageCacheLoader {
+  
+  var task: URLSessionDownloadTask!
+  var session: URLSession!
+  
+  init() {
+    session = URLSession.shared
+    task = URLSessionDownloadTask()
+  }
+  
+    func loadImageURL(url: URL?, completionHandler: @escaping ImageCacheLoaderCompletionHandler) {
+        let placeholder = UIImage(named: "profile")
+      
         guard let url = url else {
-            self.image = UIImage(named: "profile")
-            return
+          DispatchQueue.main.async {
+            completionHandler(placeholder!)
+          }
+          return
         }
         
         let urlString = ThatConferenceAPI.resourceURL(url.absoluteString)
         let imageURLString: NSString = "\(urlString)" as NSString
         
-        self.image = UIImage(named: "profile")
-        
         if let image = IMAGE_CACHE.object(forKey: imageURLString) {
-            self.image = image
-            return
+          DispatchQueue.main.async {
+            completionHandler(image)
+          }
         }
         
         let mainUrl = ThatConferenceAPI.resourceURL(url.absoluteString)
         
-        URLSession.shared.dataTask(with: mainUrl) { (data, response, error) in
-            
+        session.dataTask(with: mainUrl) { (data, response, error) in
             if error != nil {
                 print(error!)
                 return
             }
-            
+
+            let img: UIImage! = UIImage(data: data!)
+            IMAGE_CACHE.setObject(img, forKey: imageURLString as NSString)
             DispatchQueue.main.async {
-                let imageToCache = UIImage(data: data!)
-                
-                self.image = imageToCache
-                
-                IMAGE_CACHE.setObject(imageToCache!, forKey: imageURLString)
+              completionHandler(img)
             }
         }.resume()
     }

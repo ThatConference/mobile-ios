@@ -501,7 +501,7 @@
                 <navigationController storyboardIdentifier="ProfileNavigationController" title="EditProfile" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qM8-Zo-kn1" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="schedule" image="schedule" id="48z-oD-G22"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleAspectFit" translucent="NO" backIndicatorImage="back" id="uj1-dN-Sgv">
+                    <navigationBar key="navigationBar" contentMode="scaleAspectFit" misplaced="YES" translucent="NO" backIndicatorImage="back" id="uj1-dN-Sgv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <rect key="contentStretch" x="0.0" y="0.0" width="0.29999999999999999" height="0.29999999999999999"/>
@@ -521,7 +521,7 @@
             </objects>
             <point key="canvasLocation" x="-382" y="73"/>
         </scene>
-        <!--YOUR PROFILE-->
+        <!--PROFILE-->
         <scene sceneID="M0S-hq-v12">
             <objects>
                 <viewController storyboardIdentifier="ProfileDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tb5-Os-ct1" customClass="ProfileDetailsViewController" customModule="That_Conference" customModuleProvider="target" sceneMemberID="viewController">
@@ -940,7 +940,7 @@
                             <constraint firstAttribute="trailing" secondItem="xza-OB-6ge" secondAttribute="trailing" id="hh4-vZ-AmZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="YOUR PROFILE" id="4oD-Fd-MhL">
+                    <navigationItem key="navigationItem" title="PROFILE" id="4oD-Fd-MhL">
                         <barButtonItem key="leftBarButtonItem" image="back" id="YhH-rs-Na9">
                             <connections>
                                 <segue destination="d2m-ZR-sip" kind="unwind" unwindAction="unwindToMainVCWithSegue:" id="hy0-NB-8OU"/>

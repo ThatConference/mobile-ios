@@ -31,12 +31,4 @@ class ShareContactTableViewCell: UITableViewCell {
             selectIconImageView.image = UIImage(named: "unselected")
         }
     }
-    
-    func setUpCell(userAux: UserAuxiliaryModel) {
-        self.userAux = userAux
-        profileImageView.loadImageURL(url: URL(string: userAux.displayHeadShotString))
-        contactNameLabel.text = userAux.fullName
-        companyLabel.text = userAux.companyString
-    }
-
 }

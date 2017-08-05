@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BorderImageView: LoadImageView {
+class BorderImageView: UIImageView {
 
     override func awakeFromNib() {
         super.awakeFromNib()

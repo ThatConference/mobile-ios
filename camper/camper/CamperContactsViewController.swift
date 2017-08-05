@@ -13,7 +13,8 @@ class CamperContactsViewController: BaseViewControllerNoCameraViewController {
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
-
+  
+    var imageLoader: ImageCacheLoader = ImageCacheLoader()
     let conditionRef = Database.database().reference().child("contact-sharing")
     var contactArray: [Contact] = []
     var selectedContact: Contact?
@@ -116,7 +117,17 @@ extension CamperContactsViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CamperContactCell") as? CamperContactTableViewCell {
             let contact = contactArray[indexPath.row]
-            cell.setUpCell(contact: contact)
+            cell.contact = contact
+            cell.camperNameLabel.text = contact.fullName
+            cell.companyLabel.text = contact.companyString
+            cell.camperImageView.image = UIImage(named: "profile")
+          
+            imageLoader.loadImageURL(url: URL(string: contact.headShot ?? "")) { (image) in
+              if let updateCell = tableView.cellForRow(at: indexPath) as? CamperContactTableViewCell {
+                updateCell.camperImageView.image = image
+              }
+            }
+          
             return cell
         }
         
