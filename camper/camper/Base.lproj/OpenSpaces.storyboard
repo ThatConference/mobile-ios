@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eJx-Ex-Npc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eJx-Ex-Npc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -31,6 +32,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="utX-J9-1t0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3337" y="189"/>
+        </scene>
+        <!--SessionDetailViewController-->
+        <scene sceneID="iSE-Yb-8B9">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="SessionDetailViewController" storyboardName="SessionDetails" referencedIdentifier="SessionDetailViewController" id="r5T-aM-19Q" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2ol-29-JOd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3273" y="250"/>
         </scene>
         <!--Open Spaces-->
         <scene sceneID="RPd-4u-6Oh">
@@ -87,7 +96,7 @@
                                         </state>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U7G-HF-dO6">
-                                        <rect key="frame" x="79" y="11" width="217" height="20"/>
+                                        <rect key="frame" x="79" y="10.5" width="217" height="20"/>
                                         <fontDescription key="fontDescription" name="NeutrafaceText-Demi" family="Neutraface Text" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -221,7 +230,7 @@
                                                     <rect key="frame" x="8" y="0.0" width="327" height="159.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CANCELLED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDj-Ay-oE2">
-                                                            <rect key="frame" x="83" y="66.5" width="161.5" height="28"/>
+                                                            <rect key="frame" x="83.5" y="66.5" width="161.5" height="28"/>
                                                             <fontDescription key="fontDescription" name="NeutrafaceText-Bold" family="Neutraface Text" pointSize="28"/>
                                                             <color key="textColor" red="0.66666666669999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -321,6 +330,7 @@
                         <outlet property="tableView" destination="4nr-Hq-Xlt" id="zaQ-fW-bLu"/>
                         <outlet property="timeTableView" destination="LeF-79-ew8" id="jym-AV-cvj"/>
                         <segue destination="kCv-mK-lxY" kind="show" identifier="ShowPostcards" id="M55-O1-lIj"/>
+                        <segue destination="r5T-aM-19Q" kind="showDetail" id="wWz-h1-YZr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5NZ-QZ-rSh" userLabel="First Responder" sceneMemberID="firstResponder"/>

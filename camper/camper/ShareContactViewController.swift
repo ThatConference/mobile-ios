@@ -10,6 +10,8 @@ import CoreBluetooth
 import CoreLocation
 import UIKit
 import Firebase
+import Fabric
+import Crashlytics
 
 class ShareContactViewController: BaseViewControllerNoCameraViewController {
     
@@ -176,6 +178,7 @@ class ShareContactViewController: BaseViewControllerNoCameraViewController {
     func postContacts(completed: @escaping () -> ()) {
         startIndicator()
         contactAPI.postContacts(contactIDs: self.selectedIdDict)
+        Answers.logCustomEvent(withName: "Add Contacts", customAttributes: [:])
         completed()
     }
 }
