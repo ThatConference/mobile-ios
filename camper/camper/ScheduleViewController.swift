@@ -149,8 +149,10 @@ class ScheduleViewController : TimeSlotRootViewController {
     }
     
     override func setData(_ isDirty: Bool) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.dirtyDataSchedule = isDirty;
+        DispatchQueue.main.async{
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.dirtyDataSchedule = isDirty;
+        }
     }
     
     override func getDirtyData() -> Bool {

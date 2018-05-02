@@ -26,7 +26,7 @@ class SpeakerListViewController: BaseViewController {
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: #selector(SpeakerListViewController.refresh(_:)), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action: #selector(self.loadData), for: UIControlEvents.valueChanged)
         
         self.tableView.addSubview(self.refreshControl)
         
@@ -43,7 +43,7 @@ class SpeakerListViewController: BaseViewController {
         }
     }
     
-    func loadData() {
+    @objc func loadData() {
         let speakerAPI = SpeakerAPI()
         
         self.activityIndicator.startAnimating()
@@ -52,31 +52,31 @@ class SpeakerListViewController: BaseViewController {
             self.refreshControl.endRefreshing()
         }
         
-        if let speakers = PersistenceManager.loadSpeakers(Path.Speakers) {
-            self.speakerArray = speakers
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.activityIndicator.stopAnimating()
-            }
-        } else {
-            speakerAPI.getSpeakers { (result) in
-                switch (result) {
-                case .success(let result):
-                    self.speakerArray = result
+        speakerAPI.getSpeakers { (result) in
+            switch (result) {
+            case .success(let result):
+                self.speakerArray = result
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.activityIndicator.stopAnimating()
+                }
+                break
+            case .failure(let error):
+                print(error)
+                if let speakers = PersistenceManager.loadSpeakers(Path.Speakers) {
+                    self.speakerArray = speakers
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                         self.activityIndicator.stopAnimating()
                     }
-                    break
-                case .failure(let error):
-                    print(error)
+                } else {
                     self.speakerArray = []
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                         self.activityIndicator.stopAnimating()
                     }
-                    break
                 }
+                break
             }
         }
     }
@@ -97,7 +97,7 @@ extension SpeakerListViewController: UITableViewDelegate, UITableViewDataSource 
             cell.speakerNameLabel.text = speaker.fullName
             cell.businessLabel.text = speaker.company
             cell.speakerImageView.image = UIImage(named: "profile")
-          
+
             imageLoader.loadImageURL(url: speaker.headShotURL) { (image) in
                 if let updateCell = tableView.cellForRow(at: indexPath) as? SpeakerTableViewCell {
                     updateCell.speakerImageView.image = image

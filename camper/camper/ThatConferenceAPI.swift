@@ -115,7 +115,7 @@ class ThatConferenceAPI {
     
     static func resourceURL(_ partialURL: String) -> URL {
         let badPrefix = "cloud/"
-        let index1 = partialURL.characters.index(partialURL.startIndex, offsetBy: badPrefix.characters.count)
+        let index1 = partialURL.index(partialURL.startIndex, offsetBy: badPrefix.count)
         let substringURL = partialURL.substring(from: index1)
         
         let fullURL = baseResourceURLString + substringURL;

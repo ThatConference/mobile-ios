@@ -21,12 +21,12 @@ class BaseViewController: UIViewController, AuthorizationFormDelegate {
         
         self.view.addSubview(self.activityIndicator)
         
-        // That Post Card
-        let cameraBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        cameraBtn.setImage(UIImage(named: "camera"), for: UIControlState())
-        cameraBtn.addTarget(self, action: #selector(self.moveToCamera), for:  UIControlEvents.touchUpInside)
-        let item = UIBarButtonItem(customView: cameraBtn)
-        self.navigationItem.rightBarButtonItem = item
+//        // That Post Card
+//        let cameraBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+//        cameraBtn.setImage(UIImage(named: "camera"), for: UIControlState())
+//        cameraBtn.addTarget(self, action: #selector(self.moveToCamera), for:  UIControlEvents.touchUpInside)
+//        let item = UIBarButtonItem(customView: cameraBtn)
+//        self.navigationItem.rightBarButtonItem = item
         
         setUpSettings()
     }

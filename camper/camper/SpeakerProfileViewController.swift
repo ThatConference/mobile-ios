@@ -85,6 +85,7 @@ class SpeakerProfileViewController : BaseViewController {
             website.setTitle(speakerWebsite.absoluteString, for: UIControlState())
         }
         
+        biography.text = ""
         if let bioText = speaker.biography
         {
             biography.text = bioText

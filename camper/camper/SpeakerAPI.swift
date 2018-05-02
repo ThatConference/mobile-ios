@@ -9,7 +9,7 @@
 import Foundation
 
 enum SpeakerMethod: String {
-    case Speakers = "/api3/Speakers/GetSpeakers?year={year}"
+    case Speakers = "/api3/Speakers/GetSpeakers"
 }
 
 enum SpeakerResult {
@@ -95,8 +95,6 @@ class SpeakerAPI {
     
     func getSpeakerURL() -> String {
         let url = self.baseURLString + SpeakerMethod.Speakers.rawValue;
-        let url2 = url.replacingOccurrences(of: "{year}", with: self.year)
-    
-        return url2
+        return url
     }
 }
