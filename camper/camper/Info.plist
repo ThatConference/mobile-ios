@@ -32,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -50,11 +50,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Allow "That Conference" to use bluetooth?</string>
+	<string>Bluetooth is used to determine nearby users when sharing your contact information.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Will be used for creating That PostCard</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Allow "That Conference" to access your current location while using the app?</string>
+	<string>Location services is used to determine nearby users when sharing your contact information.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Will be used to store That PostCard to your local library</string>
 	<key>UIAppFonts</key>

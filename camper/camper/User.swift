@@ -30,6 +30,7 @@ class User: NSObject, NSCoding {
         static let Pinterest = "Pintrest"
         static let Instagram = "Instagram"
         static let Biography = "Biography"
+        static let BiographyHTML = "BiographyHtml"
         static let PublicEmail = "PublicEmail"
         static let PublicPhone = "PublicPhone"
         static let PublicThatSlackHandle = "PublicThatSlackHandle"
@@ -48,6 +49,7 @@ class User: NSObject, NSCoding {
     var publicEmail: String?
     
     var biography: String?
+    var biographyHTML: String?
     
     var phone: String?
     var publicPhone: String?
@@ -84,6 +86,7 @@ class User: NSObject, NSCoding {
         _email = dictionary[Keys.Email] as! String
         publicEmail = dictionary[Keys.PublicEmail] as? String
         biography = dictionary[Keys.Biography] as? String
+        biographyHTML = dictionary[Keys.BiographyHTML] as? String
         phone = dictionary[Keys.Phone] as? String
         publicPhone = dictionary[Keys.PublicPhone] as? String
         publicThatSlackHandle = dictionary[Keys.PublicThatSlackHandle] as? String
@@ -102,7 +105,7 @@ class User: NSObject, NSCoding {
         _auxiliaryId = dictionary[Keys.AuxiliaryId] as! UInt32
     }
     
-    init(id: String, headShot: String?, displayHeadShot: String?, firstName: String, lastName: String, email: String, publicEmail: String?, biography: String?, phone: String?, publicPhone: String?, publicThatSlackHandle: String?, city: String?, state: String?, company: String?, title: String?, website: String?, twitter: String?, facebook: String?, googlePlus: String?, github: String?, pinterest: String?, instagram: String?, linkedIn: String?, auxiliaryId: UInt32) {
+    init(id: String, headShot: String?, displayHeadShot: String?, firstName: String, lastName: String, email: String, publicEmail: String?, biography: String?, biographyHTML: String?, phone: String?, publicPhone: String?, publicThatSlackHandle: String?, city: String?, state: String?, company: String?, title: String?, website: String?, twitter: String?, facebook: String?, googlePlus: String?, github: String?, pinterest: String?, instagram: String?, linkedIn: String?, auxiliaryId: UInt32) {
         self._id = id
         self._headShot = headShot
         self._displayHeadshot = displayHeadShot
@@ -111,6 +114,7 @@ class User: NSObject, NSCoding {
         self._email = email
         self.publicEmail = publicEmail
         self.biography = biography
+        self.biographyHTML = biographyHTML
         self.phone = phone
         self.publicPhone = publicPhone
         self.publicThatSlackHandle = publicThatSlackHandle
@@ -139,6 +143,7 @@ class User: NSObject, NSCoding {
         aCoder.encode(self._email, forKey: Keys.Email)
         aCoder.encode(self.publicEmail, forKey: Keys.PublicEmail)
         aCoder.encode(self.biography, forKey: Keys.Biography)
+        aCoder.encode(self.biographyHTML, forKey: Keys.BiographyHTML)
         aCoder.encode(self.phone, forKey: Keys.Phone)
         aCoder.encode(self.publicPhone, forKey: Keys.PublicPhone)
         aCoder.encode(self.publicThatSlackHandle, forKey: Keys.PublicThatSlackHandle)
@@ -167,6 +172,7 @@ class User: NSObject, NSCoding {
         _email = aDecoder.decodeObject(forKey: Keys.Email) as! String
         publicEmail = aDecoder.decodeObject(forKey: Keys.PublicEmail) as? String
         biography = aDecoder.decodeObject(forKey: Keys.Biography) as? String
+        biographyHTML = aDecoder.decodeObject(forKey: Keys.BiographyHTML) as? String
         phone = aDecoder.decodeObject(forKey: Keys.Phone) as? String
         publicPhone = aDecoder.decodeObject(forKey: Keys.PublicPhone) as? String
         publicThatSlackHandle = aDecoder.decodeObject(forKey: Keys.PublicThatSlackHandle) as? String
@@ -282,6 +288,13 @@ class User: NSObject, NSCoding {
         return biography!
     }
     
+    var biographyHTMLString: String {
+        if (biographyHTML == nil) {
+            return ""
+        }
+        return biographyHTML!
+    }
+    
     var auxiliaryId: UInt32! {
         return _auxiliaryId
     }
@@ -311,6 +324,7 @@ class User: NSObject, NSCoding {
             Keys.DisplayHeadShot : displayHeadShot as AnyObject,
             Keys.PublicEmail : publicEmail as AnyObject,
             Keys.Biography : biography as AnyObject,
+            Keys.BiographyHTML : biographyHTML as AnyObject,
             Keys.Phone : phone as AnyObject,
             Keys.PublicPhone : publicPhone as AnyObject,
             Keys.PublicThatSlackHandle : publicThatSlackHandle as AnyObject,

@@ -6,6 +6,7 @@ class Speaker: NSObject, NSCoding {
     var headShotURL: URL!
     var userName: String?
     var biography: String?
+    var biographyHTML: String?
     var website: URL!
     var company: String?
     var title: String?
@@ -24,6 +25,7 @@ class Speaker: NSObject, NSCoding {
         aCoder.encode(self.headShotURL, forKey: "headShotURL")
         aCoder.encode(self.userName, forKey: "userName")
         aCoder.encode(self.biography, forKey: "biography")
+        aCoder.encode(self.biographyHTML, forKey: "biographyHTML")
         aCoder.encode(self.website, forKey: "website")
         aCoder.encode(self.company, forKey: "company")
         aCoder.encode(self.title, forKey: "title")
@@ -41,6 +43,7 @@ class Speaker: NSObject, NSCoding {
         let headShotURL = aDecoder.decodeObject(forKey: "headShotURL") as? URL
         let userName = aDecoder.decodeObject(forKey: "userName") as? String
         let biography = aDecoder.decodeObject(forKey: "biography") as? String
+        let biographyHTML = aDecoder.decodeObject(forKey: "BiographyHtml") as? String
         let website = aDecoder.decodeObject(forKey: "website") as? URL
         let company = aDecoder.decodeObject(forKey: "company") as? String
         let title = aDecoder.decodeObject(forKey: "title") as? String
@@ -55,6 +58,7 @@ class Speaker: NSObject, NSCoding {
                   headShotURL: headShotURL,
                   userName: userName,
                   biography: biography,
+                  biographyHTML: biographyHTML,
                   website: website,
                   company: company,
                   title: title,
@@ -71,6 +75,7 @@ class Speaker: NSObject, NSCoding {
                   headShotURL: URL?,
                   userName: String?,
                   biography: String?,
+                  biographyHTML: String?,
                   website: URL?,
                   company: String?,
                   title: String?,
@@ -85,6 +90,7 @@ class Speaker: NSObject, NSCoding {
         self.headShotURL = headShotURL
         self.userName = userName
         self.biography = biography
+        self.biographyHTML = biographyHTML
         self.website = website
         self.company = company
         self.title = title

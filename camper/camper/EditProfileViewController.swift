@@ -78,6 +78,7 @@ class EditProfileViewController: UIViewController {
                             email: currentUser.email,
                             publicEmail: checkTextfieldValue(emailTextField),
                             biography: checkTextView(biographyTextView),
+                            biographyHTML: checkTextView(biographyTextView),
                             phone: currentUser.phone,
                             publicPhone: checkTextfieldValue(phoneTextField),
                             publicThatSlackHandle: checkTextfieldValue(publicSlackHandle),

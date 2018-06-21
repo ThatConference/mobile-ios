@@ -239,7 +239,14 @@ class ProfileDetailsViewController: UIViewController {
             companyLabel.text = user.companyString
             titleLabel.text = user.titleString
             locationLabel.text = user.locationString
-            biographyLabel.text = user.biography
+            
+            biographyLabel.attributedText = NSAttributedString(string: "")
+            if var bioText = user.biographyHTML
+            {
+                bioText = "<div style='font-size:1.2em'>" + bioText + "</div>"
+                biographyLabel.attributedText = bioText.convertHtml()
+            }
+            
             slackHandleLabel.text = user.slackHandleString
         }
         

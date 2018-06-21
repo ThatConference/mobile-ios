@@ -31,7 +31,14 @@ class SessionDetailViewController : BaseViewController, UITableViewDataSource, U
         
         labelTitle.text = session.title
         labelCategory.text = session.primaryCategory
-        labelDescription.text = session.sessionDescription
+        
+        labelDescription.attributedText = NSAttributedString(string: "")
+        if var sessionText = session.sessionDescriptionHTML
+        {
+            sessionText = "<div style='font-size:1.2em'>" + sessionText + "</div>"
+            labelDescription.attributedText = sessionText.convertHtml()
+        }
+        
         roomName.text = session.scheduledRoom
         if let level = session.level {
             levelLabel.text = "Level: \(level)"

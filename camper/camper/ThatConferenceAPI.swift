@@ -4,7 +4,6 @@ enum Method: String {
     case ExternalLogins = "/api3/Account/ExternalLogins"
     case Favorite = "/api3/Favorites/"
     case SessionGetAccepted = "/api3/Session/GetAcceptedSessions"
-    case SessionsGetAll = "/api3/Session/GetAllAcceptedSessions"
     case Sponsors = "/api3/Sponsors/GetSponsors"
     case Token = "/Token"
     case UserFavorites = "/api3/Session/GetFavoriteSessions"
@@ -178,6 +177,7 @@ class ThatConferenceAPI {
         let id = json["Id"] as? Int
         let title = json["Title"] as? String
         let sessionDescription = json["Description"] as? String
+        let sessionDescriptionHTML = json["DescriptionHtml"] as? String
         let scheduledRoom = json["ScheduledRoom"] as? String
         let primaryCategory = json["PrimaryCategoryDisplayText"] as? String
         let level = json["Level"] as? String
@@ -206,6 +206,7 @@ class ThatConferenceAPI {
                               id: id as NSNumber?,
                               title: title,
                               sessionDescription: sessionDescription,
+                              sessionDescriptionHTML: sessionDescriptionHTML,
                               scheduledDateTime: scheduledDateTime,
                               scheduledRoom: scheduledRoom,
                               primaryCategory: primaryCategory,
@@ -227,6 +228,7 @@ class ThatConferenceAPI {
                 }
                 
                 speaker.biography = jsonSpeaker["Biography"] as? String
+                speaker.biographyHTML = jsonSpeaker["BiographyHtml"] as? String
                 
                 if let websiteString = jsonSpeaker["WebSite"] as? String {
                     speaker.website = URL(string: websiteString)

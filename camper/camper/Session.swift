@@ -7,6 +7,7 @@ class Session: NSObject, NSCoding {
         static let id = "id"
         static let title = "title"
         static let sessionDescription = "sessionDescription"
+        static let sessionDescriptionHTML = "sessionDescriptionHTML"
         static let scheduleDateTime = "scheduledDateTime"
         static let scheduledRoom = "scheduledRoom"
         static let primaryCategory = "primaryCategory"
@@ -20,8 +21,10 @@ class Session: NSObject, NSCoding {
     var cancelled: Bool = false
     var accepted: Bool = false
     var id: NSNumber?
+    
     var title: String?
     var sessionDescription: String?
+    var sessionDescriptionHTML: String?
     var scheduledDateTime: Date?
     var scheduledRoom: String?
     var primaryCategory: String?
@@ -37,6 +40,7 @@ class Session: NSObject, NSCoding {
         id = dictionary[Keys.id] as? NSNumber
         title = dictionary[Keys.title] as? String
         sessionDescription = dictionary[Keys.sessionDescription] as? String
+        sessionDescriptionHTML = dictionary[Keys.sessionDescriptionHTML] as? String
         scheduledDateTime = dictionary[Keys.scheduleDateTime] as? Date
         scheduledRoom = dictionary[Keys.scheduledRoom] as? String
         primaryCategory = dictionary[Keys.primaryCategory] as? String
@@ -53,6 +57,7 @@ class Session: NSObject, NSCoding {
         aCoder.encode(self.id, forKey: Keys.id)
         aCoder.encode(self.title, forKey: Keys.title)
         aCoder.encode(self.sessionDescription, forKey: Keys.sessionDescription)
+        aCoder.encode(self.sessionDescriptionHTML, forKey: Keys.sessionDescriptionHTML)
         aCoder.encode(self.scheduledDateTime, forKey: Keys.scheduleDateTime)
         aCoder.encode(self.scheduledRoom, forKey: Keys.scheduledRoom)
         aCoder.encode(self.primaryCategory, forKey: Keys.primaryCategory)
@@ -70,6 +75,7 @@ class Session: NSObject, NSCoding {
         id = aDecoder.decodeObject(forKey: Keys.id) as? NSNumber
         title = aDecoder.decodeObject(forKey: Keys.title) as? String
         sessionDescription = aDecoder.decodeObject(forKey: Keys.sessionDescription) as? String
+        sessionDescriptionHTML = aDecoder.decodeObject(forKey: Keys.sessionDescriptionHTML) as? String
         scheduledDateTime = aDecoder.decodeObject(forKey: Keys.scheduleDateTime) as? Date
         scheduledRoom = aDecoder.decodeObject(forKey: Keys.scheduledRoom) as? String
         primaryCategory = aDecoder.decodeObject(forKey: Keys.primaryCategory) as? String
@@ -85,6 +91,7 @@ class Session: NSObject, NSCoding {
                   id: NSNumber?,
                   title: String?,
                   sessionDescription: String?,
+                  sessionDescriptionHTML: String?,
                   scheduledDateTime: Date?,
                   scheduledRoom: String?,
                   primaryCategory: String?,
@@ -98,6 +105,7 @@ class Session: NSObject, NSCoding {
         self.id = id
         self.title = title
         self.sessionDescription = sessionDescription
+        self.sessionDescriptionHTML = sessionDescriptionHTML
         self.scheduledDateTime = scheduledDateTime
         self.scheduledRoom = scheduledRoom
         self.primaryCategory = primaryCategory
@@ -107,5 +115,4 @@ class Session: NSObject, NSCoding {
         self.isUserFavorite = isUserFavorite
         self.updated = updated
     }
-    
 }

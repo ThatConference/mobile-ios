@@ -20,8 +20,6 @@ enum SpeakerResult {
 class SpeakerAPI {
     
     let baseURLString = "https://www.thatconference.com"
-    // Must be changed yearly
-    let year = "2017"
     
     func getSpeakers(completionHandler: @escaping (SpeakerResult) -> Void) {
         
@@ -40,7 +38,7 @@ class SpeakerAPI {
             } else {
                 
                 do {
-                    let jsonObject: Any = try? JSONSerialization.jsonObject(with: data!, options: []) as Any
+                    let jsonObject: Any = try? JSONSerialization.jsonObject(with: data!, options: []) as Any?
                     
                     guard let json = jsonObject as? [Dictionary<String, AnyObject>] else {
                         return completionHandler(SpeakerResult.failure(error!))
@@ -59,6 +57,7 @@ class SpeakerAPI {
                         }
                         
                         speaker.biography = jsonSpeaker["Biography"] as? String
+                        speaker.biographyHTML = jsonSpeaker["BiographyHtml"] as? String
                         
                         if let websiteString = jsonSpeaker["WebSite"] as? String {
                             speaker.website = URL(string: websiteString)

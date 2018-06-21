@@ -85,10 +85,11 @@ class SpeakerProfileViewController : BaseViewController {
             website.setTitle(speakerWebsite.absoluteString, for: UIControlState())
         }
         
-        biography.text = ""
-        if let bioText = speaker.biography
+        biography.attributedText = NSAttributedString(string: "")
+        if var bioText = speaker.biographyHTML
         {
-            biography.text = bioText
+            bioText = "<div style='font-size:1.2em'>" + bioText + "</div>"
+            biography.attributedText = bioText.convertHtml()
         }
         
         setSocialButtons()
