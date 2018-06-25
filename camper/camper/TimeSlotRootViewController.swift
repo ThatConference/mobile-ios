@@ -77,7 +77,7 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
         return view
     }
     
-    func timeSelected(_ recognizer: UITapGestureRecognizer) {
+    @objc func timeSelected(_ recognizer: UITapGestureRecognizer) {
         fatalError("Must Override")
     }
     
@@ -109,7 +109,7 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
     }
     
     // MARK: Data Source
-    func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+    @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
         if (sender.direction == .left) {
             moveToNext()
         }

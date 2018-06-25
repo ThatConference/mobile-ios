@@ -18,12 +18,12 @@ enum SpeakerResult {
 }
 
 class SpeakerAPI {
-    
     let baseURLString = "https://www.thatconference.com"
     
     func getSpeakers(completionHandler: @escaping (SpeakerResult) -> Void) {
         
         let url: URL = URL(string: getSpeakerURL())!
+        print(url)
                 
         var request = URLRequest(url: url,
                                  cachePolicy: .useProtocolCachePolicy,
@@ -36,11 +36,10 @@ class SpeakerAPI {
             if error != nil {
                 completionHandler(SpeakerResult.failure(error!))
             } else {
-                
                 do {
-                    let jsonObject: Any = try? JSONSerialization.jsonObject(with: data!, options: []) as Any?
+                    let jsonObject: Any = try? JSONSerialization.jsonObject(with: data!, options: [])
                     
-                    guard let json = jsonObject as? [Dictionary<String, AnyObject>] else {
+                    guard let json = jsonObject as? [[String: AnyObject]] else {
                         return completionHandler(SpeakerResult.failure(APIError.invalidJSONData))
                     }
                     

@@ -234,8 +234,8 @@ class BaseViewController: UIViewController, AuthorizationFormDelegate {
                     if let timeSlots = favorites[dateString]?.timeSlots {
                         if timeSlots.count > 1 {
                             favorites[dateString]?.timeSlots.sort {
-                                let sortOne = $0.0?.time
-                                let sortTwo = $0.1?.time
+                                let sortOne = $0?.time
+                                let sortTwo = $1?.time
                                 return sortOne! < sortTwo!
                             }
                         }

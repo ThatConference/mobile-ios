@@ -22,7 +22,7 @@ class BiographyTextView: UITextView, UITextViewDelegate {
         if (text == "" || text == nil || text == "Biography") {
             let font: UIFont = UIFont(name: "Helvetica Neue", size: 16)!
             
-            attributedText = NSAttributedString(string: "Biography", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
+            attributedText = NSAttributedString(string: "Biography", attributes: [NSAttributedStringKey.font : font, NSAttributedStringKey.foregroundColor : UIColor.black.withAlphaComponent(0.3)])
         } else {
             self.textColor = UIColor.black
         }
@@ -39,7 +39,7 @@ class BiographyTextView: UITextView, UITextViewDelegate {
         if text == "" {
             let font: UIFont = UIFont(name: "Helvetica Neue", size: 16)!
             
-            attributedText = NSAttributedString(string: "Biography", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
+            attributedText = NSAttributedString(string: "Biography", attributes: [NSAttributedStringKey.font : font, NSAttributedStringKey.foregroundColor : UIColor.black.withAlphaComponent(0.3)])
         }
     }
     

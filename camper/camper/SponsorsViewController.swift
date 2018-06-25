@@ -74,7 +74,7 @@ class SponsorsViewController: BaseViewController, UITableViewDataSource, UITable
         refreshTable()
     }
     
-    func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+    @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
         if (sender.direction == .left) {
             moveToNext()
         } else if (sender.direction == .right) {

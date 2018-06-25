@@ -47,11 +47,16 @@ class ImageCacheLoader {
                 return
             }
 
-            let img: UIImage! = UIImage(data: data!)
-            IMAGE_CACHE.setObject(img, forKey: imageURLString as NSString)
-            DispatchQueue.main.async {
-              completionHandler(img)
+            if let imageData = data {
+                let img: UIImage = UIImage(data: imageData) ?? UIImage(named: "profile")!
+                IMAGE_CACHE.setObject(img, forKey: imageURLString as NSString)
+                DispatchQueue.main.async {
+                    completionHandler(img)
+                }
+            } else {
+                completionHandler(UIImage(named: "profile")!)
             }
+
         }.resume()
     }
 }

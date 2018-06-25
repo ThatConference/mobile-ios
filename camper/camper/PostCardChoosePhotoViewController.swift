@@ -43,7 +43,7 @@ class PostCardChoosePhotoViewController: UIViewController,
         
         updateFrameInfo()
         
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
         
         self.imageView.isHidden = true
         //setCameraWitHFilter()
@@ -105,7 +105,7 @@ class PostCardChoosePhotoViewController: UIViewController,
     }
     
     func checkCamera() {
-        let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         switch authStatus {
         case .authorized:
             finalSetUp()
@@ -142,8 +142,8 @@ class PostCardChoosePhotoViewController: UIViewController,
             preferredStyle: UIAlertControllerStyle.alert
         )
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel) { alert in
-            if AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo).count > 0 {
-                AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { granted in
+            if AVCaptureDevice.devices(for: AVMediaType.video).count > 0 {
+                AVCaptureDevice.requestAccess(for: AVMediaType.video) { granted in
                     DispatchQueue.main.async {
                         self.checkCamera() } }
             }
@@ -151,7 +151,7 @@ class PostCardChoosePhotoViewController: UIViewController,
         present(alert, animated: true, completion: nil)
     }
     
-    func handleSwipes(_ sender:UISwipeGestureRecognizer) {
+    @objc func handleSwipes(_ sender:UISwipeGestureRecognizer) {
         if (sender.direction == .left) {
             moveToNext()
         }
@@ -189,7 +189,7 @@ class PostCardChoosePhotoViewController: UIViewController,
         updateFrameInfo()
     }
     
-    func DidRotate() {
+    @objc func DidRotate() {
         switch UIDevice.current.orientation {
         case UIDeviceOrientation.landscapeLeft:
             currentOrientation = AVCaptureVideoOrientation.landscapeLeft
@@ -302,31 +302,31 @@ class PostCardChoosePhotoViewController: UIViewController,
     
     func setCamera() {
         captureSession = AVCaptureSession()
-        captureSession!.sessionPreset = AVCaptureSessionPresetPhoto
+        captureSession!.sessionPreset = AVCaptureSession.Preset.photo
         
         var error: NSError?
         
-        let backCamera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        let backCamera = AVCaptureDevice.default(for: AVMediaType.video)
         
         do {
-            videoDeviceInput = try AVCaptureDeviceInput(device: backCamera)
+            videoDeviceInput = try AVCaptureDeviceInput(device: backCamera!)
         } catch let error1 as NSError {
             error = error1
             videoDeviceInput = nil
         }
         
-        if error == nil && captureSession!.canAddInput(videoDeviceInput) {
-            captureSession!.addInput(videoDeviceInput)
+        if error == nil && captureSession!.canAddInput(videoDeviceInput!) {
+            captureSession!.addInput(videoDeviceInput!)
             
             stillImageOutput = AVCaptureStillImageOutput()
             stillImageOutput!.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
             
             
-            if captureSession!.canAddOutput(stillImageOutput) {
-                captureSession!.addOutput(stillImageOutput)
+            if captureSession!.canAddOutput(stillImageOutput!) {
+                captureSession!.addOutput(stillImageOutput!)
     
-                previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-                previewLayer!.videoGravity = AVLayerVideoGravityResizeAspect
+                previewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
+                previewLayer!.videoGravity = AVLayerVideoGravity.resizeAspect
                 previewLayer!.connection?.videoOrientation = currentOrientation!
                 cameraView.layer.addSublayer(previewLayer!)
             }
@@ -335,23 +335,23 @@ class PostCardChoosePhotoViewController: UIViewController,
     
     func setCameraWitHFilter() {
         captureSession = AVCaptureSession()
-        captureSession!.sessionPreset = AVCaptureSessionPresetPhoto
+        captureSession!.sessionPreset = AVCaptureSession.Preset.photo
         
-        let backCamera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        let backCamera = AVCaptureDevice.default(for: AVMediaType.video)
         
         do {
-            videoDeviceInput = try AVCaptureDeviceInput(device: backCamera)
-            captureSession!.addInput(videoDeviceInput)
+            videoDeviceInput = try AVCaptureDeviceInput(device: backCamera!)
+            captureSession!.addInput(videoDeviceInput!)
         }
         catch {
             print("Cannot Access Camera")
             return
         }
         
-        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer!.videoGravity = AVLayerVideoGravityResizeAspect
-        previewLayer!.connection?.videoOrientation = currentOrientation!
-        cameraView.layer.addSublayer(previewLayer!)
+        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
+        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspect
+        previewLayer.connection?.videoOrientation = currentOrientation!
+        cameraView.layer.addSublayer(previewLayer)
         
         let videoOutput = AVCaptureVideoDataOutput()
         videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "sample buffer delegate", attributes: []))
@@ -360,7 +360,7 @@ class PostCardChoosePhotoViewController: UIViewController,
         captureSession!.startRunning()
     }
     
-    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!)
+    func captureOutput(_ captureOutput: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection)
     {
         let videoEffect = CIFilter(name: "CIPhotoEffectInstant")
         let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
@@ -419,7 +419,7 @@ class PostCardChoosePhotoViewController: UIViewController,
             }
         }
         
-        previewLayer!.videoGravity = AVLayerVideoGravityResizeAspect
+        previewLayer!.videoGravity = AVLayerVideoGravity.resizeAspect
         cameraView.bounds = frameView.bounds
     }
     
@@ -427,22 +427,22 @@ class PostCardChoosePhotoViewController: UIViewController,
         DispatchQueue.main.async(execute: {
             
             let currentVideoDevice:AVCaptureDevice = self.videoDeviceInput!.device
-            let currentPosition: AVCaptureDevicePosition = currentVideoDevice.position
-            var preferredPosition: AVCaptureDevicePosition = AVCaptureDevicePosition.unspecified
+            let currentPosition: AVCaptureDevice.Position = currentVideoDevice.position
+            var preferredPosition: AVCaptureDevice.Position = AVCaptureDevice.Position.unspecified
             
             self.selfieModeIsOn = false
             
             switch currentPosition{
-            case AVCaptureDevicePosition.front:
-                preferredPosition = AVCaptureDevicePosition.back
-            case AVCaptureDevicePosition.back:
+            case AVCaptureDevice.Position.front:
+                preferredPosition = AVCaptureDevice.Position.back
+            case AVCaptureDevice.Position.back:
                 self.selfieModeIsOn = true
-                preferredPosition = AVCaptureDevicePosition.front
-            case AVCaptureDevicePosition.unspecified:
-                preferredPosition = AVCaptureDevicePosition.back
+                preferredPosition = AVCaptureDevice.Position.front
+            case AVCaptureDevice.Position.unspecified:
+                preferredPosition = AVCaptureDevice.Position.back
             }
             
-            let device:AVCaptureDevice = PostCardChoosePhotoViewController.deviceWithMediaType(AVMediaTypeVideo as NSString, preferringPosition: preferredPosition)
+            let device:AVCaptureDevice = PostCardChoosePhotoViewController.deviceWithMediaType(AVMediaType.video as NSString, preferringPosition: preferredPosition)
             
             var videoDeviceInput: AVCaptureDeviceInput?
             
@@ -455,15 +455,15 @@ class PostCardChoosePhotoViewController: UIViewController,
             }
             
             self.captureSession!.beginConfiguration()
-            self.captureSession!.removeInput(self.videoDeviceInput)
+            self.captureSession!.removeInput(self.videoDeviceInput!)
             
-            if self.captureSession!.canAddInput(videoDeviceInput){
+            if self.captureSession!.canAddInput(videoDeviceInput!){
                 NotificationCenter.default.removeObserver(self, name:NSNotification.Name.AVCaptureDeviceSubjectAreaDidChange, object:currentVideoDevice)
-                self.captureSession!.addInput(videoDeviceInput)
+                self.captureSession!.addInput(videoDeviceInput!)
                 self.videoDeviceInput = videoDeviceInput
                 
             }else{
-                self.captureSession!.addInput(self.videoDeviceInput)
+                self.captureSession!.addInput(self.videoDeviceInput!)
             }
             
             self.captureSession!.commitConfiguration()
@@ -472,8 +472,8 @@ class PostCardChoosePhotoViewController: UIViewController,
         })
     }
     
-    class func deviceWithMediaType(_ mediaType: NSString, preferringPosition position: AVCaptureDevicePosition) -> AVCaptureDevice {
-        let devices = AVCaptureDevice.devices(withMediaType: mediaType as String) as! [AVCaptureDevice]
+    class func deviceWithMediaType(_ mediaType: NSString, preferringPosition position: AVCaptureDevice.Position) -> AVCaptureDevice {
+        let devices = AVCaptureDevice.devices(for: AVMediaType(rawValue: mediaType as String as String)) 
         var captureDevice = devices[0]
         
         for device in devices {
@@ -487,11 +487,11 @@ class PostCardChoosePhotoViewController: UIViewController,
     }
     
     @IBAction func takePhoto(_ sender: AnyObject) {
-        if let videoConnection = stillImageOutput!.connection(withMediaType: AVMediaTypeVideo) {
+        if let videoConnection = stillImageOutput!.connection(with: AVMediaType.video) {
             videoConnection.videoOrientation = AVCaptureVideoOrientation.portrait
             stillImageOutput?.captureStillImageAsynchronously(from: videoConnection, completionHandler: {(sampleBuffer, error) in
                 if (sampleBuffer != nil) {
-                    let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
+                    let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer!)
                     let dataProvider = CGDataProvider(data: imageData! as CFData)
                     let cgImageRef = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent)
                     

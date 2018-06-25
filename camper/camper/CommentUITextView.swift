@@ -22,7 +22,7 @@ class CommentUITextView: UITextView, UITextViewDelegate {
         if (text == "" || text == nil || text == "Comment") {
             let font: UIFont = UIFont(name: "Helvetica Neue", size: 13)!
             
-            attributedText = NSAttributedString(string: "Comment", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
+            attributedText = NSAttributedString(string: "Comment", attributes: [NSAttributedStringKey.font : font, NSAttributedStringKey.foregroundColor : UIColor.black.withAlphaComponent(0.3)])
         } else {
             self.textColor = UIColor.black
         }
@@ -39,7 +39,7 @@ class CommentUITextView: UITextView, UITextViewDelegate {
         if (text == "") {
             let font: UIFont = UIFont(name: "Helvetica Neue", size: 13)!
             
-            attributedText = NSAttributedString(string: "Comment", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
+            attributedText = NSAttributedString(string: "Comment", attributes: [NSAttributedStringKey.font : font, NSAttributedStringKey.foregroundColor : UIColor.black.withAlphaComponent(0.3)])
         }
     }
     

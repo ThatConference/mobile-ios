@@ -223,6 +223,7 @@ class ProfileDetailsViewController: UIViewController {
     func loadUI() {
         if let user = mainUser {
             self.navigationController?.title = "YOUR PROFILE"
+            
             if let headshot = user.headShot {
                 imageLoader.loadImageURL(url: URL(string: headshot)) { (image) in
                     self.profileImageView.image = image
@@ -274,7 +275,7 @@ class ProfileDetailsViewController: UIViewController {
         }
     }
     
-    func settingsButtonTapped(_ sender: UIBarButtonItem) {
+    @objc func settingsButtonTapped(_ sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let call = UIAlertAction(title: "Call Contact", style: .default) { (UIAlertAction) in
             if let phone = self.selectedContact?.publicPhone {
@@ -345,7 +346,7 @@ class ProfileDetailsViewController: UIViewController {
         self.present(actionSheet, animated: true, completion: nil)
     }
     
-    func keyboardWillShow(notification: NSNotification) {
+    @objc func keyboardWillShow(notification: NSNotification) {
         //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
         var userInfo = notification.userInfo!
         var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
@@ -356,7 +357,7 @@ class ProfileDetailsViewController: UIViewController {
         self.scrollView.contentInset = contentInset
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    @objc func keyboardWillHide(notification: NSNotification) {
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         self.scrollView.contentInset = contentInset
     }

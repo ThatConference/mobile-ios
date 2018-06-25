@@ -37,12 +37,12 @@ class SettingsViewController : BaseViewController {
                                        customAttributes: [:])
     }
     
-    func thatConferencePressed(_ sender: AnyObject) {
+    @objc func thatConferencePressed(_ sender: AnyObject) {
         let url = "http://thatconference.com"
         UIApplication.shared.openURL(URL(string: url)!)
     }
     
-    func milkcanPressed(_ sender: AnyObject) {
+    @objc func milkcanPressed(_ sender: AnyObject) {
         let url = "http://milkcan.io"
         UIApplication.shared.openURL(URL(string: url)!)
     }

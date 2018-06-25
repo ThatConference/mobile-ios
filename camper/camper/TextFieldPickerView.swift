@@ -97,7 +97,7 @@ class TextFieldPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
         return toolBar
     }
     
-    func donePicker (sender:UIBarButtonItem)
+    @objc func donePicker (sender:UIBarButtonItem)
     {
         self.textField?.endEditing(true)
     }

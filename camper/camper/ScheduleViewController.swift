@@ -77,7 +77,7 @@ class ScheduleViewController : TimeSlotRootViewController {
         }
     }
     
-    func refresh(_ sender:AnyObject) {
+    @objc func refresh(_ sender:AnyObject) {
         loadData()
     }
     
@@ -368,7 +368,7 @@ class ScheduleViewController : TimeSlotRootViewController {
     }
     
     // MARK: UINavigationContollerDelegate
-    func navigationController(_ navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+    @objc func navigationController(_ navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         if viewController.isEqual(self) {
             self.tableView.reloadData()
         }
@@ -420,7 +420,7 @@ class ScheduleViewController : TimeSlotRootViewController {
         return cell
     }    
     
-    func SessionFavorited(_ sender: UITapGestureRecognizer) {
+    @objc func SessionFavorited(_ sender: UITapGestureRecognizer) {
         if Authentication.isLoggedIn() {
             if let sessionStore = StateData.instance.sessionStore {
                 if let cell = sender.view?.superview?.superview as? ScheduleTableViewCell {

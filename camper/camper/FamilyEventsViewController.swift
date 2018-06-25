@@ -81,7 +81,7 @@ class FamilyEventsViewController : TimeSlotRootViewController {
         }
     }
     
-    func refresh(_ sender:AnyObject) {
+    @objc func refresh(_ sender:AnyObject) {
         loadData()
     }
     
@@ -460,7 +460,7 @@ class FamilyEventsViewController : TimeSlotRootViewController {
         return cell
     }
     
-    func SessionFavorited(_ sender: UITapGestureRecognizer) {
+    @objc func SessionFavorited(_ sender: UITapGestureRecognizer) {
         if Authentication.isLoggedIn() {
             if let sessionStore = StateData.instance.sessionStore {
                 if let cell = sender.view?.superview?.superview as? FamilyEventsTableViewCell {

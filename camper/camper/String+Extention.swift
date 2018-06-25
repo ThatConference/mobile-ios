@@ -166,13 +166,18 @@ extension String {
     
     var htmlToAttributedString: NSAttributedString? {
         do {
-            let str = try NSAttributedString(data: data(using: String.Encoding.unicode, allowLossyConversion: true)!, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil)
-            
-            return str
+            return try NSAttributedString(data: data(using: .utf8)!,
+                                          options: [.documentType: NSAttributedString.DocumentType.html,
+                                                    .characterEncoding: String.Encoding.utf8.rawValue],
+                                          documentAttributes: nil)
         } catch {
-            print(error)
+            print("error: ", error)
+            return nil
         }
-        return NSAttributedString()
+    }
+    
+    var htmlToString: String {
+        return htmlToAttributedString?.string ?? ""
     }
     
     var stringToPhoneString: String {
@@ -212,10 +217,13 @@ extension String {
         return UIColor(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
     }
     
-    func convertHtml() -> NSAttributedString{
+    func convertHtml() -> NSAttributedString {
         guard let data = data(using: .utf8) else { return NSAttributedString() }
         do {
-            return try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil)
+            return try NSAttributedString(data: data,
+                                          options: [.documentType: NSAttributedString.DocumentType.html,
+                                                    .characterEncoding: String.Encoding.utf8.rawValue],
+                                          documentAttributes: nil)
         } catch {
             return NSAttributedString()
         }

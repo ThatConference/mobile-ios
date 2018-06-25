@@ -74,7 +74,7 @@ class OpenSpacesViewController : TimeSlotRootViewController {
     }
     
     // MARK: Data
-    func refresh(_ sender:AnyObject) {
+    @objc func refresh(_ sender:AnyObject) {
         loadData()
     }
     
@@ -428,7 +428,7 @@ class OpenSpacesViewController : TimeSlotRootViewController {
         return cell
     }
     
-    func SessionFavorited(_ sender: UITapGestureRecognizer) {
+    @objc func SessionFavorited(_ sender: UITapGestureRecognizer) {
         if Authentication.isLoggedIn() {
             let sessionStore = SessionStore()
             if let cell = sender.view?.superview?.superview as? ScheduleTableViewCell {

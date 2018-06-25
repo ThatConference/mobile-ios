@@ -28,7 +28,7 @@ class ProfileTextField: UITextField {
         self.font = font
         self.textColor = UIColor.black
         
-        attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black.withAlphaComponent(0.3)])
+        attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [NSAttributedStringKey.font : font, NSAttributedStringKey.foregroundColor : UIColor.black.withAlphaComponent(0.3)])
     }
 
 }
