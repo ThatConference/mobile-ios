@@ -43,7 +43,7 @@ class Speaker: NSObject, NSCoding {
         let headShotURL = aDecoder.decodeObject(forKey: "headShotURL") as? URL
         let userName = aDecoder.decodeObject(forKey: "userName") as? String
         let biography = aDecoder.decodeObject(forKey: "biography") as? String
-        let biographyHTML = aDecoder.decodeObject(forKey: "BiographyHtml") as? String
+        let biographyHTML = aDecoder.decodeObject(forKey: "biographyHTML") as? String
         let website = aDecoder.decodeObject(forKey: "website") as? URL
         let company = aDecoder.decodeObject(forKey: "company") as? String
         let title = aDecoder.decodeObject(forKey: "title") as? String

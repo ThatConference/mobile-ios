@@ -41,7 +41,7 @@ class SpeakerAPI {
                     let jsonObject: Any = try? JSONSerialization.jsonObject(with: data!, options: []) as Any?
                     
                     guard let json = jsonObject as? [Dictionary<String, AnyObject>] else {
-                        return completionHandler(SpeakerResult.failure(error!))
+                        return completionHandler(SpeakerResult.failure(APIError.invalidJSONData))
                     }
                     
                     var speakerArray = [Speaker]()
