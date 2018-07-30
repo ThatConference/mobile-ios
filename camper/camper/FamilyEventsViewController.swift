@@ -408,7 +408,7 @@ class FamilyEventsViewController : TimeSlotRootViewController {
     }
     
     // MARK: UINavigationContollerDelegate
-    func navigationController(_ navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+    @objc func navigationController(_ navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         if viewController.isEqual(self) {
             self.tableView.reloadData()
         }
@@ -431,9 +431,7 @@ class FamilyEventsViewController : TimeSlotRootViewController {
             cell.sessionTitleCancelled.text = session?.title
             cell.sessionTitle.sizeToFit()
             cell.categoryLabel.text = session?.primaryCategory
-            if let level = session?.level {
-                cell.levelLabel.text = "Level: \(level)"
-            }
+            cell.levelLabel.text = session?.currentLevel
             
             cell.favoriteIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.SessionFavorited(_:))))
             setFamilyFavoriteIcon(cell, animated: false)

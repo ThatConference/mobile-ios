@@ -115,4 +115,27 @@ class Session: NSObject, NSCoding {
         self.isUserFavorite = isUserFavorite
         self.updated = updated
     }
+    
+    var currentLevel: String {
+        if let currentLevel = level {
+            if isFamilyApproved {
+                switch (currentLevel) {
+                case "100":
+                    return "Preschool (and up)"
+                case "200":
+                    return "Kindergarten – 2nd Grade (and up)"
+                case "300":
+                    return "3rd Grade – 5th Grade (and up)"
+                case "400":
+                    return "6th Grade and up"
+                default:
+                    return "Level: \(currentLevel)"
+                }
+            } else {
+                return "Level: \(currentLevel)"
+            }
+        } else {
+            return ""
+        }
+    }
 }

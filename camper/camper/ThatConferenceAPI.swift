@@ -141,7 +141,7 @@ class ThatConferenceAPI {
     
     // MUST CHANGE YEARLY
     class func GetCurrentYear() -> String {
-        return "2017"
+        return "2018"
     }
     
     // MARK: Sessions
