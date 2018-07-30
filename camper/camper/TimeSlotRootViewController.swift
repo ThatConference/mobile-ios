@@ -33,9 +33,9 @@ class TimeSlotRootViewController : BaseViewController, UIGestureRecognizerDelega
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if (getDirtyData()) {
-            loadData()
-        }
+//        if (getDirtyData()) {
+//            loadData()
+//        }
     }
     
     func loadData() {
