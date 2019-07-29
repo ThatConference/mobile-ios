@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "tc-map.png",
+      "filename" : "KalahariTCMap2019.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "tc-map@2x.png",
+      "filename" : "KalahariTCMap2019-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "tc-map@3x.png",
+      "filename" : "KalahariTCMap2019-2.png",
       "scale" : "3x"
     }
   ],

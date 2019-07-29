@@ -8,14 +8,36 @@
 
 import UIKit
 
+@objc public protocol ImageScrollViewDelegate: UIScrollViewDelegate {
+    func imageScrollViewDidChangeOrientation(imageScrollView: ImageScrollView)
+}
+
 open class ImageScrollView: UIScrollView {
+    
+    @objc public enum ScaleMode: Int {
+        case aspectFill
+        case aspectFit
+        case widthFill
+        case heightFill
+    }
+    
+    @objc public enum Offset: Int {
+        case begining
+        case center
+    }
     
     static let kZoomInFactorFromMinWhenDoubleTap: CGFloat = 2
     
-    var zoomView: UIImageView? = nil
+    @objc open var imageContentMode: ScaleMode = .widthFill
+    @objc open var initialOffset: Offset = .begining
+    
+    @objc public private(set) var zoomView: UIImageView? = nil
+    
+    @objc open weak var imageScrollViewDelegate: ImageScrollViewDelegate?
+
     var imageSize: CGSize = CGSize.zero
-    fileprivate var pointToCenterAfterResize: CGPoint = CGPoint.zero
-    fileprivate var scaleToRestoreAfterResize: CGFloat = 1.0
+    private var pointToCenterAfterResize: CGPoint = CGPoint.zero
+    private var scaleToRestoreAfterResize: CGFloat = 1.0
     var maxScaleFromMinScale: CGFloat = 3.0
     
     override open var frame: CGRect {
@@ -32,7 +54,7 @@ open class ImageScrollView: UIScrollView {
         }
     }
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         initialize()
@@ -44,21 +66,27 @@ open class ImageScrollView: UIScrollView {
         initialize()
     }
     
-    fileprivate func initialize() {
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func initialize() {
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
         bouncesZoom = true
-        decelerationRate = UIScrollViewDecelerationRateFast
+        decelerationRate = UIScrollView.DecelerationRate.
         delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ImageScrollView.changeOrientationNotification), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
-    func adjustFrameToCenter() {
+    @objc public func adjustFrameToCenter() {
         
-        guard zoomView != nil else {
+        guard let unwrappedZoomView = zoomView else {
             return
         }
         
-        var frameToCenter = zoomView!.frame
+        var frameToCenter = unwrappedZoomView.frame
         
         // center horizontally
         if frameToCenter.size.width < bounds.width {
@@ -76,10 +104,10 @@ open class ImageScrollView: UIScrollView {
             frameToCenter.origin.y = 0
         }
         
-        zoomView!.frame = frameToCenter
+        unwrappedZoomView.frame = frameToCenter
     }
     
-    fileprivate func prepareToResize() {
+    private func prepareToResize() {
         let boundsCenter = CGPoint(x: bounds.midX, y: bounds.midY)
         pointToCenterAfterResize = convert(boundsCenter, to: zoomView)
         
@@ -92,7 +120,7 @@ open class ImageScrollView: UIScrollView {
         }
     }
     
-    fileprivate func recoverFromResizing() {
+    private func recoverFromResizing() {
         setMaxMinZoomScalesForCurrentBounds()
         
         // restore zoom scale, first making sure it is within the allowable range.
@@ -120,17 +148,17 @@ open class ImageScrollView: UIScrollView {
         contentOffset = offset
     }
     
-    fileprivate func maximumContentOffset() -> CGPoint {
+    private func maximumContentOffset() -> CGPoint {
         return CGPoint(x: contentSize.width - bounds.width,y:contentSize.height - bounds.height)
     }
     
-    fileprivate func minimumContentOffset() -> CGPoint {
+    private func minimumContentOffset() -> CGPoint {
         return CGPoint.zero
     }
 
     // MARK: - Display image
     
-    open func display(image: UIImage) {
+    @objc open func display(image: UIImage) {
 
         if let zoomView = zoomView {
             zoomView.removeFromSuperview()
@@ -147,23 +175,50 @@ open class ImageScrollView: UIScrollView {
         configureImageForSize(image.size)
     }
     
-    fileprivate func configureImageForSize(_ size: CGSize) {
+    private func configureImageForSize(_ size: CGSize) {
         imageSize = size
         contentSize = imageSize
         setMaxMinZoomScalesForCurrentBounds()
         zoomScale = minimumZoomScale
-        contentOffset = CGPoint.zero
+        
+        switch initialOffset {
+        case .begining:
+            contentOffset =  CGPoint.zero
+        case .center:
+            let xOffset = contentSize.width < bounds.width ? 0 : (contentSize.width - bounds.width)/2
+            let yOffset = contentSize.height < bounds.height ? 0 : (contentSize.height - bounds.height)/2
+
+            switch imageContentMode {
+            case .aspectFit:
+                contentOffset =  CGPoint.zero
+            case .aspectFill:
+                contentOffset = CGPoint(x: xOffset, y: yOffset)
+            case .heightFill:
+                contentOffset = CGPoint(x: xOffset, y: 0)
+            case .widthFill:
+                contentOffset = CGPoint(x: 0, y: yOffset)
+            }
+        }
     }
     
-    fileprivate func setMaxMinZoomScalesForCurrentBounds() {
+    private func setMaxMinZoomScalesForCurrentBounds() {
         // calculate min/max zoomscale
         let xScale = bounds.width / imageSize.width    // the scale needed to perfectly fit the image width-wise
         let yScale = bounds.height / imageSize.height   // the scale needed to perfectly fit the image height-wise
+    
+        var minScale: CGFloat = 1
         
-        // fill width if the image and phone are both portrait or both landscape; otherwise take smaller scale
-        let imagePortrait = imageSize.height > imageSize.width
-        let phonePortrait = bounds.height >= bounds.width
-        var minScale = (imagePortrait == phonePortrait) ? xScale : min(xScale, yScale)
+        switch imageContentMode {
+        case .aspectFill:
+            minScale = max(xScale, yScale)
+        case .aspectFit:
+            minScale = min(xScale, yScale)
+        case .widthFill:
+            minScale = xScale
+        case .heightFill:
+            minScale = yScale
+        }
+        
         
         let maxScale = maxScaleFromMinScale*minScale
         
@@ -190,7 +245,7 @@ open class ImageScrollView: UIScrollView {
         }
     }
     
-    fileprivate func zoomRectForScale(_ scale: CGFloat, center: CGPoint) -> CGRect {
+    private func zoomRectForScale(_ scale: CGFloat, center: CGPoint) -> CGRect {
         var zoomRect = CGRect.zero
         
         // the zoom rect is in the content view's coordinates.
@@ -211,16 +266,72 @@ open class ImageScrollView: UIScrollView {
             display(image: image)
         }
     }
+    
+    // MARK: - Actions
+    
+    @objc func changeOrientationNotification() {
+        // A weird bug that frames are not update right after orientation changed. Need delay a little bit with async.
+        DispatchQueue.main.async {
+            self.configureImageForSize(self.imageSize)
+            self.imageScrollViewDelegate?.imageScrollViewDidChangeOrientation(imageScrollView: self)
+        }
+    }
 }
 
-extension ImageScrollView: UIScrollViewDelegate{
+extension ImageScrollView: UIScrollViewDelegate {
     
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        imageScrollViewDelegate?.scrollViewDidScroll?(scrollView)
+    }
+
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        imageScrollViewDelegate?.scrollViewWillBeginDragging?(scrollView)
+    }
+
+    public func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        imageScrollViewDelegate?.scrollViewWillEndDragging?(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
+    }
+    
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        imageScrollViewDelegate?.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
+    }
+    
+    public func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        imageScrollViewDelegate?.scrollViewWillBeginDecelerating?(scrollView)
+    }
+    
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        imageScrollViewDelegate?.scrollViewDidEndDecelerating?(scrollView)
+    }
+    
+    public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        imageScrollViewDelegate?.scrollViewDidEndScrollingAnimation?(scrollView)
+    }
+    
+    public func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+        imageScrollViewDelegate?.scrollViewWillBeginZooming?(scrollView, with: view)
+    }
+    
+    public func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        imageScrollViewDelegate?.scrollViewDidEndZooming?(scrollView, with: view, atScale: scale)
+    }
+    
+    public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        return false
+    }
+    
+    @available(iOS 11.0, *)
+    public func scrollViewDidChangeAdjustedContentInset(_ scrollView: UIScrollView) {
+        imageScrollViewDelegate?.scrollViewDidChangeAdjustedContentInset?(scrollView)
+    }
+
     public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return zoomView
     }
     
     public func scrollViewDidZoom(_ scrollView: UIScrollView) {
         adjustFrameToCenter()
+        imageScrollViewDelegate?.scrollViewDidZoom?(scrollView)
     }
     
 }
